@@ -1,0 +1,22 @@
+{% assign committees = site.data.data.sidebar.committees %}
+{% if committees %}
+<div class="committees-container container-block">
+
+  <h2 class="container-block-title">
+    {{ committees.title }}
+  </h2>
+
+  <ul class="list-unstyled committees-list">
+    {% for committee in committees.info %}
+
+      {% if committee.link %}
+      <li><a href="{{ committee.link }}">{{ committee.item }}</a></li>
+      {% else %}
+      <li>{{ committee.item }}</li>
+      {% endif %}
+
+    {% endfor %}
+  </ul>
+
+</div><!--//committees-->
+{% endif %}

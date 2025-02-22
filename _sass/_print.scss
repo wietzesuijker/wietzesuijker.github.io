@@ -1,45 +1,60 @@
-@media print
-   {
+@media print {
     @page {
-        size: A4;
+        size: A4 portrait;
+        margin: 0;
     }
+
     body {
-       font-size: 12pt;
+        font-size: 12pt;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Force the main wrapper to use the full A4 width */
+    .wrapper {
+        width: 21cm !important;
+        margin: 0 auto;
+    }
+
+    /* Optionally reduce padding in the main content area */
+    .main-wrapper {
+        padding: 10px !important;
     }
 
     img.avatar {
         filter: grayscale(1);
         -webkit-filter: greyscale(1);
     }
-   .main-wrapper .time {
-       float: right;
+
+    .main-wrapper .time {
+        float: right;
         color: black !important;
-        -webkit-print-color-adjust: exact; 
-   }
+        -webkit-print-color-adjust: exact;
+    }
+
     .sidebar-wrapper {
         position: static;
         float: right;
         width: 40%;
-        -webkit-print-color-adjust: exact; 
+        -webkit-print-color-adjust: exact;
     }
 
     .remove-container.container-block {
-       display: none;
+        display: none;
     }
 
     footer {
-       display: none;
+        display: none;
     }
 
     .skillset .level-bar-inner {
-       background-color: black !important;
-       -webkit-print-color-adjust: exact; 
+        background-color: black !important;
+        -webkit-print-color-adjust: exact;
     }
 
-   .fa-inverse,
-   .fa-inverse:after,
-   .fa-inverse:before {
-     color: #ffffff !important;
-   }
-
+    .fa-inverse,
+    .fa-inverse:after,
+    .fa-inverse:before {
+        color: #ffffff !important;
+    }
 }

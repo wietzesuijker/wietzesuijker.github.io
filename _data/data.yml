@@ -3,8 +3,8 @@
 #
 
 sidebar:
-  position: left # position of the sidebar : left or right
-  about: True # set to False or comment line if you want to remove the "how to use?" in the sidebar
+  position: right # position of the sidebar : left or right
+  about: False # set to False or comment line if you want to remove the "how to use?" in the sidebar
   education: True # set to False if you want education in main section instead of in sidebar
 
   # Profile information
@@ -13,11 +13,11 @@ sidebar:
   avatar: profile.png #place a 100x100 picture inside /assets/images/ folder and provide the name of the file below
 
   # Sidebar links
-  email: wietze.suijker@email.com
+  email: wietze.suijker@gmail.com
   phone: +44 7432325986
   timezone: GMT
   citizenship: Dutch
-  website: https://wietzesuijker.github.io/ # Include the full website URL, including "http://" or "https://".
+  website: https://wietzesuijker.github.io/
   linkedin: wietze-suijker
   github: wietzesuijker
 
@@ -31,134 +31,103 @@ sidebar:
       level: Professional
 
     - idiom: French
-      level: Intermediate
+      level: Pre-intermediate
 
     - idiom: German
-      level: Intermediate
+      level: Pre-intermediate
 
     - idiom: Spanish
-      level: Intermediate
+      level: Beginner
 
   interests:
     title: Interests
     info:
-    - item: Cycling 
-      link: strava.com/athletes/8615720
+    - item: '<a href="https://www.strava.com/athletes/8615720">Cycling</a>'
+    - item: '<a href="https://www.strava.com/athletes/8615720">Running</a>'
+    - item: '<a href="https://www.strava.com/athletes/8615720">Climbing</a>'    
 
-    - item: Running
-      link: strava.com/athletes/8615720
-
-    - item: Climbing Via Ferrata
-      link: 
-
+  committees:
+    title: Committees
+    info:
+    - item: Co-organize weekly education sessions at Space Intelligence (2025-now)
+    - item: Founding member of Space Intelligence's Social Committee (2021-2023)
 
 career-profile:
   title: Career Profile
   summary: |
-    Wietze enjoys creating innovative IT solutions to provide the best earth observation data at scale, aiming to preserve biodiversity and restore the environment. 
-    As a product architect, he is in charge of developing the ML workflows for Space Intelligence products. 
-    Previously, he worked at a Water and IT company as the technical lead for a range of satellite-data-driven projects.
+    I enjoy creating innovative IT solutions to provide the best earth observation data at scale, aiming to preserve biodiversity and restore the environment. As a product architect, I am responsible for developing machine learning (ML) workflows for land cover and biomass products at Space Intelligence. We expanded from five to over sixty highly educated people during my time at the company. I helped design and develop the technical architecture to scale our products throughout that growth. Previously, I was the technical lead for various satellite-data-driven projects at a Water and IT company.
 education:
   title: Education
   info:
-  - degree: MSc in GIS
-    university: University of Wageningen (WUR), Delft, Utrecht and Twente (ITC)
+  - degree: MSc in Geo-Information Science
+    university: Joint degree at four Dutch Universities; Wageningen (WUR), Delft, Utrecht and Twente (ITC)
     time: 2014 - 2016
     details: |
       Thesis: Characterising Forest Gain and Related Carbon Sequestration
   - degree: BSc in Human Geography and Planning
-    university: University of Utrecht
+    university: University of Utrecht, Netherlands
     time: 2011 - 2014
     details: |
-      Specializations: GIS & sustainable development
+      Specializations: GIS & Sustainable Development
 
 experiences:
   title: Experiences
   info:
   - role: Product Architect
-    time: 2021 - Present
-    company: Space Intelligence, Edinburgh
+    time: 2021 - now 
+    company: Space Intelligence, Edinburgh, UK
     details: |
-      Wietze is in charge of developing the ML workflows for Space Intelligence products, generating auditable land cover and carbon maps across the tropics. He is responsible for the technical architecture of the products and the development of the ML workflows.
-      In 2023, he visited Apple’s HQ in Cupertino, CA and presented CarbonMapper at Apple's Machine Learning conference.
-      Currently, he takes on the roles of Data Engineer and scrum master in the Product Engineering Team, building reliable Machine Learning workflows for accurate, scalable, high-quality satellite data products. The team facilitates data scientists with an environment, python library and ML pipelines for data scientists to create L4 maps. We partner with the Data Platform team on infrastructure and support our Solutions team to get the best insights to clients.
+      Developer on the Product Engineering Team, providing end-to-end ML environments for data scientists. I facilitate agile ceremonies, collaborate with the Data Platform Team to optimise pipelines and batch computing environments that provide high-quality map data, and work alongside the Solutions Team to generate valuable insights for clients.  
       
+      Project Highlight: Developed land cover and biomass data for <a href="https://www.apple.com/newsroom/2024/03/apples-restore-fund-cultivates-new-roots-in-the-atlantic-forest/" style="text-decoration: underline;">Apple's Restore Fund</a>. I visited Apple’s HQ in Cupertino, CA and presented our <a href="https://www.space-intelligence.com/carbonmapper-biomass-estimates/" style="text-decoration: underline;">CarbonMapper biomass product</a> at Apple's ML conference in 2023.
   - role: Analyst
     time: 2020 - 2021
-    company: Space Intelligence, Edinburgh
+    company: Space Intelligence, Edinburgh, UK
     details: |
-      Delivered various CarbonMapper and HabitatMapper projects, predominantly in the tropics. Developed an interactive weighting app to create opportunity maps for natural capital.
-  - role: Geospatial Analyst
-    time: 2016 - Present
-    company: Nelen & Schuurmans, Utrecht
+      Delivered multiple land cover and biomass maps, primarily focused on tropical regions. Developed an app to interactively create opportunity maps for natural capital.
+  - role: GIS Specialist
+    time: 2016 - 2020
+    company: Nelen & Schuurmans, Utrecht, Netherlands
     details: |
-      Technical lead in multiple international development projects, establishing data integration flows to make operational information services. 
-      Trained developer oriented analysts with foundational data engineering skills.
-   
-projects:
-  title: mapper-project-template
-  intro: >
-    In the Product Engineering Team we productize, and scale Space-Intelligence's core land cover and carbon products pipelines to ensure high quality map data across the tropics.
-  assignments:
-  - title: Apple Restore Fund (2022-2024)
-    link: "https://www.apple.com/newsroom/2024/03/apples-restore-fund-cultivates-new-roots-in-the-atlantic-forest/"
-    tagline: "Deliver carbon maps for the Apple Restore Fund."
+      Technical lead in multiple international development projects establishing data integration flows for operational information services.
+
+      For example, I connected soil moisture data from VanDerSat - acquired by Planet in 2021 - into a mobile app for pepper farmers in <a href="https://spiceup.live/en/about" style="text-decoration: underline;">SpiceUp Indonesia</a>.
+      
+      Led an internal group of developer-oriented consultants to gain foundational software and data engineering skills.
 
 oss:
-  title: OSS Contributions
-  intro: >
-    Contributor to the PANGEO community.
+  title: Open Source Contributions
   contributions:
-  - title: SciPy 2024 - Xarray tutorial
-  - link: "https://tutorial.xarray.dev/workshops/scipy2024/index.html#:~:text=Max%20Jones%20(CarbonPlan)-,Wietze%20Suijker,-(Space%20Intelligence)"
+  - title: '<a href="https://tutorial.xarray.dev/workshops/scipy2024/index.html#:~:text=Max%20Jones%20(CarbonPlan)-,Wietze%20Suijker,-(Space%20Intelligence)" style="text-decoration: underline;">SciPy 2024 Xarray tutorial</a>'
     tagline: "Co-organized 4-hour workshop during SciPy 2024, where I led the session on the Xarray ecosystem."
 
-  - title: Open Data Cube - Save COGs with Dask to Azure
-  - link: "https://github.com/opendatacube/odc-geo"
-    tagline: "Added Azure extension to save Cloud-Optimized Geotiffs in a dask-optimized manner in the `odc-geo` Python library."
+  - title: '<a href="https://github.com/opendatacube/odc-geo" style="text-decoration: underline;">odc-geo</a>'
+    tagline: "Added Azure extension to save Cloud-Optimized Geotiffs in a dask-optimized manner in the odc-geo Python library (2024)."
 
-  - title: Python client for searching STAC APIs
-  - link: "https://github.com/stac-utils/pystac-client"
-    tagline: "FOSS4G 2022 sprint contribution for formatted search urls."
+  - title: '<a href="https://github.com/stac-utils/pystac-client" style="text-decoration: underline;">pystac-client</a>'
+    tagline: "FOSS4G sprint contribution enabling formatted search urls in python client to query STAC APIs (2022)."
 
-  - title: dask-geomodeling (2020)
-  - link: "https://github.com/nens/dask-geomodeling"
-    tagline: "On-the-fly operations on geographical maps."
-
-publications:
-  title: Publications
-  papers:
-  - title: Temporal and spatial aggregation of the normalized difference vegetation index for the prediction of rice yields
-    link: "doi.org/10.1117/12.2319189"
-    authors: W. Suijker; E. Aparicio Medrano
-    conference: "SPIE 10783, Remote Sensing for Agriculture, Ecosystems, and Hydrology"
-
-  - title: Sat4Rice feeds Vietnam with geo-information
-    link: "#"
-    authors: W. Suijker; A. Hoff
-    journal: Geo Informatie Nederland 2018-4
+  - title: '<a href="https://github.com/nens/dask-geomodeling" style="text-decoration: underline;">dask-geomodeling</a>'
+    tagline: "On-the-fly operations on geographical maps (2020)."
 
 skills:
   title: Skills &amp; Proficiency
 
   toolset:
-    - name: Geospatial data engineering
+    - name: Data Engineering - Python
       level: 80%
 
-    - name: Machine learning
+    - name: Machine Learning - LightGBM, scikit-learn, XGBoost
       level: 80%
 
-    - name: Infrastructure as code (Terraform)
+    - name: Infrastructure as code - Terraform
       level: 70%
       
-    - name: Cloud platforms (Azure, AWS, GCP)
+    - name: Cloud platforms - AWS, Azure, GCP 
       level: 80%
       
     - name: Map platforms &amp; APIs
       level: 80%
       
     - name: QGIS &amp; ArcGIS
-      level: 90%
-
-footer: >
-  Designed with <i class="fas fa-heart"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank" rel="nofollow">Xiaoying Riley</a>
+      level: 80%
