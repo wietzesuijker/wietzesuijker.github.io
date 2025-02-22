@@ -3,177 +3,162 @@
 #
 
 sidebar:
-    about: False # set to False or comment line if you want to remove the "how to use?" in the sidebar
-    education: True # set to False if you want education in main section instead of in sidebar
+  position: left # position of the sidebar : left or right
+  about: True # set to False or comment line if you want to remove the "how to use?" in the sidebar
+  education: True # set to False if you want education in main section instead of in sidebar
 
-    # Profile information
-    name: Wietze Suijker
-    tagline: Product Architect
-    avatar: profile.png  #place a 100x100 picture inside /assets/images/ folder and provide the name of the file below
+  # Profile information
+  name: Wietze Suijker
+  tagline: Product Architect
+  avatar: profile.png #place a 100x100 picture inside /assets/images/ folder and provide the name of the file below
 
-    # Sidebar links
-    email: wietze.suijker@gmail.com
-    phone: +44 7432325986
-    timezone: Edinburgh, Scotland (GMT)
-    # website: wietzesuijker.github.io #do not add http://
-    linkedin: wietze-suijker
-    twitter: '@Wietze_Suijker'
-    github: wietzesuijker
+  # Sidebar links
+  email: wietze.suijker@email.com
+  phone: +44 7432325986
+  timezone: GMT
+  citizenship: Dutch
+  website: https://wietzesuijker.github.io/ # Include the full website URL, including "http://" or "https://".
+  linkedin: wietze-suijker
+  github: wietzesuijker
 
-    languages:
-      - idiom: Dutch
-        level: Native
+  languages:
+    title: Languages
+    info:
+    - idiom: Dutch
+      level: Native
 
-      - idiom: English
-        level: Professional
-      
-      - idiom: German
-        level: Intermediate (pre-university education)
-      
-      - idiom: French
-        level: Intermediate (pre-university education)
+    - idiom: English
+      level: Professional
 
-      - idiom: Spanish
-        level: Basic
+    - idiom: French
+      level: Intermediate
 
-    interests:
-      - item: Cycling
-        link: "https://strava.com/athletes/8615720"
-        
-      - item: Technology
-        link: "https://tweakers.net/"
+    - idiom: German
+      level: Intermediate
 
-      - item: Wildlife &amp; travelling
-        link: "https://www.imdb.com/title/tt6669028/"
-        
-      - item: Climbing
-        link: "https://via-ferrata-dolomites.com/"
+    - idiom: Spanish
+      level: Intermediate
+
+  interests:
+    title: Interests
+    info:
+    - item: Cycling 
+      link: strava.com/athletes/8615720
+
+    - item: Running
+      link: strava.com/athletes/8615720
+
+    - item: Climbing Via Ferrata
+      link: 
+
 
 career-profile:
-    title: Career Profile
-    summary: |
-      I develop machine learning workflows and innovative IT solutions to provide satellite data products at scale. I am passionate about geospatial technology, and aim to continuously improve my data engineering skills, be a trustworthy colleague and deliver sustainable results.
+  title: Career Profile
+  summary: |
+    Wietze enjoys creating innovative IT solutions to provide the best earth observation data at scale, aiming to preserve biodiversity and restore the environment. 
+    As a product architect, he is in charge of developing the ML workflows for Space Intelligence products. 
+    Previously, he worked at a Water and IT company as the technical lead for a range of satellite-data-driven projects.
 education:
-    - degree: MSc in Geo-information management &amp; applications
-      university: >
-        Wageningen University &amp; Research, Delft University of Technology, Utrecht University, University of Twente (ITC)
-        
-      time: 2014 - 2016
-      details: "Thesis: Characterising Forest Gain and Related Carbon Sequestration"
-    - degree: BSc in Human Geography
-      university: Utrecht University
-      time: 2011 - 2014
-      details: "Specializations: GIS &amp; sustainable development"
+  title: Education
+  info:
+  - degree: MSc in GIS
+    university: University of Wageningen (WUR), Delft, Utrecht and Twente (ITC)
+    time: 2014 - 2016
+    details: |
+      Thesis: Characterising Forest Gain and Related Carbon Sequestration
+  - degree: BSc in Human Geography and Planning
+    university: University of Utrecht
+    time: 2011 - 2014
+    details: |
+      Specializations: GIS & sustainable development
+
 experiences:
-    - role: Data Engineer
-      time: 2023 - Now 
-      company: Space Intelligence, Edinburgh
-      details: |
-        Wietze is the scrum master of the engineering team that maintains Space Intelligence's data platform.
-        The data platform builds on the Pangeo stack and uses machine learning workflows to provide satellite data products at scale.
+  title: Experiences
+  info:
+  - role: Product Architect
+    time: 2021 - Present
+    company: Space Intelligence, Edinburgh
+    details: |
+      Wietze is in charge of developing the ML workflows for Space Intelligence products, generating auditable land cover and carbon maps across the tropics. He is responsible for the technical architecture of the products and the development of the ML workflows.
+      In 2023, he visited Apple’s HQ in Cupertino, CA and presented CarbonMapper at Apple's Machine Learning conference.
+      Currently, he takes on the roles of Data Engineer and scrum master in the Product Engineering Team, building reliable Machine Learning workflows for accurate, scalable, high-quality satellite data products. The team facilitates data scientists with an environment, python library and ML pipelines for data scientists to create L4 maps. We partner with the Data Platform team on infrastructure and support our Solutions team to get the best insights to clients.
+      
+  - role: Analyst
+    time: 2020 - 2021
+    company: Space Intelligence, Edinburgh
+    details: |
+      Delivered various CarbonMapper and HabitatMapper projects, predominantly in the tropics. Developed an interactive weighting app to create opportunity maps for natural capital.
+  - role: Geospatial Analyst
+    time: 2016 - Present
+    company: Nelen & Schuurmans, Utrecht
+    details: |
+      Technical lead in multiple international development projects, establishing data integration flows to make operational information services. 
+      Trained developer oriented analysts with foundational data engineering skills.
    
-    - role: Product Architect
-      time: 2021 - Now 
-      company: Space Intelligence, Edinburgh
-      details: |
-        In 2023, Wietze got the opportunity to visit Apple's HQ in Cupertino, CA and present CarbonMapper at an ML conference.
-
-    - role: Analyst
-      time: 2020 - 2021
-      company: Space Intelligence, Edinburgh
-      details: |
-        Delivered various CarbonMapper and HabitatMapper projects, predominantly in the tropics.
-        Developed an interactive weighting app to create opportunity maps for natural capital.
-        
-    - role: GIS Specialist
-      time: 2016 - 2020
-      company: Nelen &amp; Schuurmans, Utrecht
-      details: |
-        Led satellite data projects for farming insights, mainly in Bangladesh, Indonesia and Vietnam.
-        Founded a team enabling consultants to create open-source IT tools following standard developer practices.
-
-
-packages:
-    title: IT Packages
-    papers:
-      - title: mapper-project-template (2020-Now)
-        link: "#"
-        authors: S. Viaene, S. Gajulapalle, A. Mackie, N. Huber, K. Bodolai, W. Suijker
-        conference: "Template for internal science team to execute CarbonMapper and HabitatMapper projects."
-
-      - title: space-intelligence (2020-Now)
-        link: "#"
-        authors: K. Bodolai, S. Viaene, S. Gajulapalle, A. Mackie, K. Desai, N. Rajeev Saritha, W. Suijker
-        conference: "Space Intelligence library for satellite data processing in distributed computing environments."
-        
-      - title: dask-geomodeling (2020) - <u>Github</u>
-        link: "https://github.com/nens/dask-geomodeling"
-        authors: C. van der Wel, A. Verkerk, J.M. Vazquez Jimenez, R. van Rees &amp; W. Suijker
-        conference: "On-the-fly operations on geographical maps."
-
 projects:
-    title: Projects &amp; Roles        
-    assignments:
-      - title: "Apple Restore Fund (2022-Now)"
-        link: "https://www.apple.com/newsroom/2023/04/apple-expands-innovative-restore-fund-for-carbon-removal/#:~:text=To%20accurately%20monitor%20and%20measure,and%20forest%20carbon%20maps%20of"
-        tagline: "Deliver carbon maps for the Apple Restore Fund."
+  title: mapper-project-template
+  intro: >
+    In the Product Engineering Team we productize, and scale Space-Intelligence's core land cover and carbon products pipelines to ensure high quality map data across the tropics.
+  assignments:
+  - title: Apple Restore Fund (2022-2024)
+    link: "https://www.apple.com/newsroom/2024/03/apples-restore-fund-cultivates-new-roots-in-the-atlantic-forest/"
+    tagline: "Deliver carbon maps for the Apple Restore Fund."
 
-      - title: "CarbonMapper (2020-Now)"
-        link: "https://www.space-intelligence.com/carbonmapper-biomass-estimates/"
-        tagline: "Technical lead productizing, developing and delivering CarbonMapper, predominantly in the tropics."
+oss:
+  title: OSS Contributions
+  intro: >
+    Contributor to the PANGEO community.
+  contributions:
+  - title: SciPy 2024 - Xarray tutorial
+  - link: "https://tutorial.xarray.dev/workshops/scipy2024/index.html#:~:text=Max%20Jones%20(CarbonPlan)-,Wietze%20Suijker,-(Space%20Intelligence)"
+    tagline: "Co-organized 4-hour workshop during SciPy 2024, where I led the session on the Xarray ecosystem."
 
-      - title: "HabitatMapper (2020-Now)"
-        link: "https://www.space-intelligence.com/habitatmapper-landcover-mapping/"
-        tagline: "Technical lead productizing, developing and delivering HabitatMapper, predominantly in the tropics."
-        
-      - title: "Heat stress mapping & <u>interactive tool</u> (2019-2020)"
-        link: "https://drive.google.com/file/d/1VAOIJYxF5wfpfDsgPGypbmVkBGjn4bZO/view?usp=sharing"
-        tagline: "Implement back-end geodata model for online spatial planning tool, e.g. planting trees." 
-        
-      - title: "Reed bank monitoring (2019-2020)"
-        link: "#"
-        tagline: "Apply machine learning & deep learning image segmentation to remote sensing data." 
-        
-      - title: "G4AW - Sat4Rice Vietnam (2016-2018), IDSS Bangladesh (2016-2019), SmartSeeds Indonesia (2017-2020)"
-        link: "https://g4aw.spaceoffice.nl/en/g4aw-projects/g4aw-projects"
-        tagline: "Provide a data integration platform enhancing decision support for vegetable farmers on climate-smart agriculture."
-        
-      - title: "Impact-based forecasting for the Red Cross (2019)"
-        link: "https://www.510.global/impact-based-forecast/"
-        tagline: "Connect flood forecasts to dashboard for humanitarian aid in Zambia."
+  - title: Open Data Cube - Save COGs with Dask to Azure
+  - link: "https://github.com/opendatacube/odc-geo"
+    tagline: "Added Azure extension to save Cloud-Optimized Geotiffs in a dask-optimized manner in the `odc-geo` Python library."
 
+  - title: Python client for searching STAC APIs
+  - link: "https://github.com/stac-utils/pystac-client"
+    tagline: "FOSS4G 2022 sprint contribution for formatted search urls."
 
-skills:
-    title: Skills &amp; Proficiency
-
-    toolset:
-      - name: Geospatial data engineering
-        level: 80%
-
-      - name: Machine learning
-        level: 70%
-
-      - name: Infrastructure as code (Terraform)
-        level: 70%
-        
-      - name: Cloud platforms (Azure, AWS, GCP)
-        level: 80%
-        
-      - name: Map platforms &amp; APIs
-        level: 80%
-        
-      - name: QGIS &amp; ArcGIS
-        level: 90%
+  - title: dask-geomodeling (2020)
+  - link: "https://github.com/nens/dask-geomodeling"
+    tagline: "On-the-fly operations on geographical maps."
 
 publications:
-    title: Publications
-    papers:
-      - title: Temporal and spatial aggregation of NDVI to predict rice yields (2018)
-        link: "https://doi.org/10.1117/12.2319189"
-        authors: W. Suijker &amp; E. Aparicio Medrano
-        conference: "SPIE 10783, Remote Sensing for Agriculture, Ecosystems, and Hydrology."
-        
-      - title: Sat4Rice feeds Vietnam with geo-information (2018)
-        link: "https://geoinformatienederland.nl/system/files/documents/Def%20drukproef%20Geo%20Info%204-2018%20LR.pdf"
-        authors: W. Suijker &amp; A. Hoff
-        conference: "Geo-informatie Nederland 2018-4, pp. 56-59 (in Dutch)."
+  title: Publications
+  papers:
+  - title: Temporal and spatial aggregation of the normalized difference vegetation index for the prediction of rice yields
+    link: "doi.org/10.1117/12.2319189"
+    authors: W. Suijker; E. Aparicio Medrano
+    conference: "SPIE 10783, Remote Sensing for Agriculture, Ecosystems, and Hydrology"
+
+  - title: Sat4Rice feeds Vietnam with geo-information
+    link: "#"
+    authors: W. Suijker; A. Hoff
+    journal: Geo Informatie Nederland 2018-4
+
+skills:
+  title: Skills &amp; Proficiency
+
+  toolset:
+    - name: Geospatial data engineering
+      level: 80%
+
+    - name: Machine learning
+      level: 80%
+
+    - name: Infrastructure as code (Terraform)
+      level: 70%
+      
+    - name: Cloud platforms (Azure, AWS, GCP)
+      level: 80%
+      
+    - name: Map platforms &amp; APIs
+      level: 80%
+      
+    - name: QGIS &amp; ArcGIS
+      level: 90%
+
+footer: >
+  Designed with <i class="fas fa-heart"></i> by <a href="http://themes.3rdwavemedia.com" target="_blank" rel="nofollow">Xiaoying Riley</a>
