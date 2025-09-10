@@ -15,7 +15,7 @@ sidebar:
   # Sidebar links
   email: wietze.suijker@gmail.com
   phone: +44 7432325986
-  timezone: GMT
+  timezone: Eastern Time
   citizenship: Dutch
   website: https://wietzesuijker.github.io/
   linkedin: wietze-suijker
@@ -49,13 +49,13 @@ sidebar:
   committees:
     title: Committees
     info:
-    - item: Co-organize weekly education sessions at Space Intelligence (2025-now)
+    - item: Co-organize weekly education sessions at Space Intelligence (2025)
     - item: Founding member of Space Intelligence's Social Committee (2021-2023)
 
 career-profile:
   title: Career Profile
   summary: |
-    I enjoy creating innovative IT solutions to provide the best earth observation data at scale, aiming to preserve biodiversity and restore the environment. As a product architect, I am responsible for developing machine learning (ML) workflows for land cover and biomass products at Space Intelligence. We expanded from five to over sixty highly educated people during my time at the company. I helped design and develop the technical architecture to scale our products throughout that growth. Previously, I was the technical lead for various satellite-data-driven projects at a Water and IT company.
+    I enjoy creating innovative IT solutions to provide the best earth observation data at scale, aiming to preserve biodiversity and restore the environment. At DevelopmentSeed, I'm working on data pipelines to convert and publish Sentinel data as web-optimized zarr / geozarr for the ESA Earth Observation Processing Framework. Previously, I was a Product Architect at Space Intelligence, developing ML workflows for land cover and biomass products. I helped scale the technical architecture as the team grew from five to over sixty. Prior to that, I was the technical lead on satellite-data projects at a Water and IT firm.
 education:
   title: Education
   info:
@@ -73,18 +73,18 @@ education:
 experiences:
   title: Experiences
   info:
+  - role: Geospatial Data Engineer
+    time: 2025 - now 
+    company: DevelopmentSeed, Contractor, Remote
+    details: |
+      Contributing to the ESA Copernicus Earth Observation Processing Framework.
   - role: Product Architect
-    time: 2021 - now 
+    time: 2020 - 2025 
     company: Space Intelligence, Edinburgh, UK
     details: |
-      Developer on the Product Engineering Team, providing end-to-end ML environments for data scientists. I facilitate agile ceremonies, collaborate with the Data Platform Team to optimise pipelines and batch computing environments that provide high-quality map data, and work alongside the Solutions Team to generate valuable insights for clients.  
+      Developer on the Product Engineering Team, providing end-to-end ML environments for data scientists. I facilitated agile ceremonies, collaborated with the Data Platform Team to optimise pipelines and batch computing environments that provide high-quality map data, and worked alongside the Solutions Team to generate valuable insights for clients.  
       
-      Project Highlight: Developed land cover and biomass data for <a href="https://www.apple.com/newsroom/2024/03/apples-restore-fund-cultivates-new-roots-in-the-atlantic-forest/" style="text-decoration: underline;">Apple's Restore Fund</a>. I visited Apple’s HQ in Cupertino, CA and presented our <a href="https://www.space-intelligence.com/carbonmapper-biomass-estimates/" style="text-decoration: underline;">CarbonMapper biomass product</a> at Apple's ML conference in 2023.
-  - role: Analyst
-    time: 2020 - 2021
-    company: Space Intelligence, Edinburgh, UK
-    details: |
-      Delivered multiple land cover and biomass maps, primarily focused on tropical regions. Developed an app to interactively create opportunity maps for natural capital.
+      Project Highlight: Developed land cover and biomass data for <a href="https://www.apple.com/newsroom/2024/03/apples-restore-fund-cultivates-new-roots-in-the-atlantic-forest/" style="text-decoration: underline;">Apple's Restore Fund</a>. I visited Apple’s HQ in Cupertino, CA and presented our <a href="https://www.space-intelligence.com/land-cover-mapping/above-ground-biomass/" style="text-decoration: underline;">CarbonMapper biomass product</a> at Apple's ML conference in 2023.
   - role: GIS Specialist
     time: 2016 - 2020
     company: Nelen & Schuurmans, Utrecht, Netherlands
