@@ -9,7 +9,7 @@ sidebar:
 
   # Profile information
   name: Wietze Suijker
-  tagline: Geospatial Data Engineer
+  tagline: EO Data Engineer
   avatar: profile.png #place a 100x100 picture inside /assets/images/ folder and provide the name of the file below
 
   # Sidebar links
@@ -55,7 +55,7 @@ sidebar:
 career-profile:
   title: Career Profile
   summary: |
-    I enjoy creating innovative IT solutions to provide the best earth observation data at scale, aiming to preserve biodiversity and restore the environment. At DevelopmentSeed, I'm working on data pipelines to convert and publish Sentinel data as web-optimized zarr / geozarr for the ESA Earth Observation Processing Framework. Previously, I was a Product Architect at Space Intelligence, developing ML workflows for land cover and biomass products. I helped scale the technical architecture as the team grew from five to over sixty. Prior to that, I was the technical lead on satellite-data projects at a Water and IT firm.
+    I enjoy creating innovative IT solutions to provide the best earth observation data at scale, aiming to preserve biodiversity and restore the environment. I worked on data pipelines to convert and publish Sentinel data as web-optimized zarr / geozarr for the ESA Earth Observation Processing Framework. Previously, I was a Product Architect at Space Intelligence, developing ML workflows for land cover and biomass products. I helped scale the technical architecture as the team grew from five to over sixty. Prior to that, I was the technical lead on satellite-data projects at a Water and IT firm.
 education:
   title: Education
   info:
@@ -73,8 +73,13 @@ education:
 experiences:
   title: Experiences
   info:
-  - role: Geospatial Data Engineer
-    time: 2025 - now 
+  - role: Data Engineer / Senior Research Advisor
+    time: 2026 - now
+    company: IVADO, Montréal, Canada
+    details: |
+      Drive data engineering in AI applications related to climate change, sustainability and biodiversity.
+  - role: EO Data Engineer
+    time: Autumn 2025  
     company: DevelopmentSeed, Contractor, Remote
     details: |
       Contributing to GeoZarr data pipelines for the ESA Copernicus Earth Observation Processing Framework.
