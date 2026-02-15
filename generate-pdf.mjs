@@ -18,13 +18,24 @@ const page = await browser.newPage();
 // Render as screen (not print) so CSS grid + colors are preserved
 await page.emulateMediaType('screen');
 
-// Use a wider viewport - the PDF scale parameter will shrink it to A4,
-// fitting more content vertically on one page
 await page.setViewport({ width: 1100, height: 1560, deviceScaleFactor: 2 });
 await page.goto(url, { waitUntil: 'networkidle0' });
 
-// A4 is 210x297mm. With scale < 1, puppeteer renders at (pageWidth / scale)
-// then shrinks to fit, so more content fits per page.
+// Remove background around the wrapper and make it full-width for PDF
+await page.evaluate(() => {
+  document.body.style.background = '#fff';
+  document.body.style.padding = '0';
+  document.body.style.margin = '0';
+  const wrapper = document.querySelector('.wrapper');
+  if (wrapper) {
+    wrapper.style.maxWidth = 'unset';
+    wrapper.style.margin = '0';
+    wrapper.style.boxShadow = 'none';
+  }
+  // Hide hero and footer
+  document.querySelectorAll('.hero, footer').forEach(el => el.style.display = 'none');
+});
+
 await page.pdf({
   path: out,
   format: 'A4',
