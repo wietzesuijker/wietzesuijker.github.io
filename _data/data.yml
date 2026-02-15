@@ -4,7 +4,7 @@
 
 hero:
   headline: Geospatial Data Engineer
-  bio: Building EO data pipelines at scale - from satellite imagery to climate insights. Open-source contributor to GDAL, Xarray, and the FOSS4G ecosystem.
+  bio: Connecting satellite data to environmental impact. Open-source contributor to GDAL, Xarray, and the FOSS4G ecosystem.
 
 sidebar:
   position: right # position of the sidebar : left or right
@@ -58,7 +58,7 @@ sidebar:
 career-profile:
   title: Career Profile
   summary: |
-    Geospatial data engineer building EO data pipelines at scale. Currently driving data engineering for climate AI at IVADO. Active open-source contributor to GDAL's Zarr v3 driver. Previously built GeoZarr pipelines for ESA's Earth Observation Processing Framework at DevelopmentSeed, and spent five years as Product Architect at Space Intelligence developing ML workflows for land cover and biomass products, scaling the technical architecture as the team grew from five to over sixty.
+    Ten years connecting Earth observation data to environmental impact - from a carbon sequestration thesis to production ML pipelines to climate AI. Currently driving data engineering at IVADO. Active open-source contributor to GDAL's Zarr v3 driver. Previously built GeoZarr pipelines for ESA's Earth Observation Processing Framework at DevelopmentSeed, and spent five years as Product Architect at Space Intelligence, where I co-designed the technical architecture that scaled from a five-person startup to a sixty-person company shipping global land cover and biomass products.
 education:
   title: Education
   info:
