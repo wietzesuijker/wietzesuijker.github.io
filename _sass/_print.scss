@@ -1,7 +1,7 @@
 @media print {
     @page {
         size: A4 portrait;
-        margin: 8mm;
+        margin: 6mm;
     }
 
     /* === Force browsers to print background colors === */
@@ -18,18 +18,18 @@
 
     /* === Base === */
     body {
-        font-size: 9pt !important;
-        line-height: 1.35 !important;
+        font-size: 7.5pt !important;
+        line-height: 1.2 !important;
         margin: 0;
         padding: 0 !important;
     }
 
     p {
-        margin-bottom: 2px !important;
-        line-height: 1.35 !important;
+        margin-bottom: 1px !important;
+        line-height: 1.2 !important;
     }
 
-    /* === Layout: keep grid, compact it === */
+    /* === Layout === */
     .wrapper {
         max-width: unset !important;
         box-shadow: none !important;
@@ -41,95 +41,92 @@
     }
 
     .main-wrapper {
-        padding: 10px 14px 10px 12px !important;
+        padding: 8px 12px 6px 10px !important;
     }
 
-    /* === Sidebar compact === */
+    /* === Sidebar === */
     .sidebar-wrapper .profile-container {
-        padding: 10px !important;
+        padding: 8px !important;
     }
 
     .sidebar-wrapper .avatar {
-        max-width: 60px !important;
-        max-height: 60px !important;
-        margin-bottom: 6px !important;
+        display: none !important;
     }
 
     .sidebar-wrapper .name {
-        font-size: 14pt !important;
-        margin-bottom: 2px !important;
+        font-size: 12pt !important;
+        margin-bottom: 1px !important;
     }
 
     .sidebar-wrapper .tagline {
-        font-size: 8pt !important;
+        font-size: 7pt !important;
         margin-bottom: 0 !important;
     }
 
     .sidebar-wrapper .container-block {
-        padding: 6px 10px !important;
+        padding: 4px 8px !important;
     }
 
     .sidebar-wrapper .container-block-title {
-        font-size: 8pt !important;
-        margin-bottom: 4px !important;
+        font-size: 7pt !important;
+        margin-bottom: 2px !important;
     }
 
     .sidebar-wrapper .contact-list li {
-        margin-bottom: 2px !important;
-        font-size: 7.5pt !important;
+        margin-bottom: 1px !important;
+        font-size: 6.5pt !important;
     }
 
     .sidebar-wrapper .contact-list .fas,
     .sidebar-wrapper .contact-list .fab,
     .sidebar-wrapper .contact-list .far {
-        font-size: 9px !important;
-        width: 13px;
+        font-size: 8px !important;
+        width: 12px;
     }
 
-    /* Hide low-value sidebar sections for one-page */
+    /* Hide low-value sidebar sections */
     .sidebar-wrapper .interests-container,
     .sidebar-wrapper .committees-container {
         display: none !important;
     }
 
     .sidebar-wrapper .education-container .item {
-        margin-bottom: 4px !important;
+        margin-bottom: 2px !important;
     }
 
     .sidebar-wrapper .education-container .meta,
     .sidebar-wrapper .education-container .time {
-        font-size: 7.5pt !important;
+        font-size: 6.5pt !important;
     }
 
     .sidebar-wrapper .degree {
-        font-size: 8pt !important;
+        font-size: 7pt !important;
     }
 
     .sidebar-wrapper .languages-list li {
-        margin-bottom: 1px !important;
-        font-size: 7.5pt !important;
+        margin-bottom: 0 !important;
+        font-size: 6.5pt !important;
     }
 
-    /* === Main content compact === */
+    /* === Main content === */
     .main-wrapper .section-title {
-        font-size: 10pt !important;
-        margin-bottom: 4px !important;
+        font-size: 8pt !important;
+        margin-bottom: 2px !important;
         margin-top: 0 !important;
     }
 
     .main-wrapper .section-title .fa-stack {
-        font-size: 0.5em !important;
+        font-size: 0.45em !important;
     }
 
     .main-wrapper .section {
-        margin-bottom: 6px !important;
-    }
-
-    .main-wrapper .item {
         margin-bottom: 4px !important;
     }
 
-    /* Job title + time row */
+    .main-wrapper .item {
+        margin-bottom: 3px !important;
+    }
+
     .main-wrapper .upper-row {
         margin-bottom: 0 !important;
     }
@@ -137,56 +134,64 @@
     .main-wrapper .job-title,
     .main-wrapper .degree,
     .main-wrapper .cert-title {
-        font-size: 9pt !important;
+        font-size: 7.5pt !important;
     }
 
     .main-wrapper .time {
-        font-size: 8pt !important;
+        font-size: 7pt !important;
     }
 
     .main-wrapper .company,
     .main-wrapper .university {
-        margin-bottom: 1px !important;
-        font-size: 8pt !important;
+        margin-bottom: 0 !important;
+        font-size: 7pt !important;
     }
 
     .main-wrapper .details p {
-        font-size: 8pt !important;
+        font-size: 7pt !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* === Career profile: tighter === */
+    .career-profile-section .details {
+        font-size: 7pt !important;
+    }
+
+    /* === OSS === */
+    .main-wrapper .oss-section .item {
         margin-bottom: 1px !important;
     }
 
-    /* === OSS section compact === */
-    .main-wrapper .oss-section .item {
-        margin-bottom: 2px !important;
-    }
-
     .main-wrapper .project-title {
-        font-size: 8pt !important;
+        font-size: 7pt !important;
+        margin-bottom: 0 !important;
     }
 
     .main-wrapper .project-tagline {
-        font-size: 7.5pt !important;
+        font-size: 6.5pt !important;
+        margin-bottom: 0 !important;
     }
 
-    /* === Skills: compact for print === */
+    /* === Skills: single-line rows === */
     .skillset {
-        gap: 6px !important;
-    }
-
-    .skill-group {
         gap: 2px !important;
     }
 
+    .skill-group {
+        gap: 3px !important;
+    }
+
     .skill-category {
-        font-size: 8pt !important;
+        font-size: 7pt !important;
     }
 
     .skill-tag {
-        font-size: 7pt !important;
-        padding: 1px 5px !important;
+        font-size: 6pt !important;
+        padding: 0 4px !important;
+        margin: 0 1px !important;
     }
 
-    /* === Links: keep colors from theme === */
+    /* === Links === */
     a {
         text-decoration: none !important;
     }
@@ -197,7 +202,7 @@
         display: none !important;
     }
 
-    /* === Prevent page breaks mid-item === */
+    /* === Page breaks === */
     .item {
         break-inside: avoid;
     }
