@@ -1,17 +1,30 @@
 @media print {
     @page {
         size: A4 portrait;
-        margin: 10mm;
+        margin: 8mm;
     }
 
+    /* === Kill Bootstrap's URL-after-link expansion === */
+    a[href]:after,
+    abbr[title]:after {
+        content: none !important;
+    }
+
+    /* === Base === */
     body {
-        font-size: 11pt;
+        font-size: 9pt !important;
+        line-height: 1.3 !important;
         margin: 0;
         padding: 0 !important;
         background: #fff;
     }
 
-    /* Override grid to block so float works */
+    p {
+        margin-bottom: 2px !important;
+        line-height: 1.3 !important;
+    }
+
+    /* === Layout: override grid to float === */
     .wrapper {
         display: block !important;
         width: 100% !important;
@@ -21,7 +34,7 @@
 
     .sidebar-wrapper {
         float: right;
-        width: 32%;
+        width: 28%;
         position: static;
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
@@ -29,46 +42,170 @@
 
     .main-wrapper {
         float: left;
-        width: 66%;
-        padding: 20px !important;
+        width: 70%;
+        padding: 10px 14px 10px 10px !important;
     }
 
-    /* Preserve theme colors */
+    /* === Sidebar compact === */
     .sidebar-wrapper .profile-container {
+        padding: 10px !important;
         print-color-adjust: exact;
         -webkit-print-color-adjust: exact;
     }
 
-    .skillset .level-bar-inner {
-        print-color-adjust: exact;
-        -webkit-print-color-adjust: exact;
+    .sidebar-wrapper .avatar {
+        display: none !important; /* save vertical space */
+    }
+
+    .sidebar-wrapper .name {
+        font-size: 14pt !important;
+        margin-bottom: 2px !important;
+    }
+
+    .sidebar-wrapper .tagline {
+        font-size: 9pt !important;
+        margin-bottom: 0 !important;
+    }
+
+    .sidebar-wrapper .container-block {
+        padding: 8px 10px !important;
+    }
+
+    .sidebar-wrapper .container-block-title {
+        font-size: 9pt !important;
+        margin-bottom: 6px !important;
+    }
+
+    .sidebar-wrapper .contact-list li {
+        margin-bottom: 3px !important;
+        font-size: 8pt !important;
+    }
+
+    .sidebar-wrapper .contact-list .fas,
+    .sidebar-wrapper .contact-list .fab,
+    .sidebar-wrapper .contact-list .far {
+        font-size: 10px !important;
+        width: 14px;
+    }
+
+    /* Hide low-value sidebar sections for one-page */
+    .sidebar-wrapper .interests-container,
+    .sidebar-wrapper .committees-container {
+        display: none !important;
+    }
+
+    .sidebar-wrapper .education-container .item {
+        margin-bottom: 6px !important;
+    }
+
+    .sidebar-wrapper .education-container .meta,
+    .sidebar-wrapper .education-container .time {
+        font-size: 8pt !important;
+    }
+
+    .sidebar-wrapper .degree {
+        font-size: 9pt !important;
+    }
+
+    .sidebar-wrapper .languages-list li {
+        margin-bottom: 2px !important;
+        font-size: 8pt !important;
+    }
+
+    /* === Main content compact === */
+    .main-wrapper .section-title {
+        font-size: 11pt !important;
+        margin-bottom: 6px !important;
+        margin-top: 0 !important;
+    }
+
+    .main-wrapper .section-title .fa-stack {
+        font-size: 0.5em !important;
+    }
+
+    .main-wrapper .section {
+        margin-bottom: 8px !important;
+    }
+
+    .main-wrapper .item {
+        margin-bottom: 6px !important;
+    }
+
+    /* Job title + time row */
+    .main-wrapper .upper-row {
+        margin-bottom: 0 !important;
+    }
+
+    .main-wrapper .job-title,
+    .main-wrapper .degree,
+    .main-wrapper .cert-title {
+        font-size: 9pt !important;
     }
 
     .main-wrapper .time {
         float: right;
         position: static !important;
+        font-size: 8pt !important;
     }
 
-    /* Page break controls */
-    .section {
-        break-inside: avoid;
+    .main-wrapper .company,
+    .main-wrapper .university {
+        margin-bottom: 2px !important;
+        font-size: 8pt !important;
     }
 
+    .main-wrapper .details p {
+        font-size: 8pt !important;
+        margin-bottom: 1px !important;
+    }
+
+    /* === OSS section compact === */
+    .main-wrapper .oss-section .item {
+        margin-bottom: 3px !important;
+    }
+
+    .main-wrapper .project-title {
+        font-size: 9pt !important;
+    }
+
+    .main-wrapper .project-tagline {
+        font-size: 8pt !important;
+    }
+
+    /* === Skills: hide bars, show as compact list === */
+    .skillset .item {
+        margin-bottom: 2px !important;
+    }
+
+    .skillset .level-title {
+        font-size: 8pt !important;
+        margin: 0 !important;
+        float: none !important;
+        width: 100% !important;
+    }
+
+    .skillset .level-bar {
+        display: none !important; /* hide progress bars for print */
+    }
+
+    /* === Links === */
+    a {
+        color: inherit !important;
+        text-decoration: none !important;
+    }
+
+    /* === Hide non-print elements === */
+    .hero,
+    footer {
+        display: none !important;
+    }
+
+    /* === Prevent page breaks mid-item === */
     .item {
         break-inside: avoid;
     }
 
     h2, h3 {
         break-after: avoid;
-    }
-
-    /* Hide non-print elements */
-    .hero,
-    footer {
-        display: none !important;
-    }
-
-    a {
-        text-decoration: underline !important;
     }
 }

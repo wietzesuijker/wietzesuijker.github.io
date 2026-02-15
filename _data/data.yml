@@ -58,7 +58,7 @@ sidebar:
 career-profile:
   title: Career Profile
   summary: |
-    Geospatial data engineer building EO data pipelines at scale. Currently driving data engineering for climate AI at IVADO. Active open-source contributor to GDAL's Zarr v3 driver (C++). Previously built GeoZarr pipelines for ESA's Earth Observation Processing Framework at DevelopmentSeed, and spent five years as Product Architect at Space Intelligence developing ML workflows for land cover and biomass products, scaling the technical architecture as the team grew from five to over sixty.
+    Geospatial data engineer building EO data pipelines at scale. Currently driving data engineering for climate AI at IVADO. Active open-source contributor to GDAL's Zarr v3 driver. Previously built GeoZarr pipelines for ESA's Earth Observation Processing Framework at DevelopmentSeed, and spent five years as Product Architect at Space Intelligence developing ML workflows for land cover and biomass products, scaling the technical architecture as the team grew from five to over sixty.
 education:
   title: Education
   info:
@@ -107,7 +107,7 @@ oss:
   title: Open Source Contributions
   contributions:
   - title: '<a href="https://github.com/OSGeo/gdal/pulls?q=is%3Apr+author%3Awietzesuijker" style="text-decoration: underline;">GDAL</a>'
-    tagline: "C++ contributions to the Zarr v3 driver: parallel shard I/O, string data types, coordinate caching, and CI improvements (2026)."
+    tagline: "Contributions to the Zarr v3 driver: parallel shard I/O, string data types, coordinate caching, and CI improvements (2026)."
 
   - title: '<a href="https://github.com/EOPF-Explorer" style="text-decoration: underline;">EOPF Explorer</a>'
     tagline: "GeoZarr data pipelines and data model for ESA's Copernicus Earth Observation Processing Framework. Contributions to data-pipeline and data-model (2025)."
