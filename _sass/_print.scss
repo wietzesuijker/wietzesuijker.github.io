@@ -1,60 +1,74 @@
 @media print {
     @page {
         size: A4 portrait;
-        margin: 0;
+        margin: 10mm;
     }
 
     body {
-        font-size: 12pt;
+        font-size: 11pt;
         margin: 0;
-        padding: 0;
+        padding: 0 !important;
+        background: #fff;
     }
 
-    /* Force the main wrapper to use the full A4 width */
+    /* Override grid to block so float works */
     .wrapper {
-        width: 21cm !important;
-        margin: 0 auto;
+        display: block !important;
+        width: 100% !important;
+        max-width: unset !important;
+        box-shadow: none !important;
     }
 
-    /* Optionally reduce padding in the main content area */
+    .sidebar-wrapper {
+        float: right;
+        width: 32%;
+        position: static;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
     .main-wrapper {
-        padding: 10px !important;
+        float: left;
+        width: 66%;
+        padding: 20px !important;
     }
 
-    img.avatar {
-        filter: grayscale(1);
-        -webkit-filter: greyscale(1);
+    /* Preserve theme colors */
+    .sidebar-wrapper .profile-container {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .skillset .level-bar-inner {
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
     }
 
     .main-wrapper .time {
         float: right;
-        color: black !important;
-        -webkit-print-color-adjust: exact;
+        position: static !important;
     }
 
-    .sidebar-wrapper {
-        position: static;
-        float: right;
-        width: 40%;
-        -webkit-print-color-adjust: exact;
+    /* Page break controls */
+    .section {
+        break-inside: avoid;
     }
 
-    .remove-container.container-block {
-        display: none;
+    .item {
+        break-inside: avoid;
     }
 
+    h2, h3 {
+        break-after: avoid;
+    }
+
+    /* Hide non-print elements */
+    .hero,
     footer {
-        display: none;
+        display: none !important;
     }
 
-    .skillset .level-bar-inner {
-        background-color: black !important;
-        -webkit-print-color-adjust: exact;
-    }
-
-    .fa-inverse,
-    .fa-inverse:after,
-    .fa-inverse:before {
-        color: #ffffff !important;
+    a {
+        text-decoration: underline !important;
     }
 }

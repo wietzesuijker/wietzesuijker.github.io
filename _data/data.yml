@@ -12,7 +12,7 @@ sidebar:
 
   # Profile information
   name: Wietze Suijker
-  tagline: EO Data Engineer
+  tagline: Geospatial Data Engineer
   avatar: profile.png #place a 100x100 picture inside /assets/images/ folder and provide the name of the file below
 
   # Sidebar links
@@ -45,14 +45,14 @@ sidebar:
   interests:
     title: Interests
     info:
-    - item: '<a href="https://www.strava.com/athletes/8615720">Cycling</a>'
+    - item: '<a href="https://www.strava.com/athletes/8615720">Hiking</a>'
     - item: '<a href="https://www.strava.com/athletes/8615720">Running</a>'
     - item: '<a href="https://www.strava.com/athletes/8615720">Climbing</a>'    
 
   committees:
     title: Committees
     info:
-    - item: Co-organize weekly education sessions at Space Intelligence (2025)
+    - item: Co-organized weekly education sessions at Space Intelligence (2025)
     - item: Founding member of Space Intelligence's Social Committee (2021-2023)
 
 career-profile:
@@ -99,7 +99,7 @@ experiences:
     details: |
       Technical lead in multiple international development projects establishing data integration flows for operational information services.
 
-      For example, I connected soil moisture data from VanDerSat - acquired by Planet in 2021 - into a mobile app for pepper farmers in <a href="https://spiceup.live/en/about" style="text-decoration: underline;">SpiceUp Indonesia</a>.
+      For example, I connected soil moisture data from VanDerSat - acquired by Planet in 2021 - into a mobile app for pepper farmers in SpiceUp Indonesia.
       
       Led an internal group of developer-oriented consultants to gain foundational software and data engineering skills.
 
@@ -128,23 +128,20 @@ skills:
   title: Skills &amp; Proficiency
 
   toolset:
-    - name: Data Engineering - Python
+    - name: Geospatial Python - Xarray, Rasterio, GeoPandas, STAC
+      level: 85%
+
+    - name: Data Engineering - Pandas, NumPy, Dask, PostgreSQL/PostGIS
       level: 80%
 
     - name: Machine Learning - LightGBM, scikit-learn, XGBoost
       level: 80%
 
-    - name: Infrastructure as code - Terraform
-      level: 70%
-      
-    - name: Cloud platforms - AWS, Azure, GCP 
+    - name: Cloud &amp; Infra - AWS, Azure, GCP, Terraform, Docker
       level: 80%
-      
-    - name: Map platforms &amp; APIs
-      level: 80%
-      
+
     - name: QGIS &amp; ArcGIS
       level: 80%
 
-    - name: GenAI-assisted development - GitHub Copilot, Claude
+    - name: AI-assisted development - Claude, GitHub Copilot
       level: 75%
