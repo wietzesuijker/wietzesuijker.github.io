@@ -1,10 +1,10 @@
 @media print {
     @page {
         size: A4 portrait;
-        margin: 6mm;
+        margin: 0;
     }
 
-    /* === Force browsers to print background colors === */
+    /* === Force background colors and images === */
     * {
         print-color-adjust: exact !important;
         -webkit-print-color-adjust: exact !important;
@@ -16,50 +16,58 @@
         content: none !important;
     }
 
-    /* === Base === */
+    /* === Base: shrink everything proportionally === */
     body {
-        font-size: 7.5pt !important;
-        line-height: 1.2 !important;
-        margin: 0;
+        font-size: 7pt !important;
+        line-height: 1.25 !important;
+        margin: 0 !important;
         padding: 0 !important;
+        background: #fff !important;
     }
 
     p {
         margin-bottom: 1px !important;
-        line-height: 1.2 !important;
+        line-height: 1.25 !important;
     }
 
-    /* === Layout === */
+    /* === Keep the grid layout === */
     .wrapper {
+        display: grid !important;
+        grid-template-columns: repeat(10, 1fr) !important;
         max-width: unset !important;
         box-shadow: none !important;
         margin: 0 !important;
+        width: 100% !important;
     }
 
     .sidebar-wrapper {
+        grid-column: span 3 !important;
         padding: 0 !important;
     }
 
     .main-wrapper {
-        padding: 8px 12px 6px 10px !important;
+        grid-column: span 7 !important;
+        padding: 10px 14px 8px 12px !important;
     }
 
-    /* === Sidebar === */
+    /* === Sidebar: keep colors, compact === */
     .sidebar-wrapper .profile-container {
-        padding: 8px !important;
+        padding: 10px 8px !important;
     }
 
     .sidebar-wrapper .avatar {
-        display: none !important;
+        max-width: 50px !important;
+        max-height: 50px !important;
+        margin-bottom: 4px !important;
     }
 
     .sidebar-wrapper .name {
-        font-size: 12pt !important;
+        font-size: 11pt !important;
         margin-bottom: 1px !important;
     }
 
     .sidebar-wrapper .tagline {
-        font-size: 7pt !important;
+        font-size: 6.5pt !important;
         margin-bottom: 0 !important;
     }
 
@@ -74,53 +82,59 @@
 
     .sidebar-wrapper .contact-list li {
         margin-bottom: 1px !important;
-        font-size: 6.5pt !important;
+        font-size: 6pt !important;
     }
 
     .sidebar-wrapper .contact-list .fas,
     .sidebar-wrapper .contact-list .fab,
     .sidebar-wrapper .contact-list .far {
-        font-size: 8px !important;
-        width: 12px;
-    }
-
-    /* Hide low-value sidebar sections */
-    .sidebar-wrapper .interests-container,
-    .sidebar-wrapper .committees-container {
-        display: none !important;
+        font-size: 7px !important;
+        width: 11px !important;
+        margin-right: 3px !important;
     }
 
     .sidebar-wrapper .education-container .item {
-        margin-bottom: 2px !important;
+        margin-bottom: 3px !important;
     }
 
     .sidebar-wrapper .education-container .meta,
     .sidebar-wrapper .education-container .time {
-        font-size: 6.5pt !important;
+        font-size: 6pt !important;
     }
 
     .sidebar-wrapper .degree {
-        font-size: 7pt !important;
+        font-size: 6.5pt !important;
+        margin-bottom: 1px !important;
     }
 
     .sidebar-wrapper .languages-list li {
         margin-bottom: 0 !important;
-        font-size: 6.5pt !important;
+        font-size: 6pt !important;
+    }
+
+    .sidebar-wrapper .committees-list li {
+        margin-bottom: 0 !important;
+        font-size: 6pt !important;
+    }
+
+    .sidebar-wrapper .interests-list li {
+        margin-bottom: 0 !important;
+        font-size: 6pt !important;
     }
 
     /* === Main content === */
     .main-wrapper .section-title {
         font-size: 8pt !important;
-        margin-bottom: 2px !important;
+        margin-bottom: 3px !important;
         margin-top: 0 !important;
     }
 
     .main-wrapper .section-title .fa-stack {
-        font-size: 0.45em !important;
+        font-size: 0.4em !important;
     }
 
     .main-wrapper .section {
-        margin-bottom: 4px !important;
+        margin-bottom: 5px !important;
     }
 
     .main-wrapper .item {
@@ -134,27 +148,22 @@
     .main-wrapper .job-title,
     .main-wrapper .degree,
     .main-wrapper .cert-title {
-        font-size: 7.5pt !important;
+        font-size: 7pt !important;
     }
 
     .main-wrapper .time {
-        font-size: 7pt !important;
+        font-size: 6.5pt !important;
     }
 
     .main-wrapper .company,
     .main-wrapper .university {
         margin-bottom: 0 !important;
-        font-size: 7pt !important;
+        font-size: 6.5pt !important;
     }
 
     .main-wrapper .details p {
-        font-size: 7pt !important;
+        font-size: 6.5pt !important;
         margin-bottom: 0 !important;
-    }
-
-    /* === Career profile: tighter === */
-    .career-profile-section .details {
-        font-size: 7pt !important;
     }
 
     /* === OSS === */
@@ -163,31 +172,31 @@
     }
 
     .main-wrapper .project-title {
-        font-size: 7pt !important;
-        margin-bottom: 0 !important;
-    }
-
-    .main-wrapper .project-tagline {
         font-size: 6.5pt !important;
         margin-bottom: 0 !important;
     }
 
-    /* === Skills: single-line rows === */
+    .main-wrapper .project-tagline {
+        font-size: 6pt !important;
+        margin-bottom: 0 !important;
+    }
+
+    /* === Skills === */
     .skillset {
         gap: 2px !important;
     }
 
     .skill-group {
-        gap: 3px !important;
+        gap: 2px !important;
     }
 
     .skill-category {
-        font-size: 7pt !important;
+        font-size: 6.5pt !important;
     }
 
     .skill-tag {
-        font-size: 6pt !important;
-        padding: 0 4px !important;
+        font-size: 5.5pt !important;
+        padding: 0 3px !important;
         margin: 0 1px !important;
     }
 
@@ -196,7 +205,7 @@
         text-decoration: none !important;
     }
 
-    /* === Hide non-print elements === */
+    /* === Hide hero + footer (not part of CV) === */
     .hero,
     footer {
         display: none !important;
