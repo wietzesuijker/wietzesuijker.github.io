@@ -17,7 +17,7 @@ sidebar:
 
   # Sidebar links
   email: wietze.suijker@gmail.com
-  phone: +447432325986 / +14389312304
+  phone: +14389312304
   timezone: EST
   citizenship: Dutch
   website: https://wietzesuijker.github.io/
@@ -42,15 +42,13 @@ sidebar:
   interests:
     title: Interests
     info:
-    - item: '<a href="https://www.strava.com/athletes/8615720">Hiking</a>'
-    - item: '<a href="https://www.strava.com/athletes/8615720">Running</a>'
-    - item: '<a href="https://www.strava.com/athletes/8615720">Climbing</a>'    
+    - item: '<a href="https://www.strava.com/athletes/8615720">Hiking, Running, Climbing</a>'
 
   committees:
     title: Committees
     info:
-    - item: Co-organized weekly education sessions at Space Intelligence (2025)
-    - item: Founding member of Space Intelligence's Social Committee (2021-2023)
+    - item: Co-organized weekly education sessions, Space Intelligence (2025)
+    - item: Founding member Social Committee, Space Intelligence (2021-2023)
 
 career-profile:
   title: Career Profile
@@ -82,14 +80,14 @@ experiences:
     time: Autumn 2025
     company: DevelopmentSeed, Contractor, Remote
     details: |
-      Open-source contributions to GeoZarr data pipelines and data models for the ESA Copernicus <a href="https://github.com/EOPF-Explorer" style="text-decoration: underline;">Earth Observation Processing Framework</a> (EOPF). Also contributed to the platform's Kubernetes/FluxCD deployment infrastructure.
+      Open-source contributions to GeoZarr data pipelines and data models for the ESA Copernicus <a href="https://github.com/EOPF-Explorer">Earth Observation Processing Framework</a> (EOPF). Also contributed to the platform's Kubernetes/FluxCD deployment infrastructure.
   - role: Product Architect
     time: 2020 - 2025
     company: Space Intelligence, Edinburgh, UK
     details: |
       Co-authored the standardized project template and Python library powering all land cover and biomass map products. Designed ML pipelines (Random Forest, LightGBM) on Dask/Zarr/COG with Azure and AWS infrastructure (Terraform). Scaled the technical architecture as the team grew from five to over sixty.
 
-      Project Highlight: Developed land cover and biomass data for <a href="https://www.apple.com/newsroom/2024/03/apples-restore-fund-cultivates-new-roots-in-the-atlantic-forest/" style="text-decoration: underline;">Apple's Restore Fund</a>. Presented our <a href="https://www.space-intelligence.com/land-cover-mapping/above-ground-biomass/" style="text-decoration: underline;">CarbonMapper biomass product</a> at Apple's ML conference in Cupertino, CA (2023).
+      Project Highlight: Developed land cover and biomass data for <a href="https://www.apple.com/newsroom/2024/03/apples-restore-fund-cultivates-new-roots-in-the-atlantic-forest/">Apple's Restore Fund</a>. Presented our <a href="https://www.space-intelligence.com/land-cover-mapping/above-ground-biomass/">CarbonMapper biomass product</a> at Apple's ML conference in Cupertino, CA (2023).
   - role: GIS Specialist
     time: 2016 - 2020
     company: Nelen & Schuurmans, Utrecht, Netherlands
@@ -103,22 +101,22 @@ experiences:
 oss:
   title: Open Source Contributions
   contributions:
-  - title: '<a href="https://github.com/OSGeo/gdal/pulls?q=is%3Apr+author%3Awietzesuijker" style="text-decoration: underline;">GDAL</a>'
+  - title: '<a href="https://github.com/OSGeo/gdal/pulls?q=is%3Apr+author%3Awietzesuijker">GDAL</a>'
     tagline: "Contributions to the Zarr v3 driver: parallel shard I/O, string data types, coordinate caching, and CI improvements (2026)."
 
-  - title: '<a href="https://github.com/EOPF-Explorer" style="text-decoration: underline;">EOPF Explorer</a>'
+  - title: '<a href="https://github.com/EOPF-Explorer">EOPF Explorer</a>'
     tagline: "GeoZarr data pipelines and data model for ESA's Copernicus Earth Observation Processing Framework. Contributions to data-pipeline and data-model (2025)."
 
-  - title: '<a href="https://tutorial.xarray.dev/workshops/scipy2024/index.html#:~:text=Max%20Jones%20(CarbonPlan)-,Wietze%20Suijker,-(Space%20Intelligence)" style="text-decoration: underline;">SciPy 2024 Xarray tutorial</a>'
+  - title: '<a href="https://tutorial.xarray.dev/workshops/scipy2024/index.html#:~:text=Max%20Jones%20(CarbonPlan)-,Wietze%20Suijker,-(Space%20Intelligence)">SciPy 2024 Xarray tutorial</a>'
     tagline: "Co-organized 4-hour workshop during SciPy 2024, where I led the session on the Xarray ecosystem."
 
-  - title: '<a href="https://github.com/opendatacube/odc-geo" style="text-decoration: underline;">odc-geo</a>'
+  - title: '<a href="https://github.com/opendatacube/odc-geo">odc-geo</a>'
     tagline: "Added Azure extension to save Cloud-Optimized Geotiffs in a dask-optimized manner in the odc-geo Python library (2024)."
 
-  - title: '<a href="https://github.com/stac-utils/pystac-client" style="text-decoration: underline;">pystac-client</a>'
+  - title: '<a href="https://github.com/stac-utils/pystac-client">pystac-client</a>'
     tagline: "FOSS4G sprint contribution enabling formatted search urls in python client to query STAC APIs (2022)."
 
-  - title: '<a href="https://github.com/nens/dask-geomodeling" style="text-decoration: underline;">dask-geomodeling</a>'
+  - title: '<a href="https://github.com/nens/dask-geomodeling">dask-geomodeling</a>'
     tagline: "On-the-fly operations on geographical maps (2020)."
 
 skills:

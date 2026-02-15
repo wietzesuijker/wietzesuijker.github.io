@@ -195,6 +195,7 @@ p {
 
     .container-block {
         padding: 14px;
+        border-top: 1px solid rgba(255, 255, 255, 0.15);
     }
 
     .container-block-title {
@@ -313,6 +314,13 @@ p {
 
     .section {
         margin-bottom: 24px;
+        padding-top: 20px;
+        border-top: 1px solid $divider;
+
+        &:first-child {
+            border-top: none;
+            padding-top: 0;
+        }
     }
 
     .experiences-section,
@@ -366,6 +374,17 @@ p {
         margin-top: 0;
         margin-bottom: 5px;
         color: darken($theme-color, 15%);
+
+        a {
+            color: darken($theme-color, 15%);
+            text-decoration: none;
+            border-bottom: 1px solid lighten($theme-color, 25%);
+
+            &:hover {
+                color: darken($theme-color, 30%);
+                border-bottom-color: darken($theme-color, 15%);
+            }
+        }
     }
 
     .projects-section {
@@ -443,9 +462,10 @@ p {
     .skill-tag {
         font-size: 12px;
         padding: 2px 8px;
-        background: lighten($theme-color, 40%);
+        background: lighten($theme-color, 35%);
+        border: 1px solid lighten($theme-color, 25%);
         border-radius: 3px;
-        color: $text-color-secondary;
+        color: $text-color;
         white-space: nowrap;
         display: inline-block;
         margin: 1px 2px;
