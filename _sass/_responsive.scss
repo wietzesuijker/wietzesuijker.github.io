@@ -1,7 +1,21 @@
 /* Extra small devices (phones, less than 768px) */
 @media (max-width: 767px) {
-  body {
-    padding: 0;
+  .hero {
+    padding: 40px 16px;
+  }
+
+  .hero-avatar {
+    width: 90px;
+    height: 90px;
+  }
+
+  .hero-cta {
+    gap: 8px;
+  }
+
+  .hero-btn {
+    padding: 8px 18px;
+    font-size: 0.85rem;
   }
 
   .sidebar-wrapper {

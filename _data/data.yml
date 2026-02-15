@@ -2,10 +2,13 @@
 # Be aware that even a small syntax error here can lead to failures in output.
 #
 
+hero:
+  headline: Geospatial Data Engineer
+  bio: Building EO data pipelines at scale - from satellite imagery to climate insights. Open-source contributor to GDAL, Xarray, and the FOSS4G ecosystem.
+
 sidebar:
   position: right # position of the sidebar : left or right
-  about: False # set to False or comment line if you want to remove the "how to use?" in the sidebar
-  education: True # set to False if you want education in main section instead of in sidebar
+  education: True
 
   # Profile information
   name: Wietze Suijker
@@ -55,7 +58,7 @@ sidebar:
 career-profile:
   title: Career Profile
   summary: |
-    I enjoy creating innovative IT solutions to provide the best earth observation data at scale, aiming to preserve biodiversity and restore the environment. I worked on data pipelines to convert and publish Sentinel data as web-optimized zarr / geozarr for the ESA Earth Observation Processing Framework. Previously, I was a Product Architect at Space Intelligence, developing ML workflows for land cover and biomass products. I helped scale the technical architecture as the team grew from five to over sixty. Prior to that, I was the technical lead on satellite-data projects at a Water and IT firm.
+    Geospatial data engineer building EO data pipelines at scale. Currently driving data engineering for climate AI at IVADO. Active open-source contributor to GDAL's Zarr v3 driver (C++). Previously built GeoZarr pipelines for ESA's Earth Observation Processing Framework at DevelopmentSeed, and spent five years as Product Architect at Space Intelligence developing ML workflows for land cover and biomass products, scaling the technical architecture as the team grew from five to over sixty.
 education:
   title: Education
   info:
@@ -79,17 +82,17 @@ experiences:
     details: |
       Drive data engineering in AI applications related to climate change, sustainability and biodiversity.
   - role: EO Data Engineer
-    time: Autumn 2025  
+    time: Autumn 2025
     company: DevelopmentSeed, Contractor, Remote
     details: |
-      Contributing to GeoZarr data pipelines for the ESA Copernicus Earth Observation Processing Framework.
+      Open-source contributions to GeoZarr data pipelines and data models for the ESA Copernicus <a href="https://github.com/EOPF-Explorer" style="text-decoration: underline;">Earth Observation Processing Framework</a> (EOPF). Also contributed to the platform's Kubernetes/FluxCD deployment infrastructure.
   - role: Product Architect
-    time: 2020 - 2025 
+    time: 2020 - 2025
     company: Space Intelligence, Edinburgh, UK
     details: |
-      Developer on the Product Engineering Team, providing end-to-end ML environments for data scientists. I facilitated agile ceremonies, collaborated with the Data Platform Team to optimise pipelines and batch computing environments that provide high-quality map data, and worked alongside the Solutions Team to generate valuable insights for clients.  
-      
-      Project Highlight: Developed land cover and biomass data for <a href="https://www.apple.com/newsroom/2024/03/apples-restore-fund-cultivates-new-roots-in-the-atlantic-forest/" style="text-decoration: underline;">Apple's Restore Fund</a>. I visited Apple’s HQ in Cupertino, CA and presented our <a href="https://www.space-intelligence.com/land-cover-mapping/above-ground-biomass/" style="text-decoration: underline;">CarbonMapper biomass product</a> at Apple's ML conference in 2023.
+      Co-authored the standardized project template and Python library powering all land cover and biomass map products. Designed ML pipelines (Random Forest, LightGBM) on Dask/Zarr/COG with Azure and AWS infrastructure (Terraform). Scaled the technical architecture as the team grew from five to over sixty.
+
+      Project Highlight: Developed land cover and biomass data for <a href="https://www.apple.com/newsroom/2024/03/apples-restore-fund-cultivates-new-roots-in-the-atlantic-forest/" style="text-decoration: underline;">Apple's Restore Fund</a>. Presented our <a href="https://www.space-intelligence.com/land-cover-mapping/above-ground-biomass/" style="text-decoration: underline;">CarbonMapper biomass product</a> at Apple's ML conference in Cupertino, CA (2023).
   - role: GIS Specialist
     time: 2016 - 2020
     company: Nelen & Schuurmans, Utrecht, Netherlands
@@ -103,6 +106,12 @@ experiences:
 oss:
   title: Open Source Contributions
   contributions:
+  - title: '<a href="https://github.com/OSGeo/gdal/pulls?q=is%3Apr+author%3Awietzesuijker" style="text-decoration: underline;">GDAL</a>'
+    tagline: "C++ contributions to the Zarr v3 driver: parallel shard I/O, string data types, coordinate caching, and CI improvements (2026)."
+
+  - title: '<a href="https://github.com/EOPF-Explorer" style="text-decoration: underline;">EOPF Explorer</a>'
+    tagline: "GeoZarr data pipelines and data model for ESA's Copernicus Earth Observation Processing Framework. Contributions to data-pipeline and data-model (2025)."
+
   - title: '<a href="https://tutorial.xarray.dev/workshops/scipy2024/index.html#:~:text=Max%20Jones%20(CarbonPlan)-,Wietze%20Suijker,-(Space%20Intelligence)" style="text-decoration: underline;">SciPy 2024 Xarray tutorial</a>'
     tagline: "Co-organized 4-hour workshop during SciPy 2024, where I led the session on the Xarray ecosystem."
 
@@ -136,3 +145,6 @@ skills:
       
     - name: QGIS &amp; ArcGIS
       level: 80%
+
+    - name: GenAI-assisted development - GitHub Copilot, Claude
+      level: 75%

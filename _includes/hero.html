@@ -1,0 +1,31 @@
+{% assign hero = site.data.data.hero %}
+{% assign sidebar = site.data.data.sidebar %}
+{% if hero %}
+<section class="hero">
+  <div class="hero-inner">
+
+    {% if sidebar.avatar %}
+    <img class="hero-avatar" src="{{ site.baseurl }}/assets/images/{{ sidebar.avatar }}" alt="{{ sidebar.name }}" />
+    {% endif %}
+
+    <h1 class="hero-name">{{ sidebar.name }}</h1>
+    <p class="hero-tagline">{{ hero.headline }}</p>
+
+    {% if hero.bio %}
+    <p class="hero-bio">{{ hero.bio }}</p>
+    {% endif %}
+
+    <div class="hero-cta">
+      <a href="#cv" class="hero-btn">View CV</a>
+      <a href="{{ site.baseurl }}/print" class="hero-btn">Download PDF</a>
+      {% if sidebar.github %}
+      <a href="https://github.com/{{ sidebar.github }}" class="hero-btn hero-btn-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+      {% endif %}
+      {% if sidebar.linkedin %}
+      <a href="https://linkedin.com/in/{{ sidebar.linkedin }}" class="hero-btn hero-btn-icon" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+{% endif %}
