@@ -92,11 +92,9 @@ experiences:
     time: 2016 - 2020
     company: Nelen & Schuurmans, Utrecht, Netherlands
     details: |
-      Technical lead in multiple international development projects establishing data integration flows for operational information services.
+      Technical lead on international development projects building data integration flows - e.g. connecting VanDerSat (now Planet) soil moisture data into a mobile app for pepper farmers in Indonesia.
 
-      For example, I connected soil moisture data from VanDerSat - acquired by Planet in 2021 - into a mobile app for pepper farmers in SpiceUp Indonesia.
-      
-      Led an internal group of developer-oriented consultants to gain foundational software and data engineering skills.
+      Led an internal group of developer-oriented consultants in foundational software and data engineering skills.
 
 oss:
   title: Open Source Contributions
