@@ -58,7 +58,7 @@ sidebar:
 career-profile:
   title: Career Profile
   summary: |
-    Ten years connecting Earth observation data to environmental impact - from a carbon sequestration thesis to production ML pipelines to climate AI. Currently driving data engineering at IVADO. Active open-source contributor to GDAL's Zarr v3 driver. Previously built GeoZarr pipelines for ESA's Earth Observation Processing Framework at DevelopmentSeed, and spent five years as Product Architect at Space Intelligence, where I co-designed the technical architecture that scaled from a five-person startup to a sixty-person company shipping global land cover and biomass products.
+    Ten years connecting Earth observation data to environmental impact - from a carbon sequestration thesis to production ML pipelines to climate AI. Active open-source contributor to GDAL's Zarr v3 driver. Previously built GeoZarr pipelines for ESA's Earth Observation Processing Framework at DevelopmentSeed, and spent five years as Product Architect at Space Intelligence, where I co-designed the technical architecture that scaled from a five-person startup to a sixty-person company shipping global land cover and biomass products.
 education:
   title: Education
   info:
@@ -77,7 +77,7 @@ experiences:
   title: Experiences
   info:
   - role: Data Engineer / Senior Research Advisor
-    time: 2026 - now
+    time: 2026
     company: IVADO, Montréal, Canada
     details: |
       Drive data engineering in AI applications related to climate change, sustainability and biodiversity.
