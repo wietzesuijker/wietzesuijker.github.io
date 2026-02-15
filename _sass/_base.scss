@@ -415,15 +415,22 @@ p {
 }
 
 .skillset {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
     .item {
-        margin-bottom: 15px;
+        margin-bottom: 0;
         overflow: hidden;
     }
 
     .level-title {
-        font-size: 14px;
-        margin-top: 6px;
-        margin-bottom: 6px;
+        font-size: 13px;
+        margin: 0;
+        padding: 4px 12px;
+        background: lighten($theme-color, 40%);
+        border-radius: 20px;
+        white-space: nowrap;
     }
 
     .level-bar {
