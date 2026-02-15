@@ -417,25 +417,35 @@ p {
 .skillset {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 16px;
 
-    .item {
-        margin-bottom: 0;
-        overflow: hidden;
+    .skill-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
     }
 
-    .level-title {
-        font-size: 13px;
+    .skill-category {
+        font-size: 14px;
+        font-weight: 600;
         margin: 0;
-        padding: 4px 12px;
-        background: lighten($theme-color, 40%);
-        border-radius: 20px;
-        white-space: nowrap;
-        display: inline-block;
+        color: darken($theme-color, 15%);
+        letter-spacing: 0.3px;
     }
 
-    .level-bar {
-        display: none;
+    .skill-tools {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+    }
+
+    .skill-tag {
+        font-size: 12px;
+        padding: 3px 10px;
+        background: lighten($theme-color, 42%);
+        border-radius: 4px;
+        color: $text-color-secondary;
+        white-space: nowrap;
     }
 }
 

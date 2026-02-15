@@ -125,20 +125,20 @@ skills:
   title: Skills &amp; Proficiency
 
   toolset:
-    - name: Geospatial Python - Xarray, Rasterio, GeoPandas, STAC
-      level: 85%
+    - category: Geospatial Python
+      tools: [Xarray, Rasterio, GeoPandas, STAC]
 
-    - name: Data Engineering - Pandas, NumPy, Dask, PostgreSQL/PostGIS
-      level: 80%
+    - category: Data Engineering
+      tools: [Pandas, NumPy, Dask, PostgreSQL/PostGIS]
 
-    - name: Machine Learning - LightGBM, scikit-learn, XGBoost
-      level: 80%
+    - category: Machine Learning
+      tools: [LightGBM, scikit-learn, XGBoost]
 
-    - name: Cloud &amp; Infra - AWS, Azure, GCP, Terraform, Docker
-      level: 80%
+    - category: Cloud &amp; Infra
+      tools: [AWS, Azure, GCP, Terraform, Docker]
 
-    - name: QGIS &amp; ArcGIS
-      level: 80%
+    - category: Desktop GIS
+      tools: [QGIS, ArcGIS]
 
-    - name: AI-assisted development - Claude, GitHub Copilot
-      level: 75%
+    - category: AI-assisted development
+      tools: [Claude, GitHub Copilot]

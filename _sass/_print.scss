@@ -168,26 +168,22 @@
         font-size: 7.5pt !important;
     }
 
-    /* === Skills: inline pills === */
+    /* === Skills: compact for print === */
     .skillset {
-        display: flex !important;
-        flex-wrap: wrap !important;
-        gap: 3px !important;
+        gap: 6px !important;
     }
 
-    .skillset .item {
-        margin-bottom: 0 !important;
+    .skill-group {
+        gap: 2px !important;
     }
 
-    .skillset .level-title {
+    .skill-category {
+        font-size: 8pt !important;
+    }
+
+    .skill-tag {
         font-size: 7pt !important;
-        margin: 0 !important;
-        padding: 1px 6px !important;
-        white-space: nowrap !important;
-    }
-
-    .skillset .level-bar {
-        display: none !important;
+        padding: 1px 5px !important;
     }
 
     /* === Links: keep colors from theme === */
