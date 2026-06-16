@@ -56,20 +56,20 @@
   .cockpit-slide iframe { width:100%; height:100%; border:0; }
   .accent { color:var(--forest); font-weight:700; }
   /* appendix: dense, left-aligned ML-backup text */
-  .appx { width:90%; font-size:2.8vh; line-height:1.5; text-align:left; }
-  .appx h3 { color:var(--forest); font-size:3.1vh; margin:0 0 0.6vh; }
-  .appx ul { font-size:2.8vh; line-height:1.5; max-width:100%; margin:0.2vh 0 1.3vh; padding-left:3vw; }
-  .appx ul ul { font-size:2.6vh; margin:0.3vh 0 0.3vh; }
-  .appx li { margin:0.35vh 0; }
-  .appx p { margin:0.4vh 0 1vh; }
+  .appx { width:90%; font-size:3.3vh; line-height:1.6; text-align:left; }
+  .appx h3 { color:var(--forest); font-size:3.7vh; margin:0 0 0.8vh; }
+  .appx ul { font-size:3.3vh; line-height:1.6; max-width:100%; margin:0.4vh 0 1.8vh; padding-left:3vw; }
+  .appx ul ul { font-size:3.0vh; margin:0.5vh 0; }
+  .appx li { margin:0.9vh 0; }
+  .appx p { margin:0.8vh 0 1.4vh; }
   .appx code { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:0.9em;
     background:#f1f5f9; padding:0 0.3em; border-radius:3px; }
   /* plain-language takeaway that leads each appendix slide */
-  .appx-lead { font-size:3.1vh; line-height:1.4; color:var(--forest); font-weight:700;
-    margin:0 0 1.6vh; }
+  .appx-lead { font-size:3.9vh; line-height:1.4; color:var(--forest); font-weight:700;
+    margin:0 0 2.4vh; }
   .appx .muted { color:var(--grey); font-weight:400; }
   .appx-fig { display:flex; gap:3vw; width:92%; align-items:center; }
-  .appx-fig img { flex:0 0 56%; max-width:56%; object-fit:contain; }
+  .appx-fig img { flex:0 0 48%; max-width:48%; object-fit:contain; }
   .appx-fig .appx { width:auto; flex:1; }
 </style>
 </head>
@@ -184,13 +184,15 @@
   <section class="slide">
     <h2>Appendix: the effect is causal, not a backbone coincidence</h2>
     <div class="body">
-      <div class="appx-fig">
+      <div class="appx" style="width:92%">
+        <div class="appx-lead">Could the benefit just be luck in which AI model we picked? We tested it the hard way.</div>
+      </div>
+      <div class="appx-fig" style="margin-top:1vh">
         <img src="figs/fig_separability_causal.png" alt="causal sweep">
         <div class="appx">
-          <div class="appx-lead">Could the benefit just be luck in which AI model we picked? We tested it the hard way.</div>
           <ul>
             <li>Real models fall into two camps (CLIP vs DINOv3), so a single trend line across them would overstate a &ldquo;law.&rdquo; We say so.</li>
-            <li>So we ran a <b>controlled sweep</b>: dial species from blurred-together to cleanly-separated <i>on purpose</i>, and watch the benefit. It rises smoothly &mdash; <b>Pearson 0.997.</b> The geometry is doing the work.</li>
+            <li>So we ran a <b>controlled sweep</b>: dial species from blurred-together to cleanly-separated <i>on purpose</i>, and watch the benefit. It rises smoothly &mdash; <b>Pearson 0.997.</b></li>
             <li>Confirmed <b>4 independent ways</b>: real models, this synthetic sweep, predicting held-out models <span class="muted">(R&sup2; 0.61)</span>, and re-labelling crews <span class="muted">(agree within 1&ndash;2 pt)</span>.</li>
           </ul>
         </div>
