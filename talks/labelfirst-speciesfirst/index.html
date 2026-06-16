@@ -34,9 +34,9 @@
   .title .bg { position:absolute; inset:0; background:url('assets/canopy.jpg') center/cover; }
   .title .scrim { position:absolute; inset:0; background:rgba(0,0,0,0.5); }
   .title .tt { position:relative; margin:auto; text-align:center; color:#fff; padding:0 8vw; }
-  .title h1 { font-size:6.6vh; font-weight:700; margin:0 0 1.4vh; }
-  .title .sub { font-size:3.4vh; opacity:.92; margin-bottom:5vh; }
-  .title .who { font-size:3vh; } .title .meta { font-size:2.4vh; opacity:.85; margin-top:.6vh; }
+  .title h1 { font-size:7.8vh; font-weight:700; margin:0 0 1.8vh; }
+  .title .sub { font-size:4.0vh; opacity:.92; margin-bottom:5vh; }
+  .title .who { font-size:3.6vh; } .title .meta { font-size:2.9vh; opacity:.85; margin-top:.6vh; }
   /* two columns */
   .cols { display:flex; gap:6vw; width:90%; justify-content:center; }
   .col { flex:1; } .col h3 { color:var(--forest); font-size:3.8vh; margin:0 0 1.4vh; }
@@ -56,14 +56,18 @@
   .cockpit-slide iframe { width:100%; height:100%; border:0; }
   .accent { color:var(--forest); font-weight:700; }
   /* appendix: dense, left-aligned ML-backup text */
-  .appx { width:90%; font-size:2.25vh; line-height:1.5; text-align:left; }
-  .appx h3 { color:var(--forest); font-size:2.6vh; margin:0 0 0.6vh; }
-  .appx ul { font-size:2.25vh; line-height:1.5; max-width:100%; margin:0.2vh 0 1.3vh; padding-left:3vw; }
-  .appx ul ul { font-size:2.1vh; margin:0.3vh 0 0.3vh; }
+  .appx { width:90%; font-size:2.8vh; line-height:1.5; text-align:left; }
+  .appx h3 { color:var(--forest); font-size:3.1vh; margin:0 0 0.6vh; }
+  .appx ul { font-size:2.8vh; line-height:1.5; max-width:100%; margin:0.2vh 0 1.3vh; padding-left:3vw; }
+  .appx ul ul { font-size:2.6vh; margin:0.3vh 0 0.3vh; }
   .appx li { margin:0.35vh 0; }
   .appx p { margin:0.4vh 0 1vh; }
   .appx code { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:0.9em;
     background:#f1f5f9; padding:0 0.3em; border-radius:3px; }
+  /* plain-language takeaway that leads each appendix slide */
+  .appx-lead { font-size:3.1vh; line-height:1.4; color:var(--forest); font-weight:700;
+    margin:0 0 1.6vh; }
+  .appx .muted { color:var(--grey); font-weight:400; }
   .appx-fig { display:flex; gap:3vw; width:92%; align-items:center; }
   .appx-fig img { flex:0 0 56%; max-width:56%; object-fit:contain; }
   .appx-fig .appx { width:auto; flex:1; }
@@ -168,12 +172,12 @@
   <section class="slide">
     <h2>Thank you</h2>
     <div class="body">
-      <div class="lead" style="font-size:3.8vh">The bottleneck isn't data. It's <b class="accent">attention</b>: which photos get looked at.</div>
-      <div style="margin-top:5vh;text-align:center;font-size:2.8vh;line-height:1.7">
+      <div class="lead" style="font-size:4.4vh">The bottleneck isn't data. It's <b class="accent">attention</b>: which photos get looked at.</div>
+      <div style="margin-top:5vh;text-align:center;font-size:3.4vh;line-height:1.7">
         <b>labelfirst:</b> which photo to label next, and whether it's worth it<br>
         <b>speciesfirst:</b> the BCI deployment and the Pl@ntNet handoff<br><br>
         Wietze Suijker, wietze.suijker@mila.quebec<br>
-        <span style="font-size:2.1vh;color:var(--grey)">Evidence and code: traitlab/labelfirst, traitlab/speciesfirst</span></div>
+        <span style="font-size:2.5vh;color:var(--grey)">Evidence and code: traitlab/labelfirst, traitlab/speciesfirst</span></div>
     </div>
   </section>
 
@@ -182,51 +186,54 @@
     <div class="body">
       <div class="appx-fig">
         <img src="figs/fig_separability_causal.png" alt="causal sweep">
-        <div class="appx"><ul>
-          <li>Real backbones are <b>bimodal</b> (CLIP vs DINOv3), so one correlation overstates a &ldquo;law&rdquo;. We say so.</li>
-          <li>A <b>controlled synthetic sweep</b> dials separability from 5 to 100% and isolates the effect: <b>Pearson 0.997.</b></li>
-          <li>Validated <b>4 ways</b>: observational, this causal sweep, leave-one-out prediction (R&sup2; 0.61), and cross-labelling (within 1 to 2 pt).</li>
-        </ul></div>
+        <div class="appx">
+          <div class="appx-lead">Could the benefit just be luck in which AI model we picked? We tested it the hard way.</div>
+          <ul>
+            <li>Real models fall into two camps (CLIP vs DINOv3), so a single trend line across them would overstate a &ldquo;law.&rdquo; We say so.</li>
+            <li>So we ran a <b>controlled sweep</b>: dial species from blurred-together to cleanly-separated <i>on purpose</i>, and watch the benefit. It rises smoothly &mdash; <b>Pearson 0.997.</b> The geometry is doing the work.</li>
+            <li>Confirmed <b>4 independent ways</b>: real models, this synthetic sweep, predicting held-out models <span class="muted">(R&sup2; 0.61)</span>, and re-labelling crews <span class="muted">(agree within 1&ndash;2 pt)</span>.</li>
+          </ul>
+        </div>
       </div>
     </div>
   </section>
 
   <section class="slide">
-    <h2>Appendix &middot; selectors and the label-free pre-flight</h2>
+    <h2>Appendix &middot; how we pick, and the pre-flight</h2>
     <div class="body"><div class="appx">
-      <p><b>Selectors.</b> 16 strategies behind one protocol <code>select(X, labeled, k)</code>. Default <b>CoreSet</b> is greedy k-center (Sener &amp; Savarese 2018) in cosine space, unmodified. Co-champion <b>novel_margin</b> (AGCD, Ma et al. CVPR 2024) for new-class frontiers. Also TypiClust, ProbCover, BADGE, MaxHerding, SMI (GCMI/FLQMI, Kothawade 2021).</p>
-      <p><b>Pre-flight.</b> <i>separability</i> is kNN top-1 <b>leave-one-out</b> accuracy, with no labelling round needed.</p>
+      <div class="appx-lead">One number, computed <i>before you label anything</i>, predicts whether smart picking will beat random.</div>
       <ul>
-        <li>Causal, not correlational: fix data and labels, blur only the geometry (noise, random projection, whitening), re-audit. Gain tracks induced separability (Spearman <b>0.76 BCI, 0.94 PlantNet, 0.96 iNat</b>).</li>
-        <li>Pooled law (under 80% sep): <b>gain% = 0.66&middot;sep% + 6.2</b>, R&sup2; = 0.79 (n = 25 rungs).</li>
-        <li><b>Necessary, not sufficient:</b> PCA-whitening holds separability about fixed (52 to 51%) yet costs ~16 pt gain, by inflating intrinsic dimension (MLE 9 to 35).</li>
+        <li><b>Picking the next photo:</b> 16 interchangeable strategies behind one call. The default, <b>CoreSet</b>, simply spreads picks to cover the space &mdash; no tuning, an unmodified 2018 method. <span class="muted">(A co-pick, <code>novel_margin</code>, leans toward brand-new species when you expect them.)</span></li>
+        <li><b>The pre-flight &mdash; <i>separability</i>:</b> how cleanly the model already sorts species apart, scored without a single label.</li>
+        <li><b>We proved it's the geometry, not a fluke:</b> keep the photos and labels fixed, just <i>blur</i> the model's view &mdash; the benefit falls in lockstep <span class="muted">(correlation 0.76 BCI, 0.94 PlantNet, 0.96 iNat)</span>.</li>
+        <li><b>Necessary, not magic:</b> one &ldquo;cleanup&rdquo; step kept separability flat yet still cost ~16 points &mdash; because it quietly tangled the space behind the score.</li>
       </ul>
     </div></div>
   </section>
 
   <section class="slide">
-    <h2>Appendix &middot; protocol, and the leak we caught</h2>
+    <h2>Appendix &middot; we couldn't move the goalposts</h2>
     <div class="body"><div class="appx">
-      <p><b>Pre-registered, frozen before embeddings load:</b> one-sided paired <b>Wilcoxon</b> on per-seed AUC-over-rounds, <b>10k-bootstrap CI</b> (must exclude 0), <b>Holm-Bonferroni</b> at &alpha; = 0.05.</p>
+      <div class="appx-lead">We fixed the pass/fail test <i>before</i> seeing any result &mdash; so we couldn't fool ourselves into a win.</div>
       <ul>
-        <li><b>n = 8 by design:</b> one-sided Wilcoxon p-floor = 1/2<sup>n</sup>. n = 5 gives 0.031 (fails any Holm correction); n = 8 gives 0.0039 (headroom for &le; 12 joint claims).</li>
-        <li>Headline: all 8 seeds positive, p at the 0.0039 floor, CI excludes 0; reproduces on DINOv2-Giant and PlantCLEF2024.</li>
+        <li>The rule, locked in advance: a standard significance test on per-run scores, plus a 10,000-resample confidence interval that must exclude zero, corrected for testing many things at once.</li>
+        <li><b>Why 8 runs:</b> with all 8 pointing the same way, the math can't score better than 1-in-256 <span class="muted">(p &asymp; 0.004)</span> &mdash; enough margin to survive the correction; 5 runs wouldn't. We got all 8 positive, on 3 different models.</li>
+        <li><b>The mistake we keep on the slide:</b> an early &ldquo;our picker trains a better model&rdquo; win was really a <b>25&ndash;29% data leak</b> &mdash; the picker had peeked at the test crowns. Re-run honestly: <b>no picker dominates</b>. We added a <b>tripwire that fails the build</b> if a held-out crown ever reaches a picker again.</li>
       </ul>
-      <p><b>The retraction we keep visible.</b> An earlier &ldquo;the selector builds a better model&rdquo; finding was a <b>25 to 29% test-leakage</b> artifact (the selector saw held-out test crowns). Leak-free re-run: <b>no selector dominates</b>, coverage wins rare-recall, random wins macro-F1. A codebase audit found one more latent leak, fixed it, and added a regression test that fails if any held-out index reaches a strategy.</p>
     </div></div>
   </section>
 
   <section class="slide">
-    <h2>Appendix &middot; what didn't work, and the AL canon</h2>
+    <h2>Appendix &middot; what didn't work, and why that matters</h2>
     <div class="body"><div class="appx">
-      <p><b>Negative results, the rigour signal:</b></p>
+      <div class="appx-lead">We show the failures on purpose &mdash; they're the evidence we're not overselling.</div>
       <ul>
-        <li>Sampling-<i>difficulty</i> as a standalone picker (<code>density_needle</code>) <b>loses 0/16</b> (AUC ~45% worse): difficulty marks where labels are <i>hard</i>, not where rare species are.</li>
-        <li>PCA-whitening as &ldquo;cleanup&rdquo; <b>backfires</b>, killing the density structure CoreSet exploits.</li>
-        <li>kNN-accuracy as a backbone-choice proxy <b>doesn't track discovery</b>. Measure discovery directly.</li>
+        <li>Picking the <b>hardest-to-label</b> photos <b>lost every run</b> (0/16). Hard to label &ne; rare species.</li>
+        <li>&ldquo;Cleaning up&rdquo; the embedding first <b>backfired</b> &mdash; it erased the very structure the picker relies on.</li>
+        <li>Ranking models by a quick accuracy proxy <b>didn't predict discovery</b>. Measure discovery directly.</li>
       </ul>
-      <p><b>Positioning:</b> the contribution is <b>not a new acquisition function</b>. It's the <i>evidence methodology</i>, a CI-gatable pre-registered audit plus the label-free pre-flight. Unmodified 2018 CoreSet, FM embeddings, and a falsifiable protocol beat the industrial half-random hybrid and uniform random.</p>
-      <p><b>Transductive needles</b> (Kurinchi-Vendhan &amp; Beery 2026, arXiv:2606.03821): labelfirst implements difficulty d = &rho;/&pi; and <b>reproduces their released code exactly</b> (per-point Spearman &rho; = 1.000).</p>
+      <p><b>So the contribution isn't a clever new algorithm</b> &mdash; it's the honest, falsifiable test harness. An unmodified 2018 method plus that protocol beats the industrial half-random hybrid and plain random.</p>
+      <p class="muted">We also reproduce the Beery transductive-needles method exactly (Kurinchi-Vendhan &amp; Beery 2026, arXiv:2606.03821; per-point correlation 1.000).</p>
     </div></div>
   </section>
 
