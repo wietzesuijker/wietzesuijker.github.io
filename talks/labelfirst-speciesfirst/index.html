@@ -206,7 +206,7 @@
         <li><b>Picking the next photo:</b> 16 interchangeable strategies behind one call. The default, <b>CoreSet</b>, simply spreads picks to cover the space &mdash; no tuning, an unmodified 2018 method. <span class="muted">(A co-pick, <code>novel_margin</code>, leans toward brand-new species when you expect them.)</span></li>
         <li><b>The pre-flight &mdash; <i>separability</i>:</b> how cleanly the model already sorts species apart, scored without a single label.</li>
         <li><b>We proved it's the geometry, not a fluke:</b> keep the photos and labels fixed, just <i>blur</i> the model's view &mdash; the benefit falls in lockstep <span class="muted">(correlation 0.76 BCI, 0.94 PlantNet, 0.96 iNat)</span>.</li>
-        <li><b>Necessary, not magic:</b> one &ldquo;cleanup&rdquo; step kept separability flat yet still cost ~16 points &mdash; because it quietly tangled the space behind the score.</li>
+        <li><b>A good score isn't a guarantee:</b> one transform left the separability score almost unchanged <span class="muted">(52% &rarr; 51%)</span> yet <b>halved the benefit</b> <span class="muted">(40% &rarr; 23%)</span> &mdash; it scrambled the deeper structure the picker relies on, which a single nearest-neighbour score can't see.</li>
       </ul>
     </div></div>
   </section>
