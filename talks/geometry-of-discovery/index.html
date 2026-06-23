@@ -76,14 +76,15 @@
   </section>
 
   <section class="slide">
-    <h2>I started with a bet, and the data killed it</h2>
+    <h2>First, test the simplest hypothesis</h2>
     <div class="body">
-      <img class="fig" src="figs/orders.png" alt="one-number bet refuted" style="max-height:62vh">
-      <div class="cap">The seductive hypothesis: <i>one number</i> governs both &ldquo;which to label&rdquo;
-        (feature space) and &ldquo;where to sample&rdquo; (geographic space). Run the <i>same</i> estimator on
-        both axes across 30 orders: <b class="accent">Spearman &minus;0.06, confidence interval through zero.</b>
-        Refuted. Killing my own favourite hypothesis made the framework stronger &mdash; the two axes are
-        non-redundant.</div>
+      <img class="fig" src="figs/orders.png" alt="one-number hypothesis rejected" style="max-height:62vh">
+      <div class="cap"><b>Hypothesis:</b> a single statistic (effective dimension) governs both
+        &ldquo;which to label&rdquo; (feature space) and &ldquo;where to sample&rdquo; (geographic space).
+        <b>Test:</b> the same estimator on both axes, 30 taxonomic orders. <b>Result:</b> no association &mdash;
+        <b class="accent">Spearman &minus;0.06, 95% CI [&minus;0.14, +0.06], includes zero.</b> The hypothesis is
+        rejected; the strong coupling at a few coarse &ldquo;iconic&rdquo; taxa was an aggregation artifact. So
+        the two axes are independent, and the pre-flight must be two-dimensional.</div>
     </div>
   </section>
 
