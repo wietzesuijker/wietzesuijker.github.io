@@ -195,7 +195,7 @@
 
 </div>
 <footer><a href="../" onclick="event.stopPropagation()">&uarr;&nbsp;all talks</a><span>where to look next</span><span id="pageno"></span></footer>
-<div id="nav"><button id="prevbtn" title="previous (&larr;)">&lsaquo;</button><button id="nextbtn" title="next (&rarr;)">&rsaquo;</button></div>
+<div id="nav"><button id="prevbtn" aria-label="Previous slide" title="previous (&larr;)">&lsaquo;</button><button id="nextbtn" aria-label="Next slide" title="next (&rarr;)">&rsaquo;</button></div>
 <script>
   const slides = [...document.querySelectorAll('.slide')];
   let i = 0;
@@ -203,6 +203,7 @@
     i = Math.max(0, Math.min(slides.length - 1, n));
     slides.forEach((s, k) => s.classList.toggle('active', k === i));
     document.getElementById('pageno').textContent = (i + 1) + ' / ' + slides.length;
+    try { history.replaceState(null, '', '#' + i); } catch (e) {}
   };
   addEventListener('keydown', e => {
     if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { show(i + 1); e.preventDefault(); }
