@@ -213,7 +213,7 @@
     else if (e.key === 'End') show(slides.length - 1);
     else if (e.key === 'f') document.documentElement.requestFullscreen?.();
   });
-  addEventListener('click', e => { if (!e.target.closest('iframe') && !e.target.closest('#nav')) show(i + 1); });
+  addEventListener('click', e => { if (!e.target.closest('iframe') && !e.target.closest('#nav') && !(window.getSelection && window.getSelection().toString())) show(i + 1); });
   document.getElementById('nextbtn').onclick = () => show(i + 1);
   document.getElementById('prevbtn').onclick = () => show(i - 1);
   show(parseInt(location.hash.replace('#','')) || 0);
