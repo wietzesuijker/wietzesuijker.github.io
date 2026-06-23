@@ -71,6 +71,7 @@
   .appx-fig { display:flex; gap:3vw; width:92%; align-items:center; }
   .appx-fig img { flex:0 0 48%; max-width:48%; object-fit:contain; }
   .appx-fig .appx { width:auto; flex:1; }
+  footer a { color:var(--forest); text-decoration:none; }
 </style>
 </head>
 <body>
@@ -240,7 +241,7 @@
   </section>
 
 </div>
-<footer><span>prioritizing close-up photos for labelling</span><span id="pageno"></span></footer>
+<footer><a href="../species-discovery/" onclick="event.stopPropagation()">&uarr;&nbsp;all talks</a><span>prioritizing close-up photos for labelling</span><span id="pageno"></span></footer>
 <div id="nav"><button id="prevbtn" title="previous (←)">‹</button><button id="nextbtn" title="next (→)">›</button></div>
 <script>
   const slides = [...document.querySelectorAll('.slide')];
