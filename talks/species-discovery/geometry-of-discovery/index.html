@@ -110,9 +110,9 @@
     <div class="body">
       <img class="fig" src="figs/theory.png" alt="closed form predicts AUROC" style="max-height:64vh">
       <div class="cap">A closed-form cluster separability predicts the actual open-set detector's per-clade
-        accuracy at <b class="accent">Pearson 0.91</b> (mean error 0.04), <b>with no detector run</b> and under a
-        leave-one-species-out recompute. The score isn't correlated with the detector; it essentially <i>is</i>
-        the detector.</div>
+        accuracy at <b class="accent">Pearson 0.93</b>, <b>with no detector run</b> and under a genuine
+        leave-one-species-out recompute. The geometry doesn't merely correlate with the detector &mdash; it
+        <i>predicts</i> its score, up to a small constant offset.</div>
     </div>
   </section>
 
@@ -191,8 +191,9 @@
   <section class="slide">
     <h2>What's new, and what's next</h2>
     <div class="body"><ul>
-      <li>No prior work connects a <b>label-free</b> separability statistic to open-set discovery benefit
-        <i>before</i> any model is trained or any budget spent.</li>
+      <li>We're not aware of prior work linking a <b>label-free</b> separability statistic to open-set
+        discovery benefit <i>before</i> any model is trained or budget spent &mdash; unlike in-loop
+        active-discovery selectors, which need a trained model to score candidates.</li>
       <li>The empirical law is the floor; the next step is a <b>bound</b> &mdash; under a margin / low-noise
         condition, the inter-species margin lower-bounds the expected information gain of a query.</li>
       <li>The same pre-flight drives two further results: <b>discovering unknown species</b> under a budget,
