@@ -47,6 +47,8 @@
     padding:2vh 2.6vw; font-size:2.9vh; margin-top:2vh; max-width:90%; }
   .quote .q { font-style:italic; } .punch { font-weight:700; font-size:3.6vh; text-align:center; margin-top:2.4vh; }
   .accent { color:var(--forest); font-weight:700; }
+  .cap a.ref, .lead a.ref, .quote a.ref, .appx a.ref, .body a.ref { color:var(--forest); text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:2px; }
+  a.ref:hover { text-decoration-thickness:2.5px; }
   footer a { color:var(--forest); text-decoration:none; }
   .nexttalk { margin-top:3.4vh; }
   .nexttalk a { display:inline-block; font-family:var(--mono); text-transform:uppercase;
@@ -106,7 +108,7 @@
     <h2>The mechanism: gaps between species, not cloud size</h2>
     <div class="body">
       <img class="fig" src="figs/mechanism.png" alt="margin mechanism" style="max-height:64vh">
-      <div class="cap">The pre-flight is the <b class="accent">inter-species margin</b>: how clear the gaps
+      <div class="cap">The pre-flight is the <b class="accent"><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">inter-species margin</a></b>: how clear the gaps
         between species clusters are. It governs <i>both</i> discovery tools (+0.65 / +0.63); how
         high-dimensional the data is (the one-number bet) governs neither.</div>
     </div>

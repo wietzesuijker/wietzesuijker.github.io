@@ -43,6 +43,8 @@
     padding:2vh 2.6vw; font-size:2.9vh; margin-top:2vh; max-width:90%; }
   .quote .q { font-style:italic; } .punch { font-weight:700; font-size:3.6vh; text-align:center; margin-top:2.4vh; }
   .accent { color:var(--forest); font-weight:700; }
+  .cap a.ref, .lead a.ref, .quote a.ref, .appx a.ref, .body a.ref { color:var(--forest); text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:2px; }
+  a.ref:hover { text-decoration-thickness:2.5px; }
   .appx { width:92%; font-size:3.3vh; line-height:1.6; text-align:left; }
   .appx-lead { font-size:3.9vh; line-height:1.4; color:var(--forest); font-weight:700; margin:0 0 2.4vh; }
   .appx ul { font-size:3.3vh; line-height:1.6; max-width:100%; margin:0.4vh 0 1.8vh; padding-left:3vw; }
@@ -99,8 +101,8 @@
     <div class="body">
       <img class="fig" src="figs/mechanism.png" alt="margin mechanism" style="max-height:66vh">
       <div class="cap">Picture each species as a cloud of points. If the clouds sit apart with clear
-        <b>gaps</b>, an unknown species lands in a gap and stands out. The <b class="accent">inter-species
-        margin</b> governs <i>both</i> discovery tools (+0.65 / +0.63); how high-dimensional the data is (the
+        <b>gaps</b>, an unknown species lands in a gap and stands out. The <b class="accent"><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">inter-species
+        margin</a></b> governs <i>both</i> discovery tools (+0.65 / +0.63); how high-dimensional the data is (the
         one-number bet) governs neither (+0.22 / +0.02).</div>
     </div>
   </section>
@@ -109,7 +111,7 @@
     <h2>The detector <i>is</i> the geometry</h2>
     <div class="body">
       <img class="fig" src="figs/theory.png" alt="closed form predicts AUROC" style="max-height:64vh">
-      <div class="cap">A closed-form cluster separability predicts the actual open-set detector's per-clade
+      <div class="cap">A <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">closed-form cluster separability</a> predicts the actual open-set detector's per-clade
         accuracy at <b class="accent">Pearson 0.93</b>, <b>with no detector run</b> and under a genuine
         leave-one-species-out recompute. The geometry doesn't merely correlate with the detector; it
         <i>predicts</i> its score, up to a small constant offset.</div>
@@ -136,8 +138,8 @@
     <div class="body">
       <img class="fig" src="figs/generalize.png" alt="across six realms" style="max-height:64vh">
       <div class="cap">External validation on independent iNaturalist pulls from all six terrestrial realms:
-        the open-set detector spots new species at <b class="accent">AUROC 0.64&ndash;0.68</b>, and novelty-guided
-        selection finds species <b class="accent">+16&ndash;24% faster than random</b>, with no tuning.</div>
+        the open-set detector spots new species at <b class="accent">AUROC 0.64&ndash;0.68</b>, and <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/strategies/novel_margin.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">novelty-guided
+        selection</a> finds species <b class="accent">+16&ndash;24% faster than random</b>, with no tuning.</div>
     </div>
   </section>
 
