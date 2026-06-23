@@ -1,0 +1,204 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where to look next</title>
+<style>
+  :root { --forest:#0F766E; --ink:#1F2933; --grey:#6b7280; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; overflow:hidden;
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif; color:var(--ink);
+    background:#fff; -webkit-font-smoothing:antialiased; }
+  #deck { height:100vh; width:100vw; position:relative; }
+  .slide { position:absolute; inset:0; display:none; flex-direction:column; padding:4.5vh 6vw 7vh; }
+  .slide.active { display:flex; }
+  h2 { color:var(--forest); font-size:4.6vh; font-weight:700; margin:0 0 0.4vh;
+    border-bottom:2px solid color-mix(in srgb,var(--forest) 45%,#fff); padding-bottom:1vh; }
+  .body { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+  .fig { max-width:90%; max-height:74vh; object-fit:contain; }
+  .cap { font-size:2.7vh; color:#444; text-align:center; margin-top:2vh; max-width:92%; line-height:1.45; }
+  ul { font-size:3.6vh; line-height:1.65; max-width:88%; }
+  li b { color:var(--ink); }
+  .lead { font-size:3.4vh; text-align:center; max-width:86%; line-height:1.5; }
+  footer { position:fixed; bottom:1.6vh; left:6vw; right:9vw; display:flex; justify-content:space-between;
+    font-size:1.9vh; color:var(--grey); }
+  #nav { position:fixed; bottom:4.4vh; right:2vw; z-index:9999; display:flex; gap:.7vw; }
+  #nav button { font-size:2.6vh; line-height:1; padding:.7vh 1.3vw; border:0; border-radius:7px; cursor:pointer;
+    background:var(--forest); color:#fff; opacity:.85; box-shadow:0 2px 8px rgba(0,0,0,.35); transition:opacity .15s; }
+  #nav button:hover { opacity:1; }
+  .title { padding:0; }
+  .title .bg { position:absolute; inset:0; background:url('assets/canopy.jpg') center/cover; }
+  .title .scrim { position:absolute; inset:0; background:rgba(0,0,0,0.55); }
+  .title .tt { position:relative; margin:auto; text-align:center; color:#fff; padding:0 8vw; }
+  .title h1 { font-size:7.6vh; font-weight:700; margin:0 0 1.8vh; }
+  .title .sub { font-size:3.7vh; opacity:.92; margin-bottom:5vh; }
+  .title .who { font-size:3.6vh; } .title .meta { font-size:2.9vh; opacity:.85; margin-top:.6vh; }
+  .stats { display:flex; gap:6vw; justify-content:center; align-items:flex-start; flex-wrap:wrap; }
+  .stat { text-align:center; } .stat .n { font-size:11vh; font-weight:800; color:var(--ink); line-height:1; }
+  .stat .l { font-size:2.8vh; margin-top:1.2vh; } .stat .s { font-size:2.1vh; color:var(--grey); }
+  .quote { background:color-mix(in srgb,var(--forest) 8%,#fff); border-left:5px solid var(--forest);
+    padding:2vh 2.6vw; font-size:2.9vh; margin-top:2vh; max-width:90%; }
+  .quote .q { font-style:italic; } .punch { font-weight:700; font-size:3.6vh; text-align:center; margin-top:2.4vh; }
+  .accent { color:var(--forest); font-weight:700; }
+</style>
+</head>
+<body>
+<div id="deck">
+
+  <section class="slide title active">
+    <div class="bg"></div><div class="scrim"></div>
+    <div class="tt">
+      <h1>Where to look next</h1>
+      <div class="sub">Value-of-information sampling for a continental bioblitz</div>
+      <div class="who">Wietze Suijker</div>
+      <div class="meta">Species-discovery PhD &middot; the Wallacean paper (Ch. 4)</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>The other half of discovery: <i>where</i></h2>
+    <div class="body">
+      <div class="lead">Finding which species exist is one shortfall. Knowing <b>where</b> they are is the
+        other. Where should naturalists be sent so each observation-hour discovers the most?</div>
+      <div class="quote"><b>The score:</b> per map cell, combine observation density, recency, climate-novelty,
+        sample-coverage completeness, and model disagreement &mdash; a value-of-information estimate of what a
+        cell still hides.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>It survives the honest test: a leakage-free backtest</h2>
+    <div class="body">
+      <div class="stats">
+        <div class="stat"><div class="n accent">0.49&ndash;0.64</div><div class="l">priority &harr; actual discovery</div>
+          <div class="s">rarefied Spearman, p&lt;5e-4</div></div>
+        <div class="stat"><div class="n accent">40/40</div><div class="l">configurations robust</div>
+          <div class="s">every density / effort setting tested</div></div>
+      </div>
+      <div class="quote" style="margin-top:3.5vh">Score cells on the past, hide the future, then check: do
+        high-priority cells out-discover low-priority ones at <b>equal effort</b>? Yes &mdash; the priority map
+        predicts where discovery actually happens.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>The honest negative that shapes the whole thesis</h2>
+    <div class="body">
+      <img class="fig" src="figs/two_axis.png" alt="VOI axes are specialists" style="max-height:60vh">
+      <div class="cap">The feature-space winner (embedding novelty) <b>does not</b> win geographically. For
+        covering distinct map cells, <b class="accent">spatial coverage beats novelty +77% to +1%</b>; novelty
+        wins only for species discovery (+20%). Different signal wins in each space.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Why one number can't span both</h2>
+    <div class="body">
+      <img class="fig" src="figs/cross_space_effdim.png" alt="effective dimension decoupled" style="max-height:58vh">
+      <div class="cap">More embedding dimensions does <b>not</b> mean records spread wider across the map &mdash;
+        the &ldquo;one-number&rdquo; bet refuted, and the refutation is <b>robust across every map-spread
+        estimator</b>. The feature and geographic axes are statistically decoupled (Spearman &minus;0.06).</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Two non-redundant axes beat either alone</h2>
+    <div class="body">
+      <div class="stats">
+        <div class="stat"><div class="n accent">+21.7%</div><div class="l">joint VOI over random</div>
+          <div class="s">vs feature +15.3%, geographic +2.2% alone</div></div>
+        <div class="stat"><div class="n accent">+5.1%</div><div class="l">joint over best single axis</div>
+          <div class="s">strictly better in 24 of 26 cells</div></div>
+      </div>
+      <div class="quote" style="margin-top:3.5vh">The two pre-flights carry independent information. The
+        pre-flight is irreducibly two-dimensional &mdash; and that's a feature, not a bug.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Allocating a real budget</h2>
+    <div class="body">
+      <div class="stats">
+        <div class="stat"><div class="n accent">~92%</div><div class="l">of an oracle's discoveries</div>
+          <div class="s">VOI-guided allocation across 30 orders</div></div>
+        <div class="stat"><div class="n">~87%</div><div class="l">uniform allocation</div>
+          <div class="s">the &ldquo;spread it evenly&rdquo; baseline</div></div>
+      </div>
+      <div class="quote" style="margin-top:3.5vh">Guided allocation closes <b>37&ndash;45% of the gap</b> to an
+        all-knowing oracle (+5&ndash;7% over uniform) &mdash; on a continent's worth of clades, before a single
+        new trip.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>And you can rank a region you've never sampled</h2>
+    <div class="body">
+      <img class="fig" src="figs/forecast.png" alt="leave-one-continent-out forecast" style="max-height:60vh">
+      <div class="cap">Leave-one-continent-out: a <b>taxon-aware</b> pre-flight forecasts an unseen continent's
+        per-clade discovery difficulty at <b class="accent">+0.57</b>, versus <b>+0.19</b> for the one-number
+        geometry. Difficulty travels with the branch of the tree of life, so you can prioritise before arriving.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>From backtest to cause: a ladder, not a leap</h2>
+    <div class="body"><ul>
+      <li><b>Rung 1 (done):</b> the observational leakage-free backtest above.</li>
+      <li><b>Rung 2 (base case):</b> a <b>difference-in-differences across seasons</b> &mdash; a real causal
+        advance that doesn't depend on volunteer compliance or a third-party app.</li>
+      <li><b>Rung 3 (upside):</b> a field-randomized bioblitz trial, pursued only if app-modification + ethics
+        sign-off align in time. The causal claim no longer rests on one fragile experiment.</li>
+    </ul></div>
+  </section>
+
+  <section class="slide">
+    <h2>Responsible by construction</h2>
+    <div class="body"><ul>
+      <li>Fine-grained location prediction can aid exploitation of at-risk species. So the live deployment
+        exposes only <b>coarse, species-summed at-risk richness</b> &mdash; never an individual locality.</li>
+      <li>Species-at-risk exposure masking and CARE/OCAP Indigenous data governance are <b>first-class
+        constraints</b>, not afterthoughts.</li>
+      <li>The north-star metric is <b>discoveries per human-hour</b>, evaluated in the open.</li>
+    </ul></div>
+  </section>
+
+  <section class="slide">
+    <h2>Thank you</h2>
+    <div class="body">
+      <div class="lead" style="font-size:4.2vh">Where to sample is a <b class="accent">value-of-information</b>
+        question &mdash; answerable, leakage-free, and genuinely separate from <i>what</i> to label.</div>
+      <div style="margin-top:5vh;text-align:center;font-size:3.2vh;line-height:1.7">
+        &rho; 0.49&ndash;0.64 backtest &middot; coverage beats novelty geographically &middot;
+        joint VOI +21.7%<br><br>
+        Wietze Suijker, wietze.suijker@mila.quebec<br>
+        <span style="font-size:2.4vh;color:var(--grey)">Engine: <code>blitz-the-gap</code> &middot;
+        evidence reproduces from <code>phd-species-discovery/pilot</code></span></div>
+    </div>
+  </section>
+
+</div>
+<footer><span>where to look next</span><span id="pageno"></span></footer>
+<div id="nav"><button id="prevbtn" title="previous (&larr;)">&lsaquo;</button><button id="nextbtn" title="next (&rarr;)">&rsaquo;</button></div>
+<script>
+  const slides = [...document.querySelectorAll('.slide')];
+  let i = 0;
+  const show = n => {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+    document.getElementById('pageno').textContent = (i + 1) + ' / ' + slides.length;
+  };
+  addEventListener('keydown', e => {
+    if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { show(i + 1); e.preventDefault(); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { show(i - 1); e.preventDefault(); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'f') document.documentElement.requestFullscreen?.();
+  });
+  addEventListener('click', e => { if (!e.target.closest('#nav')) show(i + 1); });
+  document.getElementById('nextbtn').onclick = () => show(i + 1);
+  document.getElementById('prevbtn').onclick = () => show(i - 1);
+  show(parseInt(location.hash.replace('#','')) || 0);
+</script>
+</body>
+</html>

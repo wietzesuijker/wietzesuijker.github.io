@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Novelty is not Rarity</title>
+<style>
+  :root { --forest:#0F766E; --ink:#1F2933; --grey:#6b7280; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; overflow:hidden;
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif; color:var(--ink);
+    background:#fff; -webkit-font-smoothing:antialiased; }
+  #deck { height:100vh; width:100vw; position:relative; }
+  .slide { position:absolute; inset:0; display:none; flex-direction:column; padding:4.5vh 6vw 7vh; }
+  .slide.active { display:flex; }
+  h2 { color:var(--forest); font-size:4.6vh; font-weight:700; margin:0 0 0.4vh;
+    border-bottom:2px solid color-mix(in srgb,var(--forest) 45%,#fff); padding-bottom:1vh; }
+  .body { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+  .fig { max-width:90%; max-height:74vh; object-fit:contain; }
+  .cap { font-size:2.7vh; color:#444; text-align:center; margin-top:2vh; max-width:92%; line-height:1.45; }
+  ul { font-size:3.6vh; line-height:1.65; max-width:88%; }
+  li b { color:var(--ink); }
+  .lead { font-size:3.4vh; text-align:center; max-width:86%; line-height:1.5; }
+  footer { position:fixed; bottom:1.6vh; left:6vw; right:9vw; display:flex; justify-content:space-between;
+    font-size:1.9vh; color:var(--grey); }
+  #nav { position:fixed; bottom:4.4vh; right:2vw; z-index:9999; display:flex; gap:.7vw; }
+  #nav button { font-size:2.6vh; line-height:1; padding:.7vh 1.3vw; border:0; border-radius:7px; cursor:pointer;
+    background:var(--forest); color:#fff; opacity:.85; box-shadow:0 2px 8px rgba(0,0,0,.35); transition:opacity .15s; }
+  #nav button:hover { opacity:1; }
+  .title { padding:0; }
+  .title .bg { position:absolute; inset:0; background:url('assets/canopy.jpg') center/cover; }
+  .title .scrim { position:absolute; inset:0; background:rgba(0,0,0,0.55); }
+  .title .tt { position:relative; margin:auto; text-align:center; color:#fff; padding:0 8vw; }
+  .title h1 { font-size:7.6vh; font-weight:700; margin:0 0 1.8vh; }
+  .title .sub { font-size:3.7vh; opacity:.92; margin-bottom:5vh; }
+  .title .who { font-size:3.6vh; } .title .meta { font-size:2.9vh; opacity:.85; margin-top:.6vh; }
+  .stats { display:flex; gap:7vw; justify-content:center; align-items:flex-start; flex-wrap:wrap; }
+  .stat { text-align:center; } .stat .n { font-size:11vh; font-weight:800; color:var(--ink); line-height:1; }
+  .stat .l { font-size:2.8vh; margin-top:1.2vh; } .stat .s { font-size:2.1vh; color:var(--grey); }
+  .quote { background:color-mix(in srgb,var(--forest) 8%,#fff); border-left:5px solid var(--forest);
+    padding:2vh 2.6vw; font-size:2.9vh; margin-top:2vh; max-width:90%; }
+  .quote .q { font-style:italic; } .punch { font-weight:700; font-size:3.6vh; text-align:center; margin-top:2.4vh; }
+  .accent { color:var(--forest); font-weight:700; }
+  .appx { width:92%; font-size:3.3vh; line-height:1.6; text-align:left; }
+  .appx-lead { font-size:3.9vh; line-height:1.4; color:var(--forest); font-weight:700; margin:0 0 2.4vh; }
+  .appx ul { font-size:3.3vh; line-height:1.6; max-width:100%; margin:0.4vh 0 1.8vh; padding-left:3vw; }
+  .appx li { margin:0.9vh 0; } .appx .muted { color:var(--grey); font-weight:400; }
+  .two { display:flex; gap:4vw; width:92%; align-items:center; }
+  .two img { flex:0 0 50%; max-width:50%; max-height:70vh; object-fit:contain; }
+  .two .appx { width:auto; flex:1; }
+</style>
+</head>
+<body>
+<div id="deck">
+
+  <section class="slide title active">
+    <div class="bg"></div><div class="scrim"></div>
+    <div class="tt">
+      <h1>Novelty is not Rarity</h1>
+      <div class="sub">Open-set discovery of tropical tree species under a tiny budget</div>
+      <div class="who">Wietze Suijker</div>
+      <div class="meta">Species-discovery PhD &middot; the Linnean paper (Ch. 3)</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>The budget problem</h2>
+    <div class="body">
+      <div class="lead">A botanist can label a few hundred drone-imaged tree crowns. <b>Which ones</b> should
+        they see, to discover the most <i>new</i> species per hour?</div>
+      <div class="quote"><b>The catch:</b> you want the <i>rare</i> species, but rarity is a label you don't
+        have until after you've labelled. So you need a proxy you can compute on raw, unlabelled crowns.
+        <span class="q">Novelty &mdash; distance in embedding space &mdash; is the best obtainable one.</span></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>The label-free margin forecasts which unseen species are detectable</h2>
+    <div class="body">
+      <img class="fig" src="figs/ood_perspecies_margin.png" alt="margin forecasts detectability" style="max-height:62vh">
+      <div class="cap">For <b class="accent">210 species the model never saw</b> &mdash; including 80 whole-genus-
+        unseen <i>new lineages</i> &mdash; the label-free margin predicts how detectable each one is at
+        <b class="accent">Spearman +0.66</b>. No labels, no detector run: just the distance to the nearest
+        known species.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>A parameter-free open-set detector that works</h2>
+    <div class="body">
+      <img class="fig" src="figs/open_set.png" alt="open set detector per order" style="max-height:60vh">
+      <div class="cap">Spotting a new species is feasible above chance in every order
+        (<b class="accent">mean AUROC 0.66</b>). And how high-dimensional the data is predicts this only weakly
+        (+0.27, n.s.) &mdash; which is exactly why the pre-flight is the <b>margin</b>, not the dimension.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Choosing distinctive crowns beats random, and the limit is honest</h2>
+    <div class="body">
+      <img class="fig" src="figs/active_discovery.png" alt="active discovery baselines" style="max-height:58vh">
+      <div class="cap">Choosing the most distinctive crowns to label next finds <b class="accent">+21% more
+        species than random</b> (and beats it in 93% of orders), while spread-out geographic selection barely
+        helps. <b>Honest limit:</b> the pre-flight only weakly forecasts <i>which</i> taxa will benefit most.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>The recipe: don't label what the model already knows</h2>
+    <div class="body">
+      <img class="fig" src="figs/pipeline.png" alt="pre-flight recipe" style="max-height:58vh">
+      <div class="cap">End to end on real BCI crowns: moving from a naive general-backbone reading to the
+        optimal (a domain embedding + whitening) <b class="accent">doubles the detector's skill above chance</b>
+        (0.642 &rarr; 0.785). Conformal tiering also parks the crowns the model is sure about, so the botanist's
+        hours go to the uncertain tail.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>The pre-flight has two prongs, because it fails in two ways</h2>
+    <div class="body">
+      <img class="fig" src="figs/bci_mechanism.png" alt="margin prong on real crowns" style="max-height:54vh">
+      <div class="cap"><b>Prong 1 &mdash; margin (proactive):</b> on real BCI crowns, across five backbones, the
+        margin predicts per-family detection (the scatters above) &mdash; select where species separate cleanly.
+        <b>Prong 2 &mdash; where those gaps compress:</b> congeneric species overlap, the model confidently
+        mislabels the rarer twin as its common cousin, and margin can't flag it &mdash; so a <b>crown-map
+        disagreement</b> channel routes every such crown to a botanist.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>From correlation to cause: a trial we control</h2>
+    <div class="body"><ul>
+      <li>The causal test lives <b>here</b>, not on the geographic axis: a <b>pre-registered randomization</b>
+        of the botanist queue &mdash; margin/novelty-prioritized vs random &mdash; scored on new-species IDs per
+        botanist-hour.</li>
+      <li>Because the queue <i>is</i> the deployment we operate, the labeller acts on exactly what we serve:
+        <b>no volunteer-compliance gap, no third-party infrastructure.</b></li>
+      <li>Powered by simulation on data in hand; <b>de-risked anchor</b> for the thesis's causal claim.
+        (Designed and powered &mdash; not yet run.)</li>
+    </ul></div>
+  </section>
+
+  <section class="slide">
+    <h2>What I refuse to claim</h2>
+    <div class="body"><ul>
+      <li><b>Leakage checked and closed:</b> on truly-unseen species the detector scores 0.69&ndash;0.76 &mdash;
+        at or above the random-novel baseline, so the headline AUROC isn't inflated by names the backbone
+        already saw.</li>
+      <li><b>Whole-genus-held-out is weaker</b> (0.58 vs 0.65): detecting a genuinely new <i>lineage</i> is
+        harder than a new species with known cousins. That residual gap is what the field trial measures.</li>
+      <li>This is selection on top of an existing backbone, benchmarked against <b>Open-Insect</b> protocols on
+        <b>SelvaBox / CanopyRS</b> crowns &mdash; the contribution is the pre-flight and the loop, not a new model.</li>
+    </ul></div>
+  </section>
+
+  <section class="slide">
+    <h2>Thank you</h2>
+    <div class="body">
+      <div class="lead" style="font-size:4.2vh">Under a budget, <b class="accent">label-free novelty</b> is the
+        best proxy for the rarity you can't yet measure &mdash; and a two-pronged pre-flight covers where it
+        fails.</div>
+      <div style="margin-top:5vh;text-align:center;font-size:3.2vh;line-height:1.7">
+        open-set AUROC 0.66 &middot; +21% faster discovery &middot; the queue RCT as the causal anchor<br><br>
+        Wietze Suijker, wietze.suijker@mila.quebec<br>
+        <span style="font-size:2.4vh;color:var(--grey)">Deployment: <code>traitlab/speciesfirst</code> &middot;
+        evidence reproduces from <code>phd-species-discovery/pilot</code></span></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Appendix: difficulty travels with the clade, not the map</h2>
+    <div class="body">
+      <div class="two">
+        <img src="figs/forecast.png" alt="leave-one-continent-out forecast">
+        <div class="appx">
+          <div class="appx-lead">You can budget before the first crown is labelled.</div>
+          <ul>
+            <li>Some clades are easy to discover in (visually distinctive); some are hard (visually samey).</li>
+            <li>Leave-one-continent-out: a <b>taxon-aware</b> pre-flight forecasts an unseen continent's
+              per-clade difficulty at <b>+0.57</b>, versus <b>+0.19</b> for the one-number geometry.</li>
+            <li>So difficulty is predictable in advance &mdash; allocate the budget where discovery will pay off.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+<footer><span>novelty is not rarity</span><span id="pageno"></span></footer>
+<div id="nav"><button id="prevbtn" title="previous (&larr;)">&lsaquo;</button><button id="nextbtn" title="next (&rarr;)">&rsaquo;</button></div>
+<script>
+  const slides = [...document.querySelectorAll('.slide')];
+  let i = 0;
+  const show = n => {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+    document.getElementById('pageno').textContent = (i + 1) + ' / ' + slides.length;
+  };
+  addEventListener('keydown', e => {
+    if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { show(i + 1); e.preventDefault(); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { show(i - 1); e.preventDefault(); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'f') document.documentElement.requestFullscreen?.();
+  });
+  addEventListener('click', e => { if (!e.target.closest('#nav')) show(i + 1); });
+  document.getElementById('nextbtn').onclick = () => show(i + 1);
+  document.getElementById('prevbtn').onclick = () => show(i - 1);
+  show(parseInt(location.hash.replace('#','')) || 0);
+</script>
+</body>
+</html>
