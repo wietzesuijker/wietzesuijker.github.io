@@ -176,15 +176,16 @@
   </section>
 
   <section class="slide">
-    <h2>What I refuse to claim</h2>
+    <h2>What this does and doesn't claim</h2>
     <div class="body"><ul>
-      <li>It's a <b>deployment-condition diagnostic, not a model selector.</b> Across distinct backbones,
-        margin and accuracy move together &mdash; the signal is real <i>across datasets and difficulty</i>, not
-        across models.</li>
-      <li>Whole-genus-held-out detection is <b>weaker</b> (AUROC 0.59 vs 0.65): finding a truly new lineage is
-        harder than a new species with known cousins. That gap is what the field trial tests.</li>
-      <li><b>Leakage checked and closed:</b> on truly-unseen species the detector scores 0.69&ndash;0.76 &mdash;
-        at or above the random-novel baseline, so the headline isn't inflated.</li>
+      <li>It tells you <b>where discovery is easy</b> &mdash; which taxa, which regions &mdash; not
+        <b>which model to use</b>. Swap the backbone and the margin and the accuracy move together, so the signal
+        is real <i>across datasets and difficulty</i>, not across models.</li>
+      <li>Detecting a <b>whole new lineage</b> (a held-out genus) is harder than a new species with known cousins
+        &mdash; AUROC <b>0.59 vs 0.65</b>. Closing that gap is what the field trial targets.</li>
+      <li><b>Checked for leakage:</b> on species the backbone never saw, the detector still scores
+        <b>0.69&ndash;0.76</b> &mdash; at or above the random-novel baseline, so the headline isn't inflated by
+        familiar names.</li>
     </ul></div>
   </section>
 
