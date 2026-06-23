@@ -78,7 +78,7 @@
         they see, to discover the most <i>new</i> species per hour?</div>
       <div class="quote"><b>The catch:</b> you want the <i>rare</i> species, but rarity is a label you don't
         have until after you've labelled. So you need a proxy you can compute on raw, unlabelled crowns.
-        <span class="q">Novelty &mdash; distance in embedding space &mdash; is the best obtainable one.</span></div>
+        <span class="q">Novelty (distance in embedding space) is the best obtainable one.</span></div>
     </div>
   </section>
 
@@ -86,8 +86,8 @@
     <h2>The label-free margin forecasts which unseen species are detectable</h2>
     <div class="body">
       <img class="fig" src="figs/ood_perspecies_margin.png" alt="margin forecasts detectability" style="max-height:62vh">
-      <div class="cap">For <b class="accent">210 species the model never saw</b> &mdash; including 80 whole-genus-
-        unseen <i>new lineages</i> &mdash; the label-free margin predicts how detectable each one is at
+      <div class="cap">For <b class="accent">210 species the model never saw</b> (including 80 whole-genus-
+        unseen <i>new lineages</i>), the label-free margin predicts how detectable each one is at
         <b class="accent">Spearman +0.66</b>. No labels, no detector run: just the distance to the nearest
         known species.</div>
     </div>
@@ -99,7 +99,7 @@
       <img class="fig" src="figs/open_set_clean.png" alt="open set detector per order" style="max-height:64vh">
       <div class="cap">Spotting a new species is feasible <b>above chance in all 30 clades</b>
         (<b class="accent">mean AUROC 0.66</b>), untuned. How high-dimensional the data is barely predicts which
-        clades are easy &mdash; which is exactly why the pre-flight is the <b>margin</b>, not the dimension.</div>
+        clades are easy, which is exactly why the pre-flight is the <b>margin</b>, not the dimension.</div>
     </div>
   </section>
 
@@ -129,10 +129,11 @@
     <h2>The pre-flight has two prongs, because it fails in two ways</h2>
     <div class="body">
       <img class="fig" src="figs/bci_margin_clean.png" alt="margin prong on real crowns" style="max-height:60vh">
-      <div class="cap"><b>Prong 1 &mdash; margin (proactive):</b> on real BCI crowns, across five backbones, the
-        margin predicts per-family detection (the scatter above) &mdash; select where species separate cleanly.
-        <b>Prong 2 &mdash; where those gaps compress:</b> congeneric species overlap, the model confidently
-        mislabels the rarer twin as its common cousin, and margin can't flag it &mdash; so a <b>crown-map
+      <div class="cap"><b>Prong 1, margin (proactive):</b> on real BCI crowns, across five backbones, the
+        margin predicts how detectable each family is (the scatter above), so you can focus labelling on the
+        families where species separate cleanly.
+        <b>Prong 2, where those gaps compress:</b> congeneric species overlap, the model confidently
+        mislabels the rarer twin as its common cousin, and margin can't flag it, so a <b>crown-map
         disagreement</b> channel routes every such crown to a botanist.</div>
     </div>
   </section>
@@ -141,12 +142,12 @@
     <h2>From correlation to cause: a trial we control</h2>
     <div class="body"><ul>
       <li>The causal test lives <b>here</b>, not on the geographic axis: a <b>pre-registered randomization</b>
-        of the botanist queue &mdash; margin/novelty-prioritized vs random &mdash; scored on new-species IDs per
+        of the botanist queue (margin/novelty-prioritized vs random), scored on new-species IDs per
         botanist-hour.</li>
       <li>Because the queue <i>is</i> the deployment we operate, the labeller acts on exactly what we serve:
         <b>no volunteer-compliance gap, no third-party infrastructure.</b></li>
       <li>Powered by simulation on data in hand; the <b>de-risked way to turn the correlation into cause</b>.
-        (Designed and powered &mdash; not yet run.)</li>
+        (Designed and powered, not yet run.)</li>
     </ul></div>
   </section>
 
@@ -154,12 +155,12 @@
     <h2>What this does and doesn't claim</h2>
     <div class="body"><ul>
       <li><b>Checked for leakage:</b> on species the backbone never saw, the detector still scores
-        0.69&ndash;0.76 &mdash; at or above the random-novel baseline, so the headline AUROC isn't inflated by
+        0.69&ndash;0.76, at or above the random-novel baseline, so the headline AUROC isn't inflated by
         familiar names.</li>
       <li>Detecting a <b>whole new lineage</b> (a held-out genus) is harder than a new species with known cousins
-        &mdash; <b>0.59 vs 0.65</b>. That residual gap is what the field trial measures.</li>
+        (<b>0.59 vs 0.65</b>). That residual gap is what the field trial measures.</li>
       <li>This is selection on top of an existing backbone, benchmarked against <b>Open-Insect</b> protocols on
-        <b>SelvaBox / CanopyRS</b> crowns &mdash; the contribution is the pre-flight and the loop, not a new model.</li>
+        <b>SelvaBox / CanopyRS</b> crowns; the contribution is the pre-flight and the loop, not a new model.</li>
     </ul></div>
   </section>
 
@@ -167,7 +168,7 @@
     <h2>Thank you</h2>
     <div class="body">
       <div class="lead" style="font-size:4.2vh">Under a budget, <b class="accent">label-free novelty</b> is the
-        best proxy for the rarity you can't yet measure &mdash; and a two-pronged pre-flight covers where it
+        best proxy for the rarity you can't yet measure, and a two-pronged pre-flight covers where it
         fails.</div>
       <div style="margin-top:5vh;text-align:center;font-size:3.2vh;line-height:1.7">
         open-set AUROC 0.66 &middot; +21% faster discovery &middot; the queue RCT as the causal anchor<br><br>
@@ -189,7 +190,7 @@
             <li>Some clades are easy to discover in (visually distinctive); some are hard (visually samey).</li>
             <li>Leave-one-continent-out: a <b>taxon-aware</b> pre-flight forecasts an unseen continent's
               per-clade difficulty at <b>+0.57</b>, versus <b>+0.19</b> for the one-number geometry.</li>
-            <li>So difficulty is predictable in advance &mdash; allocate the budget where discovery will pay off.</li>
+            <li>So difficulty is predictable in advance: allocate the budget where discovery will pay off.</li>
           </ul>
         </div>
       </div>
