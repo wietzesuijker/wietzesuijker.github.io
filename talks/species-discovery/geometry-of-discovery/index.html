@@ -87,7 +87,7 @@
       <img class="fig" src="figs/orders.png" alt="one-number hypothesis rejected" style="max-height:62vh">
       <div class="cap"><b>Hypothesis:</b> a single statistic (effective dimension) governs both
         &ldquo;which to label&rdquo; (feature space) and &ldquo;where to sample&rdquo; (geographic space).
-        <b>Test:</b> the same estimator on both axes, 30 taxonomic orders. <b>Result:</b> no association &mdash;
+        <b>Test:</b> the same estimator on both axes, 30 taxonomic orders. <b>Result:</b> no association,
         <b class="accent">Spearman &minus;0.06, 95% CI [&minus;0.14, +0.06], includes zero.</b> The hypothesis is
         rejected; the strong coupling at a few coarse &ldquo;iconic&rdquo; taxa was an aggregation artifact. So
         the two axes are independent, and the pre-flight must be two-dimensional.</div>
@@ -111,7 +111,7 @@
       <img class="fig" src="figs/theory.png" alt="closed form predicts AUROC" style="max-height:64vh">
       <div class="cap">A closed-form cluster separability predicts the actual open-set detector's per-clade
         accuracy at <b class="accent">Pearson 0.93</b>, <b>with no detector run</b> and under a genuine
-        leave-one-species-out recompute. The geometry doesn't merely correlate with the detector &mdash; it
+        leave-one-species-out recompute. The geometry doesn't merely correlate with the detector; it
         <i>predicts</i> its score, up to a small constant offset.</div>
     </div>
   </section>
@@ -127,7 +127,7 @@
       </div>
       <div class="quote" style="margin-top:3.5vh">Within one dataset, margin and the detector read the same
         geometry, so that agreement alone would be near-circular. The real evidence: margin measured on five
-        continents predicts the <b>unseen sixth</b> &mdash; different data, so it <i>cannot</i> be circular.</div>
+        continents predicts the <b>unseen sixth</b>: different data, so it <i>cannot</i> be circular.</div>
     </div>
   </section>
 
@@ -137,7 +137,7 @@
       <img class="fig" src="figs/generalize.png" alt="across six realms" style="max-height:64vh">
       <div class="cap">External validation on independent iNaturalist pulls from all six terrestrial realms:
         the open-set detector spots new species at <b class="accent">AUROC 0.64&ndash;0.68</b>, and novelty-guided
-        selection finds species <b class="accent">+16&ndash;24% faster than random</b> &mdash; no tuning.</div>
+        selection finds species <b class="accent">+16&ndash;24% faster than random</b>, with no tuning.</div>
     </div>
   </section>
 
@@ -146,7 +146,7 @@
     <div class="body">
       <img class="fig" src="figs/resolution_ladder.png" alt="zoom, backbone, region" style="max-height:64vh">
       <div class="cap">The margin predicts discoverability at every <b>zoom</b> (order +0.65, family +0.61, genus
-        +0.62), under a different <b>backbone</b> (DINOv2 +0.76), and in other <b>realms</b> (+0.52, +0.57) &mdash;
+        +0.62), under a different <b>backbone</b> (DINOv2 +0.76), and in other <b>realms</b> (+0.52, +0.57),
         while the one-number bet goes flat or negative. The same separability law even appears in birdsong audio.</div>
     </div>
   </section>
@@ -178,13 +178,13 @@
   <section class="slide">
     <h2>What this does and doesn't claim</h2>
     <div class="body"><ul>
-      <li>It tells you <b>where discovery is easy</b> &mdash; which taxa, which regions &mdash; not
+      <li>It tells you <b>where discovery is easy</b> (which taxa, which regions), not
         <b>which model to use</b>. Swap the backbone and the margin and the accuracy move together, so the signal
         is real <i>across datasets and difficulty</i>, not across models.</li>
       <li>Detecting a <b>whole new lineage</b> (a held-out genus) is harder than a new species with known cousins
-        &mdash; AUROC <b>0.59 vs 0.65</b>. Closing that gap is what the field trial targets.</li>
+        (AUROC <b>0.59 vs 0.65</b>). Closing that gap is what the field trial targets.</li>
       <li><b>Checked for leakage:</b> on species the backbone never saw, the detector still scores
-        <b>0.69&ndash;0.76</b> &mdash; at or above the random-novel baseline, so the headline isn't inflated by
+        <b>0.69&ndash;0.76</b>, at or above the random-novel baseline, so the headline isn't inflated by
         familiar names.</li>
     </ul></div>
   </section>
@@ -193,9 +193,9 @@
     <h2>What's new, and what's next</h2>
     <div class="body"><ul>
       <li>We're not aware of prior work linking a <b>label-free</b> separability statistic to open-set
-        discovery benefit <i>before</i> any model is trained or budget spent &mdash; unlike in-loop
+        discovery benefit <i>before</i> any model is trained or budget spent, unlike in-loop
         active-discovery selectors, which need a trained model to score candidates.</li>
-      <li>The empirical law is the floor; the next step is a <b>bound</b> &mdash; under a margin / low-noise
+      <li>The empirical law is the floor; the next step is a <b>bound</b>: under a margin / low-noise
         condition, the inter-species margin lower-bounds the expected information gain of a query.</li>
       <li>The same pre-flight drives two further results: <b>discovering unknown species</b> under a budget,
         and <b>where to sample</b> next on the map.</li>
@@ -229,7 +229,7 @@
             <li>Feature-space novelty wins for <b>species discovery</b> (+20% over random); spatial coverage
               barely moves it (+8%).</li>
             <li>Spatial coverage wins for <b>geographic cell coverage</b> (+77%); novelty barely moves it (+1%).</li>
-            <li>Different signal wins in each space &mdash; that's <i>why</i> one number can't span both, and why
+            <li>Different signal wins in each space, which is <i>why</i> one number can't span both, and why
               the pre-flight is irreducibly two-dimensional.</li>
           </ul>
         </div>
