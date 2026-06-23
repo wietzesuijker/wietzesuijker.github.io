@@ -43,6 +43,8 @@
     padding:2vh 2.6vw; font-size:2.9vh; margin-top:2vh; max-width:90%; }
   .quote .q { font-style:italic; } .punch { font-weight:700; font-size:3.6vh; text-align:center; margin-top:2.4vh; }
   .accent { color:var(--forest); font-weight:700; }
+  .cap a.ref, .lead a.ref, .quote a.ref, .appx a.ref, .body a.ref { color:var(--forest); text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:2px; }
+  a.ref:hover { text-decoration-thickness:2.5px; }
   .appx { width:92%; font-size:3.3vh; line-height:1.6; text-align:left; }
   .appx-lead { font-size:3.9vh; line-height:1.4; color:var(--forest); font-weight:700; margin:0 0 2.4vh; }
   .appx ul { font-size:3.3vh; line-height:1.6; max-width:100%; margin:0.4vh 0 1.8vh; padding-left:3vw; }
@@ -87,7 +89,7 @@
     <div class="body">
       <img class="fig" src="figs/ood_perspecies_margin.png" alt="margin forecasts detectability" style="max-height:62vh">
       <div class="cap">For <b class="accent">210 species the model never saw</b> (including 80 whole-genus-
-        unseen <i>new lineages</i>), the label-free margin predicts how detectable each one is at
+        unseen <i>new lineages</i>), the <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">label-free margin</a> predicts how detectable each one is at
         <b class="accent">Spearman +0.66</b>. No labels, no detector run: just the distance to the nearest
         known species.</div>
     </div>
@@ -108,7 +110,7 @@
     <div class="body">
       <img class="fig" src="figs/active_discovery_clean.png" alt="active discovery baselines" style="max-width:99%; max-height:64vh">
       <div class="cap">The same selection principle, validated across <b>30 taxonomic orders</b>: choosing the
-        most distinctive examples to label next finds <b class="accent">+21% more species than random</b> (beating
+        <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/strategies/novel_margin.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">most distinctive examples</a> to label next finds <b class="accent">+21% more species than random</b> (beating
         random in 93% of them), while spread-out geographic selection barely helps. <b>Honest limit:</b> the
         pre-flight only weakly forecasts <i>which</i> taxa will benefit most.</div>
     </div>
@@ -119,8 +121,8 @@
     <div class="body">
       <img class="fig" src="figs/pipeline.png" alt="pre-flight recipe" style="max-height:58vh">
       <div class="cap">End to end on real BCI crowns: moving from a naive general-backbone reading to the
-        optimal (a domain embedding + whitening) <b class="accent">doubles the detector's skill above chance</b>
-        (0.642 &rarr; 0.785). Conformal tiering also parks the crowns the model is sure about, so the botanist's
+        optimal (a <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/pipeline.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">domain embedding + whitening</a>) <b class="accent">doubles the detector's skill above chance</b>
+        (0.642 &rarr; 0.785). <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/reject.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Conformal tiering</a> also parks the crowns the model is sure about, so the botanist's
         hours go to the uncertain tail.</div>
     </div>
   </section>
@@ -133,8 +135,8 @@
         margin predicts how detectable each family is (the scatter above), so you can focus labelling on the
         families where species separate cleanly.
         <b>Prong 2, where those gaps compress:</b> congeneric species overlap, the model confidently
-        mislabels the rarer twin as its common cousin, and margin can't flag it, so a <b>crown-map
-        disagreement</b> channel routes every such crown to a botanist.</div>
+        mislabels the rarer twin as its common cousin, and margin can't flag it, so a <b><a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/disagreement.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">crown-map
+        disagreement</a></b> channel routes every such crown to a botanist.</div>
     </div>
   </section>
 
