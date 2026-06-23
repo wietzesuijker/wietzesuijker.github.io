@@ -47,6 +47,12 @@
     padding:2vh 2.6vw; font-size:2.9vh; margin-top:2vh; max-width:90%; }
   .quote .q { font-style:italic; } .punch { font-weight:700; font-size:3.6vh; text-align:center; margin-top:2.4vh; }
   .accent { color:var(--forest); font-weight:700; }
+  footer a { color:var(--forest); text-decoration:none; }
+  .nexttalk { margin-top:3.4vh; }
+  .nexttalk a { display:inline-block; font-family:var(--mono); text-transform:uppercase;
+    letter-spacing:.05em; font-size:2.3vh; color:var(--forest); text-decoration:none;
+    border:1.5px solid var(--forest); padding:1.1vh 2.2vw; border-radius:8px; }
+  .nexttalk a:hover { background:color-mix(in srgb,var(--forest) 8%,#fff); }
 </style>
 </head>
 <body>
@@ -161,11 +167,12 @@
         The Geometry of Discovery &middot; Novelty is not Rarity &middot; Where to look next<br><br>
         Wietze Suijker, wietze.suijker@mila.quebec<br>
         <span style="font-size:2.4vh;color:var(--grey)">Every number reproduces from committed pilot scripts</span></div>
+      <div class="nexttalk"><a href="../geometry-of-discovery/" onclick="event.stopPropagation()">Next &rarr; The Geometry of Discovery</a></div>
     </div>
   </section>
 
 </div>
-<footer><span>two shortfalls, one pre-flight</span><span id="pageno"></span></footer>
+<footer><a href="../" onclick="event.stopPropagation()">&uarr;&nbsp;all talks</a><span>two shortfalls, one pre-flight</span><span id="pageno"></span></footer>
 <div id="nav"><button id="prevbtn" title="previous (&larr;)">&lsaquo;</button><button id="nextbtn" title="next (&rarr;)">&rsaquo;</button></div>
 <script>
   const slides = [...document.querySelectorAll('.slide')];

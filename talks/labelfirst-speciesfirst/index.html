@@ -71,6 +71,7 @@
   .appx-fig { display:flex; gap:3vw; width:92%; align-items:center; }
   .appx-fig img { flex:0 0 48%; max-width:48%; object-fit:contain; }
   .appx-fig .appx { width:auto; flex:1; }
+  footer a { color:var(--forest); text-decoration:none; }
 </style>
 </head>
 <body>
@@ -177,8 +178,7 @@
         <b>labelfirst:</b> which photo to label next, and whether it's worth it<br>
         <b>speciesfirst:</b> the BCI deployment and the Pl@ntNet handoff<br><br>
         Wietze Suijker, wietze.suijker@mila.quebec<br>
-        <span style="font-size:2.5vh;color:var(--grey)">Evidence and code: traitlab/labelfirst, traitlab/speciesfirst</span><br><br>
-        <a href="../index.html" onclick="event.stopPropagation()" style="font-size:2.6vh;color:var(--forest);text-decoration:none">&#8618;&nbsp;part of the species-discovery talk series</a></div>
+        <span style="font-size:2.5vh;color:var(--grey)">Evidence and code: traitlab/labelfirst, traitlab/speciesfirst</span></div>
     </div>
   </section>
 
@@ -241,7 +241,7 @@
   </section>
 
 </div>
-<footer><span>prioritizing close-up photos for labelling</span><span id="pageno"></span></footer>
+<footer><a href="../" onclick="event.stopPropagation()">&uarr;&nbsp;all talks</a><span>prioritizing close-up photos for labelling</span><span id="pageno"></span></footer>
 <div id="nav"><button id="prevbtn" title="previous (←)">‹</button><button id="nextbtn" title="next (→)">›</button></div>
 <script>
   const slides = [...document.querySelectorAll('.slide')];

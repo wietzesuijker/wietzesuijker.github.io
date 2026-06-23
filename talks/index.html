@@ -5,91 +5,149 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Talks — Wietze Suijker</title>
 <style>
-  :root { --forest:#0F766E; --ink:#15211D; --grey:#6b7280; --line:#e5e7eb;
+  :root { --forest:#0F766E; --forest-deep:#0B544E; --ink:#15211D; --grey:#6b7280; --line:#e5e7eb;
     --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
     --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace; }
   * { box-sizing:border-box; }
   body { margin:0; font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif; color:var(--ink);
     background:#fafafa; -webkit-font-smoothing:antialiased; line-height:1.5; }
-  .wrap { max-width:880px; margin:0 auto; padding:8vh 6vw 12vh; }
-  h1 { font-family:var(--serif); font-size:3rem; letter-spacing:-0.015em; margin:0 0 .4rem; }
-  .tag { font-family:var(--mono); color:var(--forest); font-weight:700; letter-spacing:.08em; text-transform:uppercase; font-size:.8rem; }
-  .intro { font-size:1.15rem; color:#374151; max-width:42rem; margin:1.2rem 0 .8rem; }
-  .note { font-size:.95rem; color:var(--grey); max-width:42rem; margin:0 0 3rem;
-    border-left:3px solid var(--forest); padding:.4rem 0 .4rem 1rem; background:#fff; }
-  .series { font-family:var(--mono); font-size:.78rem; color:var(--grey); text-transform:uppercase; letter-spacing:.1em;
-    margin:2.4rem 0 1rem; font-weight:700; }
+  a { color:var(--forest); }
+
+  /* hero */
+  .hero { position:relative; padding:15vh 6vw 13vh; text-align:center; color:#fff; overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; background:url('assets/canopy.jpg') center/cover; }
+  .hero-scrim { position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(10,32,27,.58), rgba(10,32,27,.74)); }
+  .hero-in { position:relative; max-width:58rem; margin:0 auto; }
+  .eyebrow { font-family:var(--mono); text-transform:uppercase; letter-spacing:.2em; font-size:.78rem;
+    opacity:.88; margin-bottom:1.5rem; }
+  .hero h1 { font-family:var(--serif); font-weight:700; font-size:clamp(2.3rem,5.2vw,4.1rem);
+    line-height:1.07; letter-spacing:-0.02em; margin:0 0 1.4rem; }
+  .hero-sub { font-size:clamp(1.05rem,1.7vw,1.3rem); line-height:1.5; max-width:42rem; margin:0 auto; opacity:.94; }
+
+  /* contained body */
+  .wrap { max-width:900px; margin:0 auto; padding:0 6vw 12vh; }
+  .series { font-family:var(--mono); font-size:.78rem; color:var(--grey); text-transform:uppercase;
+    letter-spacing:.12em; margin:3rem 0 1.1rem; font-weight:700; }
+
+  /* overview map: one problem, two spaces */
+  .map { margin-top:-6vh; position:relative; z-index:2; }
+  .map-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+  .space { border:1px solid var(--line); border-radius:14px; padding:1.7rem 1.7rem 1.5rem; background:#fff;
+    box-shadow:0 6px 24px rgba(15,118,110,.07); }
+  .space .k { font-family:var(--mono); text-transform:uppercase; letter-spacing:.08em; font-size:.74rem;
+    color:var(--forest); font-weight:700; }
+  .space h3 { font-family:var(--serif); font-size:1.55rem; letter-spacing:-0.01em; margin:.35rem 0 .55rem; }
+  .space p { margin:0; color:#4b5563; font-size:1.02rem; line-height:1.5; }
+  .map-foot { margin:1.1rem 0 0; padding:1.2rem 1.5rem; font-size:1.05rem; line-height:1.55; color:#374151;
+    background:color-mix(in srgb,var(--forest) 7%,#fff); border-left:3px solid var(--forest); border-radius:0 10px 10px 0; }
+  .map-foot b { color:var(--ink); }
+
+  /* talk cards */
   a.card { display:block; text-decoration:none; color:inherit; background:#fff; border:1px solid var(--line);
     border-radius:12px; padding:1.5rem 1.6rem; margin-bottom:1rem; transition:border-color .15s, box-shadow .15s; }
   a.card:hover { border-color:var(--forest); box-shadow:0 4px 18px rgba(15,118,110,.10); }
-  .card .ch { font-family:var(--mono); color:var(--forest); font-weight:700; font-size:.76rem; letter-spacing:.06em; text-transform:uppercase; }
+  .card .ch { font-family:var(--mono); color:var(--forest); font-weight:700; font-size:.76rem;
+    letter-spacing:.06em; text-transform:uppercase; }
   .card h2 { font-family:var(--serif); font-size:1.65rem; letter-spacing:-0.01em; margin:.3rem 0 .5rem; }
   .card p { margin:0; color:#4b5563; font-size:1.02rem; }
-  .card .ev { margin-top:.7rem; font-size:.88rem; color:var(--grey); }
+  .card .ev { margin-top:.7rem; font-family:var(--mono); font-size:.82rem; color:var(--grey); letter-spacing:.02em; }
+
   footer { color:var(--grey); font-size:.9rem; margin-top:3rem; border-top:1px solid var(--line); padding-top:1.5rem; }
-  footer a { color:var(--forest); }
+
+  @media (max-width:640px) { .map-grid { grid-template-columns:1fr; } .map { margin-top:1rem; } }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="tag">Wietze Suijker</div>
-  <h1>Talks</h1>
-  <p class="intro">Talks on <b>efficient species discovery</b>. Finding <i>which</i> species exist and
-    <i>where</i> they are is one value-of-information problem, governed by a label-free &ldquo;pre-flight&rdquo;
-    you can compute before spending a label or a field trip.</p>
-  <p class="note">Each talk stands on its own &mdash; start anywhere. Every number traces to a committed run.</p>
 
-  <div class="series">Start here</div>
+  <header class="hero">
+    <div class="hero-bg"></div><div class="hero-scrim"></div>
+    <div class="hero-in">
+      <div class="eyebrow">Wietze Suijker &middot; Talks</div>
+      <h1>Predict where discovery pays off,<br>before you pay for it.</h1>
+      <p class="hero-sub">Most species are still unnamed, and most known ones barely mapped. Finding which
+        exist and where they are is one value-of-information problem &mdash; with a label-free pre-flight for
+        both halves.</p>
+    </div>
+  </header>
 
-  <a class="card" href="two-shortfalls-one-preflight/index.html">
-    <div class="ch">the big picture &middot; ~10 minutes</div>
-    <h2>Two Shortfalls, One Pre-flight</h2>
-    <p>The whole idea in one sitting: finding <i>what</i> exists and <i>where</i> it is as a single
-      value-of-information problem, the pilot arc, and how the results connect.</p>
-    <div class="ev">the VOI framing &middot; the integrity story &middot; how the three connect</div>
-  </a>
+  <main class="wrap">
 
-  <div class="series">The talks</div>
+    <section class="map">
+      <div class="map-grid">
+        <div class="space">
+          <div class="k">what to label</div>
+          <h3>Feature space</h3>
+          <p>Which observation should a taxonomist examine next? This attacks the <b>Linnean gap</b> &mdash;
+            the species still unnamed.</p>
+        </div>
+        <div class="space">
+          <div class="k">where to look</div>
+          <h3>Geographic space</h3>
+          <p>Where should a naturalist go next? This attacks the <b>Wallacean gap</b> &mdash; the species
+            barely mapped.</p>
+        </div>
+      </div>
+      <p class="map-foot">Both are <b>value of information</b>. Foundation-model embeddings give a
+        <b>label-free pre-flight</b>: a cheap, a-priori test of where targeting beats random, computable
+        before you spend a label or a field trip. The talks work out <b>what</b> the pre-flight is, <b>where</b>
+        it transfers, and <b>where to point it</b> &mdash; and the cases where it honestly fails.</p>
+    </section>
 
-  <a class="card" href="geometry-of-discovery/index.html">
-    <div class="ch">label-free pre-flight &middot; open-set recognition</div>
-    <h2>The Geometry of Discovery</h2>
-    <p>A label-free pre-flight &mdash; the inter-species margin &mdash; predicts where discovery pays off,
-      before you pay for it. The simpler hypothesis &mdash; that one statistic spans both spaces &mdash; is tested and rejected.</p>
-    <div class="ev">margin governs both discovery tools &middot; transfers to unseen continents (+0.59) &middot;
-      backbone- and resolution-invariant</div>
-  </a>
+    <div class="series">Start here</div>
 
-  <a class="card" href="novelty-not-rarity/index.html">
-    <div class="ch">active learning &middot; tropical tree crowns</div>
-    <h2>Novelty is not Rarity</h2>
-    <p>Under a tiny annotation budget, label-free novelty is the best proxy for the rarity you can't yet
-      measure &mdash; and a two-pronged pre-flight covers where it fails. The causal test is a queue we control.</p>
-    <div class="ev">open-set AUROC 0.66 &middot; +21% faster discovery &middot; a botanist-queue trial for cause</div>
-  </a>
+    <a class="card" href="two-shortfalls-one-preflight/">
+      <div class="ch">the big picture &middot; ~10 minutes</div>
+      <h2>Two Shortfalls, One Pre-flight</h2>
+      <p>The whole idea in one sitting: finding <i>what</i> exists and <i>where</i> it is as a single
+        value-of-information problem, the pilot arc, and how the results connect.</p>
+      <div class="ev">the VOI framing &middot; the integrity story &middot; how the three connect</div>
+    </a>
 
-  <a class="card" href="where-to-look-next/index.html">
-    <div class="ch">spatial value-of-information &middot; iNaturalist</div>
-    <h2>Where to look next</h2>
-    <p>Where to sample is a value-of-information question &mdash; answerable, leakage-free, and genuinely
-      separate from <i>what</i> to label. The honest negative: spatial coverage, not embedding novelty, wins here.</p>
-    <div class="ev">&rho; 0.49&ndash;0.64 backtest &middot; the two axes are decoupled &middot; joint VOI +21.7%</div>
-  </a>
+    <div class="series">The talks</div>
 
-  <div class="series">The deployment talk</div>
+    <a class="card" href="geometry-of-discovery/">
+      <div class="ch">label-free pre-flight &middot; open-set recognition</div>
+      <h2>The Geometry of Discovery</h2>
+      <p>A label-free pre-flight &mdash; the inter-species margin &mdash; predicts where discovery pays off,
+        before you pay for it. The simpler hypothesis &mdash; that one statistic spans both spaces &mdash; is
+        tested and rejected.</p>
+      <div class="ev">governs both tools &middot; transfers to unseen continents (+0.59) &middot; backbone- &amp; resolution-invariant</div>
+    </a>
 
-  <a class="card" href="labelfirst-speciesfirst/index.html">
-    <div class="ch">Hyperspatial drone meeting &middot; June 2026</div>
-    <h2>Prioritizing close-up photos for labelling</h2>
-    <p>The engine (labelfirst) and the live BCI deployment (speciesfirst): which photo to label next, whether
-      it's worth it, and the Pl@ntNet handoff &mdash; with the interactive curation cockpit.</p>
-    <div class="ev">the separability law &middot; the Labelbox loop &middot; built for Lefolab &times; Pl@ntNet</div>
-  </a>
+    <a class="card" href="novelty-not-rarity/">
+      <div class="ch">active learning &middot; tropical tree crowns</div>
+      <h2>Novelty is not Rarity</h2>
+      <p>Under a tiny annotation budget, label-free novelty is the best proxy for the rarity you can't yet
+        measure &mdash; and a two-pronged pre-flight covers where it fails. The causal test is a queue we control.</p>
+      <div class="ev">open-set AUROC 0.66 &middot; +21% faster discovery &middot; a botanist-queue trial for cause</div>
+    </a>
 
-  <footer>
-    Wietze Suijker &middot; <a href="mailto:wietze.suijker@mila.quebec">wietze.suijker@mila.quebec</a><br>
-    Evidence and code: traitlab/labelfirst, traitlab/speciesfirst, blitz-the-gap.
-  </footer>
-</div>
+    <a class="card" href="where-to-look-next/">
+      <div class="ch">spatial value-of-information &middot; iNaturalist</div>
+      <h2>Where to look next</h2>
+      <p>Where to sample is a value-of-information question &mdash; answerable, leakage-free, and genuinely
+        separate from <i>what</i> to label. The honest negative: spatial coverage, not embedding novelty, wins here.</p>
+      <div class="ev">&rho; 0.49&ndash;0.64 backtest &middot; the two axes are decoupled &middot; a live tool over Canada</div>
+    </a>
+
+    <div class="series">The deployment talk</div>
+
+    <a class="card" href="labelfirst-speciesfirst/">
+      <div class="ch">hyperspatial drone meeting &middot; June 2026</div>
+      <h2>Prioritizing close-up photos for labelling</h2>
+      <p>The engine (labelfirst) and the live BCI deployment (speciesfirst): which photo to label next, whether
+        it's worth it, and the Pl@ntNet handoff &mdash; with the interactive curation cockpit.</p>
+      <div class="ev">the separability law &middot; the Labelbox loop &middot; built for Lefolab &times; Pl@ntNet</div>
+    </a>
+
+    <p class="series" style="margin-top:2.4rem">Each talk stands on its own &mdash; start anywhere. Every number traces to a committed run.</p>
+
+    <footer>
+      Wietze Suijker &middot; <a href="mailto:wietze.suijker@mila.quebec">wietze.suijker@mila.quebec</a><br>
+      Evidence and code: traitlab/labelfirst, traitlab/speciesfirst, blitz-the-gap.
+    </footer>
+
+  </main>
 </body>
 </html>

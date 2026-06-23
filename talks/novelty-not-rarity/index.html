@@ -50,6 +50,12 @@
   .two { display:flex; gap:4vw; width:92%; align-items:center; }
   .two img { flex:0 0 50%; max-width:50%; max-height:70vh; object-fit:contain; }
   .two .appx { width:auto; flex:1; }
+  footer a { color:var(--forest); text-decoration:none; }
+  .nexttalk { margin-top:3.4vh; }
+  .nexttalk a { display:inline-block; font-family:var(--mono); text-transform:uppercase;
+    letter-spacing:.05em; font-size:2.3vh; color:var(--forest); text-decoration:none;
+    border:1.5px solid var(--forest); padding:1.1vh 2.2vw; border-radius:8px; }
+  .nexttalk a:hover { background:color-mix(in srgb,var(--forest) 8%,#fff); }
 </style>
 </head>
 <body>
@@ -167,6 +173,7 @@
         Wietze Suijker, wietze.suijker@mila.quebec<br>
         <span style="font-size:2.4vh;color:var(--grey)">Deployment: <code>traitlab/speciesfirst</code> &middot;
         evidence reproduces from committed pilot scripts</span></div>
+      <div class="nexttalk"><a href="../where-to-look-next/" onclick="event.stopPropagation()">Next &rarr; Where to look next</a></div>
     </div>
   </section>
 
@@ -189,7 +196,7 @@
   </section>
 
 </div>
-<footer><span>novelty is not rarity</span><span id="pageno"></span></footer>
+<footer><a href="../" onclick="event.stopPropagation()">&uarr;&nbsp;all talks</a><span>novelty is not rarity</span><span id="pageno"></span></footer>
 <div id="nav"><button id="prevbtn" title="previous (&larr;)">&lsaquo;</button><button id="nextbtn" title="next (&rarr;)">&rsaquo;</button></div>
 <script>
   const slides = [...document.querySelectorAll('.slide')];
