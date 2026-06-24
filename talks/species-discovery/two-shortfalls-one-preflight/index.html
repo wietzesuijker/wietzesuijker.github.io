@@ -86,9 +86,9 @@
       <div class="lead">Both are the same question (<b class="accent">where will the next unit of human
         attention pay off most?</b>), posed in two spaces: the <b>feature space</b> of foundation-model
         embeddings (which to label) and the <b>geographic space</b> of sampling effort (where to go).</div>
-      <div class="quote">Each space carries a <b>label-free pre-flight</b>: a cheap, a-priori test of when
-        targeting beats random, computable on raw, unlabelled data because embeddings give a geometry
-        without labels.</div>
+      <div class="quote">Each space carries a <b>training-free pre-flight</b>: a cheap, a-priori test of when
+        targeting beats random, computable before any model training, using a small labelled reference set
+        for the feature-space axis.</div>
     </div>
   </section>
 
@@ -98,7 +98,7 @@
       <img class="fig" src="figs/pilot_arc.png" alt="three pilot findings: shortcut rejected, generalizes, forecastable" style="max-width:99%; max-height:72vh">
       <div class="cap">One story in three panels. <b>(A)</b> The tempting shortcut, a single number meant to
         explain both <i>what to label</i> and <i>where to look</i>, is <b>rejected</b>. <b>(B)</b> Yet the
-        label-free pre-flight and its two discovery tools still <b>work across all six biogeographic realms</b>.
+        training-free pre-flight and its two discovery tools still <b>work across all six biogeographic realms</b>.
         <b>(C)</b> And it <b>forecasts how hard discovery will be on a continent you've never sampled</b>
         (+0.57, vs +0.19 for the shortcut).</div>
     </div>
@@ -109,7 +109,7 @@
     <div class="body">
       <img class="fig" src="figs/mechanism.png" alt="margin mechanism" style="max-height:64vh">
       <div class="cap">The pre-flight is the <b class="accent"><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py#L108-L135" target="_blank" rel="noopener" onclick="event.stopPropagation()">inter-species margin</a></b>: how clear the gaps
-        between species clusters are. It governs <i>both</i> discovery tools (+0.65 / +0.63); how
+        between species clusters are. It governs <i>both</i> discovery tools (+0.65 / +0.63 within-dataset; cross-realm ceiling-controlled partial &rho;=+0.31, 934 cells, FWER p&lt;1e&minus;20); how
         high-dimensional the data is (the one-number bet) governs neither.</div>
     </div>
   </section>
