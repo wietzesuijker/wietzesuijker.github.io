@@ -155,9 +155,9 @@
   <section class="slide">
     <h2>What this does and doesn't claim</h2>
     <div class="body"><ul>
-      <li><b>Checked for leakage:</b> on species the backbone never saw, the detector still scores
-        0.69&ndash;0.76, at or above the random-novel baseline, so the headline AUROC isn't inflated by
-        familiar names.</li>
+      <li><b>Leakage-free benchmark (truenovel):</b> 116 species absent from BioCLIP&rsquo;s training manifest &rarr; AUROC
+        <b class="accent">0.92</b> (vs random-novel proxy 0.73). The proxy was understating. Broad-fauna regime;
+        within-clade congener remains 0.59. Prior leakage-checked estimate 0.69&ndash;0.76 is consistent and superseded by the stronger direct test.</li>
       <li>Detecting a <b>whole new lineage</b> (a held-out genus) is harder than a new species with known cousins
         (<b>0.59 vs 0.65</b>). That residual gap is what the field trial measures.</li>
       <li>This is selection on top of an existing backbone. We borrow <b><a class="ref" href="https://arxiv.org/abs/2503.01691" target="_blank" rel="noopener" onclick="event.stopPropagation()">Open-Insect</a></b>'s open-set evaluation protocol (how known and novel species are split and scored), but
@@ -177,6 +177,34 @@
         <span style="font-size:2.4vh;color:var(--grey)">Engine: <code>labelfirst</code> &middot; BCI deployment: <code>speciesfirst</code> &middot;
         evidence reproduces from committed pilot scripts</span></div>
       <div class="nexttalk"><a href="../where-to-look-next/" onclick="event.stopPropagation()">Next &rarr; Where to look next</a></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Honest negative: per-call triage is MSP&rsquo;s job, not the margin&rsquo;s</h2>
+    <div class="body"><ul>
+      <li>For routing an <i>individual</i> call to an expert (abstention), <b>max-softmax probability (MSP) beats
+        the novelty margin</b>: area-under-risk-coverage <b class="accent">0.37 vs 0.47</b> (30 orders; lower is better).</li>
+      <li>The margin is blind to known-vs-known confusion; MSP catches both error modes. Each tool
+        has its domain: margin for <i>discovery</i>, MSP for <i>triage</i>.</li>
+      <li>The pre-flight forecasts <b>where</b> either tool will pay off (per clade, before any calls are made)
+        &mdash; that layer is unchanged.</li>
+    </ul>
+    <div class="punch">Route by MSP &middot; discover by margin &middot; pre-flight for where.</div></div>
+  </section>
+
+  <section class="slide">
+    <h2>The law replicates at two independent tropical sites</h2>
+    <div class="body">
+      <div class="stats">
+        <div class="stat"><div class="n accent">+0.94</div><div class="l">BCI &mdash; margin &rarr; detectability</div>
+          <div class="s">family-level open-set AUROC; p=0.005, n=6 families</div></div>
+        <div class="stat"><div class="n accent">+0.84</div><div class="l">Tiputini &mdash; same law, new forest</div>
+          <div class="s">family-level; p=6e&minus;5, n=16 families</div></div>
+      </div>
+      <div class="quote" style="margin-top:3.5vh">The within-site margin&rarr;detectability law is not a BCI artifact.
+        <span style="color:var(--grey);font-size:2.5vh;display:block;margin-top:1.2vh">Honest caveat: the <i>specific</i> per-clade difficulty does not transfer across sites &mdash; a
+        within-site selector, not a cross-site difficulty oracle.</span></div>
     </div>
   </section>
 

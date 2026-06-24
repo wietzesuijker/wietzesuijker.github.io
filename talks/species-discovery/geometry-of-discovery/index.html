@@ -192,6 +192,23 @@
   </section>
 
   <section class="slide">
+    <h2>It reaches real discovery</h2>
+    <div class="body">
+      <div class="stats">
+        <div class="stat"><div class="n accent">0.92</div><div class="l">AUROC on 116 genuinely out-of-training species</div>
+          <div class="s">absent from BioCLIP&rsquo;s training manifest &mdash; truenovel benchmark</div></div>
+        <div class="stat"><div class="n accent">+0.92</div><div class="l">margin forecasts per-species detectability</div>
+          <div class="s">Spearman, n=116, p=4e&minus;49</div></div>
+      </div>
+      <div class="quote" style="margin-top:3.5vh">The random-held-out proxy scored <b>0.73</b> &mdash; it was <i>understating</i>.
+        On species the foundation model has never seen, the detector holds and the pre-flight still forecasts
+        which ones it will find.
+        <span style="color:var(--grey);font-size:2.5vh;display:block;margin-top:1.2vh">Caveat: this is broad cross-fauna detection (novel vs the whole known fauna), an easier regime
+        than within-clade congeners (0.58&ndash;0.66). The two bracket the difficulty range.</span></div>
+    </div>
+  </section>
+
+  <section class="slide">
     <h2>What's new, and what's next</h2>
     <div class="body"><ul>
       <li>We're not aware of prior work linking a <b>training-free</b> cluster-isolation scalar to open-set species discovery <i>before</i> any model is trained or budget spent &mdash; Janiak et al. (<a class="ref" href="https://arxiv.org/abs/2510.15202" target="_blank" rel="noopener" onclick="event.stopPropagation()">2510.15202</a>) independently converge on the geometry principle (OOD target, within-model); we tested both cross-realm and their predictor transfers comparably, so cross-domain transfer is a <i>shared</i> property of the isolation principle &mdash; convergent validation, our distinctions being the closed-form identity and the open-set-discovery target.</li>
