@@ -118,7 +118,9 @@
     <h2>Three results</h2>
     <div class="body"><ul>
       <li><b>The Geometry of Discovery</b>: the margin pre-flight predicts open-set discovery and
-        <b>transfers</b> to unseen continents (+0.59); the detector <i>is</i> the geometry (Pearson 0.91).</li>
+        <b>transfers</b> to unseen continents (+0.59); the detector <i>is</i> the geometry (Pearson 0.91).
+        Leakage-free real-discovery benchmark: <b class="accent">116 out-of-training species at AUROC 0.92</b>
+        (vs random-novel proxy 0.73; margin forecasts per-species detectability at +0.92).</li>
       <li><b>Novelty is not Rarity</b>: open-set discovery on tropical crowns under a budget; a
         two-pronged pre-flight; a botanist-queue trial we control.</li>
       <li><b>Where to look next</b>: geographic value-of-information; the honest negative that coverage,
@@ -148,6 +150,21 @@
         are non-redundant, not a setback. <b>(2) Leakage:</b> the margin&ndash;detector link is re-checked for
         self-membership bias; a leave-one-species-out recompute <b>strengthens</b> it
         (Pearson 0.91 &rarr; 0.93), so the headline isn't inflated by names the geometry already saw.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>It reaches real discovery</h2>
+    <div class="body">
+      <div class="stats">
+        <div class="stat"><div class="n accent">0.92</div><div class="l">AUROC on 116 genuinely out-of-training species</div>
+          <div class="s">absent from BioCLIP&rsquo;s training manifest &mdash; truenovel benchmark</div></div>
+        <div class="stat"><div class="n accent">+0.92</div><div class="l">margin forecasts per-species detectability</div>
+          <div class="s">Spearman, n=116, p=4e&minus;49</div></div>
+      </div>
+      <div class="quote" style="margin-top:3.5vh">Random-held-out proxy: <b>0.73</b> &mdash; it was <i>understating</i>.
+        On species the foundation model has never seen, the pre-flight still forecasts which ones it finds.
+        <span style="color:var(--grey);font-size:2.5vh;display:block;margin-top:1.2vh">Caveat: broad cross-fauna detection (novel vs the whole known fauna), an easier regime than within-clade congeners (0.58&ndash;0.66). The two bracket the difficulty range.</span></div>
     </div>
   </section>
 
