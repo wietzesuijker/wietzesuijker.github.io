@@ -85,13 +85,12 @@
   </section>
 
   <section class="slide">
-    <h2>The label-free margin forecasts which unseen species are detectable</h2>
+    <h2>The training-free margin forecasts which unseen species are detectable</h2>
     <div class="body">
       <img class="fig" src="figs/ood_perspecies_margin.png" alt="margin forecasts detectability" style="max-height:62vh">
       <div class="cap">For <b class="accent">210 species the model never saw</b> (including 80 whole-genus-
-        unseen <i>new lineages</i>), the <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py#L351-L454" target="_blank" rel="noopener" onclick="event.stopPropagation()">label-free margin</a> predicts how detectable each one is at
-        <b class="accent">Spearman +0.66</b>. No labels, no detector run: just the distance to the nearest
-        known species.</div>
+        unseen <i>new lineages</i>), the <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py#L351-L454" target="_blank" rel="noopener" onclick="event.stopPropagation()">training-free margin</a> predicts how detectable each one is at
+        <b class="accent">Spearman +0.66</b>. No model training, no detector run: just distances to a small labelled reference set.</div>
     </div>
   </section>
 
@@ -169,7 +168,7 @@
   <section class="slide">
     <h2>Thank you</h2>
     <div class="body">
-      <div class="lead" style="font-size:4.2vh">Under a budget, <b class="accent">label-free novelty</b> is the
+      <div class="lead" style="font-size:4.2vh">Under a budget, <b class="accent">training-free novelty (with a small labelled reference set)</b> is the
         best proxy for the rarity you can't yet measure, and a two-pronged pre-flight covers where it
         fails.</div>
       <div style="margin-top:5vh;text-align:center;font-size:3.2vh;line-height:1.7">

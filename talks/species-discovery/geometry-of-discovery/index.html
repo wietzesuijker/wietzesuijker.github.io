@@ -67,9 +67,9 @@
     <div class="bg"></div><div class="scrim"></div>
     <div class="tt">
       <h1>The Geometry of Discovery</h1>
-      <div class="sub">A label-free pre-flight for finding unknown species</div>
+      <div class="sub">A training-free pre-flight for finding unknown species</div>
       <div class="who">Wietze Suijker</div>
-      <div class="meta">label-free pre-flight &middot; open-set recognition</div>
+      <div class="meta">training-free pre-flight &middot; open-set recognition</div>
     </div>
   </section>
 
@@ -102,7 +102,7 @@
       <img class="fig" src="figs/mechanism.png" alt="margin mechanism" style="max-height:66vh">
       <div class="cap">Picture each species as a cloud of points. If the clouds sit apart with clear
         <b>gaps</b>, an unknown species lands in a gap and stands out. The <b class="accent"><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py#L108-L135" target="_blank" rel="noopener" onclick="event.stopPropagation()">inter-species
-        margin</a></b> governs <i>both</i> discovery tools (+0.65 / +0.63); how high-dimensional the data is (the
+        margin</a></b> governs <i>both</i> discovery tools (+0.65 / +0.63 within-dataset; cross-realm ceiling-controlled partial &rho;=+0.31, 934 cells, FWER p&lt;1e&minus;20 &mdash; the honest cross-realm effect is more modest); how high-dimensional the data is (the
         one-number bet) governs neither (+0.22 / +0.02).</div>
     </div>
   </section>
@@ -148,7 +148,8 @@
     <div class="body">
       <img class="fig" src="figs/resolution_ladder.png" alt="zoom, backbone, region" style="max-height:64vh">
       <div class="cap">The margin predicts discoverability at every <b>zoom</b> (order +0.65, family +0.61, genus
-        +0.62), under a different <b>backbone</b> (DINOv2 +0.76), and in other <b>realms</b> (+0.52, +0.57),
+        +0.62), under a different <b>backbone</b> (DINOv2 +0.76), and in other <b>realms</b> (+0.52, +0.57)
+        (all raw within-dataset; cross-realm ceiling-controlled partial &rho;=+0.31),
         while the one-number bet goes flat or negative. The same separability law even appears in birdsong audio.</div>
     </div>
   </section>
@@ -172,8 +173,7 @@
         <div class="stat"><div class="n accent">0.52&rarr;0.65</div><div class="l">no labels &rarr; a few labels</div>
           <div class="s">unsupervised triage, then the worth of a handful of labels per clade</div></div>
       </div>
-      <div class="quote" style="margin-top:3.5vh">Operationally: run an unsupervised first pass over a whole
-        region for free, then spend labels only where the rough signal says discovery will pay off.</div>
+      <div class="quote" style="margin-top:3.5vh">Operationally: run a training-free first pass using a small labelled reference set, then spend labels only where the rough signal says discovery will pay off.</div>
     </div>
   </section>
 
@@ -194,9 +194,7 @@
   <section class="slide">
     <h2>What's new, and what's next</h2>
     <div class="body"><ul>
-      <li>We're not aware of prior work linking a <b>label-free</b> separability statistic to open-set
-        discovery benefit <i>before</i> any model is trained or budget spent, unlike in-loop
-        active-discovery selectors, which need a trained model to score candidates.</li>
+      <li>We're not aware of prior work linking a <b>training-free</b> cluster-isolation scalar to open-set species discovery <i>before</i> any model is trained or budget spent &mdash; Janiak et al. (<a class="ref" href="https://arxiv.org/abs/2510.15202" target="_blank" rel="noopener" onclick="event.stopPropagation()">2510.15202</a>) independently converge on the geometry principle (OOD target, within-model); we tested both cross-realm and their predictor transfers comparably, so cross-domain transfer is a <i>shared</i> property of the isolation principle &mdash; convergent validation, our distinctions being the closed-form identity and the open-set-discovery target.</li>
       <li>The empirical law is the floor; the next step is a <b>bound</b>: under a margin / low-noise
         condition, the inter-species margin lower-bounds the expected information gain of a query.</li>
       <li>The same pre-flight drives two further results: <b>discovering unknown species</b> under a budget,
@@ -210,7 +208,7 @@
     <h2>Thank you</h2>
     <div class="body">
       <div class="lead" style="font-size:4.2vh">The geometry of foundation-model embeddings is a
-        <b class="accent">label-free map of where discovery is easy</b>.</div>
+        <b class="accent">training-free map of where discovery is easy (small reference set required)</b>.</div>
       <div style="margin-top:5vh;text-align:center;font-size:3.2vh;line-height:1.7">
         margin governs both discovery tools &middot; transfers to unseen continents &middot;
         backbone- and resolution-invariant<br><br>
