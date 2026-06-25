@@ -155,6 +155,21 @@
   </section>
 
   <section class="slide">
+    <h2>And it holds on the field's own benchmarks</h2>
+    <div class="body">
+      <div class="stats">
+        <div class="stat"><div class="n accent">+0.93/+0.79</div><div class="l">iNat2021-OSR &mdash; per-hop difficulty (Aves/Insecta)</div>
+          <div class="s">Lang et al. CVPR&rsquo;24, 7 taxonomic-distance hops; per-clade +0.71 on insects (p&lt;10&minus;3)</div></div>
+        <div class="stat"><div class="n accent">3/3</div><div class="l">Open-Insect &mdash; difficulty tiers, scale-stable</div>
+          <div class="s">Chen et al. NeurIPS&rsquo;25, ~18k images; tier-ordering reproduced in every region (AUROC 0.86&ndash;0.99)</div></div>
+      </div>
+      <div class="quote" style="margin-top:3.5vh">Two third-party benchmarks, never tuned on &mdash; the difficulty <i>ordering</i> transfers everywhere novelty is graded by taxonomic distance.
+        <span style="color:var(--grey);font-size:2.5vh;display:block;margin-top:1.2vh">Honest boundary: <i>per-clade</i> forecasting holds where clades carry variance (insects), but Open-Insect's
+        adversarially-curated near-relatives compress it to null (+0.23). A graded-distance forecaster, not a universal per-clade oracle.</span></div>
+    </div>
+  </section>
+
+  <section class="slide">
     <h2>And it forecasts genuinely region-novel species</h2>
     <div class="body">
       <img class="fig" src="figs/realdiscovery.png" alt="region-novel discovery" style="max-height:64vh">

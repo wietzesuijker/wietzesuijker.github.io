@@ -194,17 +194,18 @@
   </section>
 
   <section class="slide">
-    <h2>The law replicates at two independent tropical sites</h2>
+    <h2>The margin&rarr;detectability law is local, not portable across sites</h2>
     <div class="body">
       <div class="stats">
-        <div class="stat"><div class="n accent">+0.94</div><div class="l">BCI &mdash; margin &rarr; detectability</div>
-          <div class="s">family-level open-set AUROC; p=0.005, n=6 families</div></div>
-        <div class="stat"><div class="n accent">+0.84</div><div class="l">Tiputini &mdash; same law, new forest</div>
-          <div class="s">family-level; p=6e&minus;5, n=16 families</div></div>
+        <div class="stat"><div class="n accent">+0.89</div><div class="l">BCI &mdash; margin &rarr; detectability</div>
+          <div class="s">family-level open-set AUROC, robust across 3 backbones (+0.89/+0.75/+0.46); n=7 families</div></div>
+        <div class="stat"><div class="n accent">+0.45</div><div class="l">Tiputini &mdash; weak, backbone-matched</div>
+          <div class="s">+0.45/+0.28/+0.05 across backbones, CIs cross zero; the earlier +0.84 was a backbone mismatch</div></div>
       </div>
-      <div class="quote" style="margin-top:3.5vh">The within-site margin&rarr;detectability law is not a BCI artifact.
-        <span style="color:var(--grey);font-size:2.5vh;display:block;margin-top:1.2vh">Honest caveat: the <i>specific</i> per-clade difficulty does not transfer across sites &mdash; a
-        within-site selector, not a cross-site difficulty oracle.</span></div>
+      <div class="quote" style="margin-top:3.5vh">The law holds <i>within</i> each site; the per-clade difficulty <i>label</i> does not travel.
+        <span style="color:var(--grey);font-size:2.5vh;display:block;margin-top:1.2vh">Across families shared by both sites the cross-site change in margin tracks the change in detectability
+        (<i>Moraceae</i> collapses on both, <i>Malvaceae</i> stable on both, n=3 &mdash; illustration, not a powered fit).
+        Predict from the margin you measure on-site &mdash; never from another site's clade ranking.</span></div>
     </div>
   </section>
 
