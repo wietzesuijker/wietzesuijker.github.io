@@ -15,8 +15,8 @@
   #deck { height:100vh; width:100vw; position:relative; }
   .slide { position:absolute; inset:0; display:none; flex-direction:column; padding:4.5vh 6vw 7vh; }
   .slide.active { display:flex; }
-  h2 { color:var(--forest); font-family:var(--serif); font-size:4.7vh; font-weight:700; letter-spacing:-0.01em; margin:0 0 0.4vh;
-    border-bottom:2px solid color-mix(in srgb,var(--forest) 45%,#fff); padding-bottom:1vh; }
+  h2 { color:var(--forest); font-family:var(--serif); font-size:3.8vh; font-weight:700; letter-spacing:-0.01em; margin:0 0 0.4vh;
+    border-bottom:2px solid color-mix(in srgb,var(--forest) 45%,#fff); padding-bottom:1vh; text-wrap:balance; }
   .body { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; }
   .fig { max-width:90%; max-height:74vh; object-fit:contain; }
   .cap { font-size:2.7vh; color:#444; text-align:center; margin-top:2vh; max-width:92%; line-height:1.45; }
@@ -52,6 +52,9 @@
   .two { display:flex; gap:4vw; width:92%; align-items:center; }
   .two img { flex:0 0 50%; max-width:50%; max-height:70vh; object-fit:contain; }
   .two .appx { width:auto; flex:1; }
+  .figrow { display:flex; gap:3.5vw; width:97%; align-items:center; }
+  .figrow > img { flex:0 0 58%; max-width:58%; max-height:84vh; object-fit:contain; }
+  .figrow .fcap { flex:1 1 0; font-size:3.0vh; line-height:1.5; text-align:left; color:#333; }
   footer a { color:var(--forest); text-decoration:none; }
   .nexttalk { margin-top:3.4vh; }
   .nexttalk a { display:inline-block; font-family:var(--mono); text-transform:uppercase;
@@ -87,20 +90,26 @@
   <section class="slide">
     <h2>The training-free margin forecasts which unseen species are detectable</h2>
     <div class="body">
-      <img class="fig" src="figs/ood_perspecies_margin.png" alt="margin forecasts detectability" style="max-height:62vh">
-      <div class="cap">For <b class="accent">210 species the model never saw</b> (including 80 whole-genus-
-        unseen <i>new lineages</i>), the <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py#L351-L454" target="_blank" rel="noopener" onclick="event.stopPropagation()">training-free margin</a> predicts how detectable each one is at
-        <b class="accent">Spearman +0.66</b>. No model training, no detector run: just distances to a small labelled reference set.</div>
+      <div class="figrow">
+        <img src="figs/ood_perspecies_margin.png" alt="margin forecasts detectability">
+        <div class="fcap">For <b class="accent">210 species the model never saw</b> (including 80 whole-genus-
+          unseen <i>new lineages</i>), the <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py#L351-L454" target="_blank" rel="noopener" onclick="event.stopPropagation()">training-free margin</a> predicts how detectable each one is at
+          <b class="accent">Spearman +0.66</b>. No model training, no detector run: just distances to a small labelled reference set.</div>
+      </div>
     </div>
   </section>
 
   <section class="slide">
     <h2>A parameter-free open-set detector that works</h2>
     <div class="body">
-      <img class="fig" src="figs/open_set_clean.png" alt="open set detector per order" style="max-height:64vh">
-      <div class="cap">Spotting a new species is feasible <b>above chance in all 30 clades</b>
-        (<b class="accent">mean AUROC 0.66</b>), untuned. How high-dimensional the data is barely predicts which
-        clades are easy, which is exactly why the pre-flight is the <b>margin</b>, not the dimension.</div>
+      <div class="figrow">
+        <img src="figs/open_set_clean.png" alt="open set detector per order">
+        <div class="fcap">Spotting a new species is feasible <b>above chance in all 30 clades</b>
+          (<b class="accent">mean AUROC 0.66</b>), untuned. <b>These 30 taxonomic orders span birds, insects, plants
+          and fish &mdash; not just trees</b>, so the law is taxon-general; tree crowns are the deployment, not the limit.
+          How high-dimensional the data is barely predicts which
+          clades are easy, which is exactly why the pre-flight is the <b>margin</b>, not the dimension.</div>
+      </div>
     </div>
   </section>
 
@@ -118,24 +127,28 @@
   <section class="slide">
     <h2>The recipe: don't label what the model already knows</h2>
     <div class="body">
-      <img class="fig" src="figs/pipeline.png" alt="pre-flight recipe" style="max-height:58vh">
-      <div class="cap">End to end on real BCI crowns: moving from a naive general-backbone reading to the
-        optimal (a <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/pipeline.py#L213-L295" target="_blank" rel="noopener" onclick="event.stopPropagation()">domain embedding + whitening</a>) <b class="accent">doubles the detector's skill above chance</b>
-        (0.642 &rarr; 0.785). <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/reject.py#L131-L221" target="_blank" rel="noopener" onclick="event.stopPropagation()">Conformal tiering</a> also parks the crowns the model is sure about, so the botanist's
-        hours go to the uncertain tail.</div>
+      <div class="figrow">
+        <img src="figs/pipeline.png" alt="pre-flight recipe">
+        <div class="fcap">End to end on real BCI crowns: moving from a naive general-backbone reading to the
+          optimal (a <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/pipeline.py#L213-L295" target="_blank" rel="noopener" onclick="event.stopPropagation()">domain embedding + whitening</a>) <b class="accent">doubles the detector's skill above chance</b>
+          (0.642 &rarr; 0.785). <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/reject.py#L131-L221" target="_blank" rel="noopener" onclick="event.stopPropagation()">Conformal tiering</a> also parks the crowns the model is sure about, so the botanist's
+          hours go to the uncertain tail.</div>
+      </div>
     </div>
   </section>
 
   <section class="slide">
     <h2>The pre-flight has two prongs, because it fails in two ways</h2>
     <div class="body">
-      <img class="fig" src="figs/bci_margin_clean.png" alt="margin prong on real crowns" style="max-height:60vh">
-      <div class="cap"><b>Prong 1, margin (proactive):</b> on real BCI crowns, across five backbones, the
-        margin predicts how detectable each family is (the scatter above), so you can focus labelling on the
-        families where species separate cleanly.
-        <b>Prong 2, where those gaps compress:</b> congeneric species overlap, the model confidently
-        mislabels the rarer twin as its common cousin, and margin can't flag it, so a <b><a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/disagreement.py#L78-L164" target="_blank" rel="noopener" onclick="event.stopPropagation()">crown-map
-        disagreement</a></b> channel routes every such crown to a botanist.</div>
+      <div class="figrow">
+        <img src="figs/bci_margin_clean.png" alt="margin prong on real crowns">
+        <div class="fcap"><b>Prong 1, margin (proactive):</b> on real BCI crowns, across five backbones, the
+          margin predicts how detectable each family is (the scatter at left), so you can focus labelling on the
+          families where species separate cleanly.
+          <b>Prong 2, where those gaps compress:</b> congeneric species overlap, the model confidently
+          mislabels the rarer twin as its common cousin, and margin can't flag it, so a <b><a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/disagreement.py#L78-L164" target="_blank" rel="noopener" onclick="event.stopPropagation()">crown-map
+          disagreement</a></b> channel routes every such crown to a botanist.</div>
+      </div>
     </div>
   </section>
 
@@ -160,8 +173,10 @@
         within-clade congener remains 0.59. Prior leakage-checked estimate 0.69&ndash;0.76 is consistent and superseded by the stronger direct test.</li>
       <li>Detecting a <b>whole new lineage</b> (a held-out genus) is harder than a new species with known cousins
         (<b>0.59 vs 0.65</b>). That residual gap is what the field trial measures.</li>
-      <li>This is selection on top of an existing backbone. We borrow <b><a class="ref" href="https://arxiv.org/abs/2503.01691" target="_blank" rel="noopener" onclick="event.stopPropagation()">Open-Insect</a></b>'s open-set evaluation protocol (how known and novel species are split and scored), but
-        apply it to <b><a class="ref" href="https://arxiv.org/abs/2507.00170" target="_blank" rel="noopener" onclick="event.stopPropagation()">SelvaBox</a> / <a class="ref" href="https://github.com/hugobaudchon/CanopyRS" target="_blank" rel="noopener" onclick="event.stopPropagation()">CanopyRS</a></b> tree crowns, not its moth images; the contribution is the pre-flight and the loop, not a new model.</li>
+      <li>This is selection on top of an existing backbone, and the open-set law is <b>taxon-general</b>: the companion
+        validates it on third-party benchmarks across <b>birds and insects</b> (iNat2021-OSR; <b><a class="ref" href="https://arxiv.org/abs/2503.01691" target="_blank" rel="noopener" onclick="event.stopPropagation()">Open-Insect</a></b>'s moths)
+        and on iNaturalist across 30 orders and six realms. Here we borrow Open-Insect's open-set evaluation protocol and
+        deploy it on <b><a class="ref" href="https://arxiv.org/abs/2507.00170" target="_blank" rel="noopener" onclick="event.stopPropagation()">SelvaBox</a> / <a class="ref" href="https://github.com/hugobaudchon/CanopyRS" target="_blank" rel="noopener" onclick="event.stopPropagation()">CanopyRS</a></b> tree crowns; the contribution is the pre-flight and the loop, not a new model.</li>
     </ul></div>
   </section>
 
