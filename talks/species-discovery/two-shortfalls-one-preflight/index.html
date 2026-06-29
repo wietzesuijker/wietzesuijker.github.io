@@ -115,6 +115,23 @@
   </section>
 
   <section class="slide">
+    <h2>The detector <i>is</i> the geometry &mdash; off data I didn't build</h2>
+    <div class="body">
+      <div class="stats">
+        <div class="stat"><div class="n accent">+0.995</div><div class="l">closed-form = open-set AUROC, iNat2021-OSR</div>
+          <div class="s">binormal d&prime; identity, no detector trained</div></div>
+        <div class="stat"><div class="n accent">+0.997</div><div class="l">same identity, TerraIncognita</div>
+          <div class="s">MAE 0.013&ndash;0.017; two benchmarks I did not build</div></div>
+      </div>
+      <div class="quote" style="margin-top:3.5vh">The classical AUROC&nbsp;=&nbsp;&Phi;(d&prime;/&radic;2) identity, fed a
+        frozen-embedding d&prime;, <b>reproduces the empirical detector</b> with no detector trained and no label
+        spent &mdash; and even predicts the two <i>sub-chance</i> clades correctly (Coleoptera d&prime;&lt;0 &rarr;
+        AUROC 0.37, empirical 0.38). This is the <b class="accent">leakage-free anchor</b>; the 116-species
+        out-of-training result is corroboration, not the headline.</div>
+    </div>
+  </section>
+
+  <section class="slide">
     <h2>Three results</h2>
     <div class="body"><ul>
       <li><b>The Geometry of Discovery</b>: the margin pre-flight predicts open-set discovery and
