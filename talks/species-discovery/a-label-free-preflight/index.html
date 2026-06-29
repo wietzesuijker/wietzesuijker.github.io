@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A label-free pre-flight for biodiversity discovery &middot; Wietze Suijker</title>
+<style>
+  :root { --forest:#0F766E; --forest-deep:#0B544E; --ink:#15211D; --grey:#6b7280; --line:#e5e7eb;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace; }
+  * { box-sizing:border-box; }
+  body { margin:0; font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif; color:var(--ink);
+    background:#fafafa; -webkit-font-smoothing:antialiased; line-height:1.5; }
+  a { color:var(--forest); }
+
+  /* hero */
+  .hero { position:relative; padding:14vh 6vw 12vh; text-align:center; color:#fff; overflow:hidden; }
+  .hero-bg { position:absolute; inset:0; background:url('../assets/canopy.jpg') center/cover; }
+  .hero-scrim { position:absolute; inset:0;
+    background:linear-gradient(180deg, rgba(10,32,27,.58), rgba(10,32,27,.74)); }
+  .hero-in { position:relative; max-width:58rem; margin:0 auto; }
+  .eyebrow { font-family:var(--mono); text-transform:uppercase; letter-spacing:.2em; font-size:.78rem;
+    opacity:.88; margin-bottom:1.5rem; }
+  .hero h1 { font-family:var(--serif); font-weight:700; font-size:clamp(2.1rem,4.8vw,3.7rem);
+    line-height:1.08; letter-spacing:-0.02em; margin:0 0 1.4rem; }
+  .hero-sub { font-size:clamp(1.02rem,1.6vw,1.25rem); line-height:1.55; max-width:44rem; margin:0 auto; opacity:.95; }
+  .hero-sub b { color:#fff; }
+
+  /* contained body */
+  .wrap { max-width:860px; margin:0 auto; padding:0 6vw 12vh; }
+  .lead-card { margin-top:-6vh; position:relative; z-index:2; background:#fff; border:1px solid var(--line);
+    border-radius:14px; padding:2rem 2.1rem; box-shadow:0 6px 24px rgba(15,118,110,.08); }
+  .lead-card .k { font-family:var(--mono); text-transform:uppercase; letter-spacing:.1em; font-size:.74rem;
+    color:var(--forest); font-weight:700; margin-bottom:.7rem; }
+  .lead-card p { margin:0 0 .9rem; font-size:1.08rem; line-height:1.6; color:#374151; }
+  .lead-card p:last-child { margin-bottom:0; }
+
+  h2 { font-family:var(--serif); font-size:1.75rem; letter-spacing:-0.01em; margin:3.2rem 0 .4rem;
+    padding-bottom:.5rem; border-bottom:2px solid color-mix(in srgb,var(--forest) 35%,#fff); color:var(--ink); }
+  .sec-k { font-family:var(--mono); font-size:.74rem; color:var(--forest); text-transform:uppercase;
+    letter-spacing:.12em; font-weight:700; margin-top:3.2rem; }
+  .sec-k + h2 { margin-top:.3rem; }
+  p.body { font-size:1.05rem; line-height:1.6; color:#374151; margin:1rem 0; }
+  .body b, li b { color:var(--ink); }
+  .accent { color:var(--forest); font-weight:700; }
+
+  ul.findings { list-style:none; padding:0; margin:1.2rem 0; }
+  ul.findings > li { position:relative; padding:0 0 0 1.4rem; margin:0 0 1.1rem; font-size:1.04rem;
+    line-height:1.55; color:#374151; }
+  ul.findings > li::before { content:"\2014"; position:absolute; left:0; color:var(--forest); font-weight:700; }
+
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin:1.3rem 0; }
+  .depth { border:1px solid var(--line); border-radius:12px; padding:1.4rem 1.5rem; background:#fff; }
+  .depth .ch { font-family:var(--mono); color:var(--forest); font-weight:700; font-size:.74rem;
+    letter-spacing:.06em; text-transform:uppercase; }
+  .depth h3 { font-family:var(--serif); font-size:1.3rem; margin:.3rem 0 .5rem; letter-spacing:-0.01em; }
+  .depth p { margin:0; color:#4b5563; font-size:.98rem; line-height:1.5; }
+
+  .note { margin:1.4rem 0; padding:1.2rem 1.5rem; font-size:1.03rem; line-height:1.55; color:#374151;
+    background:color-mix(in srgb,var(--forest) 7%,#fff); border-left:3px solid var(--forest); border-radius:0 10px 10px 0; }
+  .note b { color:var(--ink); }
+
+  .tablewrap { overflow-x:auto; margin:1.3rem 0; border:1px solid var(--line); border-radius:12px; }
+  table { border-collapse:collapse; width:100%; font-size:.92rem; background:#fff; min-width:560px; }
+  th, td { text-align:left; padding:.7rem .9rem; border-bottom:1px solid var(--line); vertical-align:top; }
+  th { font-family:var(--mono); text-transform:uppercase; letter-spacing:.05em; font-size:.72rem;
+    color:var(--grey); background:#f8fafa; }
+  td.num { font-variant-numeric:tabular-nums; color:var(--ink); white-space:nowrap; }
+  td.src { font-family:var(--mono); font-size:.82rem; color:var(--grey); }
+  tr:last-child td { border-bottom:0; }
+
+  .positioning li { font-size:1.0rem; line-height:1.55; margin-bottom:.7rem; color:#374151; }
+
+  footer { color:var(--grey); font-size:.9rem; margin-top:3.4rem; border-top:1px solid var(--line); padding-top:1.5rem; }
+  footer a { color:var(--forest); }
+  .backlink { display:inline-block; font-family:var(--mono); text-transform:uppercase; letter-spacing:.06em;
+    font-size:.8rem; margin-bottom:1.5rem; }
+
+  @media (max-width:640px) { .grid2 { grid-template-columns:1fr; } .lead-card { margin-top:1rem; } }
+</style>
+</head>
+<body>
+
+  <header class="hero">
+    <div class="hero-bg"></div><div class="hero-scrim"></div>
+    <div class="hero-in">
+      <div class="eyebrow">Wietze Suijker &middot; Research brief</div>
+      <h1>A label-free pre-flight for biodiversity discovery</h1>
+      <p class="hero-sub">A closed-form embedding-geometry statistic predicts open-set species
+        detectability at Pearson <b>+0.99</b> on two benchmarks I did not build &mdash; net of classifier
+        accuracy, with no detector trained and no label spent.</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+
+    <section class="lead-card">
+      <div class="k">In plain English</div>
+      <p>Most species on Earth are still unnamed, and most named ones are barely mapped. The real
+        bottleneck isn't cameras or AI models &mdash; it's <b>expert attention</b>: which photo a taxonomist
+        looks at next, and where a naturalist goes next.</p>
+      <p>The way an AI model arranges species in its memory already tells you, <b>before you spend a single
+        hour of expert time</b>, where looking will pay off. If a group's known species sit cleanly apart in
+        that arrangement, the model will spot new ones there; if they're jumbled, it won't. It's a cheap
+        <b>pre-flight check</b> for discovery.</p>
+    </section>
+
+    <h2>The idea</h2>
+    <p class="body">The hard limits on biodiversity knowledge are the <b>Linnean shortfall</b> (most species
+      unnamed) and the <b>Wallacean shortfall</b> (most named species barely mapped). Both are, underneath,
+      the same decision problem: <i>which observation should an expert examine next, and where should a
+      naturalist go next.</i> The bottleneck is human attention, not sensors or models.</p>
+    <p class="body">The <b>geometry of foundation-model embeddings</b> prices that decision in advance. The
+      inter-species <b>margin</b> &mdash; how cleanly a group's known species separate in a frozen embedding
+      space &mdash; predicts, with no detector trained and no label spent, where discovery effort will pay
+      off. It is a label-free <b>pre-flight</b>: a cheap a-priori estimate of what is worth looking at.</p>
+
+    <h2>Where it fits</h2>
+    <p class="body">This is the prediction layer that sits <i>underneath</i> open-set insect-detection
+      benchmarks and <i>beside</i> spatial sampling models, squarely inside the mandate of monitoring
+      biodiversity change at scale. <b>Open-Insect</b> measures <i>which</i> novel species a detector
+      catches; <b>BATIS</b> updates a species-distribution model wherever data happens to land. The
+      pre-flight forecasts <b>which groups a detector will catch, and which regions are worth sampling,
+      before the run</b> &mdash; turning both benchmarks into label-free planning signals. Crucially it is a
+      <i>meta</i>-predictor, not a rival detector: it forecasts which clades <i>any</i> detector &mdash; the
+      standard maximum-softmax-probability baseline included &mdash; will find easy, so it complements those
+      benchmarks rather than competing with them. The application makes discovery cheaper and targeted; the
+      core is a transferable result &mdash; a geometric predictor with a closed-form mechanism.</p>
+
+    <div class="sec-k">Verified &middot; every number traceable to a committed run</div>
+    <h2>What I have shown</h2>
+    <ul class="findings">
+      <li><b>Detectability is predictable a-priori &mdash; off data I did not build.</b> A closed-form
+        binormal cluster-separability <i>is</i> the open-set AUROC (the classical AUROC&nbsp;=&nbsp;&Phi;(d&prime;/&radic;2)
+        identity fed a frozen-embedding d&prime;): it reproduces the empirical detector at Pearson
+        <span class="accent">+0.995</span> on iNat2021-OSR and <span class="accent">+0.997</span> on
+        TerraIncognita, no detector trained &mdash; and it even predicts the two <i>sub-chance</i> clades
+        correctly (Coleoptera d&prime;&lt;0 &rarr; AUROC 0.37, empirical 0.38). On a 30-order corpus it holds
+        at +0.91 (MAE 0.04). The contribution is the composition and its empirical validation, not the
+        textbook identity.</li>
+      <li><b>It predicts clades nobody has sampled.</b> Margin measured on five continents forecasts the
+        unseen sixth's per-order difficulty at Spearman <span class="accent">+0.59</span> (permutation
+        p=2&times;10&#8315;&#8308;, CI over orders [0.37, 0.73]), with <span class="accent">+0.35</span>
+        signal <i>beyond</i> a taxon-identity lookup (p=0.005, positive in all 6 folds).</li>
+      <li><b>It is not a re-skin of accuracy.</b> The known closed-set&harr;open-set correlation is exactly
+        the effect I partial out &mdash; and signal remains underneath: net of a closed-set-accuracy ceiling,
+        margin holds partial Spearman <span class="accent">+0.31</span> (p=10&#8315;&sup2;&sup1;) and Fisher
+        ratio <span class="accent">+0.40</span> (p=10&#8315;&sup3;&#8310;) across 934 clade-cells / 359 clades
+        / 10 realm-groups / 3 backbones, surviving family-wise correction &mdash; while RankMe, the standard
+        label-free quality score, <b>anti-predicts</b> here (&minus;0.33). The honest drop from raw +0.65 to
+        +0.31 is the point.</li>
+      <li><b>It survives the leakage test that kills most such claims.</b> Against BioCLIP's literal
+        TreeOfLife-10M training manifest, 116 <i>genuinely out-of-training</i> species are detected at AUROC
+        <span class="accent">0.92</span>, and margin forecasts their per-species detectability at
+        <span class="accent">+0.92</span>.</li>
+      <li><b>It is a property of the representation, not a benchmark.</b> Holds across six realms,
+        order&rarr;family&rarr;genus, four backbones spanning two pretraining paradigms, and <b>birdsong
+        audio</b> &mdash; positive in 12 of 12 slices (sign test p=2&times;10&#8315;&#8308;).</li>
+      <li><b>On the open-set benchmark, honestly:</b> a parameter-free frozen-BioCLIP detector reproduces
+        Open-Insect's difficulty ordering &mdash; local moths hardest, non-local easier, non-moths easiest
+        &mdash; <b>monotonically in all three regions</b> (e.g. C-America AUROC 0.91 / 0.95 / 0.99). The
+        fine-grained per-clade prediction needs finer granularity than three regions afford; that is where
+        the 934-cell corpus earns its +0.91.</li>
+    </ul>
+
+    <h2>The integrity, up front</h2>
+    <ul class="findings">
+      <li><b>I killed my own favourite hypothesis</b> &mdash; that a single effective-dimension invariant
+        would unify <i>what to label</i> and <i>where to sample</i>. On real data the two axes correlate at
+        Spearman <span class="accent">&minus;0.06</span> (CI through zero); the strong coupling I first saw
+        was an ecological-fallacy artifact at iconic mega-groups that vanished at order resolution. The
+        decoupling makes the framework <i>stronger</i>: the pre-flight is irreducibly two-dimensional, the
+        two shortfalls genuinely non-redundant.</li>
+      <li><b>I caught my own leak.</b> A self-membership bug inflated a cross-modal estimator; its
+        faithfulness had collapsed to 0.42 until a leave-one-out fix restored it to 0.94, and I re-verified
+        the pilot headline held under the correction. A standing reasoning-bank of eight such caught traps
+        (single-outlier leverage, pseudoreplicated CIs, a moderator that failed a permutation test) backs
+        every headline.</li>
+    </ul>
+
+    <div class="sec-k">One question, three depths</div>
+    <h2>What it could become</h2>
+    <p class="body"><i>When, and why, is biological discovery predictable, and can that predictability be
+      exploited before any cost is paid?</i> Framed as value-of-information across the two shortfalls.
+      Honestly, the two legs are not equally proven: the <i>what-to-label</i> (Linnean) leg is nailed (+0.91
+      on our data, +0.99 off it); the <i>where-to-sample</i> (Wallacean) leg is promising but earlier (+0.59
+      cross-realm), and is exactly what the field trial below is built to settle.</p>
+    <div class="grid2">
+      <div class="depth">
+        <div class="ch">the law &amp; its limit</div>
+        <h3>The mechanism</h3>
+        <p>The empirical predictor is the result; the next rung is a label-free bound on achievable discovery
+          gain and the regime where targeting cannot help. Lead with the working law; treat the bound as the
+          rigorous follow-on, not the load-bearing claim.</p>
+      </div>
+      <div class="depth">
+        <div class="ch">guarantee</div>
+        <h3>Calibrated discovery</h3>
+        <p>A calibrated &ldquo;this is a new species&rdquo; under a budget, on the live BCI / CanopyRS loop,
+          benchmarked against the open-set insect benchmark.</p>
+      </div>
+      <div class="depth">
+        <div class="ch">causality</div>
+        <h3>The field trial</h3>
+        <p>A pre-registered, candidate-controlled botanist-queue randomized trial on the live BCI loop: does
+          acting on the pre-flight <i>cause</i> more discovery per human-hour? Powered by simulation
+          (~5,600 crowns/arm; +4.9 rare species at a 25% budget). Planned, with no external dependency to
+          start.</p>
+      </div>
+    </div>
+
+    <h2>Status</h2>
+    <p class="body">The deployment layer and the research are the <b>same object</b>: the continental-scale
+      prediction tooling being built for biodiversity teams runs on exactly the law this brief proves. The
+      rare value is shipping the pipeline <b>and</b> proving the law it runs on &mdash; most work does one end
+      or the other and stalls at the seam. The mechanism paper (the +0.99 result above) is drafted; a second
+      paper &mdash; the BCI deployment plus the pre-registered field trial &mdash; is drafted too.</p>
+
+    <div class="sec-k">For the curious</div>
+    <h2>Evidence appendix</h2>
+    <div class="tablewrap">
+    <table>
+      <thead><tr><th>Claim</th><th>Number</th><th>Source artifact</th></tr></thead>
+      <tbody>
+        <tr><td>Closed-form = open-set AUROC</td><td class="num">+0.91, MAE 0.04 (30 orders); +0.926 leave-one-species-out</td><td class="src">margin_theory_results.json, margin_theory_loo_results.json</td></tr>
+        <tr><td>Identity transfers off-data</td><td class="num">+0.995 iNat-OSR, +0.997 TerraIncognita, MAE 0.013&ndash;0.017</td><td class="src">binormal_identity_benchmarks_results.json</td></tr>
+        <tr><td>Cross-realm transfer</td><td class="num">+0.59 (p=2e-4, CI [0.37,0.73]); incremental +0.35 (p=0.005, 6/6)</td><td class="src">margin_transfer_ci.json, margin_incremental_results.json</td></tr>
+        <tr><td>De-confounded at scale</td><td class="num">partial +0.31 margin / +0.40 Fisher (FWER), 934 cells; RankMe &minus;0.33</td><td class="src">scale_law_pooled_results.json</td></tr>
+        <tr><td>Genuinely out-of-training</td><td class="num">AUROC 0.92; margin&rarr;detectability +0.92 (n=116, TreeOfLife-10M)</td><td class="src">truenovel/*</td></tr>
+        <tr><td>Detector + selection</td><td class="num">AUROC 0.64&ndash;0.68 (6 realms); novelty selection +16&ndash;24% vs random</td><td class="src">open_set_results.json, two_axis_results.json</td></tr>
+        <tr><td>Allocation value</td><td class="num">+5&ndash;7% species vs uniform; closes 37&ndash;45% of the oracle gap</td><td class="src">preflight_allocation_results.json</td></tr>
+        <tr><td>Open-Insect tier order</td><td class="num">monotone local&lt;non-local&lt;non-moth, 3/3 regions; per-clade &rho;+0.28 (n=9)</td><td class="src">results_openinsect_scaled.json</td></tr>
+        <tr><td>Decoupling (refuted bet)</td><td class="num">feature vs geographic eff-dim &minus;0.06 (CI&ni;0, dCor p=0.56)</td><td class="src">independence_results.json</td></tr>
+        <tr><td>Honest limit</td><td class="num">whole-genus-held-out AUROC drops to 0.58</td><td class="src">g2_truenovel_backbone_results.json</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="body" style="font-size:.98rem;color:var(--grey)">Lead the evidence story with the off-data
+      identity transfer and the de-confounded 934-cell law &mdash; they carry no leakage asterisk. The 0.92
+      out-of-training result is corroboration, not the anchor.</p>
+
+    <h2>Positioning</h2>
+    <p class="body">The work this builds on and is distinct from:</p>
+    <ul class="positioning">
+      <li><b>Open-Insect</b> (NeurIPS 2025 D&amp;B Spotlight; arXiv:2503.01691) &mdash; measures novel-species
+        detectability with 38 detectors; this makes it <i>predictable</i> a-priori from geometry.</li>
+      <li><b>BATIS</b> (AAAI 2026 oral; arXiv:2510.19749) &mdash; updates species-distribution models from
+        passive data and names &ldquo;guide sampling effort&rdquo; as future work; the Wallacean leg is that
+        guidance, and label-free where BATIS needs predictive uncertainty.</li>
+      <li><b>Shortfalls framing</b> &mdash; the established 2015 formulation, and the <i>Nature Reviews
+        Biodiversity</i> 2025 shortfalls review.</li>
+      <li><b>Distinct from:</b> the closed-set&harr;open-set correlation objection (ICLR 2022 &mdash; answered
+        net-of-accuracy and with a mechanism, not a correlation); closed-set transferability scores (CVPR
+        2022 &mdash; open-set novelty is not recoverable from them); RankMe (ICML 2023 &mdash; anti-predicts
+        here); iterative range active learning (NeurIPS 2023 &mdash; this is one-shot, label-free,
+        novel-species). BioCLIP-2 / Perch-2.0 <i>observe</i> separability in species embeddings; this turns
+        it into a predictive value-of-information signal across both shortfalls.</li>
+    </ul>
+
+    <footer>
+      <a class="backlink" href="../">&uarr;&nbsp;all talks</a><br>
+      Wietze Suijker &middot; <a href="mailto:wietze.suijker@mila.quebec">wietze.suijker@mila.quebec</a><br>
+      Every number reproduces from committed pilot scripts.
+    </footer>
+
+  </main>
+</body>
+</html>
