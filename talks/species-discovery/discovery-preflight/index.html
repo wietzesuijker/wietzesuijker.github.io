@@ -259,6 +259,21 @@
     </div>
   </section>
 
+  <!-- retrain: the biggest deployment lever -->
+  <section class="slide">
+    <h2><span class="kick">speciesfirst &middot; the biggest lever</span>Teach the embedding your canopy, then re-select</h2>
+    <div class="body">
+      <div class="stats">
+        <div class="stat"><div class="n accent">+54%</div><div class="l">more <b>rare species</b> for the same expert budget</div><div class="s">79 &rarr; 122 of 157 rare species &middot; 520-label budget, paired over 16 seeds</div></div>
+        <div class="stat"><div class="n">~90%</div><div class="l">of that gain from a single retrain <b>mid-flight</b></div><div class="s">retrain at &asymp;160 labels (+49%); no chicken-and-egg, no waiting to finish</div></div>
+        <div class="stat"><div class="n" style="color:var(--clay)">0</div><div class="l">rare species <b>seen</b> in fine-tuning</div><div class="s">train on common only, so the rare-tail lift is honest transfer</div></div>
+      </div>
+      <div class="quote" style="margin-top:3.2vh">Pl@ntNet's embedding learned <b>ground-level leaves and flowers</b>; our crowns are <b>tops from above</b>.
+        Cross-entropy on the <b class="accent">last few blocks</b> of the frozen backbone, re-embed everything, keep selecting on the sharper space.
+        <span style="color:var(--grey);font-size:2.3vh"> It sharpens what is <i>familiar</i> so the unfamiliar stands out; it does not teach a lineage it never saw. The retrain handoff to Pl@ntNet is in flight.</span></div>
+    </div>
+  </section>
+
   <!-- 9b: why the engine travels -->
   <section class="slide">
     <h2><span class="kick">Why the engine travels</span>One pre-flight, every modality a biodiversity lab monitors</h2>
