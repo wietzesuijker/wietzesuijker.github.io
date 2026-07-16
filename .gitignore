@@ -3,3 +3,13 @@ _site/
 .sass-cache/
 .jekyll-metadata
 .jekyll-cache
+
+# OS / editor cruft
+.DS_Store
+
+# Tooling
+.claude-flow/
+node_modules/
+
+# Deck PDF exports (regenerable from HTML via puppeteer)
+talks/**/*.pdf
