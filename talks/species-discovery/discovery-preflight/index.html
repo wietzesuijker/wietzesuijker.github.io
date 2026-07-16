@@ -73,10 +73,12 @@
   .chip.good { background:color-mix(in srgb,var(--forest) 13%,#fff); color:var(--forest-deep); }
   .chip.bad  { background:color-mix(in srgb,var(--clay) 15%,#fff);  color:var(--clay); }
   /* appendix */
-  .appx { width:92%; font-size:3.1vh; line-height:1.55; text-align:left; }
-  .appx-lead { font-size:3.5vh; line-height:1.4; color:var(--forest); font-weight:700; margin:0 0 2vh; }
-  .appx ul { font-size:3.0vh; }
+  .appx { width:92%; font-size:2.7vh; line-height:1.5; text-align:left; }
+  .appx-lead { font-size:3.0vh; line-height:1.38; color:var(--forest); font-weight:700; margin:0 0 1.3vh; }
+  .appx ul { font-size:2.7vh; margin:0; }
   .appx .muted { color:var(--grey); font-weight:400; }
+  .appx code { font-family:var(--mono); font-size:0.86em; background:#eef1f0; padding:0 .3em; border-radius:3px; color:var(--forest-deep); }
+  .appx li { margin:0.7vh 0; }
   .appx-fig { display:flex; gap:3vw; width:94%; align-items:center; }
   .appx-fig img { flex:0 0 46%; max-width:46%; object-fit:contain; }
   .appx-fig .appx { width:auto; flex:1; }
@@ -215,6 +217,36 @@
     </div>
   </section>
 
+  <!-- labelfirst internals -->
+  <section class="slide">
+    <h2><span class="kick">labelfirst &middot; the engine</span>A numpy-core, provenance-first selection library</h2>
+    <div class="body"><div class="appx">
+      <div class="appx-lead">Selection and audit run with <b>zero deep-learning dependencies</b>; torch and pyarrow load lazily, only when you embed or read parquet.</div>
+      <ul>
+        <li><b>Columnar embeddings I/O.</b> <code>key, embedding</code> parquet, read straight from the Arrow value buffer (skips the per-row Python list that triples peak RAM); every row L2-normalized at load, so <code>X @ X&#7488;</code> is cosine.</li>
+        <li><b>16 strategies behind one Protocol.</b> <code>select(X, labeled, k)</code> dispatched from a registry; default <b>CoreSet</b> (greedy k-center, cosine). One <code>select_batches</code> call gates, selects, then KMeans-batches for the labeller.</li>
+        <li><b>The pre-flight is a metric, not a model.</b> kNN leave-one-out separability &rarr; GO / borderline / skip; the open-set arm computes <b>AUROC = &Phi;(d&prime;/&radic;2)</b> from LOO centroid scores, then reports the <i>realized</i> FPR/TPR as a Gaussian-fit honesty check.</li>
+        <li><b>Every run is auditable.</b> a <code>RunRecord</code> stamps strategy, seed, embedding <b>SHA-256</b>, library and Python versions, timestamp; loaders fail loudly on schema drift.</li>
+        <li><b>A pre-registered harness.</b> frozen spec, Holm&ndash;Bonferroni FWER, a Wilcoxon power-floor that refuses a PASS when seeds can't clear 1/2&#8319;, and a synthetic imbalance self-test where balanced data <i>must</i> show no win.</li>
+      </ul>
+    </div></div>
+  </section>
+
+  <!-- speciesfirst internals -->
+  <section class="slide">
+    <h2><span class="kick">speciesfirst &middot; the BCI deployment</span>A governed, conformal curation loop</h2>
+    <div class="body"><div class="appx">
+      <div class="appx-lead">An auditable loop over real crowns, <b>embed &rarr; conformal-tier &rarr; Labelbox &rarr; WCVP handoff</b>, on a commit-pinned labelfirst for reproducible builds.</div>
+      <ul>
+        <li><b>Conformal tiering with a genus fallback.</b> cross-conformal (K=5) prediction sets split crowns into <i>low-priority</i> (small set, kept as a suggestion, no expert) vs <i>flag-for-review</i>; species&rarr;genus&rarr;defer, each level held to 1&minus;&alpha; coverage; empty sets (out-of-support novelty) rank <b>first</b>.</li>
+        <li><b>Two-tier trust.</b> only verified (&ldquo;Done&rdquo;) labels grow ground truth; in-review labels steer selection but stay out of the pool. <code>merge_labels</code> refuses labels for crowns with no embedding and never overwrites.</li>
+        <li><b>Labelbox via labelpull.</b> export + flatten; <b>batch = cluster</b>, and clusters below a cohesion floor are dropped, recorded in the push plan, never silently.</li>
+        <li><b>WCVP handoff to Pl@ntNet.</b> Kew's checklist fixes synonym/rank noise (33% of BCI labels), out-of-range mislabels, and rare-but-weed; deterministic JSON. Crown geometry read from GeoPackages with <b>stdlib <code>sqlite3</code> + <code>struct</code></b> &mdash; zero geo deps.</li>
+        <li><b>Leakage-first evaluation.</b> a label-free backtest where the directed selector must beat <i>every</i> random seed, plus a genus-holdout split so a species has no congener prototype to leak from.</li>
+      </ul>
+    </div></div>
+  </section>
+
   <!-- 9 -->
   <section class="slide">
     <h2>The recipe on real crowns roughly doubles skill</h2>
@@ -251,22 +283,7 @@
     </div>
   </section>
 
-  <!-- 10 -->
-  <section class="slide">
-    <h2>Novelty is not rarity &mdash; but it predicts it</h2>
-    <div class="body">
-      <div class="lead">The field wants the <b>rare</b> species. We select on <b>novelty</b>, which we can measure
-        without labels. Do they line up?</div>
-      <div class="stats" style="margin-top:3.6vh">
-        <div class="stat"><div class="n accent">+0.43</div><div class="l">rarity predicts novelty</div><div class="s">even controlling for flower and fruit</div></div>
-        <div class="stat"><div class="n">~7%</div><div class="l">novelty explained by organ</div><div class="s">flower / fruit / foliage / bare</div></div>
-      </div>
-      <div class="cap" style="margin-top:3vh">So the label-free novelty score is the best available proxy for the
-        rarity you cannot yet see &mdash; the question Pl@ntNet asked, and it holds.</div>
-    </div>
-  </section>
-
-  <!-- 16 -->
+  <!-- 13 -->
   <section class="slide">
     <h2>From correlation to cause: a ladder, not a leap</h2>
     <div class="body"><ul>
