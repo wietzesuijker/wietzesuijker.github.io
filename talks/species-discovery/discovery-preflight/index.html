@@ -146,8 +146,9 @@
       <div class="cap">The pre-flight is the <b class="accent"><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">inter-species margin</a></b>:
         how cleanly species clusters separate. It governs <i>both</i> feature-space tools (Spearman
         <b>+0.65</b> spotting, <b>+0.63</b> choosing). Effective dimension, how high-dimensional the cloud is,
-        governs neither (+0.22, +0.02). Net of closed-set accuracy the margin keeps <b>&rho;=+0.31</b>
-        (934 clade cells, FWER p&lt;1e&minus;20), so it is real signal, not a restatement of accuracy.</div>
+        governs neither (+0.22, +0.02). The obvious objection is that separability is just accuracy in
+        disguise; it survives the control. Net of closed-set accuracy the margin keeps <b>&rho;=+0.31</b>
+        (934 clade cells, FWER p&lt;1e&minus;20): real signal, not a restatement of accuracy.</div>
     </div>
   </section>
 
@@ -161,7 +162,9 @@
         outscores a random known) depends on <b class="accent">one thing</b>: how far the bells sit apart in
         their own standard deviations, the separation <b>d&prime;</b>. The identity
         <b>AUROC = &Phi;(d&prime;/&radic;2)</b> converts that gap straight into accuracy, exact, no fitting.
-        The margin <i>is</i> a measurement of d&prime;, so it forecasts discovery.</div>
+        That is the <i>mechanism</i>, not the evidence. The evidence is the forecast: d&prime; measured on
+        <b>known</b> species predicts detection of ones held out or absent from training (next slide),
+        and could have failed.</div>
     </div>
   </section>
 
@@ -172,7 +175,7 @@
       <img class="fig" src="figs/generalize.png" alt="cross-realm and cross-backbone generalization" style="max-height:58vh">
       <div class="cap">The margin forecasts per-order difficulty on a <b>continent it was never measured on</b>
         (+0.59, positive in all six folds), and on <b>species provably absent from the model's training set</b>
-        (pooled &rho; 0.95&ndash;0.99; binormal identity Pearson 0.995&ndash;0.998, across five backbones and all six realms).
+        (the forecast holds at pooled &rho; 0.95&ndash;0.99; the identity fits it to Pearson 0.995&ndash;0.998, across five backbones and all six realms).
         Backbone-robust and resolution-invariant (order/family/genus +0.65/+0.61/+0.62).</div>
     </div>
   </section>
