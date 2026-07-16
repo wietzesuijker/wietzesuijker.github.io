@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finding Life, Efficiently &middot; The Discovery Pre-flight</title>
+<style>
+  :root { --forest:#0F766E; --forest-deep:#0B544E; --ink:#15211D; --grey:#6b7280; --line:#e5e7eb;
+    --clay:#c1682f;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+    --s1:#5f7fb0; --s2:#5f9c66; --s3:#c08a56; --gold:#d29a2e; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; overflow:hidden;
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif; color:var(--ink);
+    background:#fff; -webkit-font-smoothing:antialiased; }
+  #deck { height:100vh; width:100vw; position:relative; }
+  .slide { position:absolute; inset:0; display:none; flex-direction:column; padding:4.5vh 6vw 7vh; }
+  .slide.active { display:flex; }
+  h2 { color:var(--forest); font-family:var(--serif); font-size:4.7vh; font-weight:700; letter-spacing:-0.01em; margin:0 0 0.4vh;
+    border-bottom:2px solid color-mix(in srgb,var(--forest) 45%,#fff); padding-bottom:1vh; }
+  h2 .kick { font-family:var(--mono); text-transform:uppercase; letter-spacing:.12em; font-size:1.9vh;
+    color:var(--grey); font-weight:700; display:block; margin-bottom:.6vh; border:0; }
+  .body { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+  .fig { max-width:92%; max-height:74vh; object-fit:contain; }
+  .cap { font-size:2.6vh; color:#444; text-align:center; margin-top:2vh; max-width:94%; line-height:1.45; }
+  ul { font-size:3.5vh; line-height:1.6; max-width:90%; }
+  li b { color:var(--ink); }
+  .lead { font-size:3.4vh; text-align:center; max-width:90%; line-height:1.5; }
+  footer { position:fixed; bottom:1.6vh; left:6vw; right:9vw; display:flex; justify-content:space-between;
+    font-family:var(--mono); text-transform:uppercase; letter-spacing:0.06em; font-size:1.7vh; color:var(--grey); }
+  #nav { position:fixed; bottom:4.4vh; right:2vw; z-index:9999; display:flex; gap:.7vw; }
+  #nav button { font-size:2.6vh; line-height:1; padding:.7vh 1.3vw; border:0; border-radius:7px; cursor:pointer;
+    background:var(--forest); color:#fff; opacity:.85; box-shadow:0 2px 8px rgba(0,0,0,.35); transition:opacity .15s; }
+  #nav button:hover { opacity:1; }
+  /* title */
+  .title { padding:0; }
+  .title .bg { position:absolute; inset:0; background:url('../assets/canopy.jpg') center/cover; }
+  .title .scrim { position:absolute; inset:0; background:linear-gradient(180deg, rgba(10,32,27,.5), rgba(10,32,27,.68)); }
+  .title .tt { position:relative; margin:auto; text-align:center; color:#fff; padding:0 8vw; }
+  .title h1 { font-family:var(--serif); font-size:7.4vh; font-weight:700; letter-spacing:-0.015em; margin:0 0 1.8vh; }
+  .title .sub { font-size:3.4vh; opacity:.93; margin-bottom:5vh; line-height:1.4; }
+  .title .who { font-size:3.6vh; } .title .meta { font-family:var(--mono); text-transform:uppercase; letter-spacing:0.09em; font-size:2.2vh; opacity:.85; margin-top:1.1vh; }
+  /* columns */
+  .cols { display:flex; gap:6vw; width:92%; justify-content:center; }
+  .col { flex:1; } .col h3 { color:var(--forest); font-size:3.5vh; margin:0 0 1.2vh; }
+  .col .it { font-style:italic; color:var(--grey); font-weight:400; font-size:2.6vh; }
+  .col ul { font-size:3.0vh; }
+  /* stats */
+  .stats { display:flex; gap:7vw; justify-content:center; align-items:flex-start; flex-wrap:wrap; }
+  .stat { text-align:center; } .stat .n { font-size:10.5vh; font-weight:800; color:var(--ink); line-height:1; }
+  .stat .n.accent { color:var(--forest); } .stat .l { font-size:2.7vh; margin-top:1.2vh; max-width:22ch; } .stat .s { font-size:2.0vh; color:var(--grey); }
+  .quote { background:color-mix(in srgb,var(--forest) 8%,#fff); border-left:5px solid var(--forest);
+    padding:2vh 2.6vw; font-size:2.8vh; margin-top:2vh; max-width:92%; }
+  .quote .q { font-style:italic; } .punch { font-weight:700; font-size:3.5vh; text-align:center; margin-top:2.4vh; }
+  .accent { color:var(--forest); font-weight:700; }
+  .cap a.ref, .lead a.ref, .body a.ref { color:var(--forest); text-decoration:underline; text-decoration-thickness:1.5px; text-underline-offset:2px; }
+  footer a { color:var(--forest); text-decoration:none; }
+  /* quadrant matrix */
+  .matrix { display:grid; grid-template-columns:12vw 1fr 1fr; grid-template-rows:auto minmax(0,1fr) minmax(0,1fr);
+    gap:1.1vh 1.3vw; width:82vw; height:66vh; align-items:stretch; }
+  .matrix .corner { }
+  .matrix .colh { display:flex; flex-direction:column; align-items:center; justify-content:flex-end; text-align:center; }
+  .matrix .colh .t { font-family:var(--serif); font-weight:700; font-size:2.9vh; color:var(--ink); }
+  .matrix .colh .s { font-family:var(--mono); font-size:1.9vh; color:var(--grey); text-transform:uppercase; letter-spacing:.06em; }
+  .matrix .rowh { display:flex; flex-direction:column; justify-content:center; gap:.4vh; }
+  .matrix .rowh .k { font-family:var(--mono); font-size:1.7vh; color:var(--grey); text-transform:uppercase; letter-spacing:.08em; }
+  .matrix .rowh .t { font-family:var(--serif); font-weight:700; font-size:2.7vh; line-height:1.15; }
+  .matrix .cell { border:1px solid var(--line); border-radius:12px; padding:1vh 1vw 1.4vh; display:flex; flex-direction:column;
+    background:#fff; box-shadow:0 3px 14px rgba(15,118,110,.05); min-height:0; overflow:hidden; }
+  .matrix .cell canvas { flex:1; width:100%; min-height:0; display:block; }
+  .chip { align-self:flex-start; font-size:2.0vh; font-weight:700; padding:.5vh 1.1vw; border-radius:999px; margin-top:.6vh; }
+  .chip.good { background:color-mix(in srgb,var(--forest) 13%,#fff); color:var(--forest-deep); }
+  .chip.bad  { background:color-mix(in srgb,var(--clay) 15%,#fff);  color:var(--clay); }
+  /* appendix */
+  .appx { width:92%; font-size:3.1vh; line-height:1.55; text-align:left; }
+  .appx-lead { font-size:3.5vh; line-height:1.4; color:var(--forest); font-weight:700; margin:0 0 2vh; }
+  .appx ul { font-size:3.0vh; }
+  .appx .muted { color:var(--grey); font-weight:400; }
+  .appx-fig { display:flex; gap:3vw; width:94%; align-items:center; }
+  .appx-fig img { flex:0 0 46%; max-width:46%; object-fit:contain; }
+  .appx-fig .appx { width:auto; flex:1; }
+  .appx p { margin:1vh 0; }
+</style>
+</head>
+<body>
+<div id="deck">
+
+  <!-- 0 -->
+  <section class="slide title active">
+    <div class="bg"></div><div class="scrim"></div>
+    <div class="tt">
+      <h1>Finding Life, Efficiently</h1>
+      <div class="sub">A training-free pre-flight for species discovery:<br>the geometry, the engine, the deployment.</div>
+      <div class="who">Wietze Suijker</div>
+      <div class="meta">AAAI 2027 &middot; labelfirst &middot; speciesfirst</div>
+    </div>
+  </section>
+
+  <!-- 1: framing -->
+  <section class="slide">
+    <h2>Two shortfalls, one question: where does attention pay off?</h2>
+    <div class="body">
+      <div class="cols">
+        <div class="col"><h3>Linnean <span class="it">(what exists)</span></h3>
+          <ul><li>most species still <b>unnamed</b></li><li>which observation to <b>label</b> next?</li></ul></div>
+        <div class="col"><h3>Wallacean <span class="it">(where they are)</span></h3>
+          <ul><li>most named species barely <b>mapped</b></li><li>where to <b>observe</b> next?</li></ul></div>
+      </div>
+      <div class="quote" style="margin-top:2.6vh">The binding constraint is <b>expert attention</b>. A
+        <b class="accent">training-free pre-flight</b>, computed from a small labelled reference set in a frozen
+        embedding, tests a priori where targeting beats random, before a label or field trip is spent.</div>
+    </div>
+  </section>
+
+  <!-- 2: QUADRANT -->
+  <section class="slide" id="quad-slide">
+    <h2>One ruler, two payoffs: the gaps between species</h2>
+    <div class="body">
+      <div class="matrix">
+        <div class="corner"></div>
+        <div class="colh"><span class="t">Species sit far apart</span><span class="s">wide gaps</span></div>
+        <div class="colh"><span class="t">Species overlap</span><span class="s">narrow gaps</span></div>
+
+        <div class="rowh"><span class="k">Task 1</span><span class="t">Spotting a<br>new species</span></div>
+        <div class="cell"><canvas data-task="spot" data-gaps="wide" data-seed="7"></canvas><span class="chip good">&#10003; newcomer stands out</span></div>
+        <div class="cell"><canvas data-task="spot" data-gaps="narrow" data-seed="14"></canvas><span class="chip bad">&#10007; newcomer hides among knowns</span></div>
+
+        <div class="rowh"><span class="k">Task 2</span><span class="t">Choosing what<br>to label</span></div>
+        <div class="cell"><canvas data-task="choose" data-gaps="wide" data-seed="7"></canvas><span class="chip good">&#10003; 3 picks &rarr; 3 species</span></div>
+        <div class="cell"><canvas data-task="choose" data-gaps="narrow" data-seed="14"></canvas><span class="chip bad">&#10007; 3 picks &rarr; same crowd</span></div>
+      </div>
+      <div class="cap"><span style="color:var(--gold);font-weight:700">&#9733;</span> new species &middot;
+        dashed = distance to nearest known &middot; ringed = the budget's picks.
+        <b>Wide gaps make both jobs easy; overlap breaks both at once.</b></div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="slide">
+    <h2>The ruler: gaps between species, not cloud size</h2>
+    <div class="body">
+      <img class="fig" src="figs/mechanism.png" alt="margin mechanism" style="max-height:60vh">
+      <div class="cap">The pre-flight is the <b class="accent"><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">inter-species margin</a></b>:
+        how cleanly species clusters separate. It governs <i>both</i> feature-space tools (Spearman
+        <b>+0.65</b> spotting, <b>+0.63</b> choosing). Effective dimension, how high-dimensional the cloud is,
+        governs neither (+0.22, +0.02). Net of closed-set accuracy the margin keeps <b>&rho;=+0.31</b>
+        (934 clade cells, FWER p&lt;1e&minus;20), so it is real signal, not a restatement of accuracy.</div>
+    </div>
+  </section>
+
+  <!-- 6: AUROC intuition -->
+  <section class="slide" id="bells-slide">
+    <h2>What "detectable" means: two bell curves and the gap between them</h2>
+    <div class="body">
+      <canvas id="bells" style="width:80vw;height:50vh;display:block"></canvas>
+      <div class="cap" style="max-width:88%">Give every observation a novelty score. <b>Known</b> species and
+        <b>novel</b> ones each form a bell curve. Detection quality (<b>AUROC</b> = the chance a random novel
+        outscores a random known) depends on <b class="accent">one thing</b>: how far the bells sit apart in
+        their own standard deviations, the separation <b>d&prime;</b>. The identity
+        <b>AUROC = &Phi;(d&prime;/&radic;2)</b> converts that gap straight into accuracy, exact, no fitting.
+        The margin <i>is</i> a measurement of d&prime;, so it forecasts discovery.</div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="slide">
+    <h2>It transfers off the data it was measured on</h2>
+    <div class="body">
+      <img class="fig" src="figs/generalize.png" alt="cross-realm and cross-backbone generalization" style="max-height:58vh">
+      <div class="cap">The margin forecasts per-order difficulty on a <b>continent it was never measured on</b>
+        (+0.59, positive in all six folds), and on <b>species provably absent from the model's training set</b>
+        (&rho; 0.95&ndash;0.99; binormal identity Pearson 0.995&ndash;0.998, across five backbones and all six realms).
+        Backbone-robust and resolution-invariant (order/family/genus +0.65/+0.61/+0.62).</div>
+    </div>
+  </section>
+
+  <!-- 8 -->
+  <section class="slide">
+    <h2>How close to real discovery? A graded boundary</h2>
+    <div class="body">
+      <div class="stats">
+        <div class="stat"><div class="n accent">0.92</div><div class="l">vs the <b>whole known fauna</b></div><div class="s">116 out-of-training species</div></div>
+        <div class="stat"><div class="n">0.65</div><div class="l">with a <b>congener</b> present</div><div class="s">a close relative in the reference set</div></div>
+        <div class="stat"><div class="n" style="color:var(--clay)">0.59</div><div class="l"><b>no congener</b>: whole genus held out</div><div class="s">a genuinely new lineage</div></div>
+      </div>
+      <div class="quote" style="margin-top:3.4vh">The portable claim is <b class="accent">graded-distance
+        detectability</b>. Novel lineages with no close relative are the hard case, and I say so: the standard
+        open-set headline is partly carried by near relatives. The margin forecasts the difficulty at every rung.</div>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="slide">
+    <h2>So the pre-flight is two-dimensional</h2>
+    <div class="body">
+      <img class="fig" src="figs/two_axis.png" alt="two decoupled axes" style="max-height:56vh">
+      <div class="cap">Feature-novelty wins <b>species</b> discovery (+20%) and barely moves coverage (+0.9%);
+        geographic coverage wins <b>places</b> (+77%) and barely moves species (+8%). A double dissociation:
+        each axis is a <b class="accent">specialist</b>, neither readable off the other. A complete pre-flight
+        needs both.</div>
+    </div>
+  </section>
+
+  <!-- 11 -->
+  <section class="slide">
+    <h2><span class="kick">From geometry to software</span>Two layers, one job</h2>
+    <div class="body">
+      <div class="cols">
+        <div class="col"><h3>labelfirst <span class="it">(the engine)</span></h3>
+          <ul><li>which photo to label next</li><li>the separability pre-flight: will smart picking beat random?</li><li>16 interchangeable strategies behind one call</li></ul></div>
+        <div class="col"><h3>speciesfirst <span class="it">(the BCI deployment)</span></h3>
+          <ul><li>tier by confidence, genus fallback</li><li>the Labelbox curation loop</li><li>the Pl@ntNet label handoff</li></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9 -->
+  <section class="slide">
+    <h2>The recipe on real crowns roughly doubles skill</h2>
+    <div class="body">
+      <img class="fig" src="figs/pipeline.png" alt="deployment recipe pipeline" style="max-height:56vh">
+      <div class="cap">On 3&thinsp;280 BCI crowns: the raw margin <b>picks the best embedding</b> without running the
+        experiment; inductive whitening then adds +0.09&ndash;0.12 AUROC. End to end, detection skill above chance
+        roughly <b class="accent">doubles (0.642 &rarr; 0.785)</b>. But whitening helps the <i>detector</i> and
+        <i>hurts</i> selection, so: whiten for detection, keep raw for selection.</div>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="slide">
+    <h2>Novelty is not rarity &mdash; but it predicts it</h2>
+    <div class="body">
+      <div class="lead">The field wants the <b>rare</b> species. We select on <b>novelty</b>, which we can measure
+        without labels. Do they line up?</div>
+      <div class="stats" style="margin-top:3.6vh">
+        <div class="stat"><div class="n accent">+0.43</div><div class="l">rarity predicts novelty</div><div class="s">even controlling for flower and fruit</div></div>
+        <div class="stat"><div class="n">~7%</div><div class="l">novelty explained by organ</div><div class="s">flower / fruit / foliage / bare</div></div>
+      </div>
+      <div class="cap" style="margin-top:3vh">So the label-free novelty score is the best available proxy for the
+        rarity you cannot yet see &mdash; the question Pl@ntNet asked, and it holds.</div>
+    </div>
+  </section>
+
+  <!-- 16 -->
+  <section class="slide">
+    <h2>From correlation to cause: a ladder, not a leap</h2>
+    <div class="body"><ul>
+      <li><b>Done:</b> a <b>leakage-free backtest</b> where high-priority cells out-discover low-priority ones
+        at equal effort, with a tripwire that fails the build if a held-out crown ever reaches a picker.</li>
+      <li><b>Next:</b> a candidate-controlled <b>botanist-queue trial</b>, where the labeller acts on exactly
+        what we serve, so there is no compliance gap and no third-party infrastructure.</li>
+      <li><b>Upside:</b> a randomized <b>bioblitz field trial</b>, once field logistics and approvals align.</li>
+    </ul></div>
+  </section>
+
+  <!-- 17 -->
+  <section class="slide">
+    <h2>Thank you</h2>
+    <div class="body">
+      <div class="lead" style="font-size:4.0vh">Finding life, efficiently: predict where discovery pays off,
+        <b class="accent">before you pay for it</b>.</div>
+      <div style="margin-top:4.4vh;text-align:center;font-size:3.0vh;line-height:1.7">
+        <b>the geometry</b> &mdash; a training-free margin, a closed-form detector, two decoupled axes<br>
+        <b>the engine</b> (labelfirst) &middot; <b>the deployment</b> (speciesfirst, on BCI)<br><br>
+        Wietze Suijker &middot; wietze.suijker@mila.quebec<br>
+        <span style="font-size:2.3vh;color:var(--grey)">Every number reproduces from committed scripts &middot; traitlab/labelfirst, traitlab/speciesfirst</span></div>
+    </div>
+  </section>
+
+
+</div>
+<footer><a href="../" onclick="event.stopPropagation()">&uarr;&nbsp;all talks</a><span>finding life, efficiently</span><span id="pageno"></span></footer>
+<div id="nav"><button id="prevbtn" aria-label="Previous slide" title="previous (&larr;)">&lsaquo;</button><button id="nextbtn" aria-label="Next slide" title="next (&rarr;)">&rsaquo;</button></div>
+
+<script>
+/* ---------- quadrant canvases ---------- */
+(function () {
+  const cvs = Array.from(document.querySelectorAll('#quad-slide canvas'));
+  const S1='#5f7fb0', S2='#5f9c66', S3='#c08a56', GOLD='#d29a2e', INK='#15211D';
+  const SPCOL=[S1,S2,S3];
+  const WIDE=[[0.24,0.30],[0.74,0.27],[0.52,0.76]], NARROW=[[0.44,0.47],[0.57,0.49],[0.50,0.61]];
+  const STAR_W=[0.85,0.66], STAR_N=[0.51,0.53];
+  function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+  function gauss(r){return r()+r()+r()-1.5;}
+  function build(gaps,seed){const r=mulberry32(seed),c=gaps==='wide'?WIDE:NARROW,rad=gaps==='wide'?0.055:0.125,pts=[];
+    c.forEach((ct,ci)=>{for(let i=0;i<9;i++)pts.push({x:ct[0]+gauss(r)*rad,y:ct[1]+gauss(r)*rad,sp:ci});});return{pts,centres:c};}
+  function fps(pts,k){const cx=pts.reduce((s,p)=>s+p.x,0)/pts.length,cy=pts.reduce((s,p)=>s+p.y,0)/pts.length;
+    let f=0,b=-1;pts.forEach((p,i)=>{const d=(p.x-cx)**2+(p.y-cy)**2;if(d>b){b=d;f=i;}});const ch=[f];
+    while(ch.length<k){let ca=-1,cb=-1;pts.forEach((p,i)=>{if(ch.includes(i))return;let md=Infinity;
+      ch.forEach(j=>{const d=(p.x-pts[j].x)**2+(p.y-pts[j].y)**2;if(d<md)md=d;});if(md>cb){cb=md;ca=i;}});ch.push(ca);}return ch;}
+  function star(ctx,cx,cy,rad){ctx.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2===0?rad:rad*0.44;
+    const x=cx+Math.cos(a)*rr,y=cy+Math.sin(a)*rr;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.closePath();
+    ctx.fillStyle=GOLD;ctx.fill();ctx.lineWidth=2;ctx.strokeStyle=INK;ctx.stroke();}
+  function draw(cv){
+    const task=cv.dataset.task,gaps=cv.dataset.gaps,seed=+cv.dataset.seed,dpr=window.devicePixelRatio||1;
+    const W=cv.clientWidth,H=cv.clientHeight;if(!W||!H)return;
+    cv.width=W*dpr;cv.height=H*dpr;const ctx=cv.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    const pad=Math.max(14,W*0.06),X=x=>pad+x*(W-2*pad),Y=y=>pad+y*(H-2*pad),R=Math.max(4,W*0.018);
+    const {pts,centres}=build(gaps,seed),picks=task==='choose'?fps(pts,3):[];
+    pts.forEach((p,i)=>{ctx.globalAlpha=(task==='choose'&&!picks.includes(i))?0.38:1;
+      ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R,0,7);ctx.fillStyle=SPCOL[p.sp];ctx.fill();ctx.globalAlpha=1;});
+    if(task==='choose')picks.forEach(i=>{const p=pts[i];ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R*1.9,0,7);
+      ctx.lineWidth=2.6;ctx.strokeStyle=INK;ctx.stroke();});
+    if(task==='spot'){const st=gaps==='wide'?STAR_W:STAR_N;let nc=centres[0],nb=Infinity;
+      centres.forEach(c=>{const d=(c[0]-st[0])**2+(c[1]-st[1])**2;if(d<nb){nb=d;nc=c;}});
+      ctx.save();ctx.setLineDash([6,6]);ctx.lineWidth=1.8;ctx.strokeStyle=INK;ctx.globalAlpha=.5;
+      ctx.beginPath();ctx.moveTo(X(st[0]),Y(st[1]));ctx.lineTo(X(nc[0]),Y(nc[1]));ctx.stroke();ctx.restore();
+      star(ctx,X(st[0]),Y(st[1]),R*1.9);}
+  }
+  window.__drawQuad=()=>cvs.forEach(draw);
+  if(window.ResizeObserver){const ro=new ResizeObserver(()=>window.__drawQuad());cvs.forEach(c=>ro.observe(c));}
+  window.addEventListener('resize',()=>window.__drawQuad());
+})();
+
+/* ---------- AUROC bell curves ---------- */
+(function () {
+  const cv=document.getElementById('bells'); if(!cv) return;
+  const FOREST='#0F766E', CLAY='#c1682f', INK='#15211D', GREY='#6b7280';
+  const MU_K=0.38, MU_N=0.62, SD=0.105;                 // d' = (MU_N-MU_K)/SD ~ 2.3
+  function pdf(x,mu){const z=(x-mu)/SD;return Math.exp(-0.5*z*z);}
+  function curve(ctx,X,Y,mu){ctx.beginPath();ctx.moveTo(X(0),Y(0));
+    for(let x=0;x<=1.0001;x+=0.005)ctx.lineTo(X(x),Y(pdf(x,mu)));ctx.lineTo(X(1),Y(0));ctx.closePath();}
+  function draw(){
+    const dpr=window.devicePixelRatio||1,W=cv.clientWidth,H=cv.clientHeight; if(!W||!H)return;
+    cv.width=W*dpr;cv.height=H*dpr;const ctx=cv.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+    const padX=W*0.07, padTop=H*0.20, base=H*0.82, peak=padTop;
+    const X=x=>padX+x*(W-2*padX), Y=v=>base-v*(base-peak);
+    // axis
+    ctx.strokeStyle=GREY;ctx.lineWidth=1.5;ctx.beginPath();ctx.moveTo(X(0),base);ctx.lineTo(X(1),base);ctx.stroke();
+    // filled bells (blend shows overlap = confusable region)
+    ctx.globalAlpha=0.55; curve(ctx,X,Y,MU_K); ctx.fillStyle=FOREST; ctx.fill();
+    curve(ctx,X,Y,MU_N); ctx.fillStyle=CLAY; ctx.fill(); ctx.globalAlpha=1;
+    ctx.lineWidth=2.5;
+    curve(ctx,X,Y,MU_K); ctx.strokeStyle=FOREST; ctx.stroke();
+    curve(ctx,X,Y,MU_N); ctx.strokeStyle=CLAY; ctx.stroke();
+    // mean verticals
+    ctx.setLineDash([5,5]);ctx.lineWidth=1.5;ctx.globalAlpha=.8;
+    [[MU_K,FOREST],[MU_N,CLAY]].forEach(([m,c])=>{ctx.strokeStyle=c;ctx.beginPath();ctx.moveTo(X(m),Y(pdf(m,m)));ctx.lineTo(X(m),base);ctx.stroke();});
+    ctx.setLineDash([]);ctx.globalAlpha=1;
+    // d' double arrow
+    const ay=peak+ (base-peak)*0.06;
+    ctx.strokeStyle=INK;ctx.fillStyle=INK;ctx.lineWidth=2;
+    ctx.beginPath();ctx.moveTo(X(MU_K),ay);ctx.lineTo(X(MU_N),ay);ctx.stroke();
+    [[X(MU_K),1],[X(MU_N),-1]].forEach(([px,dir])=>{ctx.beginPath();ctx.moveTo(px,ay);ctx.lineTo(px+dir*9,ay-6);ctx.lineTo(px+dir*9,ay+6);ctx.closePath();ctx.fill();});
+    // labels
+    const fs=Math.max(13,W*0.017);
+    ctx.font='700 '+fs+'px Georgia, serif';ctx.textAlign='center';
+    ctx.fillStyle=FOREST;ctx.fillText('known',X(MU_K-0.14),base-(base-peak)*0.62);
+    ctx.fillStyle=CLAY;ctx.fillText('novel',X(MU_N+0.14),base-(base-peak)*0.62);
+    ctx.fillStyle=INK;ctx.font='700 '+(fs*1.05)+'px ui-monospace, Menlo, monospace';
+    ctx.fillText("d′ ≈ 2.3  →  AUROC ≈ 0.95", (X(MU_K)+X(MU_N))/2, ay-fs*0.7);
+    ctx.fillStyle=GREY;ctx.font=(fs*0.92)+'px -apple-system, sans-serif';
+    ctx.fillText('novelty score  →', X(0.5), base+fs*1.7);
+  }
+  window.__drawBells=draw;
+  if(window.ResizeObserver)new ResizeObserver(draw).observe(cv);
+  window.addEventListener('resize',draw);
+})();
+
+/* ---------- deck nav ---------- */
+const slides = [...document.querySelectorAll('.slide')];
+let i = 0;
+const show = n => {
+  i = Math.max(0, Math.min(slides.length - 1, n));
+  slides.forEach((s, k) => s.classList.toggle('active', k === i));
+  document.getElementById('pageno').textContent = (i + 1) + ' / ' + slides.length;
+  try { history.replaceState(null, '', '#' + i); } catch (e) {}
+  if (slides[i].id === 'quad-slide') requestAnimationFrame(() => window.__drawQuad && window.__drawQuad());
+  if (slides[i].id === 'bells-slide') requestAnimationFrame(() => window.__drawBells && window.__drawBells());
+};
+addEventListener('keydown', e => {
+  if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { show(i + 1); e.preventDefault(); }
+  else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { show(i - 1); e.preventDefault(); }
+  else if (e.key === 'Home') show(0);
+  else if (e.key === 'End') show(slides.length - 1);
+  else if (e.key === 'f') document.documentElement.requestFullscreen?.();
+});
+addEventListener('click', e => { if (!e.target.closest('#nav') && !(window.getSelection && window.getSelection().toString())) show(i + 1); });
+document.getElementById('nextbtn').onclick = () => show(i + 1);
+document.getElementById('prevbtn').onclick = () => show(i - 1);
+show(parseInt(location.hash.replace('#','')) || 0);
+</script>
+</body>
+</html>
