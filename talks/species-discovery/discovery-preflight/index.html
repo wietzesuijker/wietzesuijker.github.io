@@ -111,7 +111,7 @@
       </div>
       <div class="quote" style="margin-top:2.6vh">The binding constraint is <b>expert attention</b>. A
         <b class="accent">training-free pre-flight</b>, computed from a small labelled reference set in a frozen
-        embedding, tests a priori where targeting beats random, before a label or field trip is spent.</div>
+        embedding, predicts where targeting beats random, before a label or field trip is spent.</div>
     </div>
   </section>
 
@@ -147,7 +147,7 @@
         how cleanly species clusters separate. It governs <i>both</i> feature-space tools (Spearman
         <b>+0.65</b> spotting, <b>+0.63</b> choosing). Effective dimension, how high-dimensional the cloud is,
         governs neither (+0.22, +0.02). The obvious objection is that separability is just accuracy in
-        disguise; it survives the control. Net of closed-set accuracy the margin keeps <b>&rho;=+0.31</b>
+        disguise; it survives the control. Even after accounting for closed-set accuracy, the margin still keeps <b>&rho;=+0.31</b>
         (934 clade cells, FWER p&lt;1e&minus;20): real signal, not a restatement of accuracy.</div>
     </div>
   </section>
@@ -174,9 +174,9 @@
     <div class="body">
       <img class="fig" src="figs/generalize.png" alt="cross-realm and cross-backbone generalization" style="max-height:58vh">
       <div class="cap">The margin forecasts per-order difficulty on a <b>continent it was never measured on</b>
-        (+0.59, positive in all six folds), and on <b>species provably absent from the model's training set</b>
-        (the forecast holds at pooled &rho; 0.95&ndash;0.99; the identity fits it to Pearson 0.995&ndash;0.998, across five backbones and all six realms).
-        Backbone-robust and resolution-invariant (order/family/genus +0.65/+0.61/+0.62).</div>
+        (+0.59, positive in all six held-out realms), and on <b>species provably absent from the model's training set</b>
+        (the forecast holds at pooled &rho; 0.95&ndash;0.99; the closed-form identity fits it to Pearson 0.995&ndash;0.998, across five backbones and all six realms).
+        Backbone-robust and stable across taxonomic levels (order/family/genus +0.65/+0.61/+0.62).</div>
     </div>
   </section>
 
@@ -189,8 +189,7 @@
         <div class="stat"><div class="n">0.65</div><div class="l">with a <b>congener</b> present</div><div class="s">a close relative in the reference set</div></div>
         <div class="stat"><div class="n" style="color:var(--clay)">0.59</div><div class="l"><b>no congener</b>: whole genus held out</div><div class="s">a genuinely new lineage</div></div>
       </div>
-      <div class="quote" style="margin-top:3.4vh">The portable claim is <b class="accent">graded-distance
-        detectability</b>. Novel lineages with no close relative are the hard case, and I say so: the standard
+      <div class="quote" style="margin-top:3.4vh">The portable claim: <b class="accent">the closer a known relative sits, the easier the find</b>. Novel lineages with no close relative are the hard case, and I say so: the standard
         open-set headline is partly carried by near relatives. The margin forecasts the difficulty at every rung.</div>
     </div>
   </section>
@@ -201,7 +200,7 @@
     <div class="body">
       <img class="fig" src="figs/two_axis.png" alt="two decoupled axes" style="max-height:56vh">
       <div class="cap">Feature-novelty wins <b>species</b> discovery (+20%) and barely moves coverage (+0.9%);
-        geographic coverage wins <b>places</b> (+77%) and barely moves species (+8%). A double dissociation:
+        geographic coverage wins <b>places</b> (+77%) and barely moves species (+8%). Two independent effects:
         each axis is a <b class="accent">specialist</b>, neither readable off the other. A complete pre-flight
         needs both.</div>
     </div>
@@ -272,7 +271,7 @@
         <div class="stat"><div class="n" style="color:var(--clay)">0</div><div class="l" style="max-width:27ch">rare species <b>shown</b><br>during the retrain</div><div class="s">we fine-tune on common species only, so the +54% rare-tail lift is honest transfer, not memorized</div></div>
       </div>
       <div class="quote" style="margin-top:3.2vh">Pl@ntNet's embedding learned <b>ground-level leaves and flowers</b>; our crowns are <b>tops from above</b>.
-        Cross-entropy on the <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/adapt.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b class="accent">last few blocks</b></a> of the frozen backbone, re-embed everything, keep selecting on the sharper space.
+        Fine-tune just the <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/adapt.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b class="accent">last few blocks</b></a> of the frozen backbone (cross-entropy loss), re-embed everything, then keep selecting in the sharper space.
         <span style="color:var(--grey);font-size:2.3vh"> It sharpens what is <i>familiar</i> so the unfamiliar stands out; it does not teach a lineage it never saw. The retrain handoff to Pl@ntNet is in flight.</span></div>
     </div>
   </section>
@@ -307,7 +306,7 @@
     <h2>From correlation to cause: a ladder, not a leap</h2>
     <div class="body"><ul>
       <li><b>Done:</b> a <b>leakage-free backtest</b> where high-priority cells out-discover low-priority ones
-        at equal effort, with a tripwire that fails the build if a held-out crown ever reaches a picker.</li>
+        at equal effort, with an automatic check that stops the run if a held-out crown ever reaches the selector.</li>
       <li><b>Next:</b> a candidate-controlled <b>botanist-queue trial</b>, where the labeller acts on exactly
         what we serve, so there is no compliance gap and no third-party infrastructure.</li>
       <li><b>Upside:</b> a randomized <b>bioblitz field trial</b>, once field logistics and approvals align.</li>
