@@ -220,7 +220,7 @@
       <div class="appx-lead">We fixed the pass/fail test <i>before</i> seeing any result &mdash; so we couldn't fool ourselves into a win.</div>
       <ul>
         <li>The rule, locked in advance: a standard significance test on per-run scores, plus a 10,000-resample confidence interval that must exclude zero, corrected for testing many things at once.</li>
-        <li><b>Why 8 runs:</b> with all 8 pointing the same way, the math can't score better than 1-in-256 <span class="muted">(p &asymp; 0.004)</span> &mdash; enough margin to survive the correction; 5 runs wouldn't. We got all 8 positive, on 3 different models.</li>
+        <li><b>Why 8 runs:</b> with all 8 pointing the same way, the math can't score better than 1-in-256 <span class="muted">(p &asymp; 0.004)</span> &mdash; enough margin to survive the correction; 5 runs wouldn't. We got all 8 positive on our main model; it replicated on two more.</li>
         <li><b>The mistake we keep on the slide:</b> an early &ldquo;our picker trains a better model&rdquo; win was really a <b>25&ndash;29% data leak</b> &mdash; the picker had peeked at the test crowns. Re-run honestly: <b>no picker dominates</b>. We added a <b>tripwire that fails the build</b> if a held-out crown ever reaches a picker again.</li>
       </ul>
     </div></div>
