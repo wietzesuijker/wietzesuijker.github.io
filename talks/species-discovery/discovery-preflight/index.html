@@ -142,8 +142,8 @@
   <section class="slide">
     <h2>The ruler: gaps between species, not cloud size</h2>
     <div class="body">
-      <img class="fig" src="figs/mechanism.png" alt="margin mechanism" style="max-height:60vh">
-      <div class="cap">The pre-flight is the <b class="accent"><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">inter-species margin</a></b>:
+      <img class="fig" src="figs/mechanism.png" alt="margin mechanism" style="max-height:68vh">
+      <div class="cap" style="font-size:2.3vh">The pre-flight is the <b class="accent"><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">inter-species margin</a></b>:
         how cleanly species clusters separate. It governs <i>both</i> feature-space tools (Spearman
         <b>+0.65</b> spotting, <b>+0.63</b> choosing). Effective dimension, how high-dimensional the cloud is,
         governs neither (+0.22, +0.02). The obvious objection is that separability is just accuracy in
@@ -267,9 +267,9 @@
     <h2><span class="kick">speciesfirst &middot; the biggest lever</span>Teach the embedding your canopy, then re-select</h2>
     <div class="body">
       <div class="stats">
-        <div class="stat"><div class="n accent">+54%</div><div class="l">more <b>rare species</b> for the same expert budget</div><div class="s">79 &rarr; 122 of 157 rare species &middot; 520-label budget, paired over 16 seeds</div></div>
-        <div class="stat"><div class="n">~90%</div><div class="l">of that gain from a single retrain <b>mid-flight</b></div><div class="s">retrain at &asymp;160 labels (+49%); no chicken-and-egg, no waiting to finish</div></div>
-        <div class="stat"><div class="n" style="color:var(--clay)">0</div><div class="l">rare species <b>seen</b> in fine-tuning</div><div class="s">train on common only, so the rare-tail lift is honest transfer</div></div>
+        <div class="stat"><div class="n accent">+54%</div><div class="l" style="max-width:27ch">more <b>rare species</b><br>for the same expert budget</div><div class="s">79 &rarr; 122 of 157 rare species &middot; 520-label budget, paired over 16 seeds</div></div>
+        <div class="stat"><div class="n">~90%</div><div class="l" style="max-width:27ch">of that lift from one<br><b>mid-flight</b> retrain</div><div class="s">retrain once at &asymp;160 labels (+49% on its own); no waiting to finish</div></div>
+        <div class="stat"><div class="n" style="color:var(--clay)">0</div><div class="l" style="max-width:27ch">rare species <b>shown</b><br>during the retrain</div><div class="s">we fine-tune on common species only, so the +54% rare-tail lift is honest transfer, not memorized</div></div>
       </div>
       <div class="quote" style="margin-top:3.2vh">Pl@ntNet's embedding learned <b>ground-level leaves and flowers</b>; our crowns are <b>tops from above</b>.
         Cross-entropy on the <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/adapt.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b class="accent">last few blocks</b></a> of the frozen backbone, re-embed everything, keep selecting on the sharper space.
@@ -284,20 +284,21 @@
       <div class="cols">
         <div class="col"><h3>Runs today <span class="it">(measured)</span></h3>
           <ul>
-            <li><b>Tree crowns:</b> deployed on real BCI drone crowns; retrain handoff in flight</li>
-            <li><b>Birdsong, insects, aerial:</b> one chance-anchored line,
-              <b class="accent">AUROC &asymp; 0.32&middot;sep + 0.49 (R&sup2;=0.96)</b>, across six data types</li>
+            <li><b>Tree crowns:</b> measured on real BCI drone crowns; retrain handoff in flight</li>
+            <li><b>Birdsong, insects, aerial:</b> the same species-gap ruler predicts detection accuracy on
+              <b class="accent">one straight line, across six data types</b>
+              <span style="color:var(--grey);font-size:2.4vh">(AUROC &asymp; 0.32&times;separability + 0.49, R&sup2;=0.96)</span></li>
           </ul>
         </div>
-        <div class="col"><h3>Same shape, one line to test <span class="it">(candidate)</span></h3>
+        <div class="col"><h3>Same recipe, not yet run <span class="it">(candidate)</span></h3>
           <ul>
             <li>UAV tree ID, insect camera-traps, remote-sensing backbone selection</li>
-            <li>same expert bottleneck, same frozen-embedding geometry; the modality is proven, the dataset is a manifest away</li>
+            <li>same bottleneck (expert time), same frozen-embedding geometry; a dataset manifest away from a test</li>
           </ul>
         </div>
       </div>
       <div class="quote" style="margin-top:2.2vh">The binding constraint is the same everywhere: <b>1&ndash;20 min a photo, more pictures than botanists</b>.
-        <span style="color:var(--grey);font-size:2.3vh"> The detection pre-flight is modality-general; the label-selection win is measured on imagery, not yet on audio.</span></div>
+        <span style="color:var(--grey);font-size:2.3vh"> Detection travels to audio (birdsong AUROC 0.865); the selection-beats-random win is imagery-only so far.</span></div>
     </div>
   </section>
 
