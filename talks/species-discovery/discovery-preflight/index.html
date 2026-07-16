@@ -170,7 +170,7 @@
       <img class="fig" src="figs/generalize.png" alt="cross-realm and cross-backbone generalization" style="max-height:58vh">
       <div class="cap">The margin forecasts per-order difficulty on a <b>continent it was never measured on</b>
         (+0.59, positive in all six folds), and on <b>species provably absent from the model's training set</b>
-        (&rho; 0.95&ndash;0.99; binormal identity Pearson 0.995&ndash;0.998, across five backbones and all six realms).
+        (&rho; 0.89&ndash;1.00; binormal identity Pearson 0.995&ndash;0.998, across five backbones and all six realms).
         Backbone-robust and resolution-invariant (order/family/genus +0.65/+0.61/+0.62).</div>
     </div>
   </section>
@@ -221,9 +221,33 @@
     <div class="body">
       <img class="fig" src="figs/pipeline.png" alt="deployment recipe pipeline" style="max-height:56vh">
       <div class="cap">On 3&thinsp;280 BCI crowns: the raw margin <b>picks the best embedding</b> without running the
-        experiment; inductive whitening then adds +0.09&ndash;0.12 AUROC. End to end, detection skill above chance
+        experiment; whitening the survey batch then adds +0.09&ndash;0.12 AUROC. End to end, detection skill above chance
         roughly <b class="accent">doubles (0.642 &rarr; 0.785)</b>. But whitening helps the <i>detector</i> and
         <i>hurts</i> selection, so: whiten for detection, keep raw for selection.</div>
+    </div>
+  </section>
+
+  <!-- 9b: why the engine travels -->
+  <section class="slide">
+    <h2><span class="kick">Why the engine travels</span>One pre-flight, every modality a biodiversity lab monitors</h2>
+    <div class="body">
+      <div class="cols">
+        <div class="col"><h3>Runs today <span class="it">(measured)</span></h3>
+          <ul>
+            <li><b>Tree crowns:</b> deployed on real BCI drone crowns; retrain handoff in flight</li>
+            <li><b>Birdsong, insects, aerial:</b> one chance-anchored line,
+              <b class="accent">AUROC &asymp; 0.32&middot;sep + 0.49 (R&sup2;=0.96)</b>, across six data types</li>
+          </ul>
+        </div>
+        <div class="col"><h3>Same shape, one line to test <span class="it">(candidate)</span></h3>
+          <ul>
+            <li>UAV tree ID, insect camera-traps, remote-sensing backbone selection</li>
+            <li>same expert bottleneck, same frozen-embedding geometry; the modality is proven, the dataset is a manifest away</li>
+          </ul>
+        </div>
+      </div>
+      <div class="quote" style="margin-top:2.2vh">The binding constraint is the same everywhere: <b>1&ndash;20 min a photo, more pictures than botanists</b>.
+        <span style="color:var(--grey);font-size:2.3vh"> The detection pre-flight is modality-general; the label-selection win is measured on imagery, not yet on audio.</span></div>
     </div>
   </section>
 
