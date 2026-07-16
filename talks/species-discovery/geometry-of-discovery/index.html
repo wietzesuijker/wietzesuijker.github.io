@@ -217,7 +217,9 @@
       </div>
       <div class="quote" style="margin-top:3.5vh">The random-held-out proxy scored <b>0.73</b> &mdash; it was <i>understating</i>.
         On species the foundation model has never seen, the detector holds and the pre-flight still forecasts
-        which ones it will find.
+        which ones it will find. And it isn&rsquo;t a BioCLIP quirk: re-run on a <b>label-free</b> backbone
+        (DINOv3, n=150, no species labels &rarr; nothing to leak), the per-species forecast holds even sharper at
+        <b class="accent">+0.988</b>.
         <span style="color:var(--grey);font-size:2.5vh;display:block;margin-top:1.2vh">Caveat: this is broad cross-fauna detection (novel vs the whole known fauna), an easier regime
         than within-clade congeners (0.58&ndash;0.66). The two bracket the difficulty range.</span></div>
     </div>
