@@ -83,6 +83,26 @@
   .appx-fig img { flex:0 0 46%; max-width:46%; object-fit:contain; }
   .appx-fig .appx { width:auto; flex:1; }
   .appx p { margin:1vh 0; }
+  /* benchmark bars */
+  .bars { display:flex; flex-direction:column; gap:1.15vh; }
+  .brow { display:grid; grid-template-columns:14ch 1fr 7ch; align-items:center; gap:1vw; }
+  .brow .bl { font-size:2.4vh; font-weight:600; text-align:right; color:var(--ink); }
+  .brow .bl .bt, .bv .bt { font-family:var(--mono); font-size:1.5vh; text-transform:uppercase; letter-spacing:.05em;
+    color:var(--grey); font-weight:700; margin-left:.4ch; }
+  .btrack { position:relative; height:3.0vh; background:#f3f4f6; border-radius:5px; }
+  .btrack::before { content:""; position:absolute; left:50%; top:-0.4vh; bottom:-0.4vh; width:2px; background:var(--grey); opacity:.55; }
+  .btrack .bar { position:absolute; top:0; bottom:0; border-radius:4px; }
+  .btrack .bar.pos { background:var(--forest); }
+  .btrack .bar.neg { background:var(--clay); }
+  .btrack .bar.ns  { background:#9aa3ab; }
+  .brow .bv { font-size:2.4vh; font-weight:800; color:var(--forest); }
+  .brow .bv.muted { color:var(--grey); font-weight:700; }
+  table.mini { border-collapse:collapse; font-size:2.3vh; width:100%; }
+  table.mini th { font-family:var(--mono); font-size:1.7vh; text-transform:uppercase; letter-spacing:.05em;
+    color:var(--grey); font-weight:700; padding:.5vh .8vw; border-bottom:2px solid var(--line); text-align:center; }
+  table.mini td { padding:.55vh .8vw; text-align:center; border-bottom:1px solid var(--line); }
+  table.mini td:first-child { text-align:left; font-weight:600; }
+  table.mini tr td:last-child { color:var(--forest); font-weight:800; }
 </style>
 </head>
 <body>
@@ -144,7 +164,7 @@
     <div class="body">
       <img class="fig" src="figs/mechanism.png" alt="margin mechanism" style="max-height:68vh">
       <div class="cap" style="font-size:2.3vh">The pre-flight is the <b class="accent"><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">inter-species margin</a></b>:
-        how cleanly species clusters separate. It governs <i>both</i> feature-space tools (Spearman
+        how cleanly species clusters separate. As a <i>gauge</i>, it forecasts how well <i>both</i> feature-space tasks go (Spearman
         <b>+0.65</b> spotting, <b>+0.63</b> choosing). Effective dimension, how high-dimensional the cloud is,
         governs neither (+0.22, +0.02). The obvious objection is that separability is just accuracy in
         disguise; it survives the control. Even after accounting for closed-set accuracy, the margin still keeps <b>&rho;=+0.31</b>
@@ -206,6 +226,32 @@
     </div>
   </section>
 
+  <!-- gauge vs selector: the keystone distinction -->
+  <section class="slide">
+    <h2><span class="kick">One geometry, two jobs</span>A gauge and a selector: never one for the other</h2>
+    <div class="body">
+      <div class="cols">
+        <div class="col"><h3>The gauge <span class="it">(should I target at all?)</span></h3>
+          <ul>
+            <li><b>one number</b> for the whole embedding</li>
+            <li><b>&Phi;(d&prime;/&radic;2)</b>: how far the score <i>clouds</i> sit apart</li>
+            <li>computed <b>before a single label</b>, from a small reference set</li>
+            <li>verdict: <b class="accent">GO</b> / borderline / skip</li>
+          </ul></div>
+        <div class="col"><h3>The selector <span class="it">(which observation next?)</span></h3>
+          <ul>
+            <li><b>one score per candidate point</b></li>
+            <li><b>CoreSet</b>: farthest from what's already labelled</li>
+            <li><b>margin</b>: distance to the nearest known cluster</li>
+            <li>output: <b class="accent">the ranked queue</b></li>
+          </ul></div>
+      </div>
+      <div class="quote" style="margin-top:2.4vh">The gauge decides <b>whether to play</b>; the selector decides <b>the move</b>. Same geometry, two different questions.
+        A distance between two <i>clouds</i> (the gauge) never scores a single <i>point</i> (the selector),
+        so <b class="accent">keep them apart</b>: the gauge tells you the map is worth working; the selector works it.</div>
+    </div>
+  </section>
+
   <!-- 11 -->
   <section class="slide">
     <h2><span class="kick">From geometry to software</span>Two layers, one job</h2>
@@ -216,6 +262,39 @@
         <div class="col"><h3>speciesfirst <span class="it">(the BCI deployment)</span></h3>
           <ul><li><a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/genus.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">tier by confidence, genus fallback</a></li><li>the <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/loop.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Labelbox curation loop</a></li><li>the <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/wcvp_export.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Pl@ntNet label handoff</a></li></ul></div>
       </div>
+    </div>
+  </section>
+
+  <!-- selector vs named baselines + gauge forecast -->
+  <section class="slide">
+    <h2><span class="kick">The selector, against named methods</span>Not just better than random: benchmarked, and forecast in advance</h2>
+    <div class="body">
+      <div class="cols" style="width:96%;gap:4vw;align-items:center">
+        <div class="col" style="flex:1.35">
+          <div style="font-size:2.3vh;color:var(--grey);margin-bottom:1vh">rare-species discovery vs random &middot; BCI DINOv3 ViT-L &middot; 8 seeds, per-label-budget AUC</div>
+          <div class="bars">
+            <div class="brow"><span class="bl">CoreSet <span class="bt">default</span></span><span class="btrack"><i class="bar pos" style="left:50%;width:35.8%"></i></span><span class="bv">+39%</span></div>
+            <div class="brow"><span class="bl">novel_margin</span><span class="btrack"><i class="bar pos" style="left:50%;width:34.8%"></i></span><span class="bv">+38%</span></div>
+            <div class="brow"><span class="bl">MaxHerding</span><span class="btrack"><i class="bar pos" style="left:50%;width:33.4%"></i></span><span class="bv">+37%</span></div>
+            <div class="brow"><span class="bl">ProbCover</span><span class="btrack"><i class="bar ns" style="left:50%;width:1.0%"></i></span><span class="bv muted">+1%<span class="bt">n.s.</span></span></div>
+            <div class="brow"><span class="bl">BADGE</span><span class="btrack"><i class="bar neg" style="left:46.1%;width:3.9%"></i></span><span class="bv muted">&minus;4%</span></div>
+            <div class="brow"><span class="bl">TypiClust</span><span class="btrack"><i class="bar neg" style="left:6.7%;width:43.3%"></i></span><span class="bv muted">&minus;48%</span></div>
+          </div>
+          <div style="font-size:2.0vh;color:var(--grey);margin-top:.8vh">zero line = random &middot; green beats random (p=0.004) &middot; typicality (TypiClust) and classifier-gradient diversity (BADGE) don't help the rare tail</div>
+        </div>
+        <div class="col" style="flex:1">
+          <h3 style="font-size:2.9vh">The gauge forecasts the payoff</h3>
+          <table class="mini">
+            <tr><th>backbone</th><th>gauge<br>sep&thinsp;%</th><th>actual<br>gain</th></tr>
+            <tr><td>DINOv3 ViT-L</td><td>52.3</td><td>+39%</td></tr>
+            <tr><td>DINOv2-g</td><td>53.2</td><td>+41%</td></tr>
+            <tr><td>PlantCLEF</td><td>57.8</td><td>+46%</td></tr>
+            <tr><td>PlantCLEF 2&times;2</td><td>59.5</td><td>+46%</td></tr>
+          </table>
+          <div style="font-size:2.1vh;color:var(--grey);margin-top:1vh">gauge up &rarr; benefit up, <b>Spearman&nbsp;=&nbsp;1.0</b>. Computed with no simulation, before a label.</div>
+        </div>
+      </div>
+      <div class="quote" style="margin-top:2vh;font-size:2.5vh">Honest read: <b>CoreSet, novel_margin and MaxHerding tie at the top</b> here (multiple-testing corrected), so the default is a real design choice the <i>audit</i> settles, not intuition. The win is <b class="accent">conditional on separability</b>: the gauge (left-hand backbones) says when it is worth playing at all.</div>
     </div>
   </section>
 
