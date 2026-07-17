@@ -209,7 +209,7 @@
         <div class="stat"><div class="n">0.65</div><div class="l">with a <b>congener</b> present</div><div class="s">a close relative in the reference set</div></div>
         <div class="stat"><div class="n" style="color:var(--clay)">0.59</div><div class="l"><b>no congener</b>: whole genus held out</div><div class="s">a genuinely new lineage</div></div>
       </div>
-      <div class="quote" style="margin-top:3.4vh">The portable claim: <b class="accent">the closer a known relative sits, the easier the find</b>. Novel lineages with no close relative are the hard case, and I say so: the standard
+      <div class="quote" style="margin-top:3.4vh"><b class="accent">The closer a known relative sits, the easier the find</b>. Novel lineages with no close relative are the hard case: the standard
         open-set headline is partly carried by near relatives. The margin forecasts the difficulty at every rung.</div>
     </div>
   </section>
@@ -294,7 +294,7 @@
           <div style="font-size:2.1vh;color:var(--grey);margin-top:1vh">gauge up &rarr; benefit up, <b>Spearman&nbsp;=&nbsp;1.0</b>. Computed with no simulation, before a label.</div>
         </div>
       </div>
-      <div class="quote" style="margin-top:2vh;font-size:2.5vh">Honest read: <b>CoreSet, novel_margin and MaxHerding tie at the top</b> here (multiple-testing corrected), so the default is a real design choice the <i>audit</i> settles, not intuition. The win is <b class="accent">conditional on separability</b>: the gauge (left-hand backbones) says when it is worth playing at all.</div>
+      <div class="quote" style="margin-top:2vh;font-size:2.5vh"><b>CoreSet, novel_margin and MaxHerding tie at the top</b> here (multiple-testing corrected), so the default is a design choice the <i>audit</i> settles, not intuition. The win is <b class="accent">conditional on separability</b>: the gauge (left-hand backbones) says when it is worth playing at all.</div>
     </div>
   </section>
 
@@ -306,7 +306,7 @@
       <ul>
         <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/io/embeddings.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Columnar embeddings I/O.</a></b> <code>key, embedding</code> parquet, read straight from the Arrow value buffer (skips the per-row Python list that triples peak RAM); every row L2-normalized at load, so <code>X @ X&#7488;</code> is cosine.</li>
         <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/strategies/__init__.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">16 strategies behind one Protocol.</a></b> <code>select(X, labeled, k)</code> dispatched from a registry; default <b>CoreSet</b> (greedy k-center, cosine). One <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/pipeline.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><code>select_batches</code></a> call gates, selects, then KMeans-batches for the labeller.</li>
-        <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">The pre-flight is a metric, not a model.</a></b> kNN leave-one-out separability &rarr; GO / borderline / skip; the open-set arm computes <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/binormal.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b>AUROC = &Phi;(d&prime;/&radic;2)</b></a> from LOO centroid scores, then reports the <i>realized</i> FPR/TPR as a Gaussian-fit honesty check.</li>
+        <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">The pre-flight is a metric, not a model.</a></b> kNN leave-one-out separability &rarr; GO / borderline / skip; the open-set arm computes <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/binormal.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b>AUROC = &Phi;(d&prime;/&radic;2)</b></a> from LOO centroid scores, then reports the <i>realized</i> FPR/TPR as a Gaussian-fit check.</li>
         <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/io/queue.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Every run is auditable.</a></b> a <code>RunRecord</code> stamps strategy, seed, embedding <b>SHA-256</b>, library and Python versions, timestamp; loaders fail loudly on schema drift.</li>
         <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/audit/__init__.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">A pre-registered harness.</a></b> frozen spec, Holm&ndash;Bonferroni FWER, a <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/power.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Wilcoxon power-floor</a> that refuses a PASS when seeds can't clear 1/2&#8319;, and a synthetic imbalance self-test where balanced data <i>must</i> show no win.</li>
       </ul>
@@ -347,7 +347,7 @@
       <div class="stats">
         <div class="stat"><div class="n accent">+54%</div><div class="l" style="max-width:27ch">more <b>rare species</b><br>for the same expert budget</div><div class="s">79 &rarr; 122 of 157 rare species &middot; 520-label budget, paired over 16 seeds</div></div>
         <div class="stat"><div class="n">~90%</div><div class="l" style="max-width:27ch">of that lift from one<br><b>mid-flight</b> retrain</div><div class="s">retrain once at &asymp;160 labels (+49% on its own); no waiting to finish</div></div>
-        <div class="stat"><div class="n" style="color:var(--clay)">0</div><div class="l" style="max-width:27ch">rare species <b>shown</b><br>during the retrain</div><div class="s">we fine-tune on common species only, so the +54% rare-tail lift is honest transfer, not memorized</div></div>
+        <div class="stat"><div class="n" style="color:var(--clay)">0</div><div class="l" style="max-width:27ch">rare species <b>shown</b><br>during the retrain</div><div class="s">we fine-tune on common species only, so the +54% rare-tail lift is transfer, not memorization</div></div>
       </div>
       <div class="quote" style="margin-top:3.2vh">Pl@ntNet's embedding learned <b>ground-level leaves and flowers</b>; our crowns are <b>tops from above</b>.
         Fine-tune just the <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/adapt.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b class="accent">last few blocks</b></a> of the frozen backbone (cross-entropy loss), re-embed everything, then keep selecting in the sharper space.
@@ -503,7 +503,7 @@ const show = n => {
   i = Math.max(0, Math.min(slides.length - 1, n));
   slides.forEach((s, k) => s.classList.toggle('active', k === i));
   document.getElementById('pageno').textContent = (i + 1) + ' / ' + slides.length;
-  try { history.replaceState(null, '', '#' + i); } catch (e) {}
+  try { history.replaceState(null, '', '#' + (i + 1)); } catch (e) {}
   if (slides[i].id === 'quad-slide') requestAnimationFrame(() => window.__drawQuad && window.__drawQuad());
   if (slides[i].id === 'bells-slide') requestAnimationFrame(() => window.__drawBells && window.__drawBells());
 };
@@ -517,7 +517,7 @@ addEventListener('keydown', e => {
 addEventListener('click', e => { if (!e.target.closest('#nav') && !(window.getSelection && window.getSelection().toString())) show(i + 1); });
 document.getElementById('nextbtn').onclick = () => show(i + 1);
 document.getElementById('prevbtn').onclick = () => show(i - 1);
-show(parseInt(location.hash.replace('#','')) || 0);
+show((parseInt(location.hash.replace('#','')) || 1) - 1);
 </script>
 </body>
 </html>
