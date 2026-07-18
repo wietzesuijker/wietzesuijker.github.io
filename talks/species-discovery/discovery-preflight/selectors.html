@@ -4,125 +4,141 @@
 <title>Selectors, live &middot; The Discovery Pre-flight</title>
 <style>
   :root{--forest:#0F766E;--forest-deep:#0B544E;--ink:#15211D;--grey:#6b7280;--line:#e5e7eb;
-    --clay:#c1682f;--keep:#0072B2;--gold:#d29a2e;--gold-deep:#a9791d;
+    --clay:#c1682f;--keep:#0072B2;--gold:#d29a2e;--gold-deep:#a9791d;--field:#6d5cc4;
     --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
     --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;}
   *{box-sizing:border-box}
   html,body{margin:0;height:100%;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
     color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  header{padding:2.4vh 3vw 1vh}
-  h1{font-family:var(--serif);color:var(--forest);font-size:3.6vh;font-weight:700;letter-spacing:-.01em;margin:0}
-  h1 .kick{font-family:var(--mono);text-transform:uppercase;letter-spacing:.12em;font-size:1.5vh;
-    color:var(--grey);font-weight:700;display:block;margin-bottom:.5vh}
-  .sub{color:#4a5658;font-size:1.95vh;margin:.6vh 0 0;max-width:120ch;line-height:1.45}
-  .wrap{display:flex;gap:1.6vw;padding:1vh 3vw 2vh;align-items:stretch;min-height:0}
-  .stage{flex:1 1 auto;min-width:0;height:72vh;position:relative;border:1px solid var(--line);
+  header{padding:2.2vh 3vw .8vh}
+  h1{font-family:var(--serif);color:var(--forest);font-size:3.3vh;font-weight:700;letter-spacing:-.01em;margin:0}
+  h1 .kick{font-family:var(--mono);text-transform:uppercase;letter-spacing:.12em;font-size:1.4vh;
+    color:var(--grey);font-weight:700;display:block;margin-bottom:.4vh}
+  .sub{color:#33414e;font-size:1.9vh;margin:.5vh 0 0;max-width:125ch;line-height:1.45}
+  .sub b{color:var(--ink)}
+  .wrap{display:flex;gap:1.4vw;padding:.9vh 3vw .6vh;align-items:stretch;min-height:0}
+  .stage{flex:1 1 auto;min-width:0;height:60vh;position:relative;border:1px solid var(--line);
     border-radius:10px;overflow:hidden;background:radial-gradient(120% 120% at 50% 40%,#fdfefe,#f3f6f8)}
   canvas#emb{display:block;position:absolute;inset:0;width:100%;height:100%}
-  .hud{position:absolute;top:1.4vh;left:1.4vh;display:flex;gap:1.4vw;flex-wrap:wrap;font-size:1.55vh;
-    color:#4a5658;background:rgba(255,255,255,.86);border:1px solid var(--line);border-radius:8px;
-    padding:.7vh 1vw;backdrop-filter:blur(3px)}
-  .hud .d{display:inline-block;width:1.15vh;height:1.15vh;border-radius:50%;margin-right:.4vh;vertical-align:-.1vh}
-  .hud .ring{background:transparent;border:1.6px solid var(--gold);width:1.05vh;height:1.05vh}
-  .hud .star{color:var(--gold);font-size:1.7vh;margin-right:.2vh}
-  .stagecap{position:absolute;bottom:1.2vh;left:1.4vh;right:1.4vh;font-size:1.5vh;color:#6b7a88;
-    background:rgba(255,255,255,.8);border-radius:6px;padding:.5vh .9vw;pointer-events:none;line-height:1.4}
-  .side{width:31vw;max-width:430px;flex:0 0 auto;display:flex;flex-direction:column;gap:1.3vh;
-    height:72vh;overflow-y:auto}
-  .card{border:1px solid var(--line);border-radius:9px;padding:1.3vh 1.2vw}
-  .card h3{margin:0 0 1vh;font-family:var(--mono);font-size:1.5vh;text-transform:uppercase;
-    letter-spacing:.05em;color:var(--grey);font-weight:700}
-  .methods{display:grid;grid-template-columns:1fr 1fr;gap:.7vh}
-  .mbtn{display:flex;align-items:center;gap:.5vw;text-align:left;font:600 1.7vh/1.2 inherit;color:var(--ink);
-    background:#fff;border:1.5px solid var(--line);border-radius:7px;padding:.8vh .7vw;cursor:pointer;transition:.12s}
+  .hud{position:absolute;top:1.2vh;left:1.2vh;right:1.2vh;display:flex;gap:1.1vw;flex-wrap:wrap;font-size:1.42vh;
+    color:#4a5658;background:rgba(255,255,255,.88);border:1px solid var(--line);border-radius:8px;
+    padding:.6vh .9vw;backdrop-filter:blur(3px)}
+  .hud .d{display:inline-block;width:1.1vh;height:1.1vh;border-radius:50%;margin-right:.35vh;vertical-align:-.1vh}
+  .hud .ring{background:transparent;border:1.6px solid var(--gold);width:1vh;height:1vh}
+  .hud .vm{background:transparent;border:2px solid var(--clay);width:1vh;height:1vh}
+  .hud .fld{background:radial-gradient(var(--field),rgba(109,92,196,0));border-radius:50%}
+  .hud .star{color:var(--gold);font-size:1.6vh;margin-right:.15vh}
+  .stagecap{position:absolute;bottom:1.1vh;left:1.2vh;right:1.2vh;font-size:1.5vh;color:#5a6b7a;
+    background:rgba(255,255,255,.82);border-radius:6px;padding:.5vh .9vw;pointer-events:none;line-height:1.4}
+  .side{width:30vw;max-width:420px;flex:0 0 auto;display:flex;flex-direction:column;gap:1vh;height:60vh}
+  .card{border:1px solid var(--line);border-radius:9px;padding:1.1vh 1.1vw}
+  .card h3{margin:0 0 .8vh;font-family:var(--mono);font-size:1.42vh;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--grey);font-weight:700;display:flex;justify-content:space-between;align-items:center}
+  .methods{display:grid;grid-template-columns:1fr 1fr;gap:.6vh}
+  .mbtn{display:flex;align-items:center;gap:.5vw;text-align:left;font:600 1.62vh/1.15 inherit;color:var(--ink);
+    background:#fff;border:1.5px solid var(--line);border-radius:7px;padding:.7vh .7vw;cursor:pointer;transition:.12s}
   .mbtn:hover{border-color:var(--forest);background:#f6faf9}
   .mbtn.on{border-color:var(--forest);background:color-mix(in srgb,var(--forest) 10%,#fff);
     box-shadow:0 2px 10px rgba(15,118,110,.12)}
-  .mbtn .nm{flex:1;min-width:0}
-  .mbtn .vd{width:.9vh;height:.9vh;border-radius:50%;flex:0 0 auto}
+  .mbtn .nm{flex:1;min-width:0} .mbtn .vd{width:.85vh;height:.85vh;border-radius:50%;flex:0 0 auto}
   .vd.win{background:var(--forest)} .vd.ns{background:#9aa3ab} .vd.hurt{background:var(--clay)}
-  .explain{font-size:1.85vh;line-height:1.5;color:#33414e}
-  .explain b{color:var(--ink)} .explain .verdict{font-weight:700}
-  .explain .win{color:var(--forest-deep)} .explain .ns{color:#6b7280} .explain .hurt{color:var(--clay)}
-  .ctrls{display:flex;align-items:center;gap:.8vw}
-  .ctrls button{font:600 2.0vh/1 inherit;color:#fff;background:var(--forest);border:0;border-radius:7px;
-    padding:1vh 1.1vw;cursor:pointer;flex:0 0 auto}
+  .explain{font-size:1.72vh;line-height:1.46;color:#33414e;flex:1;overflow-y:auto}
+  .explain b{color:var(--ink)} .explain .mapname{color:var(--field);font-weight:700}
+  .explain .verdict{font-weight:700} .explain .win{color:var(--forest-deep)}
+  .explain .ns{color:#6b7280} .explain .hurt{color:var(--clay)}
+  .ctrls{display:flex;align-items:center;gap:.7vw}
+  .ctrls button{font:600 1.9vh/1 inherit;color:#fff;background:var(--forest);border:0;border-radius:7px;
+    padding:.9vh 1vw;cursor:pointer;flex:0 0 auto}
   .ctrls button:hover{background:var(--forest-deep)}
   .ctrls button.ghost{background:#fff;color:var(--forest);border:1.5px solid var(--line)}
-  .ctrls button.ghost:hover{background:#f6faf9;border-color:var(--forest)}
   input[type=range]{flex:1;min-width:0;accent-color:var(--forest)}
-  .tlab{font-family:var(--mono);font-size:1.55vh;color:var(--grey);white-space:nowrap}
-  .stats{display:flex;gap:1.4vw;flex-wrap:wrap}
-  .stat .n{font-size:3.4vh;font-weight:800;line-height:1}
+  .tlab{font-family:var(--mono);font-size:1.5vh;color:var(--grey);white-space:nowrap}
+  .toggle{font-size:1.4vh;color:var(--grey);font-weight:600;display:flex;align-items:center;gap:.35vw;cursor:pointer;text-transform:none;letter-spacing:0}
+  .toggle input{accent-color:var(--field)}
+  .stats{display:flex;gap:1.3vw;flex-wrap:wrap;margin-top:.9vh}
+  .stat .n{font-size:3vh;font-weight:800;line-height:1}
   .stat .n.gold{color:var(--gold-deep)} .stat .n.blue{color:var(--keep)}
-  .stat .l{font-size:1.5vh;color:var(--grey);margin-top:.3vh;max-width:16ch}
-  canvas#curve{width:100%;height:20vh;display:block}
-  .curvelab{font-size:1.5vh;color:var(--grey);margin-top:.4vh;line-height:1.4}
-  .foot{padding:0 3vw 2.4vh;font-size:1.6vh;color:var(--grey);line-height:1.5;max-width:130ch}
+  .stat .l{font-size:1.4vh;color:var(--grey);margin-top:.25vh;max-width:15ch}
+  .analysis{display:flex;gap:1.4vw;padding:.4vh 3vw .6vh;align-items:stretch}
+  .apanel{flex:1;border:1px solid var(--line);border-radius:9px;padding:1vh 1.1vw;min-width:0}
+  .apanel h3{margin:0 0 .5vh;font-family:var(--mono);font-size:1.42vh;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--grey);font-weight:700}
+  canvas.mini{width:100%;height:19vh;display:block}
+  .alab{font-size:1.42vh;color:var(--grey);margin-top:.35vh;line-height:1.4}
+  .alab b{color:var(--ink)}
+  .foot{padding:.4vh 3vw 2vh;font-size:1.5vh;color:var(--grey);line-height:1.5;max-width:135ch}
   .foot a{color:var(--forest)}
-  .back{position:fixed;top:2.4vh;right:2.6vw;font-family:var(--mono);font-size:1.5vh;text-transform:uppercase;
-    letter-spacing:.06em;color:var(--forest);text-decoration:none}
+  .back{position:fixed;top:2.2vh;right:2.4vw;font-family:var(--mono);font-size:1.42vh;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--forest);text-decoration:none;z-index:5}
 </style>
 </head>
 <body>
 <a class="back" href="./#11">&larr;&nbsp;back to the deck</a>
 <header>
-  <h1><span class="kick">Discovery pre-flight &middot; appendix to the selector benchmark</span>Six selectors, one embedding &mdash; watch them walk it</h1>
-  <p class="sub">Slide&nbsp;11 says CoreSet, novel_margin and MaxHerding tie at the top and TypiClust hurts. <b>Here is the mechanism.</b>
-    Pick a strategy, drag the round slider, and watch which points it labels on the <i>same</i> fixed cloud. Gold stars are rare species; the goal is to light up as many as possible per label spent.</p>
+  <h1><span class="kick">Discovery pre-flight &middot; appendix to the selector benchmark</span>Every selector is a map. The map decides who finds new species.</h1>
+  <p class="sub">Each strategy does <i>one</i> thing: score every candidate, then label the highest-scoring points. The <b>only</b> difference between them is the score &mdash; the <span style="color:var(--field);font-weight:700">indigo map</span>. Watch <b>where each map glows</b>: in the empty edges where new species hide, or in the crowded centre. That single choice explains the whole ranking on slide&nbsp;11.</p>
 </header>
 
 <div class="wrap">
   <div class="stage">
     <canvas id="emb"></canvas>
     <div class="hud">
+      <span><span class="d fld"></span>score map <span style="color:#9aa3ab">(bright = wants it most)</span></span>
+      <span><span class="d vm"></span>about to label next</span>
       <span><span class="d" style="background:#c3cad0"></span>unlabelled</span>
       <span><span class="d ring"></span>rare, still hidden</span>
-      <span><span class="d" style="background:var(--keep)"></span>labelled (common)</span>
-      <span><span class="star">&#9733;</span>rare species found</span>
-      <span><span class="d" style="background:var(--clay)"></span>picked this round</span>
+      <span><span class="d" style="background:var(--keep)"></span>labelled</span>
+      <span><span class="star">&#9733;</span>rare found</span>
     </div>
     <div class="stagecap" id="stagecap"></div>
   </div>
 
   <div class="side">
     <div class="card">
-      <h3>Selection strategy</h3>
+      <h3>Selection strategy
+        <label class="toggle"><input type="checkbox" id="fieldtog" checked> show the map</label>
+      </h3>
       <div class="methods" id="methods"></div>
     </div>
-    <div class="card">
+    <div class="card" style="flex:1;display:flex;flex-direction:column;min-height:0">
       <div class="explain" id="explain"></div>
     </div>
     <div class="card">
-      <h3>Labelling round</h3>
       <div class="ctrls">
         <button id="play" title="play / pause">&#9654;</button>
         <button class="ghost" id="reset" title="back to start">&#8635;</button>
         <input type="range" id="tslider" min="0" max="12" value="0" step="1">
         <span class="tlab" id="tlab">0 / 12</span>
       </div>
-      <div class="stats" style="margin-top:1.2vh">
+      <div class="stats">
         <div class="stat"><div class="n blue" id="statLab">8</div><div class="l">labels spent</div></div>
         <div class="stat"><div class="n gold" id="statRare">0</div><div class="l">rare species found (of 14)</div></div>
       </div>
     </div>
-    <div class="card">
-      <h3>Rare species found vs labels</h3>
-      <canvas id="curve"></canvas>
-      <div class="curvelab" id="curvelab"></div>
-    </div>
+  </div>
+</div>
+
+<div class="analysis">
+  <div class="apanel">
+    <h3>Rare species found vs labels spent</h3>
+    <canvas id="curve" class="mini"></canvas>
+    <div class="alab" id="curvelab"></div>
+  </div>
+  <div class="apanel">
+    <h3>Why the ranking: whoever labels the empty spaces wins</h3>
+    <canvas id="scatter" class="mini"></canvas>
+    <div class="alab" id="scatlab"></div>
   </div>
 </div>
 
 <div class="foot">
-  <b>Illustrative, not BCI data.</b> Each strategy is the <i>real</i> algorithm (CoreSet greedy k-center, novel_margin distance-to-nearest-labelled, MaxHerding kernel herding, ProbCover &epsilon;-ball coverage, BADGE uncertainty&times;diversity, TypiClust density-typicality) run on one synthetic 200-point cloud where common species form dense clusters and rare species sit in the sparse gaps and edges. It reproduces the <i>ordering</i> of the measured benchmark to show <i>why</i> it happens; the numbers on real crowns (8 seeds, DINOv3, multiple-testing corrected) are on <a href="./#11">slide&nbsp;11</a>.
+  <b>Illustrative, not BCI data.</b> Each strategy is the <i>real</i> algorithm run on one synthetic 200-point cloud where common species form dense clusters and rare species sit in the sparse gaps and edges. The map shown is the exact quantity each selector maximises. The mechanism it exposes &mdash; the sparser the ground a method labels, the more rare species it finds (rank correlation &asymp;&nbsp;0.9 here) &mdash; is why CoreSet, novel_margin and MaxHerding win and TypiClust loses; the measured numbers on real crowns (8 seeds, DINOv3, multiple-testing corrected) are on <a href="./#11">slide&nbsp;11</a>.
 </div>
 
 <script>
-/* ===== verified selector core (ported from the audited sim) ===== */
+/* ===== verified selector core (ported unchanged from the audited sim) ===== */
 function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
 function gauss(r){return r()+r()+r()-1.5;}
-
 function buildCloud(seed){
   const r=mulberry32(seed);const pts=[];let sp=0;
   const cc=[[0.32,0.42],[0.46,0.32],[0.58,0.46],[0.42,0.58],[0.56,0.63],[0.67,0.35]];
@@ -163,8 +179,7 @@ const SELECTORS={
     for(const i of lab){const s=pts[i].sp;if(!cen[s]){cen[s]=[0,0];cnt[s]=0;}cen[s][0]+=pts[i].x;cen[s][1]+=pts[i].y;cnt[s]++;}
     const cs=Object.keys(cen).map(s=>[cen[s][0]/cnt[s],cen[s][1]/cnt[s]]);const u=unlabeled(n,lab);
     const unc=u.map(i=>{const ds=cs.map(c=>Math.hypot(pts[i].x-c[0],pts[i].y-c[1])).sort((a,c)=>a-c);
-      const d1=ds[0]||1,gap=ds.length>=2?Math.abs(ds[0]-ds[1]):d1;
-      return Math.exp(-d1/0.10)*(1/(1+10*gap));});
+      const d1=ds[0]||1,gap=ds.length>=2?Math.abs(ds[0]-ds[1]):d1;return Math.exp(-d1/0.10)*(1/(1+10*gap));});
     const out=[],chosen=[];let fi=0;for(let k=1;k<u.length;k++)if(unc[k]>unc[fi])fi=k;out.push(u[fi]);chosen.push(u[fi]);
     for(let p=1;p<b;p++){let best=-1,bs=-Infinity;
       for(let k=0;k<u.length;k++){if(chosen.includes(u[k]))continue;const dm=Math.min(...chosen.map(c=>D[u[k]][c]));
@@ -178,24 +193,46 @@ const SELECTORS={
     for(const [i] of order){if(out.length>=b)break;if(!out.includes(i))out.push(i);}return out;},
 };
 
+/* ===== score maps: the exact quantity each selector maximises, per unlabelled point ===== */
+function marginField(pts,D,L){const n=pts.length,m=new Map();for(let i=0;i<n;i++)if(!L.has(i))m.set(i,minDistTo(i,L,D));return m;}
+const SCORES={
+  random(pts,D,L){const m=new Map();for(let i=0;i<pts.length;i++)if(!L.has(i))m.set(i,0);return m;},
+  CoreSet:marginField, novel_margin:marginField,
+  MaxHerding(pts,D,L){const s2=2*0.16*0.16,K=d=>Math.exp(-d*d/s2),n=pts.length,m=new Map();
+    for(let i=0;i<n;i++){if(L.has(i))continue;let pt=0;for(let j=0;j<n;j++)pt+=K(D[i][j]);pt/=n;
+      let st=0,c=0;for(const s of L){st+=K(D[i][s]);c++;}st/=(c+1);m.set(i,pt-st);}return m;},
+  ProbCover(pts,D,L){const eps=0.15,n=pts.length,m=new Map();
+    for(let i=0;i<n;i++){if(L.has(i))continue;let c=0;for(let j=0;j<n;j++)if(D[i][j]<=eps&&!L.has(j))c++;m.set(i,c);}return m;},
+  BADGE(pts,D,L){const n=pts.length,cen={},cnt={};
+    for(const i of L){const s=pts[i].sp;if(!cen[s]){cen[s]=[0,0];cnt[s]=0;}cen[s][0]+=pts[i].x;cen[s][1]+=pts[i].y;cnt[s]++;}
+    const cs=Object.keys(cen).map(s=>[cen[s][0]/cnt[s],cen[s][1]/cnt[s]]);const m=new Map();
+    for(let i=0;i<n;i++){if(L.has(i))continue;const ds=cs.map(c=>Math.hypot(pts[i].x-c[0],pts[i].y-c[1])).sort((a,c)=>a-c);
+      const d1=ds[0]||1,gap=ds.length>=2?Math.abs(ds[0]-ds[1]):d1;m.set(i,Math.exp(-d1/0.10)*(1/(1+10*gap)));}return m;},
+  TypiClust(pts,D,L){const n=pts.length,K=7,u=unlabeled(n,L),m=new Map();
+    for(const i of u){const ds=u.filter(j=>j!==i).map(j=>D[i][j]).sort((a,c)=>a-c).slice(0,K);
+      m.set(i,-ds.reduce((s,d)=>s+d,0)/Math.max(ds.length,1));}return m;},
+};
+
 /* ===== fixed display run: cloud seed 1039, run seed 4 (verified representative) ===== */
 const SEEDN=8, BATCH=4, ROUNDS=12;
 const CLOUD=buildCloud(1039), D=distMatrix(CLOUD.pts);
+// local sparsity of each point = distance to its 5th nearest neighbour (big = sparse / rare habitat)
+const SPARS=CLOUD.pts.map((_,i)=>{const ds=[];for(let j=0;j<CLOUD.pts.length;j++)if(j!==i)ds.push(D[i][j]);ds.sort((a,b)=>a-b);return ds[4];});
+
 const METHODS=[
-  {k:'CoreSet',      vd:'win', txt:'<b>CoreSet</b> (greedy k-center): each pick is the point <b>farthest from everything labelled</b>. It walks straight to the empty edges &mdash; exactly where rare species hide. <span class="verdict win">beats random.</span>'},
-  {k:'novel_margin', vd:'win', txt:'<b>novel_margin</b>: rank every candidate by its <b>distance to the nearest labelled point</b>, take the top few. The same edge-seeking instinct as CoreSet, and the quantity the pre-flight is built on. <span class="verdict win">beats random.</span>'},
-  {k:'MaxHerding',   vd:'win', txt:'<b>MaxHerding</b> (kernel herding): pick points so the batch <b>mirrors the whole cloud’s shape</b>. Matching the distribution forces it into the sparse pockets too. <span class="verdict win">beats random.</span>'},
-  {k:'random',       vd:'ns',  txt:'<b>random</b>: the honest floor. Picks are spread by chance, so rare species turn up at their base rate &mdash; no faster, no slower. <span class="verdict ns">the baseline everything is judged against.</span>'},
-  {k:'ProbCover',    vd:'ns',  txt:'<b>ProbCover</b>: cover the cloud with &epsilon;-balls, greedily grabbing the point that <b>covers the most uncovered neighbours</b>. Dense common blobs win the coverage race; rare singletons barely register. <span class="verdict ns">no better than random on the rare tail.</span>'},
-  {k:'BADGE',        vd:'ns',  txt:'<b>BADGE</b> (uncertainty&times;diversity): chase points on the <b>boundaries between species the model already knows</b>. Those boundaries sit among the common classes, not out where new lineages are. <span class="verdict ns">doesn’t help the rare tail.</span>'},
-  {k:'TypiClust',    vd:'hurt',txt:'<b>TypiClust</b> (typicality): pick the <b>densest, most typical</b> representative of each region. It is the exact opposite of novelty &mdash; it hugs the crowd and steps over the rare pockets. <span class="verdict hurt">hurts rare discovery.</span>'},
+  {k:'CoreSet',      vd:'win', txt:'The <span class="mapname">map is distance to the nearest labelled point</span>. CoreSet grabs the brightest peak, then <i>recomputes</i> so its batch spreads out. Its glow lives in the empty edges &mdash; exactly where new species hide. <span class="verdict win">labels sparse ground &rarr; wins.</span>'},
+  {k:'novel_margin', vd:'win', txt:'<span class="mapname">Same map as CoreSet</span> (distance to nearest known), but it takes the top few <i>at once</i> without recomputing, so its picks can bunch in one rich pocket. Still glowing over the sparse edges. <span class="verdict win">labels sparse ground &rarr; wins.</span>'},
+  {k:'MaxHerding',   vd:'win', txt:'The <span class="mapname">map rewards points that make the labelled set resemble the whole cloud</span>. It brightens wherever the crowd is under-represented, which pulls it into the sparse pockets too. <span class="verdict win">reaches sparse ground &rarr; wins.</span>'},
+  {k:'random',       vd:'ns',  txt:'<span class="mapname">No map.</span> Every point scores the same, so the glow is flat and picks are blind luck. Rare species turn up at their base rate. <span class="verdict ns">the honest floor.</span>'},
+  {k:'ProbCover',    vd:'ns',  txt:'The <span class="mapname">map is how many uncovered neighbours</span> a point has within a fixed radius. Dense common blobs glow brightest; a lone rare crown covers only itself. <span class="verdict ns">labels the crowd &rarr; no better than random.</span>'},
+  {k:'BADGE',        vd:'ns',  txt:'The <span class="mapname">map is uncertainty near boundaries between known species</span>. Those boundaries sit inside the common crowd, so the glow avoids the empty edges. <span class="verdict ns">labels the crowd &rarr; no help.</span>'},
+  {k:'TypiClust',    vd:'hurt',txt:'The <span class="mapname">map is local density</span> &mdash; it grabs the most typical, crowded points. That is the exact opposite of novelty: the glow sits on the crowd and steps over the sparse pockets. <span class="verdict hurt">labels densest ground &rarr; finds fewest.</span>'},
 ];
 
-// precompute per-method: cumulative labelled index arrays per step, and rare-count curve
 function computeAll(){
   const res={};
   for(const m of METHODS){
-    const rng=mulberry32(4*7919+101); // fixed run seed = 4
+    const rng=mulberry32(4*7919+101);
     const lab=new Set();
     const commonIdx=CLOUD.pts.map((p,i)=>i).filter(i=>!CLOUD.pts[i].rare);
     const pool=commonIdx.slice();
@@ -203,68 +240,117 @@ function computeAll(){
     const seed=[...lab];
     const rareSeen=new Set();for(const i of lab)if(CLOUD.pts[i].rare)rareSeen.add(CLOUD.pts[i].sp);
     const steps=[{labeled:[...lab],batch:[],labels:lab.size,rare:rareSeen.size}];
+    const picks=[];
     for(let round=0;round<ROUNDS;round++){
       const batch=SELECTORS[m.k](CLOUD.pts,D,lab,BATCH,rng);
-      for(const i of batch){lab.add(i);if(CLOUD.pts[i].rare)rareSeen.add(CLOUD.pts[i].sp);}
+      for(const i of batch){lab.add(i);picks.push(i);if(CLOUD.pts[i].rare)rareSeen.add(CLOUD.pts[i].sp);}
       steps.push({labeled:[...lab],batch,labels:lab.size,rare:rareSeen.size});
     }
-    res[m.k]={steps,seed};
+    const meanSparsity=picks.reduce((s,i)=>s+SPARS[i],0)/picks.length;
+    res[m.k]={steps,seed,meanSparsity,finalRare:rareSeen.size};
   }
   return res;
 }
 const RUN=computeAll();
+// normalize sparsity across methods for the scatter x-axis
+const SP_VALS=METHODS.map(m=>RUN[m.k].meanSparsity), SP_MIN=Math.min(...SP_VALS), SP_MAX=Math.max(...SP_VALS);
 
 /* ===== state + rendering ===== */
-let method='CoreSet', t=0, playing=false, timer=null;
-const embc=document.getElementById('emb'), cvc=document.getElementById('curve');
+let method='CoreSet', t=0, playing=false, timer=null, fieldOn=true;
+const embc=document.getElementById('emb'), cvc=document.getElementById('curve'), scc=document.getElementById('scatter');
+
+function star(ctx,cx,cy,rad,fill,stroke){ctx.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2===0?rad:rad*0.44;
+  const x=cx+Math.cos(a)*rr,y=cy+Math.sin(a)*rr;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.closePath();
+  ctx.fillStyle=fill;ctx.fill();ctx.lineWidth=1.3;ctx.strokeStyle=stroke;ctx.stroke();}
 
 function draw(){
   const dpr=window.devicePixelRatio||1,W=embc.clientWidth,H=embc.clientHeight;if(!W||!H)return;
   embc.width=W*dpr;embc.height=H*dpr;const ctx=embc.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
-  const pad=Math.max(18,W*0.05),X=x=>pad+x*(W-2*pad),Y=y=>pad+y*(H-2*pad),R=Math.max(3.4,W*0.007);
-  const step=RUN[method].steps[t], labSet=new Set(step.labeled), batchSet=new Set(step.batch), seedSet=new Set(RUN[method].seed);
-  // unlabelled first (common grey dot, rare hollow gold ring)
+  const pad=Math.max(20,W*0.05),X=x=>pad+x*(W-2*pad),Y=y=>pad+y*(H-2*pad),R=Math.max(3.2,W*0.0066);
+  const step=RUN[method].steps[t], labSet=new Set(step.labeled), seedSet=new Set(RUN[method].seed);
+  const nextBatch=t<ROUNDS?RUN[method].steps[t+1].batch:[];
+  // 1) score-map glow over the unlabelled, given what's known now
+  if(fieldOn){
+    const field=SCORES[method](CLOUD.pts,D,labSet);
+    let mn=Infinity,mx=-Infinity;field.forEach(v=>{if(v<mn)mn=v;if(v>mx)mx=v;});const rng=(mx-mn)||1;
+    field.forEach((v,i)=>{const s=(v-mn)/rng;const p=CLOUD.pts[i];
+      const g=ctx.createRadialGradient(X(p.x),Y(p.y),0,X(p.x),Y(p.y),R*(1.6+4.2*s));
+      g.addColorStop(0,'rgba(109,92,196,'+(0.05+0.42*s)+')');g.addColorStop(1,'rgba(109,92,196,0)');
+      ctx.fillStyle=g;ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R*(1.6+4.2*s),0,7);ctx.fill();});
+  }
+  // 2) base dots
   CLOUD.pts.forEach((p,i)=>{if(labSet.has(i))return;
-    if(p.rare){ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R*1.05,0,7);ctx.lineWidth=1.5;ctx.strokeStyle='rgba(210,154,46,.55)';ctx.stroke();}
-    else{ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R*0.82,0,7);ctx.fillStyle='#c3cad0';ctx.fill();}});
-  // labelled
+    if(p.rare){ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R*1.0,0,7);ctx.lineWidth=1.5;ctx.strokeStyle='rgba(210,154,46,.7)';ctx.stroke();}
+    else{ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R*0.78,0,7);ctx.fillStyle='#c3cad0';ctx.fill();}});
+  // 3) labelled
   CLOUD.pts.forEach((p,i)=>{if(!labSet.has(i))return;
-    if(p.rare){star(ctx,X(p.x),Y(p.y),R*2.0);}
-    else{ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R*1.05,0,7);ctx.fillStyle='#0072B2';ctx.fill();
-      if(seedSet.has(i)){ctx.lineWidth=1.6;ctx.strokeStyle='#15211D';ctx.stroke();}}});
-  // batch halo (picked this round)
-  step.batch.forEach(i=>{const p=CLOUD.pts[i];ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R*2.9,0,7);
-    ctx.lineWidth=2.6;ctx.strokeStyle='#c1682f';ctx.stroke();});
-  document.getElementById('stagecap').innerHTML=
-    t===0?'Round 0 &mdash; the seed set: a few common species you start knowing. Drag the slider to spend labels.'
-    :'Round '+t+' &mdash; '+method+' just labelled the <b style="color:#c1682f">'+step.batch.length+' ringed points</b>. '+
-     'Rare finds so far: <b style="color:#a9791d">'+step.rare+'</b>.';
+    if(p.rare){star(ctx,X(p.x),Y(p.y),R*1.95,'#d29a2e','#7a5711');}
+    else{ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R*1.02,0,7);ctx.fillStyle='#0072B2';ctx.fill();
+      if(seedSet.has(i)){ctx.lineWidth=1.5;ctx.strokeStyle='#15211D';ctx.stroke();}}});
+  // 4) next picks: reach-line to nearest known (long=into the unknown), + crosshair
+  nextBatch.forEach(i=>{const p=CLOUD.pts[i];let nj=-1,nd=Infinity;labSet.forEach(j=>{if(D[i][j]<nd){nd=D[i][j];nj=j;}});
+    if(nj>=0){const q=CLOUD.pts[nj];ctx.save();ctx.setLineDash([3.5,3.5]);ctx.strokeStyle='rgba(193,104,47,.75)';ctx.lineWidth=1.5;
+      ctx.beginPath();ctx.moveTo(X(p.x),Y(p.y));ctx.lineTo(X(q.x),Y(q.y));ctx.stroke();ctx.restore();}
+    ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R*2.5,0,7);ctx.lineWidth=2.4;ctx.strokeStyle='#c1682f';ctx.stroke();});
+  // caption
+  const cap=document.getElementById('stagecap');
+  if(t===0) cap.innerHTML='<b>Round 0.</b> You know a few common species (blue). The <span style="color:#6d5cc4;font-weight:700">indigo map</span> is '+method+"'s score for every unlabelled point; the <b style=\"color:#c1682f\">ringed points</b> are the peaks it will label first. Press play.";
+  else if(t<ROUNDS) cap.innerHTML='<b>After round '+t+'.</b> '+method+' found <b style="color:#a9791d">'+step.rare+'</b> rare species. Indigo = its map now; <b style="color:#c1682f">rings</b> = the next batch; dashed line = distance to the nearest known (long = reaching into empty space).';
+  else cap.innerHTML='<b>Done.</b> '+method+' spent '+step.labels+' labels and found <b style="color:#a9791d">'+step.rare+' / 14</b> rare species. See where its labels landed, and the two panels below.';
 }
-function star(ctx,cx,cy,rad){ctx.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2===0?rad:rad*0.44;
-  const x=cx+Math.cos(a)*rr,y=cy+Math.sin(a)*rr;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.closePath();
-  ctx.fillStyle='#d29a2e';ctx.fill();ctx.lineWidth=1.4;ctx.strokeStyle='#7a5711';ctx.stroke();}
 
 function drawCurve(){
   const dpr=window.devicePixelRatio||1,W=cvc.clientWidth,H=cvc.clientHeight;if(!W||!H)return;
   cvc.width=W*dpr;cvc.height=H*dpr;const ctx=cvc.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
-  const pl=W*0.11,pr=W*0.03,ptop=H*0.10,pb=H*0.20;
-  const maxL=SEEDN+ROUNDS*BATCH, maxR=CLOUD.nRare;
+  const pl=W*0.09,pr=W*0.03,ptop=H*0.12,pb=H*0.22, maxL=SEEDN+ROUNDS*BATCH, maxR=CLOUD.nRare;
   const X=l=>pl+(l-SEEDN)/(maxL-SEEDN)*(W-pl-pr), Y=r=>H-pb-r/maxR*(H-ptop-pb);
-  // axes
   ctx.strokeStyle='#d5dadd';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pl,H-pb);ctx.lineTo(W-pr,H-pb);ctx.moveTo(pl,H-pb);ctx.lineTo(pl,ptop);ctx.stroke();
-  ctx.fillStyle='#9aa3ab';ctx.font='500 '+Math.max(9,W*0.024)+'px '+getComputedStyle(document.body).fontFamily;
+  ctx.fillStyle='#9aa3ab';ctx.font='500 '+Math.max(9,W*0.02)+'px '+getComputedStyle(document.body).fontFamily;
   ctx.textAlign='right';ctx.fillText(maxR,pl-4,Y(maxR)+3);ctx.fillText('0',pl-4,Y(0)+3);
-  // ghost curves (all methods, faint), active bold
-  for(const m of METHODS){const steps=RUN[m.k].steps;const active=m.k===method;
+  const act=RUN[method].steps;
+  // shaded area under the active curve = the score slide 11 reports
+  ctx.beginPath();ctx.moveTo(X(act[0].labels),Y(0));
+  act.forEach(s=>ctx.lineTo(X(s.labels),Y(s.rare)));ctx.lineTo(X(act[act.length-1].labels),Y(0));ctx.closePath();
+  ctx.fillStyle='rgba(15,118,110,.10)';ctx.fill();
+  // ghosts
+  for(const m of METHODS){if(m.k===method)continue;const steps=RUN[m.k].steps;
     ctx.beginPath();steps.forEach((s,k)=>{const x=X(s.labels),y=Y(s.rare);k===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
-    if(active){ctx.strokeStyle='#0F766E';ctx.lineWidth=2.8;ctx.globalAlpha=1;}
-    else{ctx.strokeStyle=m.vd==='hurt'?'#e0b49c':m.vd==='win'?'#a9cfca':'#cfd4d8';ctx.lineWidth=1.4;ctx.globalAlpha=.9;}
-    ctx.stroke();ctx.globalAlpha=1;}
-  // marker at current t on the active curve
-  const cs=RUN[method].steps[t];ctx.beginPath();ctx.arc(X(cs.labels),Y(cs.rare),4,0,7);ctx.fillStyle='#0F766E';ctx.fill();
-  ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();
-  document.getElementById('curvelab').innerHTML=
-    'Bold = <b style="color:#0F766E">'+method+'</b>. Faint lines are the other five on the same cloud. Steeper and higher = more rare species per label. x: labels spent &middot; y: rare species found.';
+    ctx.strokeStyle=m.vd==='hurt'?'#e3bda6':m.vd==='win'?'#a9cfca':'#d3d7db';ctx.lineWidth=1.3;ctx.stroke();}
+  // active bold
+  ctx.beginPath();act.forEach((s,k)=>{const x=X(s.labels),y=Y(s.rare);k===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+  ctx.strokeStyle='#0F766E';ctx.lineWidth=2.8;ctx.stroke();
+  // star at each round a new rare species appeared
+  for(let k=1;k<act.length;k++)if(act[k].rare>act[k-1].rare)star(ctx,X(act[k].labels),Y(act[k].rare),Math.max(3,W*0.008),'#d29a2e','#7a5711');
+  // current marker
+  const cs=act[t];ctx.beginPath();ctx.arc(X(cs.labels),Y(cs.rare),4,0,7);ctx.fillStyle='#0F766E';ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();
+  document.getElementById('curvelab').innerHTML='Bold = <b>'+method+'</b>, faint = the other five. Shaded area is what the <a href="./#11" style="color:#0F766E">slide-11</a> benchmark scores &mdash; steeper and higher = more rare species per label.';
+}
+
+function drawScatter(){
+  const dpr=window.devicePixelRatio||1,W=scc.clientWidth,H=scc.clientHeight;if(!W||!H)return;
+  scc.width=W*dpr;scc.height=H*dpr;const ctx=scc.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+  const pl=W*0.10,pr=W*0.04,ptop=H*0.12,pb=H*0.26, maxR=CLOUD.nRare;
+  const spRng=(SP_MAX-SP_MIN)||1;
+  const X=sp=>pl+(sp-SP_MIN)/spRng*(W-pl-pr), Y=r=>H-pb-r/maxR*(H-ptop-pb);
+  ctx.strokeStyle='#d5dadd';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pl,H-pb);ctx.lineTo(W-pr,H-pb);ctx.moveTo(pl,H-pb);ctx.lineTo(pl,ptop);ctx.stroke();
+  ctx.fillStyle='#9aa3ab';ctx.font='600 '+Math.max(8.5,W*0.019)+'px '+getComputedStyle(document.body).fontFamily;ctx.textAlign='left';
+  ctx.fillText('crowd', pl, H-pb+H*0.14); ctx.textAlign='right'; ctx.fillText('empty space', W-pr, H-pb+H*0.14);
+  ctx.save();ctx.translate(pl-W*0.055,(ptop+H-pb)/2);ctx.rotate(-Math.PI/2);ctx.textAlign='center';ctx.fillText('rare found',0,0);ctx.restore();
+  // rising guide (least-squares over the 7 methods)
+  const xs=METHODS.map(m=>RUN[m.k].meanSparsity), ys=METHODS.map(m=>RUN[m.k].finalRare), n=xs.length;
+  const mx=xs.reduce((a,b)=>a+b)/n, my=ys.reduce((a,b)=>a+b)/n;
+  let sxy=0,sxx=0;for(let i=0;i<n;i++){sxy+=(xs[i]-mx)*(ys[i]-my);sxx+=(xs[i]-mx)**2;}
+  const slope=sxy/(sxx||1), b0=my-slope*mx;
+  ctx.strokeStyle='#c9ccd1';ctx.setLineDash([5,4]);ctx.lineWidth=1.4;ctx.beginPath();
+  ctx.moveTo(X(SP_MIN),Y(Math.max(0,Math.min(maxR,slope*SP_MIN+b0))));ctx.lineTo(X(SP_MAX),Y(Math.max(0,Math.min(maxR,slope*SP_MAX+b0))));ctx.stroke();ctx.setLineDash([]);
+  // dots
+  METHODS.forEach(m=>{const active=m.k===method;const x=X(RUN[m.k].meanSparsity),y=Y(RUN[m.k].finalRare);
+    const col=m.vd==='win'?'#0F766E':m.vd==='hurt'?'#c1682f':'#9aa3ab';
+    ctx.beginPath();ctx.arc(x,y,active?Math.max(5,W*0.011):Math.max(3.4,W*0.0075),0,7);ctx.fillStyle=col;ctx.fill();
+    if(active){ctx.lineWidth=2.4;ctx.strokeStyle='#15211D';ctx.stroke();}
+    ctx.fillStyle=active?'#15211D':'#7a828a';ctx.font=(active?'700 ':'500 ')+Math.max(8.5,W*0.019)+'px '+getComputedStyle(document.body).fontFamily;
+    ctx.textAlign=x>W*0.6?'right':'left';ctx.fillText(m.k, x+(x>W*0.6?-8:8), y+3);});
+  document.getElementById('scatlab').innerHTML='Each dot is one selector. Right = it spends labels on sparser ground; up = it finds more rare species. <b>The map that chases empty space wins</b> (rank corr &asymp; 0.9).';
 }
 
 function render(){
@@ -275,7 +361,7 @@ function render(){
   document.getElementById('statRare').textContent=step.rare;
   document.getElementById('tslider').value=t;
   document.getElementById('tlab').textContent=t+' / '+ROUNDS;
-  draw();drawCurve();
+  draw();drawCurve();drawScatter();
 }
 
 /* ===== controls ===== */
@@ -283,16 +369,17 @@ const mc=document.getElementById('methods');
 METHODS.forEach(m=>{const b=document.createElement('button');b.className='mbtn';b.dataset.k=m.k;
   b.innerHTML='<span class="vd '+m.vd+'"></span><span class="nm">'+m.k+'</span>';
   b.onclick=()=>{method=m.k;render();};mc.appendChild(b);});
+document.getElementById('fieldtog').onchange=e=>{fieldOn=e.target.checked;draw();};
 document.getElementById('tslider').oninput=e=>{t=+e.target.value;render();};
 document.getElementById('reset').onclick=()=>{t=0;stop();render();};
 function stop(){playing=false;clearInterval(timer);document.getElementById('play').innerHTML='&#9654;';}
 function play(){if(playing){stop();return;}if(t>=ROUNDS)t=0;playing=true;document.getElementById('play').innerHTML='&#10073;&#10073;';
-  timer=setInterval(()=>{if(t>=ROUNDS){stop();return;}t++;render();},650);}
+  timer=setInterval(()=>{if(t>=ROUNDS){stop();return;}t++;render();},700);}
 document.getElementById('play').onclick=play;
 addEventListener('keydown',e=>{if(e.key==='ArrowRight'&&t<ROUNDS){t++;render();}else if(e.key==='ArrowLeft'&&t>0){t--;render();}
   else if(e.key===' '){play();e.preventDefault();}});
-if(window.ResizeObserver){new ResizeObserver(()=>{draw();drawCurve();}).observe(embc);new ResizeObserver(drawCurve).observe(cvc);}
-addEventListener('resize',()=>{draw();drawCurve();});
+if(window.ResizeObserver){const ro=new ResizeObserver(()=>render());[embc,cvc,scc].forEach(c=>ro.observe(c));}
+addEventListener('resize',render);
 render();
 </script>
 </body>
