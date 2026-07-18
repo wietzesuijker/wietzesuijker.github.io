@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Selectors, live &middot; The Discovery Pre-flight</title>
+<style>
+  :root{--forest:#0F766E;--forest-deep:#0B544E;--ink:#15211D;--grey:#6b7280;--line:#e5e7eb;
+    --clay:#c1682f;--keep:#0072B2;--gold:#d29a2e;--gold-deep:#a9791d;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;}
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+    color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  header{padding:2.4vh 3vw 1vh}
+  h1{font-family:var(--serif);color:var(--forest);font-size:3.6vh;font-weight:700;letter-spacing:-.01em;margin:0}
+  h1 .kick{font-family:var(--mono);text-transform:uppercase;letter-spacing:.12em;font-size:1.5vh;
+    color:var(--grey);font-weight:700;display:block;margin-bottom:.5vh}
+  .sub{color:#4a5658;font-size:1.95vh;margin:.6vh 0 0;max-width:120ch;line-height:1.45}
+  .wrap{display:flex;gap:1.6vw;padding:1vh 3vw 2vh;align-items:stretch;min-height:0}
+  .stage{flex:1 1 auto;min-width:0;height:72vh;position:relative;border:1px solid var(--line);
+    border-radius:10px;overflow:hidden;background:radial-gradient(120% 120% at 50% 40%,#fdfefe,#f3f6f8)}
+  canvas#emb{display:block;position:absolute;inset:0;width:100%;height:100%}
+  .hud{position:absolute;top:1.4vh;left:1.4vh;display:flex;gap:1.4vw;flex-wrap:wrap;font-size:1.55vh;
+    color:#4a5658;background:rgba(255,255,255,.86);border:1px solid var(--line);border-radius:8px;
+    padding:.7vh 1vw;backdrop-filter:blur(3px)}
+  .hud .d{display:inline-block;width:1.15vh;height:1.15vh;border-radius:50%;margin-right:.4vh;vertical-align:-.1vh}
+  .hud .ring{background:transparent;border:1.6px solid var(--gold);width:1.05vh;height:1.05vh}
+  .hud .star{color:var(--gold);font-size:1.7vh;margin-right:.2vh}
+  .stagecap{position:absolute;bottom:1.2vh;left:1.4vh;right:1.4vh;font-size:1.5vh;color:#6b7a88;
+    background:rgba(255,255,255,.8);border-radius:6px;padding:.5vh .9vw;pointer-events:none;line-height:1.4}
+  .side{width:31vw;max-width:430px;flex:0 0 auto;display:flex;flex-direction:column;gap:1.3vh;
+    height:72vh;overflow-y:auto}
+  .card{border:1px solid var(--line);border-radius:9px;padding:1.3vh 1.2vw}
+  .card h3{margin:0 0 1vh;font-family:var(--mono);font-size:1.5vh;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--grey);font-weight:700}
+  .methods{display:grid;grid-template-columns:1fr 1fr;gap:.7vh}
+  .mbtn{display:flex;align-items:center;gap:.5vw;text-align:left;font:600 1.7vh/1.2 inherit;color:var(--ink);
+    background:#fff;border:1.5px solid var(--line);border-radius:7px;padding:.8vh .7vw;cursor:pointer;transition:.12s}
+  .mbtn:hover{border-color:var(--forest);background:#f6faf9}
+  .mbtn.on{border-color:var(--forest);background:color-mix(in srgb,var(--forest) 10%,#fff);
+    box-shadow:0 2px 10px rgba(15,118,110,.12)}
+  .mbtn .nm{flex:1;min-width:0}
+  .mbtn .vd{width:.9vh;height:.9vh;border-radius:50%;flex:0 0 auto}
+  .vd.win{background:var(--forest)} .vd.ns{background:#9aa3ab} .vd.hurt{background:var(--clay)}
+  .explain{font-size:1.85vh;line-height:1.5;color:#33414e}
+  .explain b{color:var(--ink)} .explain .verdict{font-weight:700}
+  .explain .win{color:var(--forest-deep)} .explain .ns{color:#6b7280} .explain .hurt{color:var(--clay)}
+  .ctrls{display:flex;align-items:center;gap:.8vw}
+  .ctrls button{font:600 2.0vh/1 inherit;color:#fff;background:var(--forest);border:0;border-radius:7px;
+    padding:1vh 1.1vw;cursor:pointer;flex:0 0 auto}
+  .ctrls button:hover{background:var(--forest-deep)}
+  .ctrls button.ghost{background:#fff;color:var(--forest);border:1.5px solid var(--line)}
+  .ctrls button.ghost:hover{background:#f6faf9;border-color:var(--forest)}
+  input[type=range]{flex:1;min-width:0;accent-color:var(--forest)}
+  .tlab{font-family:var(--mono);font-size:1.55vh;color:var(--grey);white-space:nowrap}
+  .stats{display:flex;gap:1.4vw;flex-wrap:wrap}
+  .stat .n{font-size:3.4vh;font-weight:800;line-height:1}
+  .stat .n.gold{color:var(--gold-deep)} .stat .n.blue{color:var(--keep)}
+  .stat .l{font-size:1.5vh;color:var(--grey);margin-top:.3vh;max-width:16ch}
+  canvas#curve{width:100%;height:20vh;display:block}
+  .curvelab{font-size:1.5vh;color:var(--grey);margin-top:.4vh;line-height:1.4}
+  .foot{padding:0 3vw 2.4vh;font-size:1.6vh;color:var(--grey);line-height:1.5;max-width:130ch}
+  .foot a{color:var(--forest)}
+  .back{position:fixed;top:2.4vh;right:2.6vw;font-family:var(--mono);font-size:1.5vh;text-transform:uppercase;
+    letter-spacing:.06em;color:var(--forest);text-decoration:none}
+</style>
+</head>
+<body>
+<a class="back" href="./#11">&larr;&nbsp;back to the deck</a>
+<header>
+  <h1><span class="kick">Discovery pre-flight &middot; appendix to the selector benchmark</span>Six selectors, one embedding &mdash; watch them walk it</h1>
+  <p class="sub">Slide&nbsp;11 says CoreSet, novel_margin and MaxHerding tie at the top and TypiClust hurts. <b>Here is the mechanism.</b>
+    Pick a strategy, drag the round slider, and watch which points it labels on the <i>same</i> fixed cloud. Gold stars are rare species; the goal is to light up as many as possible per label spent.</p>
+</header>
+
+<div class="wrap">
+  <div class="stage">
+    <canvas id="emb"></canvas>
+    <div class="hud">
+      <span><span class="d" style="background:#c3cad0"></span>unlabelled</span>
+      <span><span class="d ring"></span>rare, still hidden</span>
+      <span><span class="d" style="background:var(--keep)"></span>labelled (common)</span>
+      <span><span class="star">&#9733;</span>rare species found</span>
+      <span><span class="d" style="background:var(--clay)"></span>picked this round</span>
+    </div>
+    <div class="stagecap" id="stagecap"></div>
+  </div>
+
+  <div class="side">
+    <div class="card">
+      <h3>Selection strategy</h3>
+      <div class="methods" id="methods"></div>
+    </div>
+    <div class="card">
+      <div class="explain" id="explain"></div>
+    </div>
+    <div class="card">
+      <h3>Labelling round</h3>
+      <div class="ctrls">
+        <button id="play" title="play / pause">&#9654;</button>
+        <button class="ghost" id="reset" title="back to start">&#8635;</button>
+        <input type="range" id="tslider" min="0" max="12" value="0" step="1">
+        <span class="tlab" id="tlab">0 / 12</span>
+      </div>
+      <div class="stats" style="margin-top:1.2vh">
+        <div class="stat"><div class="n blue" id="statLab">8</div><div class="l">labels spent</div></div>
+        <div class="stat"><div class="n gold" id="statRare">0</div><div class="l">rare species found (of 14)</div></div>
+      </div>
+    </div>
+    <div class="card">
+      <h3>Rare species found vs labels</h3>
+      <canvas id="curve"></canvas>
+      <div class="curvelab" id="curvelab"></div>
+    </div>
+  </div>
+</div>
+
+<div class="foot">
+  <b>Illustrative, not BCI data.</b> Each strategy is the <i>real</i> algorithm (CoreSet greedy k-center, novel_margin distance-to-nearest-labelled, MaxHerding kernel herding, ProbCover &epsilon;-ball coverage, BADGE uncertainty&times;diversity, TypiClust density-typicality) run on one synthetic 200-point cloud where common species form dense clusters and rare species sit in the sparse gaps and edges. It reproduces the <i>ordering</i> of the measured benchmark to show <i>why</i> it happens; the numbers on real crowns (8 seeds, DINOv3, multiple-testing corrected) are on <a href="./#11">slide&nbsp;11</a>.
+</div>
+
+<script>
+/* ===== verified selector core (ported from the audited sim) ===== */
+function mulberry32(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296;};}
+function gauss(r){return r()+r()+r()-1.5;}
+
+function buildCloud(seed){
+  const r=mulberry32(seed);const pts=[];let sp=0;
+  const cc=[[0.32,0.42],[0.46,0.32],[0.58,0.46],[0.42,0.58],[0.56,0.63],[0.67,0.35]];
+  cc.forEach(c=>{const n=24+Math.floor(r()*10);
+    for(let i=0;i<n;i++)pts.push({x:c[0]+gauss(r)*0.06,y:c[1]+gauss(r)*0.06,sp,rare:false});sp++;});
+  const nRare=14;
+  for(let k=0;k<nRare;k++){let cx,cy;
+    if(k%2===0){const c=cc[k%cc.length];const a=r()*6.283,rad=0.11+r()*0.06;cx=c[0]+Math.cos(a)*rad;cy=c[1]+Math.sin(a)*rad;}
+    else{let t=0;do{cx=r();cy=r();t++;}while(t<40&&(cx>0.20&&cx<0.80&&cy>0.18&&cy<0.74));}
+    const n=2+Math.floor(r()*3);
+    for(let i=0;i<n;i++)pts.push({x:cx+gauss(r)*0.035,y:cy+gauss(r)*0.035,sp,rare:true});sp++;}
+  return {pts,nSpecies:sp,nRare};
+}
+function distMatrix(pts){const n=pts.length,D=Array.from({length:n},()=>new Float64Array(n));
+  for(let i=0;i<n;i++)for(let j=i+1;j<n;j++){const d=Math.hypot(pts[i].x-pts[j].x,pts[i].y-pts[j].y);D[i][j]=d;D[j][i]=d;}return D;}
+function unlabeled(n,lab){const u=[];for(let i=0;i<n;i++)if(!lab.has(i))u.push(i);return u;}
+function minDistTo(i,set,D){let m=Infinity;for(const j of set)if(D[i][j]<m)m=D[i][j];return m;}
+
+const SELECTORS={
+  random(pts,D,lab,b,rng){const u=unlabeled(pts.length,lab),out=[];
+    for(let p=0;p<b&&u.length;p++)out.push(u.splice(Math.floor(rng()*u.length),1)[0]);return out;},
+  CoreSet(pts,D,lab,b,rng){const out=[],cur=new Set(lab);
+    for(let p=0;p<b;p++){const u=unlabeled(pts.length,cur);if(!u.length)break;let best=-1,bd=-1;
+      for(const i of u){const d=minDistTo(i,cur,D);if(d>bd){bd=d;best=i;}}out.push(best);cur.add(best);}return out;},
+  novel_margin(pts,D,lab,b,rng){const u=unlabeled(pts.length,lab);
+    u.sort((a,c)=>minDistTo(c,lab,D)-minDistTo(a,lab,D));return u.slice(0,b);},
+  MaxHerding(pts,D,lab,b,rng){const s2=2*0.16*0.16,K=d=>Math.exp(-d*d/s2),out=[],cur=new Set(lab),n=pts.length;
+    for(let p=0;p<b;p++){const u=unlabeled(pts.length,cur);if(!u.length)break;let best=-1,bs=-Infinity;
+      for(const i of u){let pt=0;for(let j=0;j<n;j++)pt+=K(D[i][j]);pt/=n;let st=0,c=0;for(const s of cur){st+=K(D[i][s]);c++;}st/=(c+1);
+        const sc=pt-st;if(sc>bs){bs=sc;best=i;}}out.push(best);cur.add(best);}return out;},
+  ProbCover(pts,D,lab,b,rng){const eps=0.15,n=pts.length,out=[],covered=new Set(lab);
+    const nb=Array.from({length:n},(_,i)=>{const a=[];for(let j=0;j<n;j++)if(D[i][j]<=eps)a.push(j);return a;});
+    const cur=new Set(lab);
+    for(let p=0;p<b;p++){const u=unlabeled(pts.length,cur);if(!u.length)break;let best=-1,bc=-1;
+      for(const i of u){let c=0;for(const j of nb[i])if(!covered.has(j))c++;if(c>bc){bc=c;best=i;}}
+      out.push(best);cur.add(best);for(const j of nb[best])covered.add(j);}return out;},
+  BADGE(pts,D,lab,b,rng){const n=pts.length,cen={},cnt={};
+    for(const i of lab){const s=pts[i].sp;if(!cen[s]){cen[s]=[0,0];cnt[s]=0;}cen[s][0]+=pts[i].x;cen[s][1]+=pts[i].y;cnt[s]++;}
+    const cs=Object.keys(cen).map(s=>[cen[s][0]/cnt[s],cen[s][1]/cnt[s]]);const u=unlabeled(n,lab);
+    const unc=u.map(i=>{const ds=cs.map(c=>Math.hypot(pts[i].x-c[0],pts[i].y-c[1])).sort((a,c)=>a-c);
+      const d1=ds[0]||1,gap=ds.length>=2?Math.abs(ds[0]-ds[1]):d1;
+      return Math.exp(-d1/0.10)*(1/(1+10*gap));});
+    const out=[],chosen=[];let fi=0;for(let k=1;k<u.length;k++)if(unc[k]>unc[fi])fi=k;out.push(u[fi]);chosen.push(u[fi]);
+    for(let p=1;p<b;p++){let best=-1,bs=-Infinity;
+      for(let k=0;k<u.length;k++){if(chosen.includes(u[k]))continue;const dm=Math.min(...chosen.map(c=>D[u[k]][c]));
+        const sc=unc[k]*dm*dm;if(sc>bs){bs=sc;best=u[k];}}if(best<0)break;out.push(best);chosen.push(best);}return out;},
+  TypiClust(pts,D,lab,b,rng){const n=pts.length,K=7,u=unlabeled(n,lab);
+    const typ=u.map(i=>{const ds=u.filter(j=>j!==i).map(j=>D[i][j]).sort((a,c)=>a-c).slice(0,K);
+      return -ds.reduce((s,d)=>s+d,0)/Math.max(ds.length,1);});
+    const order=u.map((i,k)=>[i,typ[k]]).sort((a,c)=>c[1]-a[1]);const out=[],blocked=new Set();
+    for(const [i] of order){if(out.length>=b)break;if(blocked.has(i))continue;out.push(i);
+      for(let j=0;j<n;j++)if(D[i][j]<0.10)blocked.add(j);}
+    for(const [i] of order){if(out.length>=b)break;if(!out.includes(i))out.push(i);}return out;},
+};
+
+/* ===== fixed display run: cloud seed 1039, run seed 4 (verified representative) ===== */
+const SEEDN=8, BATCH=4, ROUNDS=12;
+const CLOUD=buildCloud(1039), D=distMatrix(CLOUD.pts);
+const METHODS=[
+  {k:'CoreSet',      vd:'win', txt:'<b>CoreSet</b> (greedy k-center): each pick is the point <b>farthest from everything labelled</b>. It walks straight to the empty edges &mdash; exactly where rare species hide. <span class="verdict win">beats random.</span>'},
+  {k:'novel_margin', vd:'win', txt:'<b>novel_margin</b>: rank every candidate by its <b>distance to the nearest labelled point</b>, take the top few. The same edge-seeking instinct as CoreSet, and the quantity the pre-flight is built on. <span class="verdict win">beats random.</span>'},
+  {k:'MaxHerding',   vd:'win', txt:'<b>MaxHerding</b> (kernel herding): pick points so the batch <b>mirrors the whole cloud’s shape</b>. Matching the distribution forces it into the sparse pockets too. <span class="verdict win">beats random.</span>'},
+  {k:'random',       vd:'ns',  txt:'<b>random</b>: the honest floor. Picks are spread by chance, so rare species turn up at their base rate &mdash; no faster, no slower. <span class="verdict ns">the baseline everything is judged against.</span>'},
+  {k:'ProbCover',    vd:'ns',  txt:'<b>ProbCover</b>: cover the cloud with &epsilon;-balls, greedily grabbing the point that <b>covers the most uncovered neighbours</b>. Dense common blobs win the coverage race; rare singletons barely register. <span class="verdict ns">no better than random on the rare tail.</span>'},
+  {k:'BADGE',        vd:'ns',  txt:'<b>BADGE</b> (uncertainty&times;diversity): chase points on the <b>boundaries between species the model already knows</b>. Those boundaries sit among the common classes, not out where new lineages are. <span class="verdict ns">doesn’t help the rare tail.</span>'},
+  {k:'TypiClust',    vd:'hurt',txt:'<b>TypiClust</b> (typicality): pick the <b>densest, most typical</b> representative of each region. It is the exact opposite of novelty &mdash; it hugs the crowd and steps over the rare pockets. <span class="verdict hurt">hurts rare discovery.</span>'},
+];
+
+// precompute per-method: cumulative labelled index arrays per step, and rare-count curve
+function computeAll(){
+  const res={};
+  for(const m of METHODS){
+    const rng=mulberry32(4*7919+101); // fixed run seed = 4
+    const lab=new Set();
+    const commonIdx=CLOUD.pts.map((p,i)=>i).filter(i=>!CLOUD.pts[i].rare);
+    const pool=commonIdx.slice();
+    for(let k=0;k<SEEDN;k++)lab.add(pool.splice(Math.floor(rng()*pool.length),1)[0]);
+    const seed=[...lab];
+    const rareSeen=new Set();for(const i of lab)if(CLOUD.pts[i].rare)rareSeen.add(CLOUD.pts[i].sp);
+    const steps=[{labeled:[...lab],batch:[],labels:lab.size,rare:rareSeen.size}];
+    for(let round=0;round<ROUNDS;round++){
+      const batch=SELECTORS[m.k](CLOUD.pts,D,lab,BATCH,rng);
+      for(const i of batch){lab.add(i);if(CLOUD.pts[i].rare)rareSeen.add(CLOUD.pts[i].sp);}
+      steps.push({labeled:[...lab],batch,labels:lab.size,rare:rareSeen.size});
+    }
+    res[m.k]={steps,seed};
+  }
+  return res;
+}
+const RUN=computeAll();
+
+/* ===== state + rendering ===== */
+let method='CoreSet', t=0, playing=false, timer=null;
+const embc=document.getElementById('emb'), cvc=document.getElementById('curve');
+
+function draw(){
+  const dpr=window.devicePixelRatio||1,W=embc.clientWidth,H=embc.clientHeight;if(!W||!H)return;
+  embc.width=W*dpr;embc.height=H*dpr;const ctx=embc.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+  const pad=Math.max(18,W*0.05),X=x=>pad+x*(W-2*pad),Y=y=>pad+y*(H-2*pad),R=Math.max(3.4,W*0.007);
+  const step=RUN[method].steps[t], labSet=new Set(step.labeled), batchSet=new Set(step.batch), seedSet=new Set(RUN[method].seed);
+  // unlabelled first (common grey dot, rare hollow gold ring)
+  CLOUD.pts.forEach((p,i)=>{if(labSet.has(i))return;
+    if(p.rare){ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R*1.05,0,7);ctx.lineWidth=1.5;ctx.strokeStyle='rgba(210,154,46,.55)';ctx.stroke();}
+    else{ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R*0.82,0,7);ctx.fillStyle='#c3cad0';ctx.fill();}});
+  // labelled
+  CLOUD.pts.forEach((p,i)=>{if(!labSet.has(i))return;
+    if(p.rare){star(ctx,X(p.x),Y(p.y),R*2.0);}
+    else{ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R*1.05,0,7);ctx.fillStyle='#0072B2';ctx.fill();
+      if(seedSet.has(i)){ctx.lineWidth=1.6;ctx.strokeStyle='#15211D';ctx.stroke();}}});
+  // batch halo (picked this round)
+  step.batch.forEach(i=>{const p=CLOUD.pts[i];ctx.beginPath();ctx.arc(X(p.x),Y(p.y),R*2.9,0,7);
+    ctx.lineWidth=2.6;ctx.strokeStyle='#c1682f';ctx.stroke();});
+  document.getElementById('stagecap').innerHTML=
+    t===0?'Round 0 &mdash; the seed set: a few common species you start knowing. Drag the slider to spend labels.'
+    :'Round '+t+' &mdash; '+method+' just labelled the <b style="color:#c1682f">'+step.batch.length+' ringed points</b>. '+
+     'Rare finds so far: <b style="color:#a9791d">'+step.rare+'</b>.';
+}
+function star(ctx,cx,cy,rad){ctx.beginPath();for(let i=0;i<10;i++){const a=-Math.PI/2+i*Math.PI/5,rr=i%2===0?rad:rad*0.44;
+  const x=cx+Math.cos(a)*rr,y=cy+Math.sin(a)*rr;i===0?ctx.moveTo(x,y):ctx.lineTo(x,y);}ctx.closePath();
+  ctx.fillStyle='#d29a2e';ctx.fill();ctx.lineWidth=1.4;ctx.strokeStyle='#7a5711';ctx.stroke();}
+
+function drawCurve(){
+  const dpr=window.devicePixelRatio||1,W=cvc.clientWidth,H=cvc.clientHeight;if(!W||!H)return;
+  cvc.width=W*dpr;cvc.height=H*dpr;const ctx=cvc.getContext('2d');ctx.setTransform(dpr,0,0,dpr,0,0);ctx.clearRect(0,0,W,H);
+  const pl=W*0.11,pr=W*0.03,ptop=H*0.10,pb=H*0.20;
+  const maxL=SEEDN+ROUNDS*BATCH, maxR=CLOUD.nRare;
+  const X=l=>pl+(l-SEEDN)/(maxL-SEEDN)*(W-pl-pr), Y=r=>H-pb-r/maxR*(H-ptop-pb);
+  // axes
+  ctx.strokeStyle='#d5dadd';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(pl,H-pb);ctx.lineTo(W-pr,H-pb);ctx.moveTo(pl,H-pb);ctx.lineTo(pl,ptop);ctx.stroke();
+  ctx.fillStyle='#9aa3ab';ctx.font='500 '+Math.max(9,W*0.024)+'px '+getComputedStyle(document.body).fontFamily;
+  ctx.textAlign='right';ctx.fillText(maxR,pl-4,Y(maxR)+3);ctx.fillText('0',pl-4,Y(0)+3);
+  // ghost curves (all methods, faint), active bold
+  for(const m of METHODS){const steps=RUN[m.k].steps;const active=m.k===method;
+    ctx.beginPath();steps.forEach((s,k)=>{const x=X(s.labels),y=Y(s.rare);k===0?ctx.moveTo(x,y):ctx.lineTo(x,y);});
+    if(active){ctx.strokeStyle='#0F766E';ctx.lineWidth=2.8;ctx.globalAlpha=1;}
+    else{ctx.strokeStyle=m.vd==='hurt'?'#e0b49c':m.vd==='win'?'#a9cfca':'#cfd4d8';ctx.lineWidth=1.4;ctx.globalAlpha=.9;}
+    ctx.stroke();ctx.globalAlpha=1;}
+  // marker at current t on the active curve
+  const cs=RUN[method].steps[t];ctx.beginPath();ctx.arc(X(cs.labels),Y(cs.rare),4,0,7);ctx.fillStyle='#0F766E';ctx.fill();
+  ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();
+  document.getElementById('curvelab').innerHTML=
+    'Bold = <b style="color:#0F766E">'+method+'</b>. Faint lines are the other five on the same cloud. Steeper and higher = more rare species per label. x: labels spent &middot; y: rare species found.';
+}
+
+function render(){
+  document.querySelectorAll('.mbtn').forEach(b=>b.classList.toggle('on',b.dataset.k===method));
+  document.getElementById('explain').innerHTML=METHODS.find(m=>m.k===method).txt;
+  const step=RUN[method].steps[t];
+  document.getElementById('statLab').textContent=step.labels;
+  document.getElementById('statRare').textContent=step.rare;
+  document.getElementById('tslider').value=t;
+  document.getElementById('tlab').textContent=t+' / '+ROUNDS;
+  draw();drawCurve();
+}
+
+/* ===== controls ===== */
+const mc=document.getElementById('methods');
+METHODS.forEach(m=>{const b=document.createElement('button');b.className='mbtn';b.dataset.k=m.k;
+  b.innerHTML='<span class="vd '+m.vd+'"></span><span class="nm">'+m.k+'</span>';
+  b.onclick=()=>{method=m.k;render();};mc.appendChild(b);});
+document.getElementById('tslider').oninput=e=>{t=+e.target.value;render();};
+document.getElementById('reset').onclick=()=>{t=0;stop();render();};
+function stop(){playing=false;clearInterval(timer);document.getElementById('play').innerHTML='&#9654;';}
+function play(){if(playing){stop();return;}if(t>=ROUNDS)t=0;playing=true;document.getElementById('play').innerHTML='&#10073;&#10073;';
+  timer=setInterval(()=>{if(t>=ROUNDS){stop();return;}t++;render();},650);}
+document.getElementById('play').onclick=play;
+addEventListener('keydown',e=>{if(e.key==='ArrowRight'&&t<ROUNDS){t++;render();}else if(e.key==='ArrowLeft'&&t>0){t--;render();}
+  else if(e.key===' '){play();e.preventDefault();}});
+if(window.ResizeObserver){new ResizeObserver(()=>{draw();drawCurve();}).observe(embc);new ResizeObserver(drawCurve).observe(cvc);}
+addEventListener('resize',()=>{draw();drawCurve();});
+render();
+</script>
+</body>
+</html>
