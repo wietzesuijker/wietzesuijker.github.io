@@ -68,12 +68,16 @@
   .alab b{color:var(--ink)}
   .foot{padding:.4vh 3vw 2vh;font-size:1.5vh;color:var(--grey);line-height:1.5;max-width:135ch}
   .foot a{color:var(--forest)}
-  .back{position:fixed;top:2.2vh;right:2.4vw;font-family:var(--mono);font-size:1.42vh;text-transform:uppercase;
-    letter-spacing:.06em;color:var(--forest);text-decoration:none;z-index:5}
+  .back{position:fixed;top:2vh;right:2.4vw;z-index:5;display:inline-flex;align-items:center;gap:.4vw;
+    font-family:var(--mono);font-size:1.42vh;text-transform:uppercase;letter-spacing:.06em;color:#fff;
+    text-decoration:none;background:var(--forest);border-radius:999px;padding:.7vh 1.1vw;
+    box-shadow:0 2px 8px rgba(15,118,110,.25);transition:.14s}
+  .back:hover{background:var(--forest-deep);box-shadow:0 3px 12px rgba(15,118,110,.35)}
+  .back .n{background:#fff;color:var(--forest-deep);border-radius:999px;padding:.05vh .6vw;font-weight:700}
 </style>
 </head>
 <body>
-<a class="back" href="./#11">&larr;&nbsp;back to the deck</a>
+<a class="back" href="./#11" title="Return to slide 11, the selector benchmark">&larr;&nbsp;back to <span class="n">slide&nbsp;11</span> &middot; the benchmark</a>
 <header>
   <h1><span class="kick">Discovery pre-flight &middot; appendix to the selector benchmark</span>Every selector is a map. The map decides who finds new species.</h1>
   <p class="sub">Each strategy does <i>one</i> thing: score every candidate, then label the highest-scoring points. The <b>only</b> difference between them is the score &mdash; the <span style="color:var(--field);font-weight:700">indigo map</span>. Watch <b>where each map glows</b>: in the empty edges where new species hide, or in the crowded centre. That single choice explains the whole ranking on slide&nbsp;11.</p>
