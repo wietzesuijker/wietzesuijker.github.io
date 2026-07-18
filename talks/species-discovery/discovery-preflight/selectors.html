@@ -8,16 +8,18 @@
     --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
     --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;}
   *{box-sizing:border-box}
-  html,body{margin:0;height:100%;font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
+  html{height:100%}
+  body{margin:0;min-height:100vh;display:flex;flex-direction:column;
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif;
     color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased;overflow-x:hidden}
-  header{padding:2.2vh 3vw .8vh}
+  header{flex:0 0 auto;padding:1.6vh 3vw .5vh}
   h1{font-family:var(--serif);color:var(--forest);font-size:3.3vh;font-weight:700;letter-spacing:-.01em;margin:0}
   h1 .kick{font-family:var(--mono);text-transform:uppercase;letter-spacing:.12em;font-size:1.4vh;
     color:var(--grey);font-weight:700;display:block;margin-bottom:.4vh}
   .sub{color:#33414e;font-size:1.9vh;margin:.5vh 0 0;max-width:125ch;line-height:1.45}
   .sub b{color:var(--ink)}
-  .wrap{display:flex;gap:1.4vw;padding:.9vh 3vw .6vh;align-items:stretch;min-height:0}
-  .stage{flex:1 1 auto;min-width:0;height:60vh;position:relative;border:1px solid var(--line);
+  .wrap{flex:1 1 auto;display:flex;gap:1.4vw;padding:.6vh 3vw .5vh;align-items:stretch;min-height:0}
+  .stage{flex:1 1 auto;min-width:0;min-height:32vh;position:relative;border:1px solid var(--line);
     border-radius:10px;overflow:hidden;background:radial-gradient(120% 120% at 50% 40%,#fdfefe,#f3f6f8)}
   canvas#emb{display:block;position:absolute;inset:0;width:100%;height:100%}
   .hud{position:absolute;top:1.2vh;left:1.2vh;right:1.2vh;display:flex;gap:1.1vw;flex-wrap:wrap;font-size:1.42vh;
@@ -30,7 +32,7 @@
   .hud .star{color:var(--gold);font-size:1.6vh;margin-right:.15vh}
   .stagecap{position:absolute;bottom:1.1vh;left:1.2vh;right:1.2vh;font-size:1.5vh;color:#5a6b7a;
     background:rgba(255,255,255,.82);border-radius:6px;padding:.5vh .9vw;pointer-events:none;line-height:1.4}
-  .side{width:30vw;max-width:420px;flex:0 0 auto;display:flex;flex-direction:column;gap:1vh;height:60vh}
+  .side{width:30vw;max-width:420px;flex:0 0 auto;display:flex;flex-direction:column;gap:1vh;min-height:0}
   .card{border:1px solid var(--line);border-radius:9px;padding:1.1vh 1.1vw}
   .card h3{margin:0 0 .8vh;font-family:var(--mono);font-size:1.42vh;text-transform:uppercase;
     letter-spacing:.05em;color:var(--grey);font-weight:700;display:flex;justify-content:space-between;align-items:center}
@@ -59,14 +61,14 @@
   .stat .n{font-size:3vh;font-weight:800;line-height:1}
   .stat .n.gold{color:var(--gold-deep)} .stat .n.blue{color:var(--keep)}
   .stat .l{font-size:1.4vh;color:var(--grey);margin-top:.25vh;max-width:15ch}
-  .analysis{display:flex;gap:1.4vw;padding:.4vh 3vw .6vh;align-items:stretch}
+  .analysis{flex:0 0 auto;display:flex;gap:1.4vw;padding:.4vh 3vw .6vh;align-items:stretch}
   .apanel{flex:1;border:1px solid var(--line);border-radius:9px;padding:1vh 1.1vw;min-width:0}
   .apanel h3{margin:0 0 .5vh;font-family:var(--mono);font-size:1.42vh;text-transform:uppercase;
     letter-spacing:.05em;color:var(--grey);font-weight:700}
-  canvas.mini{width:100%;height:19vh;display:block}
+  canvas.mini{width:100%;height:14vh;min-height:96px;display:block}
   .alab{font-size:1.42vh;color:var(--grey);margin-top:.35vh;line-height:1.4}
   .alab b{color:var(--ink)}
-  .foot{padding:.4vh 3vw 2vh;font-size:1.5vh;color:var(--grey);line-height:1.5;max-width:135ch}
+  .foot{flex:0 0 auto;padding:.3vh 3vw .9vh;font-size:1.48vh;color:var(--grey);line-height:1.45;max-width:135ch}
   .foot a{color:var(--forest)}
   .back{position:fixed;top:2vh;right:2.4vw;z-index:5;display:inline-flex;align-items:center;gap:.4vw;
     font-family:var(--mono);font-size:1.42vh;text-transform:uppercase;letter-spacing:.06em;color:#fff;
@@ -80,7 +82,7 @@
 <a class="back" href="./#11" title="Return to slide 11, the selector benchmark">&larr;&nbsp;back to <span class="n">slide&nbsp;11</span> &middot; the benchmark</a>
 <header>
   <h1><span class="kick">Discovery pre-flight &middot; appendix to the selector benchmark</span>Every selector is a map. The map decides who finds new species.</h1>
-  <p class="sub">Each strategy does <i>one</i> thing: score every candidate, then label the highest-scoring points. The <b>only</b> difference between them is the score &mdash; the <span style="color:var(--field);font-weight:700">indigo map</span>. Watch <b>where each map glows</b>: in the empty edges where new species hide, or in the crowded centre. That single choice explains the whole ranking on slide&nbsp;11.</p>
+  <p class="sub">Each strategy does <i>one</i> thing: score every candidate, then label the top scorers. The <b>only</b> difference is the score &mdash; the <span style="color:var(--field);font-weight:700">indigo map</span>. Watch <b>where it glows</b>: the empty edges where new species hide, or the crowded centre. That choice explains the whole <a href="./#11" style="color:var(--forest)">slide-11 ranking</a>.</p>
 </header>
 
 <div class="wrap">
@@ -136,7 +138,7 @@
 </div>
 
 <div class="foot">
-  <b>Illustrative, not BCI data.</b> Each strategy is the <i>real</i> algorithm run on one synthetic 200-point cloud where common species form dense clusters and rare species sit in the sparse gaps and edges. The map shown is the exact quantity each selector maximises. The mechanism it exposes &mdash; the sparser the ground a method labels, the more rare species it finds (rank correlation &asymp;&nbsp;0.9 here) &mdash; is why CoreSet, novel_margin and MaxHerding win and TypiClust loses; the measured numbers on real crowns (8 seeds, DINOv3, multiple-testing corrected) are on <a href="./#11">slide&nbsp;11</a>.
+  <b>Illustrative, not BCI data.</b> Each strategy is the <i>real</i> algorithm on one synthetic 200-point cloud (common species dense, rare species in the sparse gaps and edges); the map is the exact quantity it maximises. The mechanism &mdash; sparser ground labelled &rarr; more rare found (rank corr &asymp;&nbsp;0.9 here) &mdash; is why the three winners win and TypiClust loses. Measured numbers on real crowns are on <a href="./#11">slide&nbsp;11</a>.
 </div>
 
 <script>
@@ -347,13 +349,22 @@ function drawScatter(){
   const slope=sxy/(sxx||1), b0=my-slope*mx;
   ctx.strokeStyle='#c9ccd1';ctx.setLineDash([5,4]);ctx.lineWidth=1.4;ctx.beginPath();
   ctx.moveTo(X(SP_MIN),Y(Math.max(0,Math.min(maxR,slope*SP_MIN+b0))));ctx.lineTo(X(SP_MAX),Y(Math.max(0,Math.min(maxR,slope*SP_MAX+b0))));ctx.stroke();ctx.setLineDash([]);
-  // dots
-  METHODS.forEach(m=>{const active=m.k===method;const x=X(RUN[m.k].meanSparsity),y=Y(RUN[m.k].finalRare);
-    const col=m.vd==='win'?'#0F766E':m.vd==='hurt'?'#c1682f':'#9aa3ab';
-    ctx.beginPath();ctx.arc(x,y,active?Math.max(5,W*0.011):Math.max(3.4,W*0.0075),0,7);ctx.fillStyle=col;ctx.fill();
-    if(active){ctx.lineWidth=2.4;ctx.strokeStyle='#15211D';ctx.stroke();}
-    ctx.fillStyle=active?'#15211D':'#7a828a';ctx.font=(active?'700 ':'500 ')+Math.max(8.5,W*0.019)+'px '+getComputedStyle(document.body).fontFamily;
-    ctx.textAlign=x>W*0.6?'right':'left';ctx.fillText(m.k, x+(x>W*0.6?-8:8), y+3);});
+  // dots + de-collided labels (relaxation on label y within each side, connectors when nudged)
+  const fs=Math.max(8.5,W*0.019), gap=fs*1.32, fam=getComputedStyle(document.body).fontFamily;
+  const L=METHODS.map(m=>{const x=X(RUN[m.k].meanSparsity),y=Y(RUN[m.k].finalRare);
+    return {k:m.k,x,y,ly:y,active:m.k===method,side:x>W*0.60?-1:1,
+      col:m.vd==='win'?'#0F766E':m.vd==='hurt'?'#c1682f':'#9aa3ab'};});
+  for(let pass=0;pass<12;pass++)for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){
+    if(L[i].side!==L[j].side)continue;const dy=L[j].ly-L[i].ly;
+    if(Math.abs(dy)<gap){const p=(gap-Math.abs(dy))/2*(dy>=0?1:-1);L[i].ly-=p;L[j].ly+=p;}}
+  L.forEach(o=>o.ly=Math.max(ptop+fs*0.7,Math.min(H-pb-2,o.ly)));
+  L.forEach(o=>{ctx.beginPath();ctx.arc(o.x,o.y,o.active?Math.max(5,W*0.011):Math.max(3.4,W*0.0075),0,7);
+    ctx.fillStyle=o.col;ctx.fill();if(o.active){ctx.lineWidth=2.4;ctx.strokeStyle='#15211D';ctx.stroke();}});
+  L.forEach(o=>{const lx=o.x+o.side*(o.active?10:8);
+    if(Math.abs(o.ly-o.y)>fs*0.55){ctx.strokeStyle='rgba(150,158,166,.55)';ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(o.x+o.side*3,o.y);ctx.lineTo(lx,o.ly);ctx.stroke();}
+    ctx.fillStyle=o.active?'#15211D':'#7a828a';ctx.font=(o.active?'700 ':'500 ')+fs+'px '+fam;
+    ctx.textAlign=o.side<0?'right':'left';ctx.fillText(o.k,lx,o.ly+fs*0.34);});
   document.getElementById('scatlab').innerHTML='Each dot is one selector. Right = it spends labels on sparser ground; up = it finds more rare species. <b>The map that chases empty space wins</b> (rank corr &asymp; 0.9).';
 }
 
