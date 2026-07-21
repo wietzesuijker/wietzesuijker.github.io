@@ -306,18 +306,6 @@
     </div>
   </section>
 
-  <!-- 11 -->
-  <section class="slide">
-    <h2><span class="kick">From geometry to software</span>Two layers, one job</h2>
-    <div class="body">
-      <div class="cols">
-        <div class="col"><h3>labelfirst <span class="it">(the engine)</span></h3>
-          <ul><li>which photo to label next</li><li>the <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">separability pre-flight</a>: will smart picking beat random?</li><li><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/strategies/__init__.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">16 interchangeable strategies</a> behind one call</li></ul></div>
-        <div class="col"><h3>speciesfirst <span class="it">(the BCI deployment)</span></h3>
-          <ul><li><a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/genus.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">tier by confidence, genus fallback</a></li><li>the <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/loop.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Labelbox curation loop</a></li><li>the <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/wcvp_export.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Pl@ntNet label handoff</a></li></ul></div>
-      </div>
-    </div>
-  </section>
 
   <!-- selector vs named baselines + gauge forecast -->
   <section class="slide">
@@ -372,7 +360,7 @@
 <section class="slide">
     <h2><span class="kick">labelfirst &middot; the engine</span>A numpy-core selection library</h2>
     <div class="body"><div class="appx">
-      <div class="appx-lead">Selection and audit run with <b>zero deep-learning dependencies</b>; torch and pyarrow load lazily, only when you embed or read parquet.</div>
+      <div class="appx-lead">Two layers, one job: <b>labelfirst</b> is the reusable engine, <b>speciesfirst</b> the BCI deployment on top. Selection and audit run with <b>zero deep-learning dependencies</b>; torch and pyarrow load lazily, only when you embed or read parquet.</div>
       <ul>
         <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/io/embeddings.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Columnar embeddings I/O.</a></b> <code>key, embedding</code> parquet, read straight from the Arrow value buffer (skips the per-row Python list that triples peak RAM); every row L2-normalized at load, so <code>X @ X&#7488;</code> is cosine.</li>
         <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/strategies/__init__.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">16 strategies behind one Protocol.</a></b> <code>select(X, labeled, k)</code> dispatched from a registry; default <b>CoreSet</b> (greedy k-center, cosine). One <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/pipeline.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><code>select_batches</code></a> call gates, selects, then KMeans-batches for the labeller.</li>
