@@ -334,11 +334,12 @@
   <section class="slide">
     <h2>The recipe on real crowns roughly doubles skill</h2>
     <div class="body">
-      <img class="fig" src="figs/pipeline.png" alt="deployment recipe pipeline" style="max-height:56vh">
-      <div class="cap">On 3&thinsp;280 BCI crowns: the raw margin <b>picks the best embedding</b> without running the
+      <img class="fig" src="figs/pipeline.png" alt="deployment recipe pipeline" style="max-height:50vh">
+      <div class="cap" style="font-size:2.4vh">On 3&thinsp;280 BCI crowns: the raw margin <b>picks the best embedding</b> without running the
         experiment; <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/whiten.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">whitening the survey batch</a> then adds +0.09&ndash;0.12 AUROC. End to end, detection skill above chance
         roughly <b class="accent">doubles (0.642 &rarr; 0.785)</b>. But whitening helps the <i>detector</i> and
-        <i>hurts</i> selection, so: whiten for detection, keep raw for selection.</div>
+        <i>hurts</i> selection, so: whiten for detection, keep raw for selection.
+        <span style="color:var(--grey)">The whitening gain is fit on the survey batch itself, so re-fit it per batch; it is not a portable number. And detection pays off where you <b>gate by the novelty score</b>, the GO/skip call and flagging likely-new crowns for an expert, not in ordering the label queue.</span></div>
     </div>
   </section>
 
