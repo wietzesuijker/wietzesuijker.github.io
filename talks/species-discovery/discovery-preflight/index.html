@@ -160,9 +160,9 @@
 
   <!-- 5 -->
   <section class="slide">
-    <h2>The ruler: gaps between species, not cloud size</h2>
+    <h2><span class="kick">Step 1 &middot; what the ruler measures</span>The ruler: gaps between species, not cloud size</h2>
     <div class="body">
-      <img class="fig" src="figs/mechanism.png" alt="margin mechanism" style="max-height:68vh">
+      <img class="fig" src="figs/mechanism.png" alt="margin mechanism" style="max-height:56vh">
       <div class="cap" style="font-size:2.3vh">The pre-flight is the <b class="accent"><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">inter-species margin</a></b>:
         how cleanly species clusters separate. As a <i>gauge</i>, it forecasts how well <i>both</i> feature-space tasks go (Spearman
         <b>+0.65</b> spotting, <b>+0.63</b> choosing). Effective dimension, how high-dimensional the cloud is,
@@ -174,7 +174,7 @@
 
   <!-- 6: AUROC intuition -->
   <section class="slide" id="bells-slide">
-    <h2>What "detectable" means: two bell curves and the gap between them</h2>
+    <h2><span class="kick">Step 2 &middot; the gap becomes a number</span>What "detectable" means: two bell curves and the gap between them</h2>
     <div class="body">
       <canvas id="bells" style="width:80vw;height:50vh;display:block"></canvas>
       <div class="cap" style="max-width:88%">Give every observation a novelty score. <b>Known</b> species and
@@ -190,7 +190,7 @@
 
   <!-- 5 -->
   <section class="slide">
-    <h2>It transfers off the data it was measured on</h2>
+    <h2><span class="kick">Step 3 &middot; and it transfers</span>It transfers off the data it was measured on</h2>
     <div class="body">
       <img class="fig" src="figs/generalize.png" alt="cross-realm and cross-backbone generalization" style="max-height:58vh">
       <div class="cap">The margin forecasts per-order difficulty on a <b>continent it was never measured on</b>
@@ -202,7 +202,7 @@
 
   <!-- 8 -->
   <section class="slide">
-    <h2>How close to real discovery? A graded boundary</h2>
+    <h2><span class="kick">Step 4 &middot; graded by relatedness</span>How close to real discovery? A graded boundary</h2>
     <div class="body">
       <div class="stats">
         <div class="stat"><div class="n accent">0.92</div><div class="l">vs the <b>whole known fauna</b></div><div class="s">116 out-of-training species</div></div>
