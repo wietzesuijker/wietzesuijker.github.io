@@ -450,6 +450,31 @@
     </div>
   </section>
 
+  <!-- Monday morning: the action -->
+  <section class="slide">
+    <h2><span class="kick">Monday morning</span>What you actually run, in three steps</h2>
+    <div class="body">
+      <div class="cols" style="width:96%;gap:3.4vw;align-items:flex-start">
+        <div class="col"><h3>1 &middot; Embed once</h3>
+          <ul style="font-size:2.7vh;line-height:1.5">
+            <li>images &rarr; a <b>frozen backbone</b>, no training</li>
+            <li>pick the backbone by its <b>separability</b> score: highest gauge wins, no experiment</li>
+          </ul></div>
+        <div class="col"><h3>2 &middot; Gauge: GO or skip</h3>
+          <ul style="font-size:2.7vh;line-height:1.5">
+            <li><b>&Phi;(d&prime;/&radic;2)</b> from a small labelled reference set</li>
+            <li>verdict <b class="accent">GO</b> / borderline / skip, <b>before a label is spent</b></li>
+          </ul></div>
+        <div class="col"><h3>3 &middot; Spend the budget</h3>
+          <ul style="font-size:2.7vh;line-height:1.5">
+            <li>if GO, the <b>selector</b> (CoreSet / novel&#8209;margin) ranks what to label next</li>
+            <li>batch the queue for the labeller</li>
+          </ul></div>
+      </div>
+      <div class="quote" style="margin-top:2.4vh">Three knobs move the needle, in order of payoff: <b>the backbone</b> (the gauge picks it), a <b>mid-flight retrain</b> on common species (the biggest lever, +54% rare species for the same budget), and <b>whitening</b> for the detector, not the selector. Everything else is one selection call.</div>
+    </div>
+  </section>
+
   <!-- 13 -->
   <section class="slide">
     <h2>From correlation to cause: a ladder, not a leap</h2>
