@@ -138,6 +138,23 @@
   </section>
 
   <section class="slide">
+    <h2>The biggest lever: teach the embedding your canopy</h2>
+    <div class="body">
+      <div class="stats">
+        <div class="stat"><div class="n accent">+54%</div><div class="l">more <b>rare species</b> at equal budget</div>
+          <div class="s">79 &rarr; 122 of 157 rare species; 520-label budget, paired over 16 seeds</div></div>
+        <div class="stat"><div class="n accent">~90%</div><div class="l">of the gain retraining <b>mid-flight</b></div>
+          <div class="s">at &asymp;160 labels (+49%); no chicken-and-egg, no waiting to finish</div></div>
+        <div class="stat"><div class="n">0</div><div class="l">rare species <b>seen</b> in fine-tuning</div>
+          <div class="s">train on common only, so the rare-tail lift is honest transfer</div></div>
+      </div>
+      <div class="quote" style="margin-top:3.5vh">Pl@ntNet&rsquo;s embedding learned <b>ground-level leaves and flowers</b>; the crowns are <b>tops from above</b>.
+        Cross-entropy on the frozen backbone&rsquo;s <b class="accent">last few blocks</b>, re-embed, keep selecting on the sharper space.
+        <span style="color:var(--grey);font-size:2.5vh;display:block;margin-top:1.2vh">It sharpens what is <i>familiar</i> so the unfamiliar stands out; it does not teach a lineage it never saw. The retrain handoff to Pl@ntNet is in flight.</span></div>
+    </div>
+  </section>
+
+  <section class="slide">
     <h2>The pre-flight has two prongs, because it fails in two ways</h2>
     <div class="body">
       <div class="figrow">
