@@ -199,7 +199,8 @@
       <div class="cap">The margin forecasts per-order difficulty on a <b>continent it was never measured on</b>
         (+0.59, positive in all six held-out realms), and on <b>species provably absent from the model's training set</b>
         (the forecast holds at pooled &rho; 0.95&ndash;0.99; the closed-form identity fits it to Pearson 0.995&ndash;0.998, across five backbones and all six realms).
-        Backbone-robust and stable across taxonomic levels (order/family/genus +0.65/+0.61/+0.62).</div>
+        Backbone-robust and stable across taxonomic levels (order/family/genus +0.65/+0.61/+0.62).
+        The identity has a known range: tight where species separate, loosening toward chance when they don't (its error scales with separability, &rho; &minus;0.64 across backbones and biomes).</div>
     </div>
   </section>
 
@@ -391,7 +392,7 @@
       <div class="cols">
         <div class="col"><h3>Runs today <span class="it">(measured)</span></h3>
           <ul>
-            <li><b>Tree crowns:</b> measured on real BCI drone crowns; retrain handoff in flight</li>
+            <li><b>UAV tree crowns:</b> now run (<b class="accent">3 biomes &times; 5 backbones</b>, DINOvTree/BIRCH); where species separate, a <b>frozen k-NN ties the fine-tuned model</b> (boreal 0.88 vs 0.85)</li>
             <li><b>Birdsong, insects, aerial:</b> the same species-gap ruler predicts detection accuracy on
               <b class="accent">one straight line, across six data types</b>
               <span style="color:var(--grey);font-size:2.4vh">(AUROC &asymp; 0.32&times;separability + 0.49, R&sup2;=0.96)</span></li>
@@ -399,7 +400,7 @@
         </div>
         <div class="col"><h3>Same recipe, not yet run <span class="it">(candidate)</span></h3>
           <ul>
-            <li>UAV tree ID, insect camera-traps, remote-sensing backbone selection</li>
+            <li>insect camera-traps, remote-sensing backbone selection, herbarium sheets</li>
             <li>same bottleneck (expert time), same frozen-embedding geometry; a dataset manifest away from a test</li>
           </ul>
         </div>
