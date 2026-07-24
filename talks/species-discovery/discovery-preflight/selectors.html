@@ -79,10 +79,10 @@
 </style>
 </head>
 <body>
-<a class="back" href="./#11" title="Return to slide 11, the selector benchmark">&larr;&nbsp;back to <span class="n">slide&nbsp;11</span> &middot; the benchmark</a>
+<a class="back" href="./#12" title="Return to slide 12, the selector benchmark">&larr;&nbsp;back to <span class="n">slide&nbsp;12</span> &middot; the benchmark</a>
 <header>
   <h1><span class="kick">Discovery pre-flight &middot; appendix to the selector benchmark</span>Every selector is a map. The map decides who finds new species.</h1>
-  <p class="sub">Each strategy does <i>one</i> thing: score every candidate, then label the top scorers. The <b>only</b> difference is the score &mdash; the <span style="color:var(--field);font-weight:700">indigo map</span>. Watch <b>where it glows</b>: the empty edges where new species hide, or the crowded centre. That choice explains the whole <a href="./#11" style="color:var(--forest)">slide-11 ranking</a>.</p>
+  <p class="sub">Each strategy does <i>one</i> thing: score every candidate, then label the top scorers. The <b>only</b> difference is the score &mdash; the <span style="color:var(--field);font-weight:700">indigo map</span>. Watch <b>where it glows</b>: the empty edges where new species hide, or the crowded centre. That choice explains the whole <a href="./#12" style="color:var(--forest)">slide-12 ranking</a>.</p>
 </header>
 
 <div class="wrap">
@@ -138,7 +138,7 @@
 </div>
 
 <div class="foot">
-  <b>Illustrative, not BCI data.</b> Each strategy is the <i>real</i> algorithm on one synthetic 200-point cloud (common species dense, rare species in the sparse gaps and edges); the map is the exact quantity it maximises. The mechanism &mdash; sparser ground labelled &rarr; more rare found (rank corr &asymp;&nbsp;0.9 here) &mdash; is why the three winners win and TypiClust loses. Measured numbers on real crowns are on <a href="./#11">slide&nbsp;11</a>.
+  <b>Illustrative, not BCI data.</b> Each strategy is the <i>real</i> algorithm on one synthetic 200-point cloud (common species dense, rare species in the sparse gaps and edges); the map is the exact quantity it maximises. The mechanism &mdash; sparser ground labelled &rarr; more rare found (rank corr &asymp;&nbsp;0.9 here) &mdash; is why the three winners win and TypiClust loses. Measured numbers on real crowns are on <a href="./#12">slide&nbsp;12</a>.
 </div>
 
 <script>
@@ -314,7 +314,7 @@ function drawCurve(){
   ctx.fillStyle='#9aa3ab';ctx.font='500 '+Math.max(9,W*0.02)+'px '+getComputedStyle(document.body).fontFamily;
   ctx.textAlign='right';ctx.fillText(maxR,pl-4,Y(maxR)+3);ctx.fillText('0',pl-4,Y(0)+3);
   const act=RUN[method].steps;
-  // shaded area under the active curve = the score slide 11 reports
+  // shaded area under the active curve = the score slide 12 reports
   ctx.beginPath();ctx.moveTo(X(act[0].labels),Y(0));
   act.forEach(s=>ctx.lineTo(X(s.labels),Y(s.rare)));ctx.lineTo(X(act[act.length-1].labels),Y(0));ctx.closePath();
   ctx.fillStyle='rgba(15,118,110,.10)';ctx.fill();
@@ -329,7 +329,7 @@ function drawCurve(){
   for(let k=1;k<act.length;k++)if(act[k].rare>act[k-1].rare)star(ctx,X(act[k].labels),Y(act[k].rare),Math.max(3,W*0.008),'#d29a2e','#7a5711');
   // current marker
   const cs=act[t];ctx.beginPath();ctx.arc(X(cs.labels),Y(cs.rare),4,0,7);ctx.fillStyle='#0F766E';ctx.fill();ctx.strokeStyle='#fff';ctx.lineWidth=1.5;ctx.stroke();
-  document.getElementById('curvelab').innerHTML='Bold = <b>'+method+'</b>, faint = the other five. Shaded area is what the <a href="./#11" style="color:#0F766E">slide-11</a> benchmark scores &mdash; steeper and higher = more rare species per label.';
+  document.getElementById('curvelab').innerHTML='Bold = <b>'+method+'</b>, faint = the other five. Shaded area is what the <a href="./#12" style="color:#0F766E">slide-12</a> benchmark scores &mdash; steeper and higher = more rare species per label.';
 }
 
 function drawScatter(){
