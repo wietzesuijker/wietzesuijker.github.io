@@ -101,7 +101,7 @@
     <h2>Two layers, one job</h2>
     <div class="body"><div class="cols">
       <div class="col"><h3>labelfirst <span class="it">(the engine)</span></h3>
-        <ul><li>which photo to label next</li><li>a pre-flight: will smart picking beat random?</li></ul></div>
+        <ul><li>which photo to label next</li><li>a pre-flight: is smart picking likely to beat random?</li></ul></div>
       <div class="col"><h3>crownfirst <span class="it">(the BCI deployment)</span></h3>
         <ul><li>tier by confidence, genus fallback</li><li>the Labelbox loop, the Pl@ntNet handoff</li></ul></div>
     </div></div>
@@ -236,7 +236,7 @@
         <li>&ldquo;Cleaning up&rdquo; the embedding first <b>backfired</b> for the default picker on DINOv3: it erased the very structure the picker relies on.</li>
         <li>After retraining, a quick accuracy check <b>barely moved</b> while discovery jumped. Measure discovery directly.</li>
       </ul>
-      <p><b>So the contribution isn't a clever new algorithm</b> &mdash; it's the honest, falsifiable test harness. An unmodified 2018 method plus that protocol beats a half-random hybrid and plain random, once photos nobody can label are skipped (re-proposing them put it 27% below random).</p>
+      <p><b>So the contribution isn't a clever new algorithm</b> &mdash; it's the honest, falsifiable test harness. An unmodified 2018 method plus that protocol beats a half-random hybrid and plain random, once photos nobody can label are kept out of selection (on the drone pool, re-proposing them put it 27% below random).</p>
       <p class="muted">We also reproduce the difficulty score of the Beery transductive-needles method (Kurinchi-Vendhan &amp; Beery 2026, arXiv:2606.03821; per-point correlation 1.000).</p>
     </div></div>
   </section>

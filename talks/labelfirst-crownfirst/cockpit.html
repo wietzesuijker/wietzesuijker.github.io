@@ -706,7 +706,7 @@ if(window.ResizeObserver){ new ResizeObserver(()=>resize()).observe(document.que
 function renderDiscovery(){
   const sp=document.getElementById('sepStat');
   if(sp&&DATA.separability!=null) sp.innerHTML=`Embedding <b>separability ${Math.round(DATA.separability*100)}%</b> `+
-    `<span class="muted">— a crown's nearest neighbour shares its species this often. Higher usually means a bigger gap below, though not after whitening.</span>`;
+    `<span class="muted">— a crown's nearest neighbour shares its species this often. Higher usually means a bigger gap below; this view is whitened, where that link is weaker.</span>`;
   const d=DATA.discovery; if(!d||!d.x||!d.x.length) return;
   const xs=d.x, pri=d.prioritized, rnd=d.random;
   const W=320,H=158,pL=36,pR=10,pT=10,pB=28;

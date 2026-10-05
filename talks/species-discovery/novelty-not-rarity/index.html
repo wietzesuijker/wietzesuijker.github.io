@@ -130,7 +130,7 @@
       <div class="figrow">
         <img src="figs/pipeline.png" alt="pre-flight recipe">
         <div class="fcap">End to end on real BCI crowns: moving from a naive general-backbone reading to the
-          a domain embedding (Pl@ntNet) <b class="accent">lifts detection</b> (0.642 &rarr; 0.693). Whitening lifts it to 0.785 only when fit on the whole survey batch; fit on reference data alone, it lowered detection on all three backbones we tried. <a class="ref" href="https://github.com/traitlab/crownfirst/blob/f97accc13cd29f32b40db18b58b1c2a4489f466c/src/crownfirst/reject.py#L134-L223" target="_blank" rel="noopener" onclick="event.stopPropagation()">Conformal tiering</a> also parks the crowns the model is sure about, so the botanist's
+          a domain embedding (PlantCLEF) <b class="accent">lifts detection</b> (0.642 &rarr; 0.693). Whitening lifts it to 0.785, but that transform was fit on the whole survey batch. <a class="ref" href="https://github.com/traitlab/crownfirst/blob/f97accc13cd29f32b40db18b58b1c2a4489f466c/src/crownfirst/reject.py#L134-L223" target="_blank" rel="noopener" onclick="event.stopPropagation()">Conformal tiering</a> also parks the crowns the model is sure about, so the botanist's
           hours go to the uncertain tail.</div>
       </div>
     </div>
@@ -140,10 +140,10 @@
     <h2>The biggest lever: teach the embedding your canopy</h2>
     <div class="body">
       <div class="stats">
-        <div class="stat"><div class="n accent">+54%</div><div class="l">more <b>rare species</b> at equal budget</div>
+        <div class="stat"><div class="n accent">+54%</div><div class="l">more <b>rare species</b>, a ceiling (backbone adapted on extra labels)</div>
           <div class="s">79 &rarr; 122 of 157 rare species; 520-label budget, paired over 16 seeds</div></div>
         <div class="stat"><div class="n accent">~90%</div><div class="l">of the gain retraining <b>mid-flight</b></div>
-          <div class="s">at &asymp;160 labels (+49%); no chicken-and-egg, no waiting to finish</div></div>
+          <div class="s">at &asymp;160 labels (up to +49%); no chicken-and-egg, no waiting to finish</div></div>
         <div class="stat"><div class="n">0</div><div class="l">rare species <b>seen</b> in fine-tuning</div>
           <div class="s">train on common only, so the rare-tail lift is honest transfer</div></div>
       </div>
@@ -159,7 +159,7 @@
       <div class="figrow">
         <img src="figs/bci_margin_clean.png" alt="margin prong on real crowns">
         <div class="fcap"><b>Prong 1, margin (proactive):</b> on real BCI crowns the
-          margin tracks how detectable each family is, positive on every backbone and clearly so only for Pl@ntNet (7 families) (the scatter at left), so you can focus labelling on the
+          margin tracks how detectable each family is, positive on every backbone and clearly so only for Pl@ntNet (7 families; scatter at left), so you can focus labelling on the
           families where species separate cleanly.
           <b>Prong 2, where those gaps compress:</b> congeneric species overlap, the model confidently
           mislabels the rarer twin as its common cousin, and margin can't flag it, so a <b><a class="ref" href="https://github.com/traitlab/crownfirst/blob/f97accc13cd29f32b40db18b58b1c2a4489f466c/src/crownfirst/disagreement.py#L113-L227" target="_blank" rel="noopener" onclick="event.stopPropagation()">crown-map
@@ -171,8 +171,7 @@
   <section class="slide">
     <h2>From correlation to cause: a trial we control</h2>
     <div class="body"><ul>
-      <li>The causal test lives <b>here</b>, not on the geographic axis: a <b>randomization of the botanist queue</b>, with a drafted preregistration,
-        of the botanist queue (margin/novelty-prioritized vs random), scored on new-species IDs per
+      <li>The causal test lives <b>here</b>, not on the geographic axis: a <b>randomization of the botanist queue</b> (margin/novelty-prioritized vs random), with a drafted preregistration, scored on new-species IDs per
         botanist-hour.</li>
       <li>Because the queue <i>is</i> the deployment we operate, the labeller acts on exactly what we serve:
         <b>no volunteer-compliance gap, no third-party infrastructure.</b></li>
@@ -203,7 +202,7 @@
         strong, cheap proxy for the rarity you can't yet measure, and a two-pronged pre-flight covers where it
         fails.</div>
       <div style="margin-top:5vh;text-align:center;font-size:3.2vh;line-height:1.7">
-        open-set AUROC 0.66 &middot; +21% faster discovery &middot; the queue RCT as the causal anchor<br><br>
+        open-set AUROC 0.66 &middot; +21% faster discovery (iNat) &middot; the queue RCT as the causal anchor<br><br>
         Wietze Suijker, wietze.suijker@mila.quebec<br>
         <span style="font-size:2.4vh;color:var(--grey)">Engine: <code>labelfirst</code> &middot; BCI deployment: <code>crownfirst</code> &middot;
         evidence reproduces from committed pilot scripts</span></div>

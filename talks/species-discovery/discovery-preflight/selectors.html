@@ -138,7 +138,7 @@
 </div>
 
 <div class="foot">
-  <b>Illustrative, not BCI data.</b> Each strategy is the <i>real</i> algorithm on one synthetic 200-point cloud (common species dense, rare species in the sparse gaps and edges); the map is the exact quantity it maximises. The mechanism &mdash; sparser ground labelled &rarr; more rare found (rank corr &asymp;&nbsp;0.9 here) &mdash; is why the three distance-seekers lead and the density-seekers trail. Measured numbers on real crowns are on <a href="./#12">slide&nbsp;12</a>.
+  <b>Illustrative, not BCI data.</b> Each strategy is the <i>real</i> algorithm on one synthetic 200-point cloud (common species dense, rare species in the sparse gaps and edges); the map is the exact quantity it maximises. The mechanism &mdash; sparser ground labelled &rarr; more rare found (rank corr &asymp;&nbsp;0.9 here) &mdash; is why the three leaders (two distance-seekers and MaxHerding) lead and the density-seekers trail. Measured numbers on real crowns are on <a href="./#12">slide&nbsp;12</a>.
 </div>
 
 <script>
@@ -231,7 +231,7 @@ const METHODS=[
   {k:'MaxHerding',   vd:'win', txt:'The <span class="mapname">map rewards points that make the labelled set resemble the whole cloud</span>. It brightens wherever the crowd is under-represented, which pulls it into the sparse pockets too. <span class="verdict win">reaches sparse ground &rarr; wins.</span>'},
   {k:'random',       vd:'ns',  txt:'<span class="mapname">No map.</span> Every point scores the same, so the glow is flat and picks are blind luck. Rare species turn up at their base rate. <span class="verdict ns">the honest floor.</span>'},
   {k:'ProbCover',    vd:'ns',  txt:'The <span class="mapname">map is how many uncovered neighbours</span> a point has within a fixed radius. Dense common blobs glow brightest; a lone rare crown covers only itself. <span class="verdict ns">labels the crowd &rarr; a small gain over random (+4% on BCI).</span>'},
-  {k:'BADGE',        vd:'ns',  txt:'The <span class="mapname">map is uncertainty near boundaries between known species</span>. Those boundaries sit inside the common crowd, so the glow avoids the empty edges. <span class="verdict ns">labels the crowd &rarr; no help here (not benchmarked on slide 12).</span>'},
+  {k:'BADGE',        vd:'ns',  txt:'The <span class="mapname">map is uncertainty near boundaries between known species</span>. Those boundaries sit inside the common crowd, so the glow avoids the empty edges. <span class="verdict ns">labels the crowd &rarr; no better than random (its k-means++ start: &minus;2% on BCI).</span>'},
   {k:'TypiClust',    vd:'ns',  txt:'The <span class="mapname">map is local density</span> &mdash; it grabs the most typical, crowded points. That is the exact opposite of novelty: the glow sits on the crowd and steps over the sparse pockets. <span class="verdict ns">labels densest ground &rarr; a small gain (+5% on BCI), far behind the leaders.</span>'},
 ];
 

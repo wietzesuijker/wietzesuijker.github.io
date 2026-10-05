@@ -130,7 +130,7 @@
       </div>
       <div class="quote" style="margin-top:2.6vh">The binding constraint is <b>expert attention</b>. A
         <b class="accent">training-free pre-flight</b>, computed from a small labelled reference set in a frozen
-        embedding, predicts where targeting beats random, before a label or field trip is spent.</div>
+        embedding, estimates where discovery is easier, before more labels or a field trip are spent.</div>
     </div>
   </section>
 
@@ -297,8 +297,9 @@
             <div class="brow"><span class="bl">MaxHerding</span><span class="btrack"><i class="bar pos" style="left:50%;width:33.4%"></i></span><span class="bv">+37%</span></div>
             <div class="brow"><span class="bl">TypiClust</span><span class="btrack"><i class="bar pos" style="left:50%;width:4.4%"></i></span><span class="bv muted">+5%</span></div>
             <div class="brow"><span class="bl">ProbCover</span><span class="btrack"><i class="bar pos" style="left:50%;width:3.9%"></i></span><span class="bv muted">+4%</span></div>
+            <div class="brow"><span class="bl">k-means++</span><span class="btrack"><i class="bar ns" style="left:48.2%;width:1.8%"></i></span><span class="bv muted">&minus;2%<span class="bt">n.s.</span></span></div>
           </div>
-          <div style="font-size:2.0vh;color:var(--grey);margin-top:.8vh">zero line = random &middot; all beat random (exact sign-flip test) &middot; density-seeking pickers (TypiClust, ProbCover) gain far less on the rare tail</div>
+          <div style="font-size:2.0vh;color:var(--grey);margin-top:.8vh">zero line = random &middot; all but k-means++ beat random (exact sign-flip test) &middot; density-seeking pickers (TypiClust, ProbCover) gain far less on the rare tail</div>
         </div>
         <div class="col" style="flex:1">
           <h3 style="font-size:2.9vh">The gauge forecasts the payoff</h3>
@@ -347,7 +348,7 @@
     <h2><span class="kick">crownfirst &middot; the biggest lever</span>Teach the embedding your canopy, then re-select</h2>
     <div class="body">
       <div class="stats">
-        <div class="stat"><div class="n accent">+54%</div><div class="l" style="max-width:27ch">more <b>rare species</b><br>ceiling, with a backbone adapted on extra labels</div><div class="s">79 &rarr; 122 of 157 rare species &middot; 520-label budget, paired over 16 seeds</div></div>
+        <div class="stat"><div class="n accent">+54%</div><div class="l" style="max-width:27ch">more <b>rare species</b>, a ceiling<br>(backbone adapted on extra labels)</div><div class="s">79 &rarr; 122 of 157 rare species &middot; 520-label budget, paired over 16 seeds</div></div>
         <div class="stat"><div class="n">~90%</div><div class="l" style="max-width:27ch">of that lift from one<br><b>mid-flight</b> retrain</div><div class="s">retrain once at &asymp;160 labels (up to +49%); no waiting to finish</div></div>
         <div class="stat"><div class="n" style="color:var(--clay)">0</div><div class="l" style="max-width:27ch">rare species <b>shown</b><br>during the retrain</div><div class="s">we fine-tune on common species only, so the +54% rare-tail lift is transfer, not memorization</div></div>
       </div>
@@ -366,7 +367,7 @@
         <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/strategies/__init__.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">20 strategies behind one Protocol.</a></b> <code>select(X, labeled, k)</code> dispatched from a registry; default <b>CoreSet</b> (greedy k-center, cosine). One <a class="ref" href="https://github.com/traitlab/labelfirst/blob/3ccfdfba1f48/src/labelfirst/pipeline.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><code>select_batches</code></a> call gates, selects, then KMeans-batches for the labeller.</li>
         <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">The pre-flight is a metric, not a model.</a></b> kNN leave-one-out separability &rarr; GO / borderline / skip; the open-set arm computes <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/binormal.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b>AUROC = &Phi;(d&prime;/&radic;2)</b></a> from LOO centroid scores, then reports the <i>realized</i> FPR/TPR as a Gaussian-fit check.</li>
         <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/io/queue.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Every run is auditable.</a></b> a <code>RunRecord</code> stamps strategy, seed, embedding <b>SHA-256</b>, library and Python versions, timestamp; loaders fail loudly on schema drift.</li>
-        <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/audit/__init__.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">A pre-registered harness.</a></b> frozen spec, Holm&ndash;Bonferroni FWER, a <a class="ref" href="https://github.com/traitlab/labelfirst/blob/36c0e8a108c096e2b0e985f7f87ad81124706f8b/src/labelfirst/eval/audit/_stats.py#L64-L107" target="_blank" rel="noopener" onclick="event.stopPropagation()">Wilcoxon power-floor</a> that refuses a PASS when seeds can't clear 1/2&#8319;, and a synthetic imbalance self-test where balanced data <i>must</i> show no win.</li>
+        <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/audit/__init__.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">A preregistration-ready harness.</a></b> frozen spec, Holm&ndash;Bonferroni FWER, a <a class="ref" href="https://github.com/traitlab/labelfirst/blob/36c0e8a108c096e2b0e985f7f87ad81124706f8b/src/labelfirst/eval/audit/_stats.py#L64-L107" target="_blank" rel="noopener" onclick="event.stopPropagation()">Wilcoxon power-floor</a> that refuses a PASS when seeds can't clear 1/2&#8319;, and a synthetic imbalance self-test where balanced data <i>must</i> show no win.</li>
       </ul>
     </div></div>
   </section>
@@ -419,7 +420,7 @@
         <div class="col"><h3>2 &middot; Gauge: GO or skip</h3>
           <ul style="font-size:2.7vh;line-height:1.5">
             <li><b>&Phi;(d&prime;/&radic;2)</b> from a small labelled reference set</li>
-            <li>verdict <b class="accent">GO</b> / borderline / skip, <b>before a label is spent</b></li>
+            <li>verdict <b class="accent">GO</b> / borderline / skip, <b>before the labelling budget is spent</b></li>
           </ul></div>
         <div class="col"><h3>3 &middot; Spend the budget</h3>
           <ul style="font-size:2.7vh;line-height:1.5">
