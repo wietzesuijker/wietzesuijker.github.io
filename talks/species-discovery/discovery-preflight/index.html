@@ -290,16 +290,15 @@
     <div class="body">
       <div class="cols" style="width:96%;gap:4vw;align-items:center">
         <div class="col" style="flex:1.35">
-          <div style="font-size:2.3vh;color:var(--grey);margin-bottom:1vh">rare-species discovery vs random &middot; BCI DINOv3 ViT-L &middot; 8 seeds, per-label-budget AUC</div>
+          <div style="font-size:2.3vh;color:var(--grey);margin-bottom:1vh">rare-species discovery vs random &middot; BCI DINOv3 ViT-L &middot; 16 seeds, per-label-budget AUC</div>
           <div class="bars">
             <div class="brow"><span class="bl">CoreSet <span class="bt">default</span></span><span class="btrack"><i class="bar pos" style="left:50%;width:35.8%"></i></span><span class="bv">+39%</span></div>
             <div class="brow"><span class="bl">novel_margin</span><span class="btrack"><i class="bar pos" style="left:50%;width:34.8%"></i></span><span class="bv">+38%</span></div>
             <div class="brow"><span class="bl">MaxHerding</span><span class="btrack"><i class="bar pos" style="left:50%;width:33.4%"></i></span><span class="bv">+37%</span></div>
-            <div class="brow"><span class="bl">ProbCover</span><span class="btrack"><i class="bar ns" style="left:50%;width:1.0%"></i></span><span class="bv muted">+1%<span class="bt">n.s.</span></span></div>
-            <div class="brow"><span class="bl">BADGE</span><span class="btrack"><i class="bar neg" style="left:46.1%;width:3.9%"></i></span><span class="bv muted">&minus;4%</span></div>
-            <div class="brow"><span class="bl">TypiClust</span><span class="btrack"><i class="bar neg" style="left:6.7%;width:43.3%"></i></span><span class="bv muted">&minus;48%</span></div>
+            <div class="brow"><span class="bl">TypiClust</span><span class="btrack"><i class="bar pos" style="left:50%;width:4.4%"></i></span><span class="bv muted">+5%</span></div>
+            <div class="brow"><span class="bl">ProbCover</span><span class="btrack"><i class="bar pos" style="left:50%;width:3.9%"></i></span><span class="bv muted">+4%</span></div>
           </div>
-          <div style="font-size:2.0vh;color:var(--grey);margin-top:.8vh">zero line = random &middot; green beats random (p=0.004) &middot; typicality (TypiClust) and classifier-gradient diversity (BADGE) don't help the rare tail</div>
+          <div style="font-size:2.0vh;color:var(--grey);margin-top:.8vh">zero line = random &middot; all beat random (exact sign-flip test) &middot; density-seeking pickers (TypiClust, ProbCover) gain far less on the rare tail</div>
         </div>
         <div class="col" style="flex:1">
           <h3 style="font-size:2.9vh">The gauge forecasts the payoff</h3>
@@ -310,10 +309,10 @@
             <tr><td>PlantCLEF</td><td>57.8</td><td>+46%</td></tr>
             <tr><td>PlantCLEF 2&times;2</td><td>59.5</td><td>+46%</td></tr>
           </table>
-          <div style="font-size:2.1vh;color:var(--grey);margin-top:1vh">gauge up &rarr; benefit up, <b>Spearman&nbsp;=&nbsp;1.0</b>. Computed with no simulation, before a label.</div>
+          <div style="font-size:2.1vh;color:var(--grey);margin-top:1vh">gauge up &rarr; benefit up, <b>Spearman&nbsp;=&nbsp;1.0</b> over 4 backbones. Computed from the crowns already labelled, no simulation.</div>
         </div>
       </div>
-      <div class="quote" style="margin-top:2vh;font-size:2.5vh"><b>CoreSet, novel_margin and MaxHerding tie at the top</b> here (multiple-testing corrected), so the default is a design choice the <i>audit</i> settles, not intuition. The win is <b class="accent">conditional on separability</b>: the gauge (left-hand backbones) says when it is worth playing at all.
+      <div class="quote" style="margin-top:2vh;font-size:2.5vh"><b>CoreSet and novel_margin tie at the top</b> here, and MaxHerding trails by 1.5% (multiple-testing corrected), so the default is a design choice the <i>audit</i> settles, not intuition. The win is <b class="accent">conditional on separability</b>: the gauge (left-hand backbones) says when it is worth playing at all.
         <a class="ref" href="selectors.html" style="white-space:nowrap;font-weight:700" onclick="event.stopPropagation()">Walk all six live &rarr;</a></div>
     </div>
   </section>
@@ -406,7 +405,7 @@
         </div>
       </div>
       <div class="quote" style="margin-top:2.2vh">The binding constraint is the same everywhere: <b>1&ndash;20 min a photo, more pictures than botanists</b>.
-        <span style="color:var(--grey);font-size:2.3vh"> Detection travels to audio (birdsong AUROC 0.865); the selection-beats-random win is imagery-only so far.</span></div>
+        <span style="color:var(--grey);font-size:2.3vh"> Detection travels to audio (birdsong AUROC 0.865); on birdsong (CBI), selection gain also rises with separability, an exploratory result.</span></div>
     </div>
   </section>
 
@@ -417,7 +416,7 @@
         <div class="col"><h3>1 &middot; Embed once</h3>
           <ul style="font-size:2.7vh;line-height:1.5">
             <li>images &rarr; a <b>frozen backbone</b>, no training</li>
-            <li>pick the backbone by its <b>separability</b> score: highest gauge wins, no experiment</li>
+            <li>pick the backbone by its <b>separability</b> score: a higher gauge forecasts a larger gain, a guide rather than a validated rule</li>
           </ul></div>
         <div class="col"><h3>2 &middot; Gauge: GO or skip</h3>
           <ul style="font-size:2.7vh;line-height:1.5">

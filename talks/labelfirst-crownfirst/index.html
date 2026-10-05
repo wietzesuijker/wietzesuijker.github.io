@@ -120,10 +120,10 @@
   </section>
 
   <section class="slide">
-    <h2>And we can measure it, before spending a label</h2>
+    <h2>And we can measure it, before spending the budget</h2>
     <div class="body">
       <img class="fig" src="figs/fig_separability.png" alt="separability across 22 embeddings" style="max-height:64vh">
-      <div class="cap">A label-free pre-flight catches this before you spend a label.<br>
+      <div class="cap">A cheap pre-flight on the crowns already labelled catches this before you spend the budget.<br>
         The production Pl@ntNet model measures <b class="accent">57.7%</b>, at the top of the good regime.</div>
     </div>
   </section>
@@ -183,18 +183,19 @@
   </section>
 
   <section class="slide">
-    <h2>Appendix: the effect is causal, not a backbone coincidence</h2>
+    <h2>Appendix: not a backbone coincidence</h2>
     <div class="body">
       <div class="appx" style="width:92%">
         <div class="appx-lead">Could the benefit just be luck in which AI model we picked? We tested it the hard way.</div>
       </div>
       <div class="appx-fig" style="margin-top:1vh">
-        <img src="figs/fig_separability_causal.png" alt="causal sweep">
+        <img src="figs/fig_separability_causal.png" alt="controlled sweep">
         <div class="appx">
           <ul>
             <li>Real models fall into two camps (CLIP vs DINOv3), so a single trend line across them would overstate a &ldquo;law.&rdquo; We say so.</li>
             <li>So we ran a <b>controlled sweep</b>: dial species from blurred-together to cleanly-separated <i>on purpose</i>, and watch the benefit. It rises smoothly &mdash; <b>Pearson 0.997.</b></li>
-            <li>Confirmed <b>4 independent ways</b>: real models, this synthetic sweep, predicting held-out models <span class="muted">(R&sup2; 0.61)</span>, and re-labelling crews <span class="muted">(agree within 1&ndash;2 pt)</span>.</li>
+            <li>Consistent across <b>4 independent checks</b>: real models, this synthetic sweep, predicting held-out models <span class="muted">(R&sup2; 0.61)</span>, and re-labelling crews <span class="muted">(agree within 1&ndash;2 pt)</span>.</li>
+            <li class="muted">The sweep changes more than separability, so it shows association, not that separability alone causes the gain.</li>
           </ul>
         </div>
       </div>
@@ -217,10 +218,10 @@
   <section class="slide">
     <h2>Appendix: we couldn't move the goalposts</h2>
     <div class="body"><div class="appx">
-      <div class="appx-lead">We fixed the pass/fail test <i>before</i> seeing any result &mdash; so we couldn't fool ourselves into a win.</div>
+      <div class="appx-lead">The confirmatory camera-trap test was fixed <i>before</i> seeing any result, so we couldn't fool ourselves into a win. The forest-crown results are exploratory.</div>
       <ul>
         <li>The rule, locked in advance: a standard significance test on per-run scores, plus a 10,000-resample confidence interval that must exclude zero, corrected for testing many things at once.</li>
-        <li><b>Why 8 runs:</b> with all 8 pointing the same way, the math can't score better than 1-in-256 <span class="muted">(p &asymp; 0.004)</span> &mdash; enough margin to survive the correction; 5 runs wouldn't. We got all 8 positive on our main model; it replicated on two more.</li>
+        <li><b>Why 16 runs:</b> with all 16 pointing the same way, an exact sign-flip test reaches 1-in-65,536 <span class="muted">(p = 2<sup>&minus;16</sup>)</span>, enough margin to survive the correction; 5 runs wouldn't.</li>
         <li><b>The mistake we keep on the slide:</b> an early &ldquo;our picker trains a better model&rdquo; win was really a <b>25&ndash;29% data leak</b> &mdash; the picker had peeked at the test crowns. Re-run honestly: <b>no picker dominates</b>. We added a <b>tripwire that fails the build</b> if a held-out crown ever reaches a picker again.</li>
       </ul>
     </div></div>
