@@ -93,7 +93,7 @@
       <div class="figrow">
         <img src="figs/ood_perspecies_margin.png" alt="margin forecasts detectability">
         <div class="fcap">For <b class="accent">210 species the model never saw</b> (including 80 whole-genus-
-          unseen <i>new lineages</i>), the <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py#L351-L454" target="_blank" rel="noopener" onclick="event.stopPropagation()">training-free margin</a> predicts how detectable each one is at
+          unseen <i>new lineages</i>), the <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/al_benefit.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">training-free margin</a> predicts how detectable each one is at
           <b class="accent">Spearman +0.66</b>. No model training, no detector run: just distances to a small labelled reference set.</div>
       </div>
     </div>
@@ -118,7 +118,7 @@
     <div class="body">
       <img class="fig" src="figs/active_discovery_clean.png" alt="active discovery baselines" style="max-width:99%; max-height:64vh">
       <div class="cap">The same selection principle, validated across <b>30 taxonomic orders</b>: choosing the
-        <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/strategies/novel_margin.py#L122-L203" target="_blank" rel="noopener" onclick="event.stopPropagation()">most distinctive examples</a> to label next finds <b class="accent">+21% more species than random</b> (beating
+        <a class="ref" href="https://github.com/traitlab/labelfirst/blob/36c0e8a108c096e2b0e985f7f87ad81124706f8b/src/labelfirst/strategies/novel_margin.py#L83-L118" target="_blank" rel="noopener" onclick="event.stopPropagation()">most distinctive examples</a> to label next finds <b class="accent">+21% more species than random</b> (beating
         random in 93% of them), while spread-out geographic selection barely helps. <b>Honest limit:</b> the
         pre-flight only weakly forecasts <i>which</i> taxa will benefit most.</div>
     </div>
@@ -130,8 +130,8 @@
       <div class="figrow">
         <img src="figs/pipeline.png" alt="pre-flight recipe">
         <div class="fcap">End to end on real BCI crowns: moving from a naive general-backbone reading to the
-          optimal (a <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/pipeline.py#L213-L295" target="_blank" rel="noopener" onclick="event.stopPropagation()">domain embedding + whitening</a>) <b class="accent">doubles the detector's skill above chance</b>
-          (0.642 &rarr; 0.785). <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/reject.py#L131-L221" target="_blank" rel="noopener" onclick="event.stopPropagation()">Conformal tiering</a> also parks the crowns the model is sure about, so the botanist's
+          optimal (a <a class="ref" href="https://github.com/traitlab/crownfirst/blob/f97accc13cd29f32b40db18b58b1c2a4489f466c/src/crownfirst/pipeline.py#L215-L297" target="_blank" rel="noopener" onclick="event.stopPropagation()">domain embedding + whitening</a>) <b class="accent">doubles the detector's skill above chance</b>
+          (0.642 &rarr; 0.785). <a class="ref" href="https://github.com/traitlab/crownfirst/blob/f97accc13cd29f32b40db18b58b1c2a4489f466c/src/crownfirst/reject.py#L134-L223" target="_blank" rel="noopener" onclick="event.stopPropagation()">Conformal tiering</a> also parks the crowns the model is sure about, so the botanist's
           hours go to the uncertain tail.</div>
       </div>
     </div>
@@ -149,7 +149,7 @@
           <div class="s">train on common only, so the rare-tail lift is honest transfer</div></div>
       </div>
       <div class="quote" style="margin-top:3.5vh">Pl@ntNet&rsquo;s embedding learned <b>ground-level leaves and flowers</b>; the crowns are <b>tops from above</b>.
-        Cross-entropy on the frozen backbone&rsquo;s <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/adapt.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b class="accent">last few blocks</b></a>, re-embed, keep selecting on the sharper space.
+        Cross-entropy on the frozen backbone&rsquo;s <a class="ref" href="https://github.com/traitlab/crownfirst/blob/main/src/crownfirst/adapt.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b class="accent">last few blocks</b></a>, re-embed, keep selecting on the sharper space.
         <span style="color:var(--grey);font-size:2.5vh;display:block;margin-top:1.2vh">It sharpens what is <i>familiar</i> so the unfamiliar stands out; it does not teach a lineage it never saw. The retrain handoff to Pl@ntNet is in flight.</span></div>
     </div>
   </section>
@@ -163,7 +163,7 @@
           margin predicts how detectable each family is (the scatter at left), so you can focus labelling on the
           families where species separate cleanly.
           <b>Prong 2, where those gaps compress:</b> congeneric species overlap, the model confidently
-          mislabels the rarer twin as its common cousin, and margin can't flag it, so a <b><a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/disagreement.py#L78-L164" target="_blank" rel="noopener" onclick="event.stopPropagation()">crown-map
+          mislabels the rarer twin as its common cousin, and margin can't flag it, so a <b><a class="ref" href="https://github.com/traitlab/crownfirst/blob/f97accc13cd29f32b40db18b58b1c2a4489f466c/src/crownfirst/disagreement.py#L113-L227" target="_blank" rel="noopener" onclick="event.stopPropagation()">crown-map
           disagreement</a></b> channel routes every such crown to a botanist.</div>
       </div>
     </div>
@@ -206,7 +206,7 @@
       <div style="margin-top:5vh;text-align:center;font-size:3.2vh;line-height:1.7">
         open-set AUROC 0.66 &middot; +21% faster discovery &middot; the queue RCT as the causal anchor<br><br>
         Wietze Suijker, wietze.suijker@mila.quebec<br>
-        <span style="font-size:2.4vh;color:var(--grey)">Engine: <code>labelfirst</code> &middot; BCI deployment: <code>speciesfirst</code> &middot;
+        <span style="font-size:2.4vh;color:var(--grey)">Engine: <code>labelfirst</code> &middot; BCI deployment: <code>crownfirst</code> &middot;
         evidence reproduces from committed pilot scripts</span></div>
       <div class="nexttalk"><a href="../where-to-look-next/" onclick="event.stopPropagation()">Next &rarr; Where to look next</a></div>
     </div>

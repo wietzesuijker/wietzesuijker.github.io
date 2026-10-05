@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Prioritizing close-up photos for labelling</title>
+<style>
+  :root { --forest:#0F766E; --ink:#1F2933; --grey:#6b7280; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; overflow:hidden;
+    font-family:-apple-system,Segoe UI,Helvetica,Arial,sans-serif; color:var(--ink);
+    background:#fff; -webkit-font-smoothing:antialiased; }
+  #deck { height:100vh; width:100vw; position:relative; }
+  .slide { position:absolute; inset:0; display:none; flex-direction:column;
+    padding:4.5vh 6vw 7vh; }
+  .slide.active { display:flex; }
+  h2 { color:var(--forest); font-size:4.6vh; font-weight:700; margin:0 0 0.4vh;
+    border-bottom:2px solid color-mix(in srgb,var(--forest) 45%,#fff); padding-bottom:1vh; }
+  .body { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center; }
+  .fig { max-width:90%; max-height:78vh; object-fit:contain; }
+  .cap { font-size:2.7vh; color:#444; text-align:center; margin-top:2vh; max-width:90%; line-height:1.45; }
+  ul { font-size:3.6vh; line-height:1.65; max-width:86%; }
+  li b { color:var(--ink); }
+  .lead { font-size:3.4vh; text-align:center; }
+  footer { position:fixed; bottom:1.6vh; left:6vw; right:9vw; display:flex; justify-content:space-between;
+    font-size:1.9vh; color:var(--grey); }
+  /* always-clickable nav, sits above the cockpit iframe so you can leave the interactive slide */
+  #nav { position:fixed; bottom:4.4vh; right:2vw; z-index:9999; display:flex; gap:.7vw; }
+  #nav button { font-size:2.6vh; line-height:1; padding:.7vh 1.3vw; border:0; border-radius:7px; cursor:pointer;
+    background:var(--forest); color:#fff; opacity:.85; box-shadow:0 2px 8px rgba(0,0,0,.35); transition:opacity .15s; }
+  #nav button:hover { opacity:1; }
+  /* title slide */
+  .title { padding:0; }
+  .title .bg { position:absolute; inset:0; background:url('assets/canopy.jpg') center/cover; }
+  .title .scrim { position:absolute; inset:0; background:rgba(0,0,0,0.5); }
+  .title .tt { position:relative; margin:auto; text-align:center; color:#fff; padding:0 8vw; }
+  .title h1 { font-size:7.8vh; font-weight:700; margin:0 0 1.8vh; }
+  .title .sub { font-size:4.0vh; opacity:.92; margin-bottom:5vh; }
+  .title .who { font-size:3.6vh; } .title .meta { font-size:2.9vh; opacity:.85; margin-top:.6vh; }
+  /* two columns */
+  .cols { display:flex; gap:6vw; width:90%; justify-content:center; }
+  .col { flex:1; } .col h3 { color:var(--forest); font-size:3.8vh; margin:0 0 1.4vh; }
+  .col .it { font-style:italic; color:var(--grey); font-weight:400; font-size:2.7vh; }
+  /* stat callout */
+  .stats { display:flex; gap:9vw; justify-content:center; align-items:flex-start; }
+  .stat { text-align:center; } .stat .n { font-size:12vh; font-weight:800; color:var(--ink); line-height:1; }
+  .stat .l { font-size:3vh; margin-top:1.2vh; } .stat .s { font-size:2.2vh; color:var(--grey); }
+  .quote { background:color-mix(in srgb,var(--forest) 8%,#fff); border-left:5px solid var(--forest);
+    padding:2vh 2.6vw; font-size:2.8vh; margin-top:2vh; max-width:90%; }
+  .quote .q { font-style:italic; } .punch { font-weight:700; font-size:3.6vh; text-align:center; margin-top:2.4vh; }
+  /* cockpit */
+  .cockpit-slide { padding:0; }
+  .cockpit-slide .tag { position:absolute; top:2.2vh; left:3vw; z-index:5; background:rgba(255,255,255,.86);
+    color:var(--forest); font-weight:700; font-size:2.2vh; padding:.8vh 1.4vw; border-radius:6px;
+    box-shadow:0 1px 6px rgba(0,0,0,.15); }
+  .cockpit-slide iframe { width:100%; height:100%; border:0; }
+  .accent { color:var(--forest); font-weight:700; }
+  /* appendix: dense, left-aligned ML-backup text */
+  .appx { width:90%; font-size:3.3vh; line-height:1.6; text-align:left; }
+  .appx h3 { color:var(--forest); font-size:3.7vh; margin:0 0 0.8vh; }
+  .appx ul { font-size:3.3vh; line-height:1.6; max-width:100%; margin:0.4vh 0 1.8vh; padding-left:3vw; }
+  .appx ul ul { font-size:3.0vh; margin:0.5vh 0; }
+  .appx li { margin:0.9vh 0; }
+  .appx p { margin:0.8vh 0 1.4vh; }
+  .appx code { font-family:ui-monospace,Menlo,Consolas,monospace; font-size:0.9em;
+    background:#f1f5f9; padding:0 0.3em; border-radius:3px; }
+  /* plain-language takeaway that leads each appendix slide */
+  .appx-lead { font-size:3.9vh; line-height:1.4; color:var(--forest); font-weight:700;
+    margin:0 0 2.4vh; }
+  .appx .muted { color:var(--grey); font-weight:400; }
+  .appx-fig { display:flex; gap:3vw; width:92%; align-items:center; }
+  .appx-fig img { flex:0 0 48%; max-width:48%; object-fit:contain; }
+  .appx-fig .appx { width:auto; flex:1; }
+  footer a { color:var(--forest); text-decoration:none; }
+</style>
+</head>
+<body>
+<div id="deck">
+
+  <section class="slide title active">
+    <div class="bg"></div><div class="scrim"></div>
+    <div class="tt">
+      <h1>Prioritizing close-up photos for labelling</h1>
+      <div class="sub">labelfirst, the engine.&nbsp;&nbsp;crownfirst, the BCI deployment.</div>
+      <div class="who">Wietze Suijker</div>
+      <div class="meta">Hyperspatial drone meeting, 16 June 2026</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>The problem is the long tail</h2>
+    <div class="body">
+      <img class="fig" src="figs/fig_longtail.png" alt="BCI long tail">
+      <div class="quote"><span style="color:var(--forest);font-weight:700">Panama, Étienne</span><br>
+        <span class="q">&ldquo;Necesitamos encontrar las especies raras.&rdquo;</span><br>
+        <b>So which photos does the botanist see first?</b></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Two layers, one job</h2>
+    <div class="body"><div class="cols">
+      <div class="col"><h3>labelfirst <span class="it">(the engine)</span></h3>
+        <ul><li>which photo to label next</li><li>a pre-flight: will smart picking beat random?</li></ul></div>
+      <div class="col"><h3>crownfirst <span class="it">(the BCI deployment)</span></h3>
+        <ul><li>tier by confidence, genus fallback</li><li>the Labelbox loop, the Pl@ntNet handoff</li></ul></div>
+    </div></div>
+  </section>
+
+  <section class="slide">
+    <h2>The hard part isn't choosing, it's <i>seeing</i></h2>
+    <div class="body">
+      <img class="fig" src="figs/fig_intuition.png" alt="embedding intuition">
+      <div class="cap">When species separate, a smart queue heads for the sparse edges where the rare ones sit. When they blur together, there is nothing to aim at.</div>
+    </div>
+  </section>
+
+  <section class="slide cockpit-slide">
+    <iframe src="cockpit.html" title="BCI curation cockpit" loading="lazy"></iframe>
+  </section>
+
+  <section class="slide">
+    <h2>And we can measure it, before spending a label</h2>
+    <div class="body">
+      <img class="fig" src="figs/fig_separability.png" alt="separability across 22 embeddings" style="max-height:64vh">
+      <div class="cap">A label-free pre-flight catches this before you spend a label.<br>
+        The production Pl@ntNet model measures <b class="accent">57.7%</b>, at the top of the good regime.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>On real BCI crowns, it pays off</h2>
+    <div class="body">
+      <img class="fig" src="figs/fig_discovery.png" alt="discovery curve" style="max-height:62vh">
+      <div class="cap">Tiering also parks ~40% of crowns (57% with the genus fallback); retraining on your labels finds ~50% more rare species.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Finding rare species, not just flowers</h2>
+    <div class="body">
+      <div class="lead">Jean-Christophe Lombardo (Pl@ntNet) asked. It holds.</div>
+      <div class="stats" style="margin-top:4vh">
+        <div class="stat"><div class="n accent">+0.43</div><div class="l">rarity predicts novelty</div>
+          <div class="s">(even controlling for flower and fruit)</div></div>
+        <div class="stat"><div class="n accent">~7%</div><div class="l">novelty explained by organ</div>
+          <div class="s">(flower, fruit, foliage, bare)</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>How it plugs into this room</h2>
+    <div class="body"><ul>
+      <li><b>Pl@ntNet (Pierre, Jean-Christophe):</b> the WCVP label handoff feeds Pl@ntNet's next retrain</li>
+      <li><b>Antoine and Étienne's system:</b> crownfirst is the photo-selection layer</li>
+      <li><b>Helene's held-out eval:</b> separability and the sampling/classifier-limited split, tracked over time</li>
+    </ul></div>
+  </section>
+
+  <section class="slide">
+    <h2>Next steps</h2>
+    <div class="body"><ul>
+      <li><b>Ship the WCVP label handoff</b> to Pl@ntNet</li>
+      <li><b>Go live</b> on the Labelbox sandbox (Antoine)</li>
+      <li><b>Align</b> bbox convention and orthorectification (Étienne, Antoine)</li>
+      <li><b>With Helene:</b> design the held-out set that measures drift</li>
+    </ul>
+      <div class="punch">Stop sending whole missions. Send the photos that find the rare tail.</div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Thank you</h2>
+    <div class="body">
+      <div class="lead" style="font-size:4.4vh">The bottleneck isn't data. It's <b class="accent">attention</b>: which photos get looked at.</div>
+      <div style="margin-top:5vh;text-align:center;font-size:3.4vh;line-height:1.7">
+        <b>labelfirst:</b> which photo to label next, and whether it's worth it<br>
+        <b>crownfirst:</b> the BCI deployment and the Pl@ntNet handoff<br><br>
+        Wietze Suijker, wietze.suijker@mila.quebec<br>
+        <span style="font-size:2.5vh;color:var(--grey)">Evidence and code: traitlab/labelfirst, traitlab/crownfirst</span></div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Appendix: the effect is causal, not a backbone coincidence</h2>
+    <div class="body">
+      <div class="appx" style="width:92%">
+        <div class="appx-lead">Could the benefit just be luck in which AI model we picked? We tested it the hard way.</div>
+      </div>
+      <div class="appx-fig" style="margin-top:1vh">
+        <img src="figs/fig_separability_causal.png" alt="causal sweep">
+        <div class="appx">
+          <ul>
+            <li>Real models fall into two camps (CLIP vs DINOv3), so a single trend line across them would overstate a &ldquo;law.&rdquo; We say so.</li>
+            <li>So we ran a <b>controlled sweep</b>: dial species from blurred-together to cleanly-separated <i>on purpose</i>, and watch the benefit. It rises smoothly &mdash; <b>Pearson 0.997.</b></li>
+            <li>Confirmed <b>4 independent ways</b>: real models, this synthetic sweep, predicting held-out models <span class="muted">(R&sup2; 0.61)</span>, and re-labelling crews <span class="muted">(agree within 1&ndash;2 pt)</span>.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide">
+    <h2>Appendix: how we pick, and the pre-flight</h2>
+    <div class="body"><div class="appx">
+      <div class="appx-lead">One number, computed <i>before you label anything</i>, predicts whether smart picking will beat random.</div>
+      <ul>
+        <li><b>Picking the next photo:</b> 16 interchangeable strategies behind one call. The default, <b>CoreSet</b>, simply spreads picks to cover the space &mdash; no tuning, an unmodified 2018 method. <span class="muted">(A co-pick, <code>novel_margin</code>, leans toward brand-new species when you expect them.)</span></li>
+        <li><b>The pre-flight &mdash; <i>separability</i>:</b> how cleanly the model already sorts species apart, scored without a single label.</li>
+        <li><b>We proved it's the geometry, not a fluke:</b> keep the photos and labels fixed, just <i>blur</i> the model's view &mdash; the benefit falls in lockstep <span class="muted">(correlation 0.76 BCI, 0.94 PlantNet, 0.96 iNat)</span>.</li>
+        <li><b>A high score isn't a guarantee:</b> we reshaped the embedding so its flat, noisy directions counted as much as the meaningful ones <span class="muted">(a standard step called whitening)</span>. The score barely moved <span class="muted">(52% &rarr; 51%)</span>, but the benefit <b>halved</b> <span class="muted">(40% &rarr; 23%)</span> &mdash; now the picker spreads its choices into noise instead of toward the rare species, and a nearest-neighbour score can't catch that.</li>
+      </ul>
+    </div></div>
+  </section>
+
+  <section class="slide">
+    <h2>Appendix: we couldn't move the goalposts</h2>
+    <div class="body"><div class="appx">
+      <div class="appx-lead">We fixed the pass/fail test <i>before</i> seeing any result &mdash; so we couldn't fool ourselves into a win.</div>
+      <ul>
+        <li>The rule, locked in advance: a standard significance test on per-run scores, plus a 10,000-resample confidence interval that must exclude zero, corrected for testing many things at once.</li>
+        <li><b>Why 8 runs:</b> with all 8 pointing the same way, the math can't score better than 1-in-256 <span class="muted">(p &asymp; 0.004)</span> &mdash; enough margin to survive the correction; 5 runs wouldn't. We got all 8 positive on our main model; it replicated on two more.</li>
+        <li><b>The mistake we keep on the slide:</b> an early &ldquo;our picker trains a better model&rdquo; win was really a <b>25&ndash;29% data leak</b> &mdash; the picker had peeked at the test crowns. Re-run honestly: <b>no picker dominates</b>. We added a <b>tripwire that fails the build</b> if a held-out crown ever reaches a picker again.</li>
+      </ul>
+    </div></div>
+  </section>
+
+  <section class="slide">
+    <h2>Appendix: what didn't work, and why that matters</h2>
+    <div class="body"><div class="appx">
+      <div class="appx-lead">We show the failures on purpose &mdash; they're the evidence we're not overselling.</div>
+      <ul>
+        <li>Picking the <b>hardest-to-label</b> photos <b>lost every run</b> (0/16). Hard to label &ne; rare species.</li>
+        <li>&ldquo;Cleaning up&rdquo; the embedding first <b>backfired</b> &mdash; it erased the very structure the picker relies on.</li>
+        <li>Ranking models by a quick accuracy proxy <b>didn't predict discovery</b>. Measure discovery directly.</li>
+      </ul>
+      <p><b>So the contribution isn't a clever new algorithm</b> &mdash; it's the honest, falsifiable test harness. An unmodified 2018 method plus that protocol beats the industrial half-random hybrid and plain random.</p>
+      <p class="muted">We also reproduce the Beery transductive-needles method exactly (Kurinchi-Vendhan &amp; Beery 2026, arXiv:2606.03821; per-point correlation 1.000).</p>
+    </div></div>
+  </section>
+
+</div>
+<footer><a href="../species-discovery/" onclick="event.stopPropagation()">&uarr;&nbsp;all talks</a><span>prioritizing close-up photos for labelling</span><span id="pageno"></span></footer>
+<div id="nav"><button id="prevbtn" title="previous (←)">‹</button><button id="nextbtn" title="next (→)">›</button></div>
+<script>
+  const slides = [...document.querySelectorAll('.slide')];
+  let i = 0;
+  const show = n => {
+    i = Math.max(0, Math.min(slides.length - 1, n));
+    slides.forEach((s, k) => s.classList.toggle('active', k === i));
+    document.getElementById('pageno').textContent = (i + 1) + ' / ' + slides.length;
+  };
+  addEventListener('keydown', e => {
+    if (['ArrowRight', 'ArrowDown', ' ', 'PageDown'].includes(e.key)) { show(i + 1); e.preventDefault(); }
+    else if (['ArrowLeft', 'ArrowUp', 'PageUp'].includes(e.key)) { show(i - 1); e.preventDefault(); }
+    else if (e.key === 'Home') show(0);
+    else if (e.key === 'End') show(slides.length - 1);
+    else if (e.key === 'f') document.documentElement.requestFullscreen?.();
+  });
+  addEventListener('click', e => { if (!e.target.closest('iframe') && !e.target.closest('#nav')) show(i + 1); });
+  document.getElementById('nextbtn').onclick = () => show(i + 1);
+  document.getElementById('prevbtn').onclick = () => show(i - 1);
+  show(parseInt(location.hash.replace('#','')) || 0);
+</script>
+</body>
+</html>

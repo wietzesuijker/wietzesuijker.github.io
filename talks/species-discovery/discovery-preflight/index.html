@@ -115,7 +115,7 @@
       <h1>Finding Life, Efficiently</h1>
       <div class="sub">A training-free pre-flight for species discovery:<br>the geometry, the engine, the deployment.</div>
       <div class="who">Wietze Suijker</div>
-      <div class="meta">labelfirst &middot; speciesfirst</div>
+      <div class="meta">labelfirst &middot; crownfirst</div>
     </div>
   </section>
 
@@ -337,7 +337,7 @@
     <div class="body">
       <img class="fig" src="figs/pipeline.png" alt="deployment recipe pipeline" style="max-height:50vh">
       <div class="cap" style="font-size:2.4vh">On 3&thinsp;280 BCI crowns: the raw margin <b>picks the best embedding</b> without running the
-        experiment; <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/whiten.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">whitening the survey batch</a> then adds +0.09&ndash;0.12 AUROC. End to end, detection skill above chance
+        experiment; <a class="ref" href="https://github.com/traitlab/crownfirst/blob/main/src/crownfirst/whiten.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">whitening the survey batch</a> then adds +0.09&ndash;0.12 AUROC. End to end, detection skill above chance
         roughly <b class="accent">doubles (0.642 &rarr; 0.785)</b>. But whitening helps the <i>detector</i> and
         <i>hurts</i> selection, so: whiten for detection, keep raw for selection.
         <span style="color:var(--grey)">The whitening gain is fit on the survey batch itself, so re-fit it per batch; it is not a portable number. And detection pays off where you <b>gate by the novelty score</b>, the GO/skip call and flagging likely-new crowns for an expert, not in ordering the label queue.</span></div>
@@ -345,7 +345,7 @@
   </section>
 
   <section class="slide">
-    <h2><span class="kick">speciesfirst &middot; the biggest lever</span>Teach the embedding your canopy, then re-select</h2>
+    <h2><span class="kick">crownfirst &middot; the biggest lever</span>Teach the embedding your canopy, then re-select</h2>
     <div class="body">
       <div class="stats">
         <div class="stat"><div class="n accent">+54%</div><div class="l" style="max-width:27ch">more <b>rare species</b><br>for the same expert budget</div><div class="s">79 &rarr; 122 of 157 rare species &middot; 520-label budget, paired over 16 seeds</div></div>
@@ -353,7 +353,7 @@
         <div class="stat"><div class="n" style="color:var(--clay)">0</div><div class="l" style="max-width:27ch">rare species <b>shown</b><br>during the retrain</div><div class="s">we fine-tune on common species only, so the +54% rare-tail lift is transfer, not memorization</div></div>
       </div>
       <div class="quote" style="margin-top:3.2vh">Pl@ntNet's embedding learned <b>ground-level leaves and flowers</b>; our crowns are <b>tops from above</b>.
-        Fine-tune just the <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/adapt.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b class="accent">last few blocks</b></a> of the frozen backbone (cross-entropy loss), re-embed everything, then keep selecting in the sharper space.
+        Fine-tune just the <a class="ref" href="https://github.com/traitlab/crownfirst/blob/main/src/crownfirst/adapt.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b class="accent">last few blocks</b></a> of the frozen backbone (cross-entropy loss), re-embed everything, then keep selecting in the sharper space.
         <span style="color:var(--grey);font-size:2.3vh"> It sharpens what is <i>familiar</i> so the unfamiliar stands out; it does not teach a lineage it never saw. The retrain handoff to Pl@ntNet is in flight.</span></div>
     </div>
   </section>
@@ -361,27 +361,27 @@
   <section class="slide">
     <h2><span class="kick">labelfirst &middot; the engine</span>A numpy-core selection library</h2>
     <div class="body"><div class="appx">
-      <div class="appx-lead">Two layers, one job: <b>labelfirst</b> is the reusable engine, <b>speciesfirst</b> the BCI deployment on top. Selection and audit run with <b>zero deep-learning dependencies</b>; torch and pyarrow load lazily, only when you embed or read parquet.</div>
+      <div class="appx-lead">Two layers, one job: <b>labelfirst</b> is the reusable engine, <b>crownfirst</b> the BCI deployment on top. Selection and audit run with <b>zero deep-learning dependencies</b>; torch and pyarrow load lazily, only when you embed or read parquet.</div>
       <ul>
         <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/io/embeddings.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Columnar embeddings I/O.</a></b> <code>key, embedding</code> parquet, read straight from the Arrow value buffer (skips the per-row Python list that triples peak RAM); every row L2-normalized at load, so <code>X @ X&#7488;</code> is cosine.</li>
-        <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/strategies/__init__.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">16 strategies behind one Protocol.</a></b> <code>select(X, labeled, k)</code> dispatched from a registry; default <b>CoreSet</b> (greedy k-center, cosine). One <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/pipeline.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><code>select_batches</code></a> call gates, selects, then KMeans-batches for the labeller.</li>
+        <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/strategies/__init__.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">16 strategies behind one Protocol.</a></b> <code>select(X, labeled, k)</code> dispatched from a registry; default <b>CoreSet</b> (greedy k-center, cosine). One <a class="ref" href="https://github.com/traitlab/labelfirst/blob/3ccfdfba1f48/src/labelfirst/pipeline.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><code>select_batches</code></a> call gates, selects, then KMeans-batches for the labeller.</li>
         <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/separability.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">The pre-flight is a metric, not a model.</a></b> kNN leave-one-out separability &rarr; GO / borderline / skip; the open-set arm computes <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/diagnose/binormal.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b>AUROC = &Phi;(d&prime;/&radic;2)</b></a> from LOO centroid scores, then reports the <i>realized</i> FPR/TPR as a Gaussian-fit check.</li>
         <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/io/queue.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Every run is auditable.</a></b> a <code>RunRecord</code> stamps strategy, seed, embedding <b>SHA-256</b>, library and Python versions, timestamp; loaders fail loudly on schema drift.</li>
-        <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/audit/__init__.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">A pre-registered harness.</a></b> frozen spec, Holm&ndash;Bonferroni FWER, a <a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/power.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Wilcoxon power-floor</a> that refuses a PASS when seeds can't clear 1/2&#8319;, and a synthetic imbalance self-test where balanced data <i>must</i> show no win.</li>
+        <li><b><a class="ref" href="https://github.com/traitlab/labelfirst/blob/main/src/labelfirst/eval/audit/__init__.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">A pre-registered harness.</a></b> frozen spec, Holm&ndash;Bonferroni FWER, a <a class="ref" href="https://github.com/traitlab/labelfirst/blob/36c0e8a108c096e2b0e985f7f87ad81124706f8b/src/labelfirst/eval/audit/_stats.py#L64-L107" target="_blank" rel="noopener" onclick="event.stopPropagation()">Wilcoxon power-floor</a> that refuses a PASS when seeds can't clear 1/2&#8319;, and a synthetic imbalance self-test where balanced data <i>must</i> show no win.</li>
       </ul>
     </div></div>
   </section>
 
   <section class="slide">
-    <h2><span class="kick">speciesfirst &middot; the BCI deployment</span>A governed, conformal curation loop</h2>
+    <h2><span class="kick">crownfirst &middot; the BCI deployment</span>A governed, conformal curation loop</h2>
     <div class="body"><div class="appx">
       <div class="appx-lead">An auditable loop over real crowns, <b>embed &rarr; conformal-tier &rarr; Labelbox &rarr; WCVP handoff</b>, on a commit-pinned labelfirst for reproducible builds.</div>
       <ul>
-        <li><b><a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/genus.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Conformal tiering with a genus fallback.</a></b> <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/reject.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">cross-conformal (K=5)</a> prediction sets split crowns into <i>low-priority</i> (small set, kept as a suggestion, no expert) vs <i>flag-for-review</i>; species&rarr;genus&rarr;defer, each level held to 1&minus;&alpha; coverage; empty sets (out-of-support novelty) rank <b>first</b>.</li>
-        <li><b><a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/loop.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Two-tier trust.</a></b> only verified (&ldquo;Done&rdquo;) labels grow ground truth; in-review labels steer selection but stay out of the pool. <code>merge_labels</code> refuses labels for crowns with no embedding and never overwrites.</li>
-        <li><b><a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/labelbox_io.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Labelbox</a> via <a class="ref" href="https://github.com/traitlab/labelpull" target="_blank" rel="noopener" onclick="event.stopPropagation()">labelpull</a>.</b> export + flatten; <b>batch = cluster</b>, and clusters below a cohesion floor are dropped, recorded in the push plan, never silently.</li>
-        <li><b><a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/wcvp.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">WCVP handoff to Pl@ntNet.</a></b> Kew's checklist fixes synonym/rank noise (33% of BCI labels), out-of-range mislabels, and rare-but-weed; deterministic JSON. Crown geometry read from GeoPackages with <a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/wcvp_geometry.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b>stdlib <code>sqlite3</code> + <code>struct</code></b></a> &mdash; zero geo deps.</li>
-        <li><b><a class="ref" href="https://github.com/traitlab/speciesfirst/blob/main/src/speciesfirst/gzsl_split.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Leakage-first evaluation.</a></b> a label-free backtest where the directed selector must beat <i>every</i> random seed, plus a genus-holdout split so a species has no congener prototype to leak from.</li>
+        <li><b><a class="ref" href="https://github.com/traitlab/crownfirst/blob/main/src/crownfirst/genus.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Conformal tiering with a genus fallback.</a></b> <a class="ref" href="https://github.com/traitlab/crownfirst/blob/main/src/crownfirst/reject.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">cross-conformal (K=5)</a> prediction sets split crowns into <i>low-priority</i> (small set, kept as a suggestion, no expert) vs <i>flag-for-review</i>; species&rarr;genus&rarr;defer, each level held to 1&minus;&alpha; coverage; empty sets (out-of-support novelty) rank <b>first</b>.</li>
+        <li><b><a class="ref" href="https://github.com/traitlab/crownfirst/blob/main/src/crownfirst/loop.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Two-tier trust.</a></b> only verified (&ldquo;Done&rdquo;) labels grow ground truth; in-review labels steer selection but stay out of the pool. <code>merge_labels</code> refuses labels for crowns with no embedding and never overwrites.</li>
+        <li><b><a class="ref" href="https://github.com/traitlab/crownfirst/blob/main/src/crownfirst/labelbox_io.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Labelbox</a> via <a class="ref" href="https://github.com/traitlab/labelpull" target="_blank" rel="noopener" onclick="event.stopPropagation()">labelpull</a>.</b> export + flatten; <b>batch = cluster</b>, and clusters below a cohesion floor are dropped, recorded in the push plan, never silently.</li>
+        <li><b><a class="ref" href="https://github.com/traitlab/crownfirst/blob/main/src/crownfirst/wcvp.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">WCVP handoff to Pl@ntNet.</a></b> Kew's checklist fixes synonym/rank noise (33% of BCI labels), out-of-range mislabels, and rare-but-weed; deterministic JSON. Crown geometry read from GeoPackages with <a class="ref" href="https://github.com/traitlab/crownfirst/blob/main/src/crownfirst/wcvp_geometry.py" target="_blank" rel="noopener" onclick="event.stopPropagation()"><b>stdlib <code>sqlite3</code> + <code>struct</code></b></a> &mdash; zero geo deps.</li>
+        <li><b><a class="ref" href="https://github.com/traitlab/crownfirst/blob/main/src/crownfirst/gzsl_split.py" target="_blank" rel="noopener" onclick="event.stopPropagation()">Leakage-first evaluation.</a></b> a label-free backtest where the directed selector must beat <i>every</i> random seed, plus a genus-holdout split so a species has no congener prototype to leak from.</li>
       </ul>
     </div></div>
   </section>
@@ -452,9 +452,9 @@
         <b class="accent">before you pay for it</b>.</div>
       <div style="margin-top:4.4vh;text-align:center;font-size:3.0vh;line-height:1.7">
         <b>the geometry</b> &mdash; a training-free margin, a closed-form detector, two decoupled axes<br>
-        <b>the engine</b> (labelfirst) &middot; <b>the deployment</b> (speciesfirst, on BCI)<br><br>
+        <b>the engine</b> (labelfirst) &middot; <b>the deployment</b> (crownfirst, on BCI)<br><br>
         Wietze Suijker &middot; wietze.suijker@mila.quebec<br>
-        <span style="font-size:2.3vh;color:var(--grey)">Every number reproduces from committed scripts &middot; traitlab/labelfirst, traitlab/speciesfirst</span></div>
+        <span style="font-size:2.3vh;color:var(--grey)">Every number reproduces from committed scripts &middot; traitlab/labelfirst, traitlab/crownfirst</span></div>
     </div>
   </section>
 
