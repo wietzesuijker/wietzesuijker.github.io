@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>A label-free pre-flight for biodiversity discovery &middot; Wietze Suijker</title>
+<title>A training-free pre-flight for biodiversity discovery &middot; Wietze Suijker</title>
 <style>
   :root { --forest:#0F766E; --forest-deep:#0B544E; --ink:#15211D; --grey:#6b7280; --line:#e5e7eb;
     --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
@@ -85,7 +85,7 @@
     <div class="hero-bg"></div><div class="hero-scrim"></div>
     <div class="hero-in">
       <div class="eyebrow">Wietze Suijker &middot; Research brief</div>
-      <h1>A label-free pre-flight for biodiversity discovery</h1>
+      <h1>A training-free pre-flight for biodiversity discovery</h1>
       <p class="hero-sub">A closed-form embedding-geometry statistic predicts open-set species
         detectability at Pearson <b>+0.99</b> on two benchmarks I did not build &mdash; net of classifier
         accuracy, with no detector trained and no label spent.</p>
@@ -113,7 +113,7 @@
     <p class="body">The <b>geometry of foundation-model embeddings</b> prices that decision in advance. The
       inter-species <b>margin</b> &mdash; how cleanly a group's known species separate in a frozen embedding
       space &mdash; predicts, with no detector trained and no label spent, where discovery effort will pay
-      off. It is a label-free <b>pre-flight</b>: a cheap a-priori estimate of what is worth looking at.</p>
+      off. It is a training-free <b>pre-flight</b> (it needs a small labelled reference set): a cheap a-priori estimate of what is worth looking at.</p>
 
     <h2>Where it fits</h2>
     <p class="body">This is the prediction layer that sits <i>underneath</i> open-set insect-detection
@@ -121,7 +121,7 @@
       biodiversity change at scale. <b>Open-Insect</b> measures <i>which</i> novel species a detector
       catches; <b>BATIS</b> updates a species-distribution model wherever data happens to land. The
       pre-flight forecasts <b>which groups a detector will catch, and which regions are worth sampling,
-      before the run</b> &mdash; turning both benchmarks into label-free planning signals. Crucially it is a
+      before the run</b> &mdash; turning both benchmarks into training-free planning signals. Crucially it is a
       <i>meta</i>-predictor, not a rival detector: it forecasts which clades <i>any</i> detector &mdash; the
       standard maximum-softmax-probability baseline included &mdash; will find easy, so it complements those
       benchmarks rather than competing with them. The application makes discovery cheaper and targeted; the
@@ -154,8 +154,7 @@
         <span class="accent">0.92</span>, and margin forecasts their per-species detectability at
         <span class="accent">+0.92</span>.</li>
       <li><b>It is a property of the representation, not a benchmark.</b> Holds across six realms,
-        order&rarr;family&rarr;genus, four backbones spanning two pretraining paradigms, and <b>birdsong
-        audio</b> &mdash; positive in 12 of 12 slices (sign test p=2&times;10&#8315;&#8308;).</li>
+        order&rarr;family&rarr;genus, four backbones spanning two pretraining paradigms, and <b>three audio sets</b> (birds, marine mammals, mosquitoes) &mdash; positive in 12 of 12 slices (sign test p=2&times;10&#8315;&#8308;).</li>
       <li><b>On the open-set benchmark, honestly:</b> a parameter-free frozen-BioCLIP detector reproduces
         Open-Insect's difficulty ordering &mdash; local moths hardest, non-local easier, non-moths easiest
         &mdash; <b>monotonically in all three regions</b> (e.g. C-America AUROC 0.91 / 0.95 / 0.99). The
@@ -182,14 +181,14 @@
     <h2>What it could become</h2>
     <p class="body"><i>When, and why, is biological discovery predictable, and can that predictability be
       exploited before any cost is paid?</i> Framed as value-of-information across the two shortfalls.
-      Honestly, the two legs are not equally proven: the <i>what-to-label</i> (Linnean) leg is nailed (+0.91
+      Honestly, the two legs are not equally proven: the <i>what-to-label</i> (Linnean) detectability forecast is strong (+0.91
       on our data, +0.99 off it); the <i>where-to-sample</i> (Wallacean) leg is promising but earlier (+0.59
       cross-realm), and is exactly what the field trial below is built to settle.</p>
     <div class="grid2">
       <div class="depth">
         <div class="ch">the law &amp; its limit</div>
         <h3>The mechanism</h3>
-        <p>The empirical predictor is the result; the next rung is a label-free bound on achievable discovery
+        <p>The empirical predictor is the result; the next rung is a training-free bound on achievable discovery
           gain and the regime where targeting cannot help. Lead with the working law; treat the bound as the
           rigorous follow-on, not the load-bearing claim.</p>
       </div>
@@ -202,8 +201,8 @@
       <div class="depth">
         <div class="ch">causality</div>
         <h3>The field trial</h3>
-        <p>A pre-registered, candidate-controlled botanist-queue randomized trial on the live BCI loop: does
-          acting on the pre-flight <i>cause</i> more discovery per human-hour? Powered by simulation
+        <p>A candidate-controlled botanist-queue randomized trial (preregistration drafted) on the live BCI loop: does
+          acting on the pre-flight <i>cause</i> more discovery per human-hour? Powered by a retrospective simulation, an optimistic upper bound,
           (~5,600 crowns/arm; +4.9 rare species at a 25% budget). Planned, with no external dependency to
           start.</p>
       </div>
@@ -214,7 +213,7 @@
       prediction tooling being built for biodiversity teams runs on exactly the law this brief proves. The
       rare value is shipping the pipeline <b>and</b> proving the law it runs on &mdash; most work does one end
       or the other and stalls at the seam. The mechanism paper (the +0.99 result above) is drafted; a second
-      paper &mdash; the BCI deployment plus the pre-registered field trial &mdash; is drafted too.</p>
+      paper &mdash; the BCI deployment plus the planned field trial &mdash; is drafted too.</p>
 
     <div class="sec-k">For the curious</div>
     <h2>Evidence appendix</h2>
@@ -252,7 +251,7 @@
       <li><b>Distinct from:</b> the closed-set&harr;open-set correlation objection (ICLR 2022 &mdash; answered
         net-of-accuracy and with a mechanism, not a correlation); closed-set transferability scores (CVPR
         2022 &mdash; open-set novelty is not recoverable from them); RankMe (ICML 2023 &mdash; anti-predicts
-        here); iterative range active learning (NeurIPS 2023 &mdash; this is one-shot, label-free,
+        here); iterative range active learning (NeurIPS 2023 &mdash; this is one-shot, training-free,
         novel-species). BioCLIP-2 / Perch-2.0 <i>observe</i> separability in species embeddings; this turns
         it into a predictive value-of-information signal across both shortfalls.</li>
     </ul>
