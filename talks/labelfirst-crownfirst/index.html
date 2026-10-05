@@ -124,7 +124,7 @@
     <div class="body">
       <img class="fig" src="figs/fig_separability.png" alt="separability across 22 embeddings" style="max-height:64vh">
       <div class="cap">A cheap pre-flight on the crowns already labelled catches this before you spend the budget.<br>
-        The production Pl@ntNet model measures <b class="accent">57.7%</b>, at the top of the good regime.</div>
+        The Pl@ntNet-family models score about <b class="accent">58%</b>, at the top of the good regime.</div>
     </div>
   </section>
 
@@ -132,7 +132,7 @@
     <h2>On real BCI crowns, it pays off</h2>
     <div class="body">
       <img class="fig" src="figs/fig_discovery.png" alt="discovery curve" style="max-height:62vh">
-      <div class="cap">Tiering also parks ~40% of crowns (57% with the genus fallback); retraining on your labels finds ~50% more rare species.</div>
+      <div class="cap">Tiering confidently narrows ~40% of labelled crowns to at most 3 species (57% with the genus fallback); retraining on your labels finds up to ~50% more rare species in simulation, an upper bound because the retrained model saw every common-species label.</div>
     </div>
   </section>
 
@@ -142,9 +142,9 @@
       <div class="lead">Jean-Christophe Lombardo (Pl@ntNet) asked. It holds.</div>
       <div class="stats" style="margin-top:4vh">
         <div class="stat"><div class="n accent">+0.43</div><div class="l">rarity predicts novelty</div>
-          <div class="s">(even controlling for flower and fruit)</div></div>
+          <div class="s">(even controlling for flowering, leaf state and bare crowns)</div></div>
         <div class="stat"><div class="n accent">~7%</div><div class="l">novelty explained by organ</div>
-          <div class="s">(flower, fruit, foliage, bare)</div></div>
+          <div class="s">(flowering, foliage, senescent, bare)</div></div>
       </div>
     </div>
   </section>
@@ -193,8 +193,8 @@
         <div class="appx">
           <ul>
             <li>Real models fall into two camps (CLIP vs DINOv3), so a single trend line across them would overstate a &ldquo;law.&rdquo; We say so.</li>
-            <li>So we ran a <b>controlled sweep</b>: dial species from blurred-together to cleanly-separated <i>on purpose</i>, and watch the benefit. It rises smoothly &mdash; <b>Pearson 0.997.</b></li>
-            <li>Consistent across <b>4 independent checks</b>: real models, this synthetic sweep, predicting held-out models <span class="muted">(R&sup2; 0.61)</span>, and re-labelling crews <span class="muted">(agree within 1&ndash;2 pt)</span>.</li>
+            <li>So we ran a <b>controlled sweep</b>: dial species from blurred-together to cleanly-separated <i>on purpose</i>, and watch the benefit. In this synthetic test it rises smoothly.</li>
+            <li>Consistent across <b>3 checks</b>: real models, this synthetic sweep, and a blur ladder on three real datasets <span class="muted">(pooled R&sup2; 0.79)</span>.</li>
             <li class="muted">The sweep changes more than separability, so it shows association, not that separability alone causes the gain.</li>
           </ul>
         </div>
@@ -205,12 +205,12 @@
   <section class="slide">
     <h2>Appendix: how we pick, and the pre-flight</h2>
     <div class="body"><div class="appx">
-      <div class="appx-lead">One number, computed <i>before you label anything</i>, predicts whether smart picking will beat random.</div>
+      <div class="appx-lead">One number, computed on the photos you have already labelled, signals whether smart picking is likely to beat random.</div>
       <ul>
-        <li><b>Picking the next photo:</b> 16 interchangeable strategies behind one call. The default, <b>CoreSet</b>, simply spreads picks to cover the space &mdash; no tuning, an unmodified 2018 method. <span class="muted">(A co-pick, <code>novel_margin</code>, leans toward brand-new species when you expect them.)</span></li>
-        <li><b>The pre-flight &mdash; <i>separability</i>:</b> how cleanly the model already sorts species apart, scored without a single label.</li>
-        <li><b>We proved it's the geometry, not a fluke:</b> keep the photos and labels fixed, just <i>blur</i> the model's view &mdash; the benefit falls in lockstep <span class="muted">(correlation 0.76 BCI, 0.94 PlantNet, 0.96 iNat)</span>.</li>
-        <li><b>A high score isn't a guarantee:</b> we reshaped the embedding so its flat, noisy directions counted as much as the meaningful ones <span class="muted">(a standard step called whitening)</span>. The score barely moved <span class="muted">(52% &rarr; 51%)</span>, but the benefit <b>halved</b> <span class="muted">(40% &rarr; 23%)</span> &mdash; now the picker spreads its choices into noise instead of toward the rare species, and a nearest-neighbour score can't catch that.</li>
+        <li><b>Picking the next photo:</b> about 20 interchangeable strategies behind one call. The default, <b>CoreSet</b>, simply spreads picks to cover the space &mdash; no tuning, an unmodified 2018 method. <span class="muted">(A co-pick, <code>novel_margin</code>, leans toward brand-new species when you expect them.)</span></li>
+        <li><b>The pre-flight &mdash; <i>separability</i>:</b> how cleanly the model already sorts species apart, scored from the labels you already have, before you spend more.</li>
+        <li><b>It tracks the geometry, not a fluke:</b> keep the photos and labels fixed, just <i>blur</i> the model's view, and the benefit falls with it <span class="muted">(correlation 0.76 BCI, 0.94 PlantNet, 0.96 iNat)</span>.</li>
+        <li><b>A high score isn't a guarantee:</b> we reshaped the embedding so its flat, noisy directions counted as much as the meaningful ones <span class="muted">(a standard step called whitening)</span>. The score barely moved <span class="muted">(52% &rarr; 51%)</span>, but the benefit <b>nearly halved</b> <span class="muted">(39% &rarr; 23%)</span> &mdash; now the picker spreads its choices into noise instead of toward the rare species, and a nearest-neighbour score can't catch that.</li>
       </ul>
     </div></div>
   </section>
@@ -220,9 +220,9 @@
     <div class="body"><div class="appx">
       <div class="appx-lead">The confirmatory camera-trap test was fixed <i>before</i> seeing any result, so we couldn't fool ourselves into a win. The forest-crown results are exploratory.</div>
       <ul>
-        <li>The rule, locked in advance: a standard significance test on per-run scores, plus a 10,000-resample confidence interval that must exclude zero, corrected for testing many things at once.</li>
+        <li>The rule, locked in advance: an exact test on the 16 paired runs, with a correction across related comparisons.</li>
         <li><b>Why 16 runs:</b> with all 16 pointing the same way, an exact sign-flip test reaches 1-in-65,536 <span class="muted">(p = 2<sup>&minus;16</sup>)</span>, enough margin to survive the correction; 5 runs wouldn't.</li>
-        <li><b>The mistake we keep on the slide:</b> an early &ldquo;our picker trains a better model&rdquo; win was really a <b>25&ndash;29% data leak</b> &mdash; the picker had peeked at the test crowns. Re-run honestly: <b>no picker dominates</b>. We added a <b>tripwire that fails the build</b> if a held-out crown ever reaches a picker again.</li>
+        <li><b>The mistake we keep on the slide:</b> an early &ldquo;our picker trains a better model&rdquo; win turned out to be a <b>test-set leak</b>: the picker had peeked at the test crowns. Re-run cleanly, <b>no picker came out ahead</b>.</li>
       </ul>
     </div></div>
   </section>
@@ -232,12 +232,12 @@
     <div class="body"><div class="appx">
       <div class="appx-lead">We show the failures on purpose &mdash; they're the evidence we're not overselling.</div>
       <ul>
-        <li>Picking the <b>hardest-to-label</b> photos <b>lost every run</b> (0/16). Hard to label &ne; rare species.</li>
-        <li>&ldquo;Cleaning up&rdquo; the embedding first <b>backfired</b> &mdash; it erased the very structure the picker relies on.</li>
-        <li>Ranking models by a quick accuracy proxy <b>didn't predict discovery</b>. Measure discovery directly.</li>
+        <li>Picking &ldquo;needle&rdquo; photos tucked inside other species' clusters <b>lost to the novelty picker on every run</b> (0/16). Odd-looking &ne; rare species.</li>
+        <li>&ldquo;Cleaning up&rdquo; the embedding first <b>backfired</b> for the default picker on DINOv3: it erased the very structure the picker relies on.</li>
+        <li>After retraining, a quick accuracy check <b>barely moved</b> while discovery jumped. Measure discovery directly.</li>
       </ul>
-      <p><b>So the contribution isn't a clever new algorithm</b> &mdash; it's the honest, falsifiable test harness. An unmodified 2018 method plus that protocol beats the industrial half-random hybrid and plain random.</p>
-      <p class="muted">We also reproduce the Beery transductive-needles method exactly (Kurinchi-Vendhan &amp; Beery 2026, arXiv:2606.03821; per-point correlation 1.000).</p>
+      <p><b>So the contribution isn't a clever new algorithm</b> &mdash; it's the honest, falsifiable test harness. An unmodified 2018 method plus that protocol beats a half-random hybrid and plain random, once photos nobody can label are skipped (re-proposing them put it 27% below random).</p>
+      <p class="muted">We also reproduce the difficulty score of the Beery transductive-needles method (Kurinchi-Vendhan &amp; Beery 2026, arXiv:2606.03821; per-point correlation 1.000).</p>
     </div></div>
   </section>
 
