@@ -4,7 +4,7 @@
 
 hero:
   headline: Research Engineer, Geospatial ML
-  bio: Machine learning on Earth observation data for biodiversity, climate and land use. Open-source contributor to GDAL, Xarray, and the FOSS4G ecosystem.
+  bio: Machine learning on Earth observation data for biodiversity, climate and land use. Open-source contributor to Xarray and the FOSS4G ecosystem.
 
 sidebar:
   position: right # position of the sidebar : left or right
@@ -53,7 +53,7 @@ sidebar:
 career-profile:
   title: Career Profile
   summary: |
-    Ten years turning Earth observation data into decisions, from a carbon sequestration thesis to production land cover and biomass maps to research at Mila. I now work on machine learning for biodiversity and climate: which samples to label first for species discovery, tree species from drone imagery, and how km-scale rainfall models transfer between regions. Before that I built GeoZarr pipelines for ESA's Earth Observation Processing Framework at DevelopmentSeed, and spent five years as Product Architect at Space Intelligence, where I co-designed the technical architecture that scaled from a five-person startup to a sixty-person company shipping global land cover and biomass products. Active open-source contributor to GDAL's Zarr v3 driver.
+    For ten years I have turned Earth observation data into decisions about forests, land and water, and I now build machine learning for nature conservation and climate. Most of my care goes into evaluation: a model only helps if it holds up on regions and years it has not seen. At Mila I work on which samples to label first for species discovery, tree species from drone imagery, and how km-scale precipitation downscaling models transfer between regions. Before that I built GeoZarr pipelines for ESA's Earth Observation Processing Framework at DevelopmentSeed, and spent five years as Product Architect at Space Intelligence, where I co-designed the technical architecture that scaled from a five-person startup to a sixty-person company shipping global land cover and biomass products.
 education:
   title: Education
   info:
@@ -75,11 +75,11 @@ experiences:
     time: 2026 - Present
     company: Mila, Quebec, Canada
     details: |
-      Machine learning for biodiversity and climate research in IVADO's environment cluster, working with the Rolnick Lab, TraitLab (Université de Montréal) and the Pollock Lab.
+      Machine learning for biodiversity and climate research in IVADO's environment cluster, working with the Rolnick Lab and Pollock Lab (McGill University) and TraitLab (Université de Montréal).
 
-      - Label prioritisation for species discovery: sole-author paper under review, with preregistered tests on the iWildCam and Snapshot Serengeti camera-trap datasets using frozen DINOv2 embeddings.
-      - Precipitation downscaling: co-author of RainAtlas (data engineering and evaluation campaigns), a benchmark of UNet and diffusion models on radar products from the US, Europe and East Asia, run on the Mila and Digital Research Alliance of Canada clusters.
-      - Tree species from drone imagery on Barro Colorado Island, Panama: retrained a PlantCLEF backbone inside a labelling loop, and made close-up image loading 14.6x faster in the lab's crown classifier.
+      - Label prioritisation for species discovery: sole-author paper under review, tested on the iWildCam and Snapshot Serengeti camera-trap datasets using frozen DINOv3 embeddings.
+      - Precipitation downscaling: co-author of RainAtlas (data engineering and evaluation campaigns), a benchmark of a UNet and four generative models (diffusion, flow and consistency) on radar-based merged precipitation products from the US, Europe and East Asia, run on the Mila and Digital Research Alliance of Canada clusters.
+      - Tree species from drone imagery on Barro Colorado Island, Panama: retrained a PlantCLEF backbone inside a simulated labelling loop, and made close-up image loading 14.6x faster in the lab's crown classifier.
       - Open tools for the Blitz the Gap biodiversity campaign: a sampling-priority planner, an identification-priority app, and species distribution maps served from object storage with an out-of-time check (fit on 2025 records, scored on 2026).
       - Mentored students in the labs through day-to-day collaboration on research code, cluster workflows and evaluation.
   - role: EO Data Engineer
@@ -106,13 +106,13 @@ oss:
   title: Open Source Contributions
   contributions:
   - title: '<a href="https://github.com/OSGeo/gdal/pulls?q=is%3Apr+author%3Awietzesuijker">GDAL</a>'
-    tagline: "27 merged pull requests to the Zarr v3 driver: sharded writes, parallel shard I/O, multiscale reads, overviews for arrays with more than two dimensions, string data types (2026)."
+    tagline: "27 merged pull requests, 18 of them to the Zarr driver: sharded writes, parallel shard I/O, overviews for arrays with more than two dimensions, string data types (2026)."
 
   - title: '<a href="https://github.com/PollockLab">Blitz the Gap tools</a>'
-    tagline: "Main contributor to what-to-id, where-to-blitz, rangecraft and the openbiodiversity.ca maps: open tools that direct biodiversity recording and identification effort (2026)."
+    tagline: "Main contributor to what-to-id, where-to-blitz and rangecraft, and co-developer of the openbiodiversity.ca maps: open tools that direct biodiversity recording and identification effort (2026)."
 
   - title: '<a href="https://github.com/openlayers/openlayers/pulls?q=is%3Apr+author%3Awietzesuijker">OpenLayers and zarr-layer</a>'
-    tagline: "GeoZarr rendering in the browser: merged contributions to OpenLayers and CarbonPlan zarr-layer (2026)."
+    tagline: "GeoZarr rendering in the browser: merged contributions to OpenLayers and a merged fix in CarbonPlan zarr-layer (2026)."
 
   - title: '<a href="https://github.com/EOPF-Explorer">EOPF Explorer</a>'
     tagline: "GeoZarr data pipelines and data model for ESA's Copernicus Earth Observation Processing Framework. Contributions to data-pipeline and data-model (2025)."
@@ -133,8 +133,8 @@ publications:
   title: Research
   papers:
   - title: "Which samples to label first for rare-class discovery"
-    authors: Wietze Suijker (sole author)
-    conference: Under review, 2026. Preregistered benchmark on camera-trap data.
+    authors: Wietze Suijker
+    conference: Under review, 2026. Benchmark on camera-trap data.
   - title: "RainAtlas: A Multi-Continental Dataset for Precipitation Downscaling"
     link: https://arxiv.org/abs/2609.39833
     authors: Pierre-Louis Lemaire, Luca Schmidt, Wietze Suijker, Alex Hernández-García, David Rolnick
@@ -154,10 +154,10 @@ skills:
       tools: [Pandas, NumPy, Dask, PostgreSQL/PostGIS]
 
     - category: Machine Learning
-      tools: [PyTorch, DINOv2, LightGBM, scikit-learn]
+      tools: [PyTorch, DINOv3, LightGBM, scikit-learn]
 
     - category: Research Computing
-      tools: [SLURM, Mila and DRAC clusters, preregistered evaluation]
+      tools: [SLURM, Mila and DRAC clusters]
 
     - category: Cloud &amp; Infra
       tools: [AWS, Azure, GCP, Terraform, Docker]

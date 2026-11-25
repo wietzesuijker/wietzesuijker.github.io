@@ -36,11 +36,22 @@ await page.evaluate(() => {
   document.querySelectorAll('.hero, footer').forEach(el => el.style.display = 'none');
 });
 
+// Keep sections and entries whole across pages, and run the sidebar colour to the foot of the last page
+const SCALE = 0.68;
+await page.addStyleTag({ content: '.section, .item { break-inside: avoid; }' });
+await page.evaluate((pagePx) => {
+  const wrapper = document.querySelector('.wrapper');
+  if (!wrapper) return;
+  // shortcut: one pass, assumes avoided breaks add at most one page; rerun logic if the CV grows past three pages
+  const pages = Math.ceil(wrapper.scrollHeight / pagePx);
+  wrapper.style.minHeight = `${pages * pagePx - 1}px`;
+}, (297 / 25.4) * 96 / SCALE);
+
 await page.pdf({
   path: out,
   format: 'A4',
   printBackground: true,
-  scale: 0.68,
+  scale: SCALE,
   margin: { top: 0, right: 0, bottom: 0, left: 0 },
 });
 
