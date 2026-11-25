@@ -3,8 +3,8 @@
 #
 
 hero:
-  headline: EO Data Engineer
-  bio: Connecting satellite data to environmental impact. Open-source contributor to GDAL, Xarray, and the FOSS4G ecosystem.
+  headline: Research Engineer, Geospatial ML
+  bio: Machine learning on Earth observation data for biodiversity, climate and land use. Open-source contributor to GDAL, Xarray, and the FOSS4G ecosystem.
 
 sidebar:
   position: right # position of the sidebar : left or right
@@ -12,7 +12,7 @@ sidebar:
 
   # Profile information
   name: Wietze Suijker
-  tagline: EO Data Engineer
+  tagline: Research Engineer, Geospatial ML
   avatar: profile.png #place a 100x100 picture inside /assets/images/ folder and provide the name of the file below
 
   # Sidebar links
@@ -53,7 +53,7 @@ sidebar:
 career-profile:
   title: Career Profile
   summary: |
-    Ten years connecting Earth observation data to environmental impact - from a carbon sequestration thesis to production ML pipelines to climate AI. Active open-source contributor to GDAL's Zarr v3 driver. Previously built GeoZarr pipelines for ESA's Earth Observation Processing Framework at DevelopmentSeed, and spent five years as Product Architect at Space Intelligence, where I co-designed the technical architecture that scaled from a five-person startup to a sixty-person company shipping global land cover and biomass products.
+    Ten years turning Earth observation data into decisions, from a carbon sequestration thesis to production land cover and biomass maps to research at Mila. I now work on machine learning for biodiversity and climate: which samples to label first for species discovery, tree species from drone imagery, and how km-scale rainfall models transfer between regions. Before that I built GeoZarr pipelines for ESA's Earth Observation Processing Framework at DevelopmentSeed, and spent five years as Product Architect at Space Intelligence, where I co-designed the technical architecture that scaled from a five-person startup to a sixty-person company shipping global land cover and biomass products. Active open-source contributor to GDAL's Zarr v3 driver.
 education:
   title: Education
   info:
@@ -75,7 +75,13 @@ experiences:
     time: 2026 - Present
     company: Mila, Quebec, Canada
     details: |
-      Applying AI and ML to biodiversity and climate research at Mila Quebec, as part of IVADO's environment cluster
+      Machine learning for biodiversity and climate research in IVADO's environment cluster, working with the Rolnick Lab, TraitLab (Université de Montréal) and the Pollock Lab.
+
+      - Label prioritisation for species discovery: sole-author paper under review, with preregistered tests on the iWildCam and Snapshot Serengeti camera-trap datasets using frozen DINOv2 embeddings.
+      - Precipitation downscaling: co-author of RainAtlas (data engineering and evaluation campaigns), a benchmark of UNet and diffusion models on radar products from the US, Europe and East Asia, run on the Mila and Digital Research Alliance of Canada clusters.
+      - Tree species from drone imagery on Barro Colorado Island, Panama: retrained a PlantCLEF backbone inside a labelling loop, and made close-up image loading 14.6x faster in the lab's crown classifier.
+      - Open tools for the Blitz the Gap biodiversity campaign: a sampling-priority planner, an identification-priority app, and species distribution maps served from object storage with an out-of-time check (fit on 2025 records, scored on 2026).
+      - Mentored students in the labs through day-to-day collaboration on research code, cluster workflows and evaluation.
   - role: EO Data Engineer
     time: 2025
     company: DevelopmentSeed, Contractor, Remote
@@ -100,7 +106,13 @@ oss:
   title: Open Source Contributions
   contributions:
   - title: '<a href="https://github.com/OSGeo/gdal/pulls?q=is%3Apr+author%3Awietzesuijker">GDAL</a>'
-    tagline: "Contributions to the Zarr v3 driver: parallel shard I/O, string data types, coordinate caching, and CI improvements (2026)."
+    tagline: "27 merged pull requests to the Zarr v3 driver: sharded writes, parallel shard I/O, multiscale reads, overviews for arrays with more than two dimensions, string data types (2026)."
+
+  - title: '<a href="https://github.com/PollockLab">Blitz the Gap tools</a>'
+    tagline: "Main contributor to what-to-id, where-to-blitz, rangecraft and the openbiodiversity.ca maps: open tools that direct biodiversity recording and identification effort (2026)."
+
+  - title: '<a href="https://github.com/openlayers/openlayers/pulls?q=is%3Apr+author%3Awietzesuijker">OpenLayers and zarr-layer</a>'
+    tagline: "GeoZarr rendering in the browser: merged contributions to OpenLayers and CarbonPlan zarr-layer (2026)."
 
   - title: '<a href="https://github.com/EOPF-Explorer">EOPF Explorer</a>'
     tagline: "GeoZarr data pipelines and data model for ESA's Copernicus Earth Observation Processing Framework. Contributions to data-pipeline and data-model (2025)."
@@ -117,6 +129,20 @@ oss:
   - title: '<a href="https://github.com/nens/dask-geomodeling">dask-geomodeling</a>'
     tagline: "On-the-fly operations on geographical maps (2020)."
 
+publications:
+  title: Research
+  papers:
+  - title: "Which samples to label first for rare-class discovery"
+    authors: Wietze Suijker (sole author)
+    conference: Under review, 2026. Preregistered benchmark on camera-trap data.
+  - title: "RainAtlas: A Multi-Continental Dataset for Precipitation Downscaling"
+    link: https://arxiv.org/abs/2609.39833
+    authors: Pierre-Louis Lemaire, Luca Schmidt, Wietze Suijker, Alex Hernández-García, David Rolnick
+    conference: arXiv:2609.39833, 2026. Under review.
+  - title: "Prioritizing close-up photos for labelling"
+    link: https://wietzesuijker.github.io/talks/labelfirst-crownfirst/
+    authors: Talk, hyperspatial drone meeting, June 2026.
+
 skills:
   title: Skills &amp; Proficiency
 
@@ -128,7 +154,10 @@ skills:
       tools: [Pandas, NumPy, Dask, PostgreSQL/PostGIS]
 
     - category: Machine Learning
-      tools: [LightGBM, scikit-learn, XGBoost]
+      tools: [PyTorch, DINOv2, LightGBM, scikit-learn]
+
+    - category: Research Computing
+      tools: [SLURM, Mila and DRAC clusters, preregistered evaluation]
 
     - category: Cloud &amp; Infra
       tools: [AWS, Azure, GCP, Terraform, Docker]
